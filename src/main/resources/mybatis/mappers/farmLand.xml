@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.farmland">
+    <resultMap id="farmLandResult" type="farmlandPriceVO">
+        <id property="mpf_idx" column="mpf_idx" />
+        <result property="mpf_locationName" column="mpf_locationName" />
+        <result property="mpf_locationNameDetail" column="mpf_locationNameDetail" />
+        <result property="mpf_lowestPrice" column="mpf_lowestPrice" />
+        <result property="mpf_maximumPrice" column="mpf_maximumPrice" />
+        <result property="mpf_averagePrice" column="mpf_averagePrice" />
+        <result property="mpf_lieutenant" column="mpf_lieutenant" />
+    </resultMap>
+
+    <select id="selectAllFarmlandPrice" resultMap="farmLandResult">
+        <![CDATA[
+            select * from market_price_farmland
+        ]]>
+    </select>
+
+    <insert id="insertFarmlandPrice" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="mpf_idx">
+                insert into market_price_farmland(mpf_locationName, mpf_locationNameDetail, mpf_lowestPrice,
+                                                  mpf_maximumPrice, mpf_averagePrice, mpf_lieutenant) values
+        <foreach collection="list" item="item" separator=",">
+                (#{item.mpf_locationName}, #{item.mpf_locationNameDetail}, #{item.mpf_lowestPrice},
+                 #{item.mpf_maximumPrice}, #{item.mpf_averagePrice}, #{item.mpf_lieutenant})
+        </foreach>
+    </insert>
+
+    <delete id="deleteFarmlandPrice">
+        <![CDATA[
+            delete from market_price_farmland
+        ]]>
+    </delete>
+
+</mapper>

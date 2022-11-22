@@ -51,30 +51,30 @@
                 let memberId = $('#mi_id').val();
                 //alert(memberId);
                 $.ajax({
-                    type: 'get',
-                    dataType: 'text',
-                    url: "${contextPath}/member/idCheck.do",
-                    data: {mi_id: memberId},
-                    success: function (data, status) {
+                    type : 'get',
+                    dataType : 'text',
+                    url : "${contextPath}/member/idCheck.do",
+                    data : {mi_id : memberId},
+                    success : function (data, status) {
                         //alert(data);
-                        if (memberId == "") {
+                        if(memberId == ""){
                             alert("아이디를 입력해주세요");
                             memberId.focus();
                             return false;
                         }
-                        if (data == 'true') {
+                        if(data=='true'){
                             $('#msg').html("중복된 아이디 입니다.")
                             $('#mi_id').val("");
                             $('#mi_id').focus();
-                        } else {
+                        }else{
                             $('#msg').html("사용할 수 있는 아이디 입니다.")
                             $('#isIdCheck').val('true');
                         }
                     },
-                    error: function (data, status) {
-                        alert('error' + status);
+                    error : function (data, status){
+                        alert('error'+status);
                     },
-                    complete: function (xhr, status) {
+                    complete : function (xhr, status){
                         //alert(xhr.status);
                     }
                 });
@@ -99,7 +99,7 @@
             var pwd1 = $("#password_1").val();
             var pwd2 = $("#password_2").val();
 
-            if (pwd1 != '' && pwd2 == '') {
+            if ( pwd1 != '' && pwd2 == '' ) {
                 null;
             } else if (pwd1 != "" || pwd2 != "") {
                 if (pwd1 == pwd2) {
@@ -123,14 +123,18 @@
                 let phoneNum = $("#mi_phone").val();
                 let phoneNum1 = $("#mi_phone1").val();
                 let phoneNum2 = $("#mi_phone2").val();
-                var sendNumber = phoneNum + phoneNum1 + phoneNum2;
+                console.log(phoneNum2);
+                const sendNumber = phoneNum+phoneNum1+phoneNum2;
+                if(sendNumber=="010"){
+                    alert("휴대폰 번호가 올바르지 않습니다");
+                }
                 $.ajax({
                     type: "POST",
-                    url: "./sendSMS.do",
-                    data: {to: sendNumber},
+                    url: "${contextPath}/member/sendSMS.do",
+                    data: {to : sendNumber},
                     cache: false,
-                    success: function (data) {
-                        if (data == "error") {
+                    success: function (data){
+                        if(data==" "){
                             alert("휴대폰 번호가 올바르지 않습니다.");
                         } else {
                             //alert("전송 완료");
@@ -483,6 +487,7 @@
         <div id="BG">
             <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%">
         </div>
+
     </article>
 </section>
 

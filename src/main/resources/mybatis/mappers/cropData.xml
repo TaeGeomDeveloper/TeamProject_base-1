@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cropData">
+    <resultMap id="cropDataResult" type="cropDataVO">
+        <id property="cd_idx" column="cd_idx" />
+        <result property="cd_cropClassification" column="cd_cropClassification" />
+        <result property="cd_cropName" column="cd_cropName" />
+        <result property="cd_operatingCost" column="cd_operatingCost" />
+        <result property="cd_growthPeriodStart" column="cd_growthPeriodStart" />
+        <result property="cd_growthPeriodEnd" column="cd_growthPeriodEnd" />
+        <result property="cd_harvestSeasonStart" column="cd_harvestSeasonStart" />
+        <result property="cd_harvestSeasonEnd" column="cd_harvestSeasonEnd" />
+        <result property="cd_income" column="cd_income" />
+        <result property="cd_marketValue" column="cd_marketValue" />
+        <result property="cd_insuranceStatus" column="cd_insuranceStatus" />
+    </resultMap>
+
+    <select id="selectAllCropData" resultMap="cropDataResult">
+        <![CDATA[
+            select * from crop_data
+        ]]>
+    </select>
+
+    <insert id="insertCropData" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="cd_idx">
+                insert into crop_data(cd_cropClassification, cd_cropName, cd_operatingCost, cd_growthPeriodStart, cd_growthPeriodEnd, cd_harvestSeasonStart, cd_harvestSeasonEnd, cd_income, cd_marketValue, cd_insuranceStatus) values
+        <foreach collection="list" item="item" separator=",">
+                (#{item.cd_cropClassification}, #{item.cd_cropName}, #{item.cd_operatingCost}, #{item.cd_growthPeriodStart}, #{item.cd_growthPeriodEnd}, #{item.cd_harvestSeasonStart}, #{item.cd_harvestSeasonEnd}, #{item.cd_income}, #{item.cd_marketValue}, #{item.cd_insuranceStatus})
+        </foreach>
+    </insert>
+
+    <delete id="deleteCropData">
+        <![CDATA[
+            delete from crop_data
+        ]]>
+    </delete>
+
+</mapper>

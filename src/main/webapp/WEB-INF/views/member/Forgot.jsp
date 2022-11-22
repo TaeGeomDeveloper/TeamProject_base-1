@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.tp.farm.vo.MemberVO" %>
 <%@ page import="com.tp.farm.dao.MemberDAO" %><%--
   Created by IntelliJ IDEA.
@@ -32,7 +33,7 @@
             console.log(name);
             console.log(phone);
             $.ajax({
-                url:"/smartfarm/member/findId.do",
+                url:"${contextPath}/member/findId.do",
                 type : "get",
                 data:{mi_name :name, mi_phone :phone},
                     success:function (data, status){
@@ -43,7 +44,7 @@
                         }else{
                             alert("회원님의 아이디는 "+data+"입니다");
                             Find.method = "post";
-                            Find.action = "/smartfarm/member/Login.do";
+                            Find.action = "${contextPath}/member/Login.do";
                             Find.submit();
                         }
                     },
@@ -65,7 +66,7 @@
                 console.log(id)
                 console.log(email)
                 $.ajax({
-                    url: "/smartfarm/member/findPwd.do",
+                    url: "${contextPath}/member/findPwd.do",
                     type: "POST",
                     data:{mi_id: id, mi_email: email},
                     success: function (data, status) {
@@ -75,7 +76,7 @@
                             $("#floatingInputEmail").val('');
                         } else {
                             Find.method = "post";
-                            Find.action = "/smartfarm/member/Login.do";
+                            Find.action = "${contextPath}/member/Login.do";
                             Find.submit();
                             alert("등록된 이메일로 비밀번호를 발송했습니다.");
                         }
