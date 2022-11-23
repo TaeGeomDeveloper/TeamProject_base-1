@@ -12,6 +12,57 @@
     <title>Main</title>
     <!-- 스타일시트 연결 -->
 
+    <!-- 댓글등록 button -->
+    <script>
+        function replyForm_check(){
+            var replyForm = document.replyForm;
+            let cbr_replyId = $("#cbr_replyId").val();
+            let cbr_content = $("#cbr_content").val();
+            alert(cbr_replyId);
+            if(cbr_replyId == ""){
+                alert("로그인이 필요합니다");
+                console.log(cbr_replyId);
+                cbr_replyId.focus();
+                return false;
+            };
+
+            if(cbr_content == ""){
+                alert("내용을 입력해주세요");
+                cbr_content.focus();
+                return false;
+            };
+
+            replyForm.method = "post";
+            replyForm.action = "./writeReply.do";
+            replyForm.submit();
+        }
+    </script>
+
+    <!-- 대댓글등록 button -->
+    <script>
+        function reReplyForm_check(){
+            var reReplyForm = document.reReplyForm;
+            let cbr_reReplyId = $("#cbr_reReplyId").val();
+            let cbr_reContent = $("#cbr_reContent").val();
+            alert(cbr_reReplyId);
+            if(cbr_reReplyId == ""){
+                alert("로그인이 필요합니다");
+                cbr_reReplyId.focus();
+                return false;
+            };
+
+            if(cbr_reContent == ""){
+                alert("내용을 입력해주세요");
+                cbr_reContent.focus();
+                return false;
+            };
+
+            reReplyForm.method = "post";
+            reReplyForm.action = "./writeReReply.do";
+            reReplyForm.submit();
+        }
+    </script>
+
     <script>
         // 대댓글 출력하기
         function fn_click(number) {
@@ -33,10 +84,10 @@
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-            <h1 class="Title"> 게시글 </h1>
+        <div id="Main_Box" align="center" style="margin-top: 30px">
+            <h1> 게시글 </h1>
 
-            <div class="d-flex justify-content-center" style="text-align: center; ">
+            <div class="d-flex justify-content-center" style="width: 80%; text-align: center; ">
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-success">
@@ -67,12 +118,12 @@
                     </tbody>
                 </table>
             </div>
-            <div style="border: 5px solid #04AA6D; border-radius: 20px; height: 700px; text-align: left">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; text-align: left">
                 ${board.cb_content}
             </div>
 
             <%--댓글--%>
-            <div class="d-flex justify-content-center" style=" text-align: center;">
+            <div class="d-flex justify-content-center" style="width: 80%; text-align: center;">
                 <table class="table align-middle" style="margin-top: 30px; border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-warning">
