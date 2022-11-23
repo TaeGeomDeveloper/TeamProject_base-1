@@ -57,7 +57,8 @@
             width : 40%;
             height: 10%;
             border : 2px solid black;
-
+            right : 30%;
+            top : 223.5%;
             font-size: 2.5em;
         }
         #serviceHead p {
@@ -68,7 +69,7 @@
             height: 25%;
             border : 2px solid black;
             right : 30%;
-            top : 286.5%;
+            top : 290.1%;
             font-size: 1.2em;
         }
 
@@ -220,20 +221,20 @@
     <div id="serviceHead">
         <h5>팀 소개</h5>
         <%--<h5 style="text-align:center;margin-top:20px;">--%>
-
+        <span id="serviceIntro">TEAM 기가막히조</span>
         </h5>
-        <div>
-            <div id="serviceIntro">TEAM 기가막히조</div>
+        <span>
             <img src="${contextPath}/resources/image/family.jpg" />
-            <p>
+            </span>
+        <p>
             A : ~ ~ ~ ~ ~ ~ ~ ~ 하고있어요  역할을 맡았어요<br/>
             B : ~~~~~~~~~~~~~~~~하고있어요   역할을 맡았어요<br/>
             C :  @#@!@#@~!!~@!!!하고있어요   역할을 맡았어요<br/>
             D : !~~~~~~~~~!@~#~~하고있어요  역할을 맡았어요<br/>
             E : !~~$$**((#%##@##하고있어요  역할을 맡았어요<br/>
             F : ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            </p>
-        </div>
+        </p>
+    </div>
     </div>
 </article>
 </body>
