@@ -23,7 +23,7 @@
 <%--헤더--%>
 <section class="head">
     <header style="font-size: 60px">
-        스마트팜
+        Back To The Farm
     </header>
     <nav>
         <c:choose>

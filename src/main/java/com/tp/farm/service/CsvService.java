@@ -55,7 +55,7 @@ public class CsvService {
     //지정된 경로에 csv 파일 읽는 코드
     public ArrayList<TraditionalMarketVO> getTraditionalMarketData() throws IOException{
         ArrayList<TraditionalMarketVO> list = new ArrayList<>();
-        File file = new File("C:/dev/install/Project_base/전국전통시장표준데이터_수정본.csv");
+        File file = new File("C:/dev/project/TeamProject_base/전국전통시장표준데이터_수정본.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
@@ -71,7 +71,7 @@ public class CsvService {
 
     public ArrayList<FarmlandPriceVO> getFarmlandPriceData() throws IOException{
         ArrayList<FarmlandPriceVO> list = new ArrayList<>();
-        File file = new File("C:/dev/install/Project_base/농지_시세_테이블.csv");
+        File file = new File("C:/dev/project/TeamProject_base/농지_시세_테이블.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
@@ -87,13 +87,14 @@ public class CsvService {
 
     public ArrayList<CropDataVO> getCropData() throws IOException{
         ArrayList<CropDataVO> list = new ArrayList<>();
-        File file = new File("C:/dev/install/Project_base/농작물_자료조사표.csv");
+        File file = new File("C:/dev/project/TeamProject_base/농작물_자료조사표_상중하_수정.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
         CropDataVO cropData = null;
         while((line=br.readLine())!=null){
             cropData = new CropDataVO(line);
+//            System.out.println(cropData.toString());
             list.add(cropData);
         }
         br.close();
