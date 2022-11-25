@@ -36,4 +36,9 @@
         <put-attribute name="body" value="/WEB-INF/views/member/Forgot.jsp" />
     </definition>
 
+    <definition name="/member/Manager" extends="baseLayout">
+        <put-attribute name="title" value="관리자 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/member/Manager.jsp" />
+    </definition>
+
 </tiles-definitions>
