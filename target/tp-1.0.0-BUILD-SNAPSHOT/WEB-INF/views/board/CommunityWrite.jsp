@@ -19,28 +19,42 @@
     <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteFunction.js" charset="UTF-8"></script>
 
     <script>
-            function fn_click() {
-                var WriteForm = document.WriteForm;
-                WriteForm.method = "post";
-                WriteForm.action = "./createBoard.do";
-                WriteForm.submit();
-            }
+        function writeform_check(){
+            var writeForm = document.writeForm;
+            let cb_title = $("#cb_title").val();
+
+            if(cb_title == ""){
+                alert("제목를 입력해주세요");
+                cb_title.focus();
+                return false;
+            };
+
+            writeForm.method = "post";
+            writeForm.action = "./createBoard.do";
+            writeForm.submit();
+        }
     </script>
 
     <style>
         .dropdown-toggle::after { display: none; }
     </style>
-
+    <style>
+        th{
+            text-align: center;
+            max-width: 100px;
+            min-width: 100px;
+        }
+    </style>
 </head>
 <body>
 
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1 style="font-size: 60px">쉼터</h1>
+        <div id="Main_Box" align="center" style="margin: auto; width: 90%">
+            <h1 class="Title">쉼터</h1>
             <form name="WriteForm" enctype="multipart/form-data">
-                <div style="border: 10px solid #04AA6D; border-radius: 20px; width: 80%; margin-bottom: 20px; margin-top: 30px;">
+                <div style="border: 10px solid #04AA6D; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
                     <table style="margin: 20px">
                         <tr>
                             <th>아이디</th>
@@ -50,7 +64,7 @@
                         </tr>
                         <tr>
                             <th>제목</th>
-                            <td><input class="form-control" placeholder="Title" type="text" name="cb_title"
+                            <td><input class="form-control" placeholder="Title" type="text" name="cb_title" id="cb_title"
                                        style="width: 50%"/></td>
                         </tr>
                         <tr>
@@ -64,11 +78,12 @@
                         </tr>
                     </table>
                 </div>
+                <div style="margin: auto">
+                    <button class="button2" type="button" onclick="writeform_check()" >작성하기</button>
+                </div>
             </form>
 
-            <div style="margin: auto">
-                <button class="button2" type="submit" onclick="fn_click()" > 작성하기</button>
-            </div>
+
         </div>
 
     </article>

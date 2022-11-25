@@ -141,6 +141,9 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/member/Manager.do">관리자</a>
+                    </li>
                 </ul>
 
                 <form class="d-flex" role="search">

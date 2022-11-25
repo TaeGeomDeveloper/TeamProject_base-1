@@ -22,13 +22,13 @@
 
 <%--헤더--%>
 <section class="head">
-    <header>
+    <header style="font-size: 60px">
         스마트팜
     </header>
     <nav>
         <c:choose>
             <c:when test="${user != null}">
-                <h5 align="right">환영합니다. ${user.mi_name}님! </h5>
+                <h5 align="right"> ${user.mi_name}님, 환영합니다. </h5>
                 <ul>
                     <li>
                         <a href="${contextPath}/member/ReadInfo.do?mi_id=${user.mi_id}&mode=r">
@@ -73,7 +73,7 @@
     <%--네비--%>
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="${contextPath}/smartfarm/Main.do">Home</a>
+            <a class="navbar-brand" href="${contextPath}/smartfarm/Main.do">메인</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -90,9 +90,9 @@
                             알림 소식
                         </a>
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
-                            <li><a class="dropdown-item rounded-2 active" href="${contextPath}/notice/BoardList.do">공지사항</a></li>
+                            <li><a class="dropdown-item rounded-2 " href="${contextPath}/notice/BoardList.do">공지사항</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/News.do">관련 뉴스</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Support.do">농부 지원 사업</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Support.do">지원 사업</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Reference.do">자료실</a></li>
                         </ul>
@@ -106,11 +106,6 @@
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/SmartFarmInfo.do">스마트팜 이란</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Promote.do">홍보 게시판</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/FarmInfo.do">농업 정보</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/SmartfarmSalesList.do">스마트팜 장비</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -131,8 +126,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
-                                    <li><a class="dropdown-item rounded-2 active" href="${contextPath}/service/Farm.do">작물 선택</a></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/HowFarmer.do">귀농 절차</a></li>
+                                    <li><a class="dropdown-item rounded-2 " href="${contextPath}/service/Farm.do">작물 선택</a></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Advice.do">전문가 상담/문의</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Recruitment.do">일손 구하기</a></li>
@@ -146,6 +141,9 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/member/Manager.do">관리자</a>
+                    </li>
                 </ul>
 
                 <form class="d-flex" role="search">
