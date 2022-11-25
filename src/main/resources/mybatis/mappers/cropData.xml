@@ -11,8 +11,8 @@
         <result property="cd_operatingCost" column="cd_operatingCost" />
         <result property="cd_income" column="cd_income" />
         <result property="cd_labor" column="cd_labor" />
-        <result property="cd_planterStart" column="cd_planterStart" />
-        <result property="cd_planterSemiannual" column="cd_planterSemiannual" />
+        <result property="cd_sowingStart" column="cd_sowingStart" />
+        <result property="cd_sowingSemiannual" column="cd_sowingSemiannual" />
         <result property="cd_harvestStart" column="cd_harvestStart" />
         <result property="cd_harvestSemiannual" column="cd_harvestSemiannual" />
         <result property="cd_harvestEnd" column="cd_harvestEnd" />
@@ -32,13 +32,13 @@
     </select>
 
     <insert id="insertCropData" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="cd_idx">
-                insert into crop_data(cd_cropClassification, cd_cropName, cd_operatingCost, cd_income, cd_labor, cd_planterStart,
-                                      cd_planterSemiannual, cd_harvestStart, cd_harvestSemiannual, cd_harvestEnd,
+                insert into crop_data(cd_cropClassification, cd_cropName, cd_operatingCost, cd_income, cd_labor, cd_sowingStart,
+                                      cd_sowingSemiannual, cd_harvestStart, cd_harvestSemiannual, cd_harvestEnd,
                                       cd_marketValue, cd_basicInformation, cd_insuranceStatus, cd_methodCultivation, cd_pest,
                                       cd_farmMaterials, cd_nutritionEfficacy) values
                             <foreach collection="list" item="item" separator=",">
                                     (#{item.cd_cropClassification}, #{item.cd_cropName}, #{item.cd_operatingCost}, #{item.cd_income},
-                                          #{item.cd_labor}, #{item.cd_planterStart}, #{item.cd_planterSemiannual}, #{item.cd_harvestStart},
+                                          #{item.cd_labor}, #{cd_sowingStart}, #{item.cd_sowingSemiannual}, #{item.cd_harvestStart},
                                           #{item.cd_harvestSemiannual}, #{item.cd_harvestEnd}, #{item.cd_marketValue}, #{item.cd_basicInformation},
                                           #{item.cd_insuranceStatus}, #{item.cd_methodCultivation}, #{item.cd_pest}, #{item.cd_farmMaterials},
                                           #{item.cd_nutritionEfficacy})
