@@ -84,6 +84,7 @@ public class CsvService {
         while((line=br.readLine())!=null){
             cropData = new CropDataVO(line);
             list.add(cropData);
+            System.out.println(cropData);
         }
         br.close();
         fr.close();

@@ -38,7 +38,7 @@
                                       cd_farmMaterials, cd_nutritionEfficacy) values
                             <foreach collection="list" item="item" separator=",">
                                     (#{item.cd_cropClassification}, #{item.cd_cropName}, #{item.cd_operatingCost}, #{item.cd_income},
-                                          #{item.cd_labor}, #{cd_sowingStart}, #{item.cd_sowingSemiannual}, #{item.cd_harvestStart},
+                                          #{item.cd_labor}, #{item.cd_sowingStart}, #{item.cd_sowingSemiannual}, #{item.cd_harvestStart},
                                           #{item.cd_harvestSemiannual}, #{item.cd_harvestEnd}, #{item.cd_marketValue}, #{item.cd_basicInformation},
                                           #{item.cd_insuranceStatus}, #{item.cd_methodCultivation}, #{item.cd_pest}, #{item.cd_farmMaterials},
                                           #{item.cd_nutritionEfficacy})
