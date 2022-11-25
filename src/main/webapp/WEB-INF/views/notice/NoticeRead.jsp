@@ -13,7 +13,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-            <h1 style="font-size: 60px; color: #f58e45; margin-top: 50px"> 공지사항 </h1>
+            <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 공지사항 </h1>
 
             <div class="d-flex justify-content-center" style="text-align: center; ">
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #f7a063;">

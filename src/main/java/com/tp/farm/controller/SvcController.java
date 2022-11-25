@@ -12,10 +12,15 @@
 
 package com.tp.farm.controller;
 
+import com.tp.farm.dao.CsvDAO;
 import com.tp.farm.dao.SvcDAO;
 import com.tp.farm.service.SvcService;
+import com.tp.farm.vo.BoardVO;
+import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.CropSelectVO;
 import java.io.*;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +41,7 @@ public class SvcController {
 
     @Autowired
     private SvcDAO svcDao;
+    private CsvDAO csvDAO;
     private CropSelectVO selectVO;
 //    @Autowired
 //    private SvcService service;
@@ -112,18 +118,20 @@ public class SvcController {
     }
      // 작물 선택 절차
     @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public CropSelectVO FarmProcess(@RequestBody CropSelectVO selectVO) throws  Exception{
+    public List<CropDataVO> FarmProcess(@RequestBody CropSelectVO selectVO) throws  Exception{
 
         if(selectVO == null){
             System.out.println("theres no VO founded");
         } else {
             System.out.println("VO ON");
         }
-
         System.out.println("작물 선택 절차");
         svcDao.insertFarmInfo(selectVO);
 
-        return selectVO;
+        System.out.println("작물 정보 리스트 받아오기");
+        List<CropDataVO> list = svcDao.selectAll();
+
+        return list;
     }
 
     private String getViewName(HttpServletRequest request) throws Exception {

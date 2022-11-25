@@ -17,6 +17,9 @@ public class CsvDAO {
     @Autowired
     private SqlSession sqlSession;
 
+
+
+
   public boolean insertDataTraditionalMarket(List<TraditionalMarketVO> list) throws SQLException{
       boolean flag = false;
       int affectedCount = sqlSession.insert("mapper.traditionalMarket.insertTraditionalMarket", list);
@@ -26,7 +29,6 @@ public class CsvDAO {
       }else {
           System.out.println("traditionalMarket data insert failed");
       }
-
       return  flag;
   }
 
