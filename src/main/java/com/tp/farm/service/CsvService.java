@@ -20,36 +20,25 @@ public class CsvService {
     @Autowired
     CsvDAO csvDAO;
 
-    //DB에 insert 실행하는 코드
+    // DB에 insert 실행하는 코드
     public void insertDataTraditionalMarket() throws SQLException, IOException {
-//        boolean flag = csvDAO.insertDataTraditionalMarket(this.getTraditionalMarketData());
-        boolean flag = csvDAO.deleteTraditionalMarketData();
-        if(flag){
-            //System.out.println("전통시장 데이터 모두 삭제 완료");
-            csvDAO.insertDataTraditionalMarket(this.getTraditionalMarketData());
-            //System.out.println("전통시장 데이터 모두 입력 완료");
-        }
-        //System.out.println(flag);
+        csvDAO.insertDataTraditionalMarket(this.getTraditionalMarketData());
     }
-
-    public void  insertDataFarmlandPrice() throws SQLException, IOException{
-//        boolean flag = csvDAO.insertDataFarmlandPrice(this.getFarmlandPriceData());
-        boolean flag = csvDAO.deleteFarmlandPriceData();
-        if(flag){
-            //System.out.println("농지 시세 테이블 모두 삭제 완료");
-            csvDAO.insertDataFarmlandPrice(this.getFarmlandPriceData());
-            //System.out.println("농지 시세 테이블 모두 입력 완료");
-        }
+    public void insertDataFarmlandPrice() throws SQLException, IOException{
+        csvDAO.insertDataFarmlandPrice(this.getFarmlandPriceData());
     }
-
-    public void  insertCropData() throws SQLException, IOException{
-//        boolean flag = csvDAO.insertDataCropData(this.getCropData());
-        boolean flag = csvDAO.deleteCropData();
-        if(flag){
-            //System.out.println("농지 시세 테이블 모두 삭제 완료");
-            csvDAO.insertDataCropData(this.getCropData());
-            //System.out.println("농지 시세 테이블 모두 입력 완료");
-        }
+    public void insertCropData() throws SQLException, IOException{
+        csvDAO.insertDataCropData(this.getCropData());
+    }
+    // DB에 Delete 실행하는 코드
+    public void deleteDataTraditionalMarket() throws SQLException, IOException {
+        csvDAO.deleteTraditionalMarketData();
+    }
+    public void deleteDataFarmlandPrice() throws SQLException, IOException {
+        csvDAO.deleteFarmlandPriceData();
+    }
+    public void deleteCropData() throws SQLException, IOException {
+        csvDAO.deleteCropData();
     }
 
     //지정된 경로에 csv 파일 읽는 코드
