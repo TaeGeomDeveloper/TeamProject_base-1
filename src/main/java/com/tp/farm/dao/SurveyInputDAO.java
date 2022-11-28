@@ -1,21 +1,20 @@
 package com.tp.farm.dao;
 
-import com.tp.farm.vo.CropSelectVO;
-import com.tp.farm.vo.MemberVO;
+import com.tp.farm.vo.SurveyInputVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("SvcDAO")
-public class SvcDAO {
+@Repository("surveyInputDAO")
+public class SurveyInputDAO {
 
     @Autowired
     private SqlSession sqlSession;
 
-    //작물 선택 등록!
-    public boolean insertFarmInfo(CropSelectVO selectVO) {
+    //작물 선택 설문조사에서 회원이 선택한 값 DB에 insert
+    public boolean insertFarmInfo(SurveyInputVO surveyInput) {
         boolean flag = false;
-        int affectedCount = sqlSession.insert("mapper.svc.insertFarmInfo", selectVO);
+        int affectedCount = sqlSession.insert("mapper.surveyInput.insertSurveyInput", surveyInput);
         if(affectedCount>0) {
             flag = true;
         }
