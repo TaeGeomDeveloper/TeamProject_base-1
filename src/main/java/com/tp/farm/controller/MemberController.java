@@ -163,12 +163,12 @@ public class MemberController {
     @RequestMapping(value = "/DeleteFarmlandPriceData.do", method = {RequestMethod.GET, RequestMethod.POST})
     public void DeleteFarmlandPriceData() throws  Exception{
         System.out.println("농지_시세_테이블 삭제");
-        csvService.deleteDataTraditionalMarket();
+        csvService.deleteDataFarmlandPrice();
     }
     @RequestMapping(value = "/DeleteCropData.do", method = {RequestMethod.GET, RequestMethod.POST})
     public void DeleteCropData() throws  Exception{
         System.out.println("농작물_자료조사표 삭제");
-        csvService.deleteDataTraditionalMarket();
+        csvService.deleteCropData();
     }
 
     // 로그아웃
@@ -237,7 +237,7 @@ public class MemberController {
             flag = true;
             String mi_password = member.getMi_password();
             System.out.println(mi_password + "find pwd success");
-            mailService.sendMail(mi_email, "smartfarm find password", mi_id + " password is" + mi_password + ".");
+            mailService.sendMail(mi_email, "회원님이 요청하신 비밀번호 찾기입니다.", mi_id + " password is " + mi_password);
         }
         System.out.println("findPwd status --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
