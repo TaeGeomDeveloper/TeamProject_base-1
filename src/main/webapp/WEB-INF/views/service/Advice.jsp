@@ -34,6 +34,26 @@
     </script>
 
     <style>
+        .Mbtn {
+            border-radius: 15px;
+            background-color: #f2b285;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .Mbtn:hover {
+            background-color: #f58e45;
+        }
+    </style>
+
+    <style>
         #Advice th {
             width: 100px;
             text-align: center;
@@ -51,7 +71,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1 style="font-size: 60px; color: #f58e45; margin-bottom: 30px"> 전문가 상담 및 문의 </h1>
+            <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 전문가 상담 및 문의 </h1>
 
             <div class="container marketing" style="margin-top: 30px">
 
@@ -234,6 +254,35 @@
                 <h1 style="font-size: 60px; color: #f58e45; margin-bottom: 10px; text-align: center"> 전문가 상담 및 문의 </h1>
                 <form name="WriteForm" id="frm" enctype="multipart/form-data">
                     <div style="border: 10px solid #f58e45; border-radius: 20px; width: 100%; margin-bottom: 20px">
+                        <h3 style="text-align: center">작물선택 결과</h3>
+                        <table>
+                            <tr>
+                                <th>
+                                    선택한 작물
+                                </th>
+                                <td>
+                                    작물A
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    작물 A의 시세
+                                </th>
+                                <td>
+                                    얼마
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    작물 A의 파종기와 수학시기
+                                </th>
+                                <td>
+                                    1월 ~ 12월 상중하
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="border: 10px solid #f58e45; border-radius: 20px; width: 100%; margin-bottom: 20px">
                         <table id="Advice" style="margin: 20px">
                             <tr>
                                 <th>아이디</th>
@@ -254,17 +303,12 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>첨부파일</th>
-                                <td><input class="form-control" placeholder="file" type="file" name="cb_attachedFile"
-                                           style="width: 50%"/></td>
-                            </tr>
                         </table>
                     </div>
                 </form>
 
-                <div style="margin: auto">
-                    <button class="button2" type="submit" onclick="fn_click()" id="savebutton"> 작성하기</button>
+                <div align="center">
+                    <button class="Mbtn" type="submit" onclick="fn_click()" id="savebutton"> 작성하기</button>
                 </div>
             </div>
 

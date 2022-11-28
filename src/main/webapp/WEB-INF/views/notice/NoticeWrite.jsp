@@ -36,7 +36,7 @@
 <section>
   <article>
     <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-      <h1 style="font-size: 60px; color: #f58e45; margin-top: 50px;"> 공지사항 </h1>
+      <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 공지사항 </h1>
       <form name="WriteForm" id="frm" enctype="multipart/form-data">
         <div style="border: 10px solid #f7a063; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
           <table style="margin: 20px">

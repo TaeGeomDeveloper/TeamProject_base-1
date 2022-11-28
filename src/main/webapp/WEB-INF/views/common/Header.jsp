@@ -23,7 +23,7 @@
 <%--헤더--%>
 <section class="head">
     <header style="font-size: 60px">
-        스마트팜
+        Back To The Farm
     </header>
     <nav>
         <c:choose>
@@ -141,6 +141,9 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/member/Manager.do">관리자</a>
+                    </li>
                 </ul>
 
                 <form class="d-flex" role="search">

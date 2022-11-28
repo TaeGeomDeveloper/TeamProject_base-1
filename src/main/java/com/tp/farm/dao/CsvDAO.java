@@ -26,7 +26,6 @@ public class CsvDAO {
       }else {
           System.out.println("traditionalMarket data insert failed");
       }
-
       return  flag;
   }
 

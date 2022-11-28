@@ -20,6 +20,7 @@ public class CropSelectVO {
     private String cs_howFarm;         // 재배 방법
     private String cs_harvestSeason;    // 수확 시기
     private String cs_needMachinery;    // 설비 유무
+    private String cs_needFarmland;     //농작지 유무
     private String cs_experience;    // 농사 경험
 
 
