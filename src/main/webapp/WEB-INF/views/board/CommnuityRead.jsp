@@ -103,7 +103,7 @@
                     <tr style="margin: auto">
                         <td>${board.cb_seq}</td>
                         <td>${board.cb_title}</td>
-                        <td>${board.mi_id}</td>
+                        <td>${board.cb_id}</td>
                         <td>${board.cb_regDate}</td>
                         <td>${board.cb_viewCount}</td>
                         <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">

@@ -89,7 +89,8 @@ public class BoardController {
         ModelAndView mav = new ModelAndView();
         BoardVO board = new BoardVO();
         boolean flag = false;
-        board.setMi_id(request.getParameter("mi_id"));
+        board.setCb_category(request.getParameter("cb_category"));
+        board.setCb_id(request.getParameter("cb_id"));
         board.setCb_title(request.getParameter("cb_title"));
         board.setCb_content(request.getParameter("cb_content"));
         try {
