@@ -94,18 +94,21 @@
                     </p>
 
 <%--작물 선택--%>
-                    <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7f2">
-                        <h2>본인 정보입력(필수)</h2>
+                    <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
+                        <h2>회원 정보입력 (필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <input type="hidden" value="${user.mi_id}" name="cs_id" id="cs_id">
+                                <p class="WForm">이름</p>
                                 <input class="form-control form-control" type="text" value="${user.mi_name}" name="cs_name" id="cs_name" readonly>
                             </div>
                             <div style="width: 25%; padding: 20px">
+                                <p class="WForm">나이</p>
                                 <input class="form-control form-control" type="text" placeholder="나이" name="cs_age" id="cs_age">
                             </div>
                             <div style="width: 25%; padding: 20px">
+                                <p class="WForm">성별</p>
                                 <select class="form-select form-select mb-3" name="cs_sex" id="cs_sex">
                                     <option selected value="men">남자</option>
                                     <option value="women">여자</option>
@@ -113,11 +116,11 @@
                             </div>
                         </div>
                         <hr class="featurette-divider">
-                        <h2 class="h2_selector">귀농 희망지역(필수)</h2>
+                        <h2 class="h2_selector">귀농 희망지역 및 수확시기 (필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
-                            <div style="width: 30%; padding: 20px">
-                                <p class="WForm">지역</p>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">귀농 희망지역</p>
                                 <select class="form-select form-select mb-3" name="cs_location" id="cs_location">
                                     <option selected value="전체">전체</option>
                                     <option value="강원도">강원도</option>
@@ -130,9 +133,67 @@
                                     <option value="전라남도">전라남도</option>
                                 </select>
                             </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">파종시기</p>
+                                <select class="form-select form-select mb-3" name="cs_P" id="cs_P">
+                                    <option selected value="1월">1월</option>
+                                    <option value="2월">2월</option>
+                                    <option value="3월">3월</option>
+                                    <option value="4월">4월</option>
+                                    <option value="5월">5월</option>
+                                    <option value="6월">6월</option>
+                                    <option value="7월">7월</option>
+                                    <option value="8월">8월</option>
+                                    <option value="9월">9월</option>
+                                    <option value="10월">10월</option>
+                                    <option value="11월">11월</option>
+                                    <option value="12월">12월</option>
+                                </select>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">상</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">중</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                    <label class="form-check-label" for="inlineRadio3">하</label>
+                                </div>
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">수학 시기</p>
+                                <select class="form-select form-select mb-3" name="cs_harvestSeason" id="cs_harvestSeason">
+                                    <option selected value="1월">1월</option>
+                                    <option value="2월">2월</option>
+                                    <option value="3월">3월</option>
+                                    <option value="4월">4월</option>
+                                    <option value="5월">5월</option>
+                                    <option value="6월">6월</option>
+                                    <option value="7월">7월</option>
+                                    <option value="8월">8월</option>
+                                    <option value="9월">9월</option>
+                                    <option value="10월">10월</option>
+                                    <option value="11월">11월</option>
+                                    <option value="12월">12월</option>
+                                </select>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4" value="option4">
+                                    <label class="form-check-label" for="inlineRadio4">상</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio5" value="option5">
+                                    <label class="form-check-label" for="inlineRadio5">중</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio6" value="option6">
+                                    <label class="form-check-label" for="inlineRadio6">하</label>
+                                </div>
+                            </div>
                         </div>
                         <hr class="featurette-divider">
-                        <h2 class="h2_selector">작물 분류(필수)</h2>
+                        <h2 class="h2_selector">고려사항 (선택)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
@@ -152,19 +213,16 @@
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
-                                <p class="WForm">수학 시기</p>
-                                <select class="form-select form-select mb-3" name="cs_harvestSeason" id="cs_harvestSeason">
-                                    <option selected value="전체">모두</option>
-                                    <option value="봄">봄</option>
-                                    <option value="여름">여름</option>
-                                    <option value="가을">가을</option>
-                                    <option value="겨울">겨울</option>
+                                <p class="WForm">농사 경험 유무</p>
+                                <select class="form-select form-select mb-3" name="cs_experience" id="cs_experience">
+                                    <option selected value="없음">없음</option>
+                                    <option value="3개월">3개월 이상</option>
+                                    <option value="6개월">6개월 이상</option>
+                                    <option value="1년이상">1년 이상</option>
+                                    <option value="3년이상">3년 이상</option>
                                 </select>
                             </div>
                         </div>
-                        <hr class="featurette-divider">
-                        <h2 class="h2_selector">고려사항(선택)</h2>
-                        <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농기계 및 설비 유무</p>
@@ -174,14 +232,12 @@
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
-                                <p class="WForm">농사 경험 유무</p>
-                                <select class="form-select form-select mb-3" name="cs_experience" id="cs_experience">
-                                    <option selected value="없음">없음</option>
-                                    <option value="3개월">3개월 이상</option>
-                                    <option value="6개월">6개월 이상</option>
-                                    <option value="1년이상">1년 이상</option>
-                                    <option value="3년이상">3년 이상</option>
-                                </select>
+                                <p class="WForm">자본금</p>
+                                <input class="form-control form-control" type="text" placeholder="자본금" name="cs_age" >
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">토지크기 (ha)</p>
+                                <input class="form-control form-control" type="text" placeholder="토지크기" name="cs_age">
                             </div>
                         </div>
                         <hr class="featurette-divider">
@@ -194,15 +250,15 @@
                 </div>
             </div>
 
-<%-- 작물 정보 --%>
+<%-- 작물 정보 리스트 출력 --%>
             <div id="window" style="display: none">
                 <div id="Main_Box" align="center">
-                    <div class="d-flex justify-content-center" style="margin-bottom: 30px">
-                        <c:forEach var="i" begin="0" end="6">
+                    <div class="align-self-center" style="margin-bottom: 30px">
+                        <c:forEach var="i" begin="0" end="12">
                             <!-- Button trigger modal -->
                             <button id="Fbtn" onclick="fn_click(${i})" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
-                                <img src="${contextPath}/resources/image/과일/과일${i+1}.jpg" alt="과일${i+1}" width="100"
+                                <img src="${contextPath}/resources/image/과일채소/${i+1}.jpg" alt="과일채소${i+1}" width="100"
                                      height="100" class="rounded-circle">
                             </button>
                         </c:forEach>
@@ -538,17 +594,17 @@
                 </div>
 
 
-                <div id="Main_Box2" align="center" style="margin-bottom: 30px">
-                    <div class="d-flex justify-content-center" style="margin-bottom: 30px; margin-top: 30px">
-                        <c:forEach var="i" begin="0" end="5">
-                            <button id="Fbtn" onclick="fn_clcik2(${i})">
-                                <img src="${contextPath}/resources/image/채소/채소${i+1}.jpg" alt="과일${i+1}" width="100"
-                                     height="100" class="rounded-circle">
-                            </button>
-                        </c:forEach>
-                    </div>
+<%--                <div id="Main_Box2" align="center" style="margin-bottom: 30px">--%>
+<%--                    <div class="d-flex justify-content-center" style="margin-bottom: 30px; margin-top: 30px">--%>
+<%--                        <c:forEach var="i" begin="0" end="5">--%>
+<%--                            <button id="Fbtn" onclick="fn_clcik2(${i})">--%>
+<%--                                <img src="${contextPath}/resources/image/채소/채소${i+1}.jpg" alt="과일${i+1}" width="100"--%>
+<%--                                     height="100" class="rounded-circle">--%>
+<%--                            </button>--%>
+<%--                        </c:forEach>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                </div>
             </div>
 
             <div class="b-example-divider"></div>
