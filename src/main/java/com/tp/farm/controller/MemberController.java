@@ -4,13 +4,11 @@ import com.tp.farm.service.CsvService;
 import com.tp.farm.service.MailService;
 import com.tp.farm.service.MemberService;
 import com.tp.farm.utils.NaverSensV2;
-import com.tp.farm.vo.CropSelectVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 import com.tp.farm.dao.MemberDAO;
 import com.tp.farm.vo.MemberVO;
@@ -243,7 +241,7 @@ public class MemberController {
             flag = true;
             String mi_password = member.getMi_password();
             System.out.println(mi_password + "find pwd success");
-            mailService.sendMail(mi_email, "smartfarm find password", mi_id + " password is" + mi_password + ".");
+            mailService.sendMail(mi_email, "회원님이 요청하신 비밀번호 찾기입니다.", mi_id + " password is " + mi_password);
         }
         System.out.println("findPwd status --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);

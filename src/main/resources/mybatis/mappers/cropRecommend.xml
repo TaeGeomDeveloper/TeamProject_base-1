@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.cropRecommend">
+    <resultMap id="surveyInputResult" type="surveyInputVO">
+        <result property="msi_id" column="msi_id" />
+        <result property="msi_memberName" column="msi_memberName" />
+        <result property="msi_memberAge" column="msi_memberAge" />
+        <result property="msi_memberGender" column="msi_memberGender" />
+        <result property="msi_desiredArea" column="msi_desiredArea" />
+        <result property="msi_desiredAreaDetail" column="msi_desiredAreaDetail" />
+        <result property="msi_desiredTimeSowing" column="msi_desiredTimeSowing" />
+        <result property="msi_desiredTimeSowingPart" column="msi_desiredTimeSowingPart" />
+        <result property="msi_desiredHarvestTime" column="msi_desiredHarvestTime" />
+        <result property="msi_desiredHarvestTimePart" column="msi_desiredHarvestTimePart" />
+        <result property="msi_cropClassification" column="msi_cropClassification" />
+        <result property="msi_cultivationMethod" column="msi_cultivationMethod" />
+        <result property="msi_farmingExperience" column="msi_farmingExperience" />
+        <result property="msi_hadMachinery" column="msi_hadMachinery" />
+        <result property="msi_capital" column="msi_capital" />
+        <result property="msi_holdingLand" column="msi_holdingLand" />
+    </resultMap>
+
+    <resultMap id="cropDataResult" type="cropDataVO">
+        <id property="cd_idx" column="cd_idx" />
+        <result property="cd_cropClassification" column="cd_cropClassification" />
+        <result property="cd_cropName" column="cd_cropName" />
+        <result property="cd_operatingCost" column="cd_operatingCost" />
+        <result property="cd_income" column="cd_income" />
+        <result property="cd_labor" column="cd_labor" />
+        <result property="cd_sowingStart" column="cd_sowingStart" />
+        <result property="cd_sowingSemiannual" column="cd_sowingSemiannual" />
+        <result property="cd_harvestStart" column="cd_harvestStart" />
+        <result property="cd_harvestSemiannual" column="cd_harvestSemiannual" />
+        <result property="cd_harvestEnd" column="cd_harvestEnd" />
+        <result property="cd_marketValue" column="cd_marketValue" />
+        <result property="cd_basicInformation" column="cd_basicInformation" />
+        <result property="cd_insuranceStatus" column="cd_insuranceStatus" />
+        <result property="cd_methodCultivation" column="cd_methodCultivation" />
+        <result property="cd_pest" column="cd_pest" />
+        <result property="cd_farmMaterials" column="cd_farmMaterials" />
+        <result property="cd_nutritionEfficacy" column="cd_nutritionEfficacy" />
+    </resultMap>
+
+    <resultMap id="tmResult" type="traditionalMarketVO">
+        <id property="tmi_idx" column="tmi_idx" />
+        <result property="tmi_name" column="tmi_name" />
+        <result property="tmi_marketType" column="tmi_marketType" />
+        <result property="tmi_roadNameAddress" column="tmi_roadNameAddress" />
+        <result property="tmi_numberAddress" column="tmi_numberAddress" />
+        <result property="tmi_storesNumber" column="tmi_storesNumber" />
+        <result property="tmi_hasVoucher" column="tmi_hasVoucher" />
+        <result property="tmi_hasParkingLot" column="tmi_hasParkingLot" />
+        <result property="tmi_phoneNumber" column="tmi_phoneNumber" />
+        <result property="tmi_renewalDate" column="tmi_renewalDate" />
+    </resultMap>
+
+    <resultMap id="farmLandResult" type="farmlandPriceVO">
+        <id property="mpf_idx" column="mpf_idx" />
+        <result property="mpf_locationName" column="mpf_locationName" />
+        <result property="mpf_locationNameDetail" column="mpf_locationNameDetail" />
+        <result property="mpf_lowestPrice" column="mpf_lowestPrice" />
+        <result property="mpf_maximumPrice" column="mpf_maximumPrice" />
+        <result property="mpf_averagePrice" column="mpf_averagePrice" />
+        <result property="mpf_lieutenant" column="mpf_lieutenant" />
+    </resultMap>
+
+    <select id="selectCrop">
+        <![CDATA[
+            select distinct(cd.cd_idx)
+            from crop_data cd
+              where cd.cd_cropClassification = #{msi_cropClassification}
+              and cd.cd_sowingStart = #{msi_desiredTimeSowing}
+              and cd.cd_sowingSemiannual = #{msi_desiredTimeSowingPart}
+              and cd.cd_harvestStart = #{msi_desiredHarvestTime}
+              and cd.cd_harvestSemiannual = #{msi_desiredHarvestTimePart};
+        ]]>
+    </select>
+
+
+</mapper>

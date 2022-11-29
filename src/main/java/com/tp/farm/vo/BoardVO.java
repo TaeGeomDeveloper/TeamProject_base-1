@@ -13,7 +13,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class BoardVO {
     private int cb_seq;
-    private String mi_id;
+    private String cb_category;
+    private String cb_id;
     private String cb_title;
     private String cb_content;
     private int cb_viewCount;
