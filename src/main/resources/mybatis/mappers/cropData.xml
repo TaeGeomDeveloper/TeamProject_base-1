@@ -27,27 +27,27 @@
 
     <select id="selectAllCropData" resultMap="cropDataResult">
         <![CDATA[
-        select * from crop_data
+            select * from crop_data
         ]]>
     </select>
 
     <insert id="insertCropData" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="cd_idx">
-        insert into crop_data(cd_cropClassification, cd_cropName, cd_operatingCost, cd_income, cd_labor, cd_sowingStart,
-        cd_sowingSemiannual, cd_harvestStart, cd_harvestSemiannual, cd_harvestEnd,
-        cd_marketValue, cd_basicInformation, cd_insuranceStatus, cd_methodCultivation, cd_pest,
-        cd_farmMaterials, cd_nutritionEfficacy) values
-        <foreach collection="list" item="item" separator=",">
-            (#{item.cd_cropClassification}, #{item.cd_cropName}, #{item.cd_operatingCost}, #{item.cd_income},
-            #{item.cd_labor}, #{item.cd_sowingStart}, #{item.cd_sowingSemiannual}, #{item.cd_harvestStart},
-            #{item.cd_harvestSemiannual}, #{item.cd_harvestEnd}, #{item.cd_marketValue}, #{item.cd_basicInformation},
-            #{item.cd_insuranceStatus}, #{item.cd_methodCultivation}, #{item.cd_pest}, #{item.cd_farmMaterials},
-            #{item.cd_nutritionEfficacy})
-        </foreach>
+                insert into crop_data(cd_cropClassification, cd_cropName, cd_operatingCost, cd_income, cd_labor, cd_sowingStart,
+                                      cd_sowingSemiannual, cd_harvestStart, cd_harvestSemiannual, cd_harvestEnd,
+                                      cd_marketValue, cd_basicInformation, cd_insuranceStatus, cd_methodCultivation, cd_pest,
+                                      cd_farmMaterials, cd_nutritionEfficacy) values
+                            <foreach collection="list" item="item" separator=",">
+                                    (#{item.cd_cropClassification}, #{item.cd_cropName}, #{item.cd_operatingCost}, #{item.cd_income},
+                                          #{item.cd_labor}, #{item.cd_sowingStart}, #{item.cd_sowingSemiannual}, #{item.cd_harvestStart},
+                                          #{item.cd_harvestSemiannual}, #{item.cd_harvestEnd}, #{item.cd_marketValue}, #{item.cd_basicInformation},
+                                          #{item.cd_insuranceStatus}, #{item.cd_methodCultivation}, #{item.cd_pest}, #{item.cd_farmMaterials},
+                                          #{item.cd_nutritionEfficacy})
+                            </foreach>
     </insert>
 
     <delete id="deleteCropData">
         <![CDATA[
-        delete from crop_data
+            delete from crop_data
         ]]>
     </delete>
 

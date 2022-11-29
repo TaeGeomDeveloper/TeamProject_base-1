@@ -18,7 +18,6 @@
             var replyForm = document.replyForm;
             let cbr_replyId = $("#cbr_replyId").val();
             let cbr_content = $("#cbr_content").val();
-            alert(cbr_replyId);
             if(cbr_replyId == ""){
                 alert("로그인이 필요합니다");
                 console.log(cbr_replyId);
@@ -44,7 +43,6 @@
             var reReplyForm = document.reReplyForm;
             let cbr_reReplyId = $("#cbr_reReplyId").val();
             let cbr_reContent = $("#cbr_reContent").val();
-            alert(cbr_reReplyId);
             if(cbr_reReplyId == ""){
                 alert("로그인이 필요합니다");
                 cbr_reReplyId.focus();
@@ -105,7 +103,7 @@
                     <tr style="margin: auto">
                         <td>${board.cb_seq}</td>
                         <td>${board.cb_title}</td>
-                        <td>${board.mi_id}</td>
+                        <td>${board.cb_id}</td>
                         <td>${board.cb_regDate}</td>
                         <td>${board.cb_viewCount}</td>
                         <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">

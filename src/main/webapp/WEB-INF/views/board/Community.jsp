@@ -34,16 +34,16 @@
                 <div class="container-fluid">
                     <select class="form-select" aria-label="Default select example" style="width: 20%">
                         <option selected>카테고리</option>
-                        <option value="1">잡담</option>
-                        <option value="2">일상</option>
-                        <option value="3">공유</option>
-                        <option value="4">Q&A</option>
+                        <option value="1">일반</option>
+                        <option value="2">정보</option>
+                        <option value="3">나눔</option>
+                        <option value="4">질문</option>
                     </select>
                     <div class="d-flex">
-                        <button class="button">잡담</button>
-                        <button class="button">일상</button>
-                        <button class="button">공유</button>
-                        <button class="button">Q&A</button>
+                        <button class="button">일반</button>
+                        <button class="button">정보</button>
+                        <button class="button">나눔</button>
+                        <button class="button">질문</button>
                     </div>
                 </div>
             </nav>
@@ -66,11 +66,11 @@
                     <tr>
                         <td>${vo.cb_seq}</td>
                         <td><a href="ReadBoard.do?cb_seq=${vo.cb_seq}">${vo.cb_title} </a></td>
-                        <td>${vo.mi_id}</td>
+                        <td>${vo.cb_id}</td>
                         <td>${vo.cb_regDate}</td>
                         <td>${vo.cb_viewCount}</td>
                         <td>
-                            <a href="Update.do?id=${vo.mi_id}">
+                            <a href="Update.do?id=${vo.cb_id}">
                                 <button class="button3">변경</button>
                             </a>
                         </td>

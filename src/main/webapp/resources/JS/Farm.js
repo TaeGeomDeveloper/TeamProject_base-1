@@ -1,4 +1,3 @@
-
 // 차트
 google.charts.load('current', {'packages': ['corechart']});
 google.charts.setOnLoadCallback(drawChart);
@@ -28,74 +27,53 @@ function PDF_popup() {
     var pop = window.open("/smartfarm/resources/PDF/Pdf1.jsp", "pop", "width=600,height=800, scrollbars=yes, resizable=yes");
 }
 
-// 정보
-function fn_click(number) {
+// 작물 정보
+function FarmInfo(map) {
 
     $(document).ready(function () {
+        <!-- Modal Test-->
+        var textTest = "";
+        var cropName = "";
+        var sowing = "";
+        var harvest = "";
 
-        // 정렬
-        $("#menu1").click(function () {
-            $("#Info_menu1").slideDown("slow");
-            $("#Info_menu2").slideUp("slow");
-            $("#Info_menu3").slideUp("slow");
-            $("#Info_menu4").slideUp("slow");
-            $("#Info_menu5").slideUp("slow");
-        });
-        $("#menu2").click(function () {
-            $("#Info_menu1").slideUp("slow");
-            $("#Info_menu2").slideDown("slow");
-            $("#Info_menu3").slideUp("slow");
-            $("#Info_menu4").slideUp("slow");
-            $("#Info_menu5").slideUp("slow");
-        });
-        $("#menu3").click(function () {
-            $("#Info_menu1").slideUp("slow");
-            $("#Info_menu2").slideUp("slow");
-            $("#Info_menu3").slideDown("slow");
-            $("#Info_menu4").slideUp("slow");
-            $("#Info_menu5").slideUp("slow");
-        });
-        $("#menu4").click(function () {
-            $("#Info_menu1").slideUp("slow");
-            $("#Info_menu2").slideUp("slow");
-            $("#Info_menu3").slideUp("slow");
-            $("#Info_menu4").slideDown("slow");
-            $("#Info_menu5").slideUp("slow");
-        });
-        $("#menu5").click(function () {
-            $("#Info_menu1").slideUp("slow");
-            $("#Info_menu2").slideUp("slow");
-            $("#Info_menu3").slideUp("slow");
-            $("#Info_menu4").slideUp("slow");
-            $("#Info_menu5").slideDown("slow");
-        });
+        // textTest += "<br>번호 : " + map.cd_idx;
+        // textTest += "<br>이름 : " + map.cd_cropName;
+        // $('#TestForm').html(textTest);
 
-        $.ajax({
-            url: "/smartfarm/resources/JSON/Farm2.json",
-            dataType: "json",
-            success: function (data) {
-                if (data.length > 0) {
+        // 기본 정보
+        //document.getElementById("Fruit_Title").innerHTML = obj.cd_cropName;
+        sowing += "파종시기 : "+ map.cd_sowingStart + map.cd_sowingSemiannual;
+        harvest += "수학 시작 시점 : " + map.cd_harvestStart + map.cd_harvestSemiannual + "<br>" +"수학 종료 시점 : " + map.cd_harvestEnd;
 
-                    // 기본 정보
-                    document.getElementById("Fruit_Title").innerHTML = data[number].name;
-                    document.getElementById("content1").innerHTML = data[number].content;
-                    document.getElementById("FruitPic").innerHTML = "<img src=\"/smartfarm/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
-                    document.getElementById("SmallInfo").innerHTML = data[number].SmallInfo;
+        cropName += map.cd_cropName;
+        $('#Fruit_Title').html(cropName);
+        $('#SmallInfo').html(map.cd_basicInformation);
+        document.getElementById("FruitPic").innerHTML = "<img src=\"/smartfarm/resources/image/FV/" + map.cd_idx + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
 
-                    // 재배 기술
-                    document.getElementById("FruitPic2").innerHTML = "<img src=\"/smartfarm/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
-                    document.getElementById("level").innerHTML = "재배 난이도 : " + data[number].rating + "<br/>";
-                    document.getElementById("Fruit_Title2").innerHTML = data[number].name;
+        // 상세 정보
+        $('#nutrition').html(map.cd_nutritionEfficacy);
+        $('#sowing').html(sowing);
+        $('#harvest').html(harvest);
+        $('#content2').html(map.cd_methodCultivation);
+        $('#pest').html(map.cd_pest);
 
-                    document.getElementById("content2").innerHTML = data[number].content2 + "<br/>";
-                    document.getElementById("content3").innerHTML = "현재 시세 : " + data[number].price;
-                }
-            },
-            error: function (data, status) {
-            },
-            complete: function (data, status) {
-            }
-        }); // ajax end
+        document.getElementById("FVS").innerHTML = "  <a href=\"/smartfarm/service/FarmInfo.do?cd_idx="+map.cd_idx+"\">\n" +
+            "                                            <button type=\"button\" class=\"btn btn-success\">작물 최종 선택</button>\n" +
+            "                                        </a>";
+
+        //             document.getElementById("content1").innerHTML = data[number].content;
+
+        //             document.getElementById("SmallInfo").innerHTML = data[number].SmallInfo;
+        //
+        //             // 재배 기술
+        //             document.getElementById("FruitPic2").innerHTML = "<img src=\"/smartfarm/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+        //             document.getElementById("level").innerHTML = "재배 난이도 : " + data[number].rating + "<br/>";
+        //             document.getElementById("Fruit_Title2").innerHTML = data[number].name;
+        //
+        //             document.getElementById("content2").innerHTML = data[number].content2 + "<br/>";
+        //             document.getElementById("content3").innerHTML = "현재 시세 : " + data[number].price;
+
     });
 }
 
