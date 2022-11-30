@@ -25,7 +25,7 @@ function drawChart() {
 // PDF
 function PDF_popup() {
     //${contextPath}/resources/PDF/Pdf1.jsp
-    var pop = window.open("/smartfarm/resources/PDF/Pdf1.jsp", "pop", "width=600,height=800, scrollbars=yes, resizable=yes");
+    var pop = window.open("/gwinongin/resources/PDF/Pdf1.jsp", "pop", "width=600,height=800, scrollbars=yes, resizable=yes");
 }
 
 // 정보
@@ -71,7 +71,7 @@ function fn_click(number) {
         });
 
         $.ajax({
-            url: "/smartfarm/resources/JSON/Farm2.json",
+            url: "/gwinongin/resources/JSON/Farm2.json",
             dataType: "json",
             success: function (data) {
                 if (data.length > 0) {
@@ -79,11 +79,11 @@ function fn_click(number) {
                     // 기본 정보
                     document.getElementById("Fruit_Title").innerHTML = data[number].name;
                     document.getElementById("content1").innerHTML = data[number].content;
-                    document.getElementById("FruitPic").innerHTML = "<img src=\"/smartfarm/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                    document.getElementById("FruitPic").innerHTML = "<img src=\"/gwinongin/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
                     document.getElementById("SmallInfo").innerHTML = data[number].SmallInfo;
 
                     // 재배 기술
-                    document.getElementById("FruitPic2").innerHTML = "<img src=\"/smartfarm/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                    document.getElementById("FruitPic2").innerHTML = "<img src=\"/gwinongin/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
                     document.getElementById("level").innerHTML = "재배 난이도 : " + data[number].rating + "<br/>";
                     document.getElementById("Fruit_Title2").innerHTML = data[number].name;
 
@@ -109,14 +109,14 @@ function fn_clcik2(number) {
     }
 
     $.ajax({
-        url: "/smartfarm/resources/JSON/Farm2.json",
+        url: "/gwinongin/resources/JSON/Farm2.json",
         dataType: "json",
         success: function (data) {
             if (data.length > 0) {
                 document.getElementById("content4").innerHTML = data[number].name + "<br/>"
                     + data[number].content;
-                document.getElementById("FruitPic").innerHTML = "<img src=\"smartfarm/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
-                document.getElementById("FruitPic2").innerHTML = "<img src=\"smartfarm/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                document.getElementById("FruitPic").innerHTML = "<img src=\"gwinongin/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                document.getElementById("FruitPic2").innerHTML = "<img src=\"gwinongin/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
 
 
                 document.getElementById("content5").innerHTML = "재배 난이도 : " + data[number].rating + "<br/>";

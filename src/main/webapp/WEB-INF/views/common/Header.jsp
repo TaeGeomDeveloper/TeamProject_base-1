@@ -73,7 +73,7 @@
     <%--네비--%>
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="${contextPath}/smartfarm/Main.do">메인</a>
+            <a class="navbar-brand" href="${contextPath}/home/Main.do">메인</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                     aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,7 +81,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="${contextPath}/smartfarm/Service.do">서비스소개</a>
+                        <a class="nav-link active" aria-current="page" href="${contextPath}/home/Service.do">서비스소개</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -91,10 +91,10 @@
                         </a>
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                             <li><a class="dropdown-item rounded-2 " href="${contextPath}/notice/BoardList.do">공지사항</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/News.do">관련 뉴스</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Support.do">지원 사업</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/home/News.do">관련 뉴스</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/home/Support.do">지원 사업</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Reference.do">자료실</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/home/Reference.do">자료실</a></li>
                         </ul>
                     </li>
 
@@ -104,8 +104,8 @@
                             스마트팜
                         </a>
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/SmartFarmInfo.do">스마트팜 이란</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Promote.do">홍보 게시판</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/home/SmartFarmInfo.do">스마트팜 이란</a></li>
+                            <li><a class="dropdown-item rounded-2" href="${contextPath}/home/Promote.do">홍보 게시판</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

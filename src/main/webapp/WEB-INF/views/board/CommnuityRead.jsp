@@ -141,9 +141,7 @@
                                 <tr>
                                     <td>${reply.cbr_seq}</td>
                                     <td>${reply.cbr_replyId}</td>
-                                    <td>
-                                        <a href="viewWriteReReply.do?cb_seq=${board.cb_seq}&cbr_bundleSeq=${reply.cbr_bundleSeq}&cbr_currentSeq=${reply.cbr_currentSeq}">${reply.cbr_bundleSeq}</a>
-                                    </td>
+                                    <td>${reply.cbr_bundleSeq}</td>
                                     <td>${reply.cbr_currentSeq}</td>
                                     <td>${reply.cbr_regDate}</td>
                                     <td>
@@ -164,7 +162,6 @@
                                         <button class="button" onclick="fn_click(${reply.cbr_bundleSeq})">답글</button>
                                         <div id="${reply.cbr_bundleSeq}"
                                              style="display: none; background-color: lightgray">
-                                            대댓글이 나옵니다.
                                             <div>
                                                 <table style="width: 100%">
                                                     <c:forEach var="Rereply" items="${replyList}">

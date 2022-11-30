@@ -88,7 +88,7 @@
                 </tbody>
             </table>
 
-            <a href="${contextPath}/smartfarm/notice/CreateNewBoard.do">
+            <a href="${contextPath}/gwinongin/notice/CreateNewBoard.do">
                 <button class="button2">작성하기</button>
             </a>
 

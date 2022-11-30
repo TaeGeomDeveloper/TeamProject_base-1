@@ -170,7 +170,7 @@ public class NoticeController {
         //업로드
         File file = new File(path , fileName);
         img.transferTo(file);
-        return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);
+        return ResponseEntity.ok().body("/gwinongin/resources/upload/"+fileName);
     }
 
     private String getViewName(HttpServletRequest request) throws Exception {
