@@ -1,4 +1,5 @@
 <%@ page import="com.tp.farm.vo.FarmlandPriceVO" %>
+<%@ page import="com.tp.farm.vo.SurveyInputVO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -29,109 +30,9 @@
         }
     </style>
 
-<%--    <script>--%>
-<%--        $(document).ready(function() {--%>
-<%--            $("#flip").on('click', function (event) {--%>
-
-<%--                let msi_id = $("#msi_id").val();--%>
-<%--                let msi_memberName = $("#msi_memberName").val();--%>
-<%--                let msi_memberAge = $("#msi_memberAge").val();--%>
-<%--                let msi_memberGender = $("#msi_memberGender").val();--%>
-<%--                let msi_desiredArea = $("#msi_desiredArea").val();--%>
-<%--                let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();--%>
-<%--                let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();--%>
-<%--                let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();--%>
-<%--                let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();--%>
-<%--                let msi_cropClassification = $("#msi_cropClassification").val();--%>
-<%--                let msi_cultivationMethod = $("#msi_cultivationMethod").val();--%>
-<%--                let msi_farmingExperience = $("#msi_farmingExperience").val();--%>
-<%--                let msi_hadMachinery = $("#msi_hadMachinery").val();--%>
-<%--                let msi_capital = $("#msi_capital").val();--%>
-<%--                let msi_holdingLand = $("#msi_holdingLand").val();--%>
-
-<%--                console.log(msi_id);--%>
-<%--                console.log(msi_memberName);--%>
-<%--                console.log(msi_memberAge);--%>
-<%--                console.log(msi_memberGender);--%>
-<%--                console.log(msi_desiredArea);--%>
-<%--                console.log(msi_desiredTimeSowing);--%>
-<%--                console.log(msi_desiredTimeSowingPart);--%>
-<%--                console.log(msi_desiredHarvestTime);--%>
-<%--                console.log(msi_desiredHarvestTimePart);--%>
-<%--                console.log(msi_cropClassification);--%>
-<%--                console.log(msi_cultivationMethod);--%>
-<%--                console.log(msi_farmingExperience);--%>
-<%--                console.log(msi_hadMachinery);--%>
-<%--                console.log(msi_capital);--%>
-<%--                console.log(msi_holdingLand);--%>
-
-
-
-<%--                // let param = {--%>
-<%--                //     "msi_id":msi_id,--%>
-<%--                //     "msi_memberName":msi_memberName,--%>
-<%--                //     "msi_memberGender":msi_memberGender,--%>
-<%--                //     "msi_memberAge":msi_memberAge,--%>
-<%--                //     "msi_desiredArea":msi_desiredArea,--%>
-<%--                //     "msi_desiredTimeSowing":msi_desiredTimeSowing,--%>
-<%--                //     "msi_desiredTimeSowingPart":msi_desiredTimeSowingPart,--%>
-<%--                //     "msi_desiredHarvestTime":msi_desiredHarvestTime,--%>
-<%--                //     "msi_desiredHarvestTimePart":msi_desiredHarvestTimePart,--%>
-<%--                //     "msi_cropClassification":msi_cropClassification,--%>
-<%--                //     "msi_cultivationMethod":msi_cultivationMethod,--%>
-<%--                //     "msi_farmingExperience":msi_farmingExperience,--%>
-<%--                //     "msi_hadMachinery":msi_hadMachinery,--%>
-<%--                //     "msi_capital":msi_capital,--%>
-<%--                //     "msi_holdingLand":msi_holdingLand,--%>
-<%--                // }--%>
-
-<%--               $.ajax({--%>
-<%--                   type: 'POST',--%>
-<%--                   url: "${contextPath}/service/FarmProcess.do",--%>
-<%--                   contentType: "application/json; charset=UTF-8",--%>
-<%--                   dataType: "json",--%>
-<%--                   data: {--%>
-<%--                       msi_id:msi_id,--%>
-<%--                       msi_memberName:msi_memberName,--%>
-<%--                       msi_memberGender:msi_memberGender,--%>
-<%--                       msi_memberAge:msi_memberAge,--%>
-<%--                       msi_desiredArea:msi_desiredArea,--%>
-<%--                       msi_desiredTimeSowing:msi_desiredTimeSowing,--%>
-<%--                       msi_desiredTimeSowingPart:msi_desiredTimeSowingPart,--%>
-<%--                       msi_desiredHarvestTime:msi_desiredHarvestTime,--%>
-<%--                       msi_desiredHarvestTimePart:msi_desiredHarvestTimePart,--%>
-<%--                       msi_cropClassification:msi_cropClassification,--%>
-<%--                       msi_cultivationMethod:msi_cultivationMethod,--%>
-<%--                       msi_farmingExperience:msi_farmingExperience,--%>
-<%--                       msi_hadMachinery:msi_hadMachinery,--%>
-<%--                       msi_capital:msi_capital,--%>
-<%--                       msi_holdingLand:msi_holdingLand,--%>
-<%--                   },--%>
-<%--                   success: function (data,status){--%>
-<%--                        alert("성공!");--%>
-<%--                       $("#window").slideDown("slow");--%>
-<%--                   },--%>
-<%--                   error : function(data,status){--%>
-<%--                       // 실패시--%>
-<%--                       alert(data + status);--%>
-<%--                   }--%>
-<%--               }) ;--%>
-<%--            });--%>
-<%--        });--%>
-<%--    </script>--%>
-
     <script>
-        function recommendCrop(){
-            const FarmInfo = document.FarmInfo;
-            FarmInfo.action = "./FarmProcess.do";
-            FarmInfo.method = "POST";
-            FarmInfo.submit();
-            $("#window").slideDown("slow");
-        }
-    </script>
+        $(document).ready(function() {
 
-    <script>
-        $("document").ready(function () {
             var area0 = [
                 "도 선택",
                 "강원도",
@@ -344,6 +245,181 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            //console.log('in');
+            $('#flip').on('click', function (event) {
+                //alert(event.target.id);
+                let memberId = $('#msi_id').val();
+                let msi_id = $("#msi_id").val();
+                let msi_memberName = $("#msi_memberName").val();
+                let msi_memberAge = $("#msi_memberAge").val();
+                let msi_memberGender = $("#msi_memberGender").val();
+                let msi_desiredArea = $("#msi_desiredArea").val();
+                let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();
+                let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();
+                let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();
+                let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();
+                let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();
+                let msi_cropClassification = $("#msi_cropClassification").val();
+                let msi_cultivationMethod = $("#msi_cultivationMethod").val();
+                let msi_farmingExperience = $("#msi_farmingExperience").val();
+                let msi_hadMachinery = $("#msi_hadMachinery").val();
+                let msi_capital = $("#msi_capital").val();
+                let msi_holdingLand = $("#msi_holdingLand").val();
+
+                let param = {
+                    "msi_id":msi_id,
+                    "msi_memberName":msi_memberName,
+                    "msi_memberGender":msi_memberGender,
+                    "msi_memberAge":msi_memberAge,
+                    "msi_desiredArea":msi_desiredArea,
+                    "msi_desiredAreaDetail":msi_desiredAreaDetail,
+                    "msi_desiredTimeSowing":msi_desiredTimeSowing,
+                    "msi_desiredTimeSowingPart":msi_desiredTimeSowingPart,
+                    "msi_desiredHarvestTime":msi_desiredHarvestTime,
+                    "msi_desiredHarvestTimePart":msi_desiredHarvestTimePart,
+                    "msi_cropClassification":msi_cropClassification,
+                    "msi_cultivationMethod":msi_cultivationMethod,
+                    "msi_farmingExperience":msi_farmingExperience,
+                    "msi_hadMachinery":msi_hadMachinery,
+                    "msi_capital":msi_capital,
+                    "msi_holdingLand":msi_holdingLand
+                }
+
+                //alert(memberId);
+                $.ajax({
+                    type : 'get',
+                    dataType : 'text',
+                    url : "${contextPath}/service/CropRecIdCheck.do",
+                    data : {msi_id : memberId},
+                    success : function (data, status) {
+                        //alert(data);
+                        if(data=='true'){
+                            alert("이미 동일 아이디로 입력하신 이력이 존재합니다. " +
+                                "\n기존에 있던 이력을 삭제해주세요 *^^*");
+                            const deleteData = confirm("기존에 있던 이력을 삭제 하시겠습니까?");
+                            if(deleteData){
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "${contextPath}/service/DeleteSurvey.do?msi_id=${user.mi_id}",
+                                    success: function(data, status){
+                                        alert("삭제 완료");
+                                    },
+                                    error: function(data, status){
+                                        alert(data + status);
+                                    }
+                                })
+                            }
+                        }else{
+                            $.ajax({
+                                type: 'POST',
+                                url: "${contextPath}/service/FarmProcess.do",
+                                // dataType: "text",
+                                contentType: "application/json; charset=UTF-8",
+                                dataType: "json",
+                                data: JSON.stringify(param),
+                                async: false,
+                                success: function (data, status) {
+                                    //alert(check);
+                                    alert("성공!");
+                                    $("#window").slideDown("slow");
+                                    //alert(List);
+                                },
+                                error: function (data, status) {
+                                    // 실패시
+                                    alert(data + status);
+                                }
+                            });
+                        }
+                    },
+                    error : function (data, status){
+                        alert('error'+status);
+                    },
+                    complete : function (xhr, status){
+                        //alert(xhr.status);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+<%--        $(document).ready(function() {--%>
+<%--            $("#flip").on('click', function (event) {--%>
+
+<%--                // let msi_id = $("#msi_id").val();--%>
+<%--                // let msi_memberName = $("#msi_memberName").val();--%>
+<%--                // let msi_memberAge = $("#msi_memberAge").val();--%>
+<%--                // let msi_memberGender = $("#msi_memberGender").val();--%>
+<%--                // let msi_desiredArea = $("#msi_desiredArea").val();--%>
+<%--                // let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();--%>
+<%--                // let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();--%>
+<%--                // let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();--%>
+<%--                // let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();--%>
+<%--                // let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();--%>
+<%--                // let msi_cropClassification = $("#msi_cropClassification").val();--%>
+<%--                // let msi_cultivationMethod = $("#msi_cultivationMethod").val();--%>
+<%--                // let msi_farmingExperience = $("#msi_farmingExperience").val();--%>
+<%--                // let msi_hadMachinery = $("#msi_hadMachinery").val();--%>
+<%--                // let msi_capital = $("#msi_capital").val();--%>
+<%--                // let msi_holdingLand = $("#msi_holdingLand").val();--%>
+<%--&lt;%&ndash;                <%SurveyInputVO surveyInput = (SurveyInputVO) request.getAttribute("list");%>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                let check = <%=surveyInput.getMsi_id()%>&ndash;%&gt;--%>
+
+<%--                console.log(msi_desiredTimeSowing);--%>
+<%--                console.log(msi_desiredHarvestTime);--%>
+<%--                let param = {--%>
+<%--                    "msi_id":msi_id,--%>
+<%--                    "msi_memberName":msi_memberName,--%>
+<%--                    "msi_memberGender":msi_memberGender,--%>
+<%--                    "msi_memberAge":msi_memberAge,--%>
+<%--                    "msi_desiredArea":msi_desiredArea,--%>
+<%--                    "msi_desiredAreaDetail":msi_desiredAreaDetail,--%>
+<%--                    "msi_desiredTimeSowing":msi_desiredTimeSowing,--%>
+<%--                    "msi_desiredTimeSowingPart":msi_desiredTimeSowingPart,--%>
+<%--                    "msi_desiredHarvestTime":msi_desiredHarvestTime,--%>
+<%--                    "msi_desiredHarvestTimePart":msi_desiredHarvestTimePart,--%>
+<%--                    "msi_cropClassification":msi_cropClassification,--%>
+<%--                    "msi_cultivationMethod":msi_cultivationMethod,--%>
+<%--                    "msi_farmingExperience":msi_farmingExperience,--%>
+<%--                    "msi_hadMachinery":msi_hadMachinery,--%>
+<%--                    "msi_capital":msi_capital,--%>
+<%--                    "msi_holdingLand":msi_holdingLand--%>
+<%--                }--%>
+
+<%--                &lt;%&ndash;$.ajax({&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    type: 'POST',&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    url: "${contextPath}/service/FarmProcess.do",&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    // dataType: "text",&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    contentType: "application/json; charset=UTF-8",&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    dataType: "json",&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    data: JSON.stringify(param),&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    success: function (data, status) {&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        alert(check);&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        alert("성공!");&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        $("#window").slideDown("slow");&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        //alert(List);&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    },&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    error: function (data, status) {&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        // 실패시&ndash;%&gt;--%>
+<%--                &lt;%&ndash;        alert(data + status);&ndash;%&gt;--%>
+<%--                &lt;%&ndash;    }&ndash;%&gt;--%>
+<%--                &lt;%&ndash;});&ndash;%&gt;--%>
+<%--            });--%>
+<%--        });--%>
+    </script>
+
+    <script>
+        // function recommendCrop(){
+        //     const FarmInfo = document.FarmInfo;
+        //     FarmInfo.action = "./FarmProcess.do";
+        //     FarmInfo.method = "POST";
+        //     FarmInfo.submit();
+        //     $("#window").slideDown("slow");
+        // }
+    </script>
+
 </head>
 <body>
 
@@ -360,7 +436,7 @@
                         지역 환경 고려 하고 지역 특산물을 우선 하는게 좋습니다.<br/>
                     </p>
 
-<%--작물 선택--%>
+                    <%--작물 선택--%>
                     <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
                         <h2>회원 정보입력 (필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
@@ -423,7 +499,7 @@
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">수학 시기</p>
                                 <select class="form-select form-select mb-3" name="msi_desiredHarvestTime" id="msi_desiredHarvestTime">
-                                    <option selected value="1월">1월</option>
+                                    <option selected value="1">1월</option>
                                     <option value="2">2월</option>
                                     <option value="3">3월</option>
                                     <option value="4">4월</option>
@@ -500,15 +576,17 @@
                         </div>
                         <hr class="featurette-divider">
                         <div align="center">
-                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto" onclick="recommendCrop()">작물 확인
+                            <a id="deleteLocation">
+                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
                             </button>
+                            </a>
                         </div>
                     </form>
 
                 </div>
             </div>
 
-<%-- 작물 정보 리스트 출력 --%>
+            <%-- 작물 정보 리스트 출력 --%>
             <div id="window" style="display: none">
                 <div id="Main_Box" align="center">
                     <div class="align-self-center" style="margin-bottom: 30px">
@@ -522,7 +600,7 @@
                         </c:forEach>
                     </div>
 
-<!-- Modal -->
+                    <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -852,16 +930,16 @@
                 </div>
 
 
-<%--                <div id="Main_Box2" align="center" style="margin-bottom: 30px">--%>
-<%--                    <div class="d-flex justify-content-center" style="margin-bottom: 30px; margin-top: 30px">--%>
-<%--                        <c:forEach var="i" begin="0" end="5">--%>
-<%--                            <button id="Fbtn" onclick="fn_clcik2(${i})">--%>
-<%--                                <img src="${contextPath}/resources/image/채소/채소${i+1}.jpg" alt="과일${i+1}" width="100"--%>
-<%--                                     height="100" class="rounded-circle">--%>
-<%--                            </button>--%>
-<%--                        </c:forEach>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                <%--                <div id="Main_Box2" align="center" style="margin-bottom: 30px">--%>
+                <%--                    <div class="d-flex justify-content-center" style="margin-bottom: 30px; margin-top: 30px">--%>
+                <%--                        <c:forEach var="i" begin="0" end="5">--%>
+                <%--                            <button id="Fbtn" onclick="fn_clcik2(${i})">--%>
+                <%--                                <img src="${contextPath}/resources/image/채소/채소${i+1}.jpg" alt="과일${i+1}" width="100"--%>
+                <%--                                     height="100" class="rounded-circle">--%>
+                <%--                            </button>--%>
+                <%--                        </c:forEach>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
 
             </div>
 

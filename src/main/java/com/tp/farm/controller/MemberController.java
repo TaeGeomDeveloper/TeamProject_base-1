@@ -97,7 +97,7 @@ public class MemberController {
         MemberVO memberVO = new MemberVO(mi_id, mi_password, mi_name, email, phone, wireline, mi_address, mi_addressDetail, mi_addressCode, regidentRegNumber, null);
 
         memberDAO.insertOneMember(memberVO);
-        mav.setViewName("Main");
+        mav.setViewName("/member/Login");
         return mav;
     }
 
