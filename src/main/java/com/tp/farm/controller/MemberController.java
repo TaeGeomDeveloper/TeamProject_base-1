@@ -237,7 +237,7 @@ public class MemberController {
             flag = true;
             String mi_password = member.getMi_password();
             System.out.println(mi_password + "find pwd success");
-            mailService.sendMail(mi_email, "smartfarm find password", mi_id + " password is" + mi_password + ".");
+            mailService.sendMail(mi_email, "gwinongin find password", mi_id + " password is" + mi_password + ".");
         }
         System.out.println("findPwd status --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
