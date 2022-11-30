@@ -173,7 +173,7 @@ public class BoardController {
         //업로드
         File file = new File(path , fileName);
         img.transferTo(file);
-        return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);
+        return ResponseEntity.ok().body("/gwinongin/resources/upload/"+fileName);
     }
 
     //////////////////////////////////////////
@@ -220,7 +220,15 @@ public class BoardController {
     @RequestMapping(value="/viewUpdateReply.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewUpdateReply(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("UpdateReply");
+        String cb_seq = request.getParameter("cb_seq");
+        String cbr_seq = request.getParameter("cbr_seq");
+        boolean flag = false;
+        BoardVO board = boardService.readBoard(cb_seq);
+        List<ReplyVO> replyList = replyService.readAllReply(cb_seq);
+        mav.addObject("cbr_seq", cbr_seq);
+        mav.addObject("board", board);
+        mav.addObject("replyList", replyList);
+        mav.setViewName("/board/ReplyUpdate");
         return mav;
     }
 
