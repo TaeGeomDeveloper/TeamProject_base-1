@@ -13,14 +13,17 @@
 package com.tp.farm.controller;
 
 import com.tp.farm.dao.SurveyInputDAO;
+import com.tp.farm.service.CropRecService;
 import com.tp.farm.vo.SurveyInputVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /*
         작성자 : 윤태검
@@ -36,8 +39,8 @@ public class CropRecController {
     @Autowired
     private SurveyInputDAO surveyInputDAO;
 
-//    @Autowired
-//    private CropRecommendService service;
+    @Autowired
+    private CropRecService cropRecService;
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -109,40 +112,55 @@ public class CropRecController {
         mav.setViewName(viewName);
         return mav;
     }
-     // 작물 선택 절차
-    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView FarmProcess(HttpServletRequest request, HttpServletResponse response) throws  Exception{
-        ModelAndView mav = new ModelAndView();
-        String msi_id = request.getParameter("msi_id");
-        String msi_memberName = request.getParameter("msi_memberName");
-        int msi_memberAge = Integer.parseInt(request.getParameter("msi_memberAge"));
-        String msi_memberGender = request.getParameter("msi_memberGender");
-        String msi_desiredArea = request.getParameter("msi_desiredArea");
-        String msi_desiredAreaDetail = request.getParameter("msi_desiredAreaDetail");
-        int msi_desiredTimeSowing = Integer.parseInt(request.getParameter("msi_desiredTimeSowing"));
-        String msi_desiredTimeSowingPart = request.getParameter("msi_desiredTimeSowingPart");
-        int msi_desiredHarvestTime = Integer.parseInt(request.getParameter("msi_desiredHarvestTime"));
-        String msi_desiredHarvestTimePart = request.getParameter("msi_desiredHarvestTimePart");
-        String msi_cropClassification = request.getParameter("msi_cropClassification");
-        String msi_cultivationMethod = request.getParameter("msi_cultivationMethod");
-        String msi_farmingExperience = request.getParameter("msi_farmingExperience");
-        String msi_hadMachinery = request.getParameter("msi_hadMachinery");
-        int msi_capital = Integer.parseInt(request.getParameter("msi_capital"));
-        int msi_holdingLand = Integer.parseInt(request.getParameter("msi_holdingLand"));
-        SurveyInputVO surveyInput = new SurveyInputVO(msi_id, msi_memberName, msi_memberAge, msi_memberGender, msi_desiredArea, msi_desiredAreaDetail,
-                                                        msi_desiredTimeSowing, msi_desiredTimeSowingPart, msi_desiredHarvestTime, msi_desiredHarvestTimePart,
-                                                        msi_cropClassification, msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery,
-                                                        msi_capital, msi_holdingLand);
-
-        if(surveyInput==null){
-            mav.setViewName("/service/Farm");
-        }else{
-            surveyInputDAO.insertFarmInfo(surveyInput);
-            mav.setViewName("/service/Farm");
+    // 작물 선택 절차
+    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+    public SurveyInputVO FarmProcess(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+        if(surveyInput == null){
+            System.out.println("theres no VO founded");
+        } else {
+            System.out.println("VO ON");
+            System.out.println(surveyInput.toString());
         }
+        System.out.println("작물 선택 절차");
+        surveyInputDAO.insertFarmInfo(surveyInput);
 
+        System.out.println("작물 정보 리스트 받아오기");
+        //List<SurveyInputVO> list = surveyInputDAO.selectAll();
+
+        return surveyInput;
+    }
+
+    // 작물 선택 설문조사 시 id 중복 확인
+    @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
+    public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
+        boolean flag = false;
+        System.out.println("idCheck : " + msi_id);
+        flag = cropRecService.cropRecIdCheck(msi_id);
+        return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/DeleteSurvey.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView deleteSurvey(@RequestParam("msi_id") String msi_id){
+        ModelAndView mav = new ModelAndView();
+        surveyInputDAO.deleteSurvey(msi_id);
+        mav.setViewName("/service/Farm");
         return mav;
     }
+
+//    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+//    public SurveyInputVO FarmProcess(@RequestBody SurveyInputVO vo) throws  Exception{
+//        if(vo == null){
+//            System.out.println("theres no VO found");
+//        } else {
+//            System.out.println("VO ON");
+//            System.out.println("id: "+vo.getMsi_id());
+//        }
+//        System.out.println("작물 선택 절차");
+////        System.out.println(selectVO.getCs_location());
+//        surveyInputDAO.insertFarmInfo(vo);
+//
+//        return vo;
+//    }
 
     private String getViewName(HttpServletRequest request) throws Exception {
         String contextPath = request.getContextPath();

@@ -69,8 +69,7 @@
 
     <select id="selectCrop">
         <![CDATA[
-            select distinct(cd.cd_idx)
-            from crop_data cd
+            select distinct * from crop_data cd
               where cd.cd_cropClassification = #{msi_cropClassification}
               and cd.cd_sowingStart = #{msi_desiredTimeSowing}
               and cd.cd_sowingSemiannual = #{msi_desiredTimeSowingPart}
@@ -78,6 +77,7 @@
               and cd.cd_harvestSemiannual = #{msi_desiredHarvestTimePart};
         ]]>
     </select>
+
 
 
 </mapper>

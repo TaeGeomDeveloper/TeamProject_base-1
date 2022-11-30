@@ -16,7 +16,7 @@ public class CropDataVO {
     private String cd_labor;
     private int cd_sowingStart;
     private String cd_sowingSemiannual;
-    private String cd_harvestStart;
+    private int cd_harvestStart;
     private String cd_harvestSemiannual;
     private String cd_harvestEnd;
     private int cd_marketValue;
@@ -37,7 +37,7 @@ public class CropDataVO {
         cd_labor = temp[4].strip();
         cd_sowingStart = Integer.parseInt(temp[5].strip());
         cd_sowingSemiannual = temp[6].strip();
-        cd_harvestStart = temp[7].strip();
+        cd_harvestStart = Integer.parseInt(temp[7].strip());
         cd_harvestSemiannual = temp[8].strip();
         cd_harvestEnd = temp[9].strip();
         cd_marketValue = Integer.parseInt(temp[10].strip());
