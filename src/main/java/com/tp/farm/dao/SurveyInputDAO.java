@@ -21,5 +21,21 @@ public class SurveyInputDAO {
         return flag;
     }
 
+    public boolean checkId(String msi_id) {
+        boolean flag = false;
+        int affectedCount = sqlSession.selectOne("mapper.surveyInput.checkId", msi_id);
+        if(affectedCount>0){
+            flag = true;
+        }
+        return flag;
+    }
 
+    public boolean deleteSurvey(String msi_id){
+        boolean flag = false;
+        int affectedCount = sqlSession.delete("mapper.surveyInput.deleteSurvey", msi_id);
+        if(affectedCount>0){
+            flag = true;
+        }
+        return flag;
+    }
 }

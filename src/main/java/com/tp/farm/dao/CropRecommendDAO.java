@@ -17,4 +17,6 @@ public class CropRecommendDAO {
 
         return result;
     }
+
+
 }
