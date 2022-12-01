@@ -37,6 +37,7 @@ $(document).ready(function()
         $('#cb_content').summernote(setting);
         $('#cb_content').summernote('fontName', '맑은 고딕');
 		$('#cb_content').summernote('lineHeight', 0.5);
+		$('#cb_content').summernote('code', '<p style="line-height: 0.5;"><font face="맑은 고딕">﻿</font></p>');
 	});
 
 
@@ -46,7 +47,7 @@ function sendFile(file, editor) {
 	$.ajax({
 		data : form_data,
 		type : "POST",
-		url : '/smartfarm/board/summerimages.do',
+		url : '/gwinongin/board/summerimages.do',
 		cache : false,
 		contentType : false,
 		enctype : 'multipart/form-data',

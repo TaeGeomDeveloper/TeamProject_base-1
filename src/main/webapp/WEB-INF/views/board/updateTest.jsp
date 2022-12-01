@@ -46,7 +46,7 @@
                         }
                     };
 
-                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\ \'")}');
+                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\'")}');
                     $('#cb_content').summernote(setting);
                     $('#cb_content').summernote('fontName', '맑은 고딕');
             });
@@ -57,7 +57,7 @@
             	$.ajax({
             		data : form_data,
             		type : "POST",
-            		url : '/smartfarm/board/summerimages.do',
+            		url : '/gwinongin/board/summerimages.do',
             		cache : false,
             		contentType : false,
             		enctype : 'multipart/form-data',

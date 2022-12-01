@@ -17,7 +17,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_i').DataTable();
+            $('#table_i').DataTable({
+                order: [ [ 0, "desc" ] ]
+            });
         });
     </script>
 
@@ -52,6 +54,7 @@
                 <thead style="background-color: #7afacb">
                 <tr>
                     <th>글번호</th>
+                    <th>분류</th>
                     <th style="width: 40%">제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
@@ -65,6 +68,7 @@
                 <c:forEach var="vo" items="${list}">
                     <tr>
                         <td>${vo.cb_seq}</td>
+                        <td>${vo.cb_category}</td>
                         <td><a href="ReadBoard.do?cb_seq=${vo.cb_seq}">${vo.cb_title} </a></td>
                         <td>${vo.cb_id}</td>
                         <td>${vo.cb_regDate}</td>

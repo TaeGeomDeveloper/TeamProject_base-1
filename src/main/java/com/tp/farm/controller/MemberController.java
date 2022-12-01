@@ -97,7 +97,7 @@ public class MemberController {
         MemberVO memberVO = new MemberVO(mi_id, mi_password, mi_name, email, phone, wireline, mi_address, mi_addressDetail, mi_addressCode, regidentRegNumber, null);
 
         memberDAO.insertOneMember(memberVO);
-        mav.setViewName("Main");
+        mav.setViewName("/member/Login");
         return mav;
     }
 
@@ -242,7 +242,11 @@ public class MemberController {
             flag = true;
             String mi_password = member.getMi_password();
             System.out.println(mi_password + "find pwd success");
+<<<<<<< HEAD
             mailService.sendMail(mi_email, "회원님이 요청하신 비밀번호 찾기입니다.", mi_id + " password is " + mi_password);
+=======
+            mailService.sendMail(mi_email, "gwinongin find password", mi_id + " password is" + mi_password + ".");
+>>>>>>> origin/lemon
         }
         System.out.println("findPwd status --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);

@@ -36,6 +36,17 @@
             updateMember.action = "UpdateMember.do?mi_id=${member.mi_id}";
             updateMember.submit();
         }
+
+        function fn_deleteMember(){
+            var updateForm = document.updateForm;
+
+            let result = confirm("정말 회원탈퇴를 하시겠습니까?");
+            if(result){
+                updateForm.method = "post";
+                updateForm.action = "deleteMember.do?mi_id=${member.mi_id}";
+                updateForm.submit();
+            }
+        }
     </script>
     <style>
         body {
@@ -208,15 +219,16 @@
 
                             <%
                                 if (mode.equals("r")) {
-                                    out.print("<button class='button2' onclick='fn_updateForm()'> 수정 하기 </button>");
+                                    out.print("<button class='button2' onclick='fn_updateForm()' type='button'> 수정 하기 </button>");
                                 } else if (mode.equals("u")) {
-                                    out.print("<button class='button2' onclick='fn_Update()'> 수정 완료 </button>");
+                                    out.print("<button class='button2' onclick='fn_Update()' type='button'> 수정 완료 </button>");
                                 }
                             %>
+<%--                            <a href="deleteMember.do?mi_id=${member.mi_id}" style="text-decoration:none">--%>
+                                <button class="button2" onclick="fn_deleteMember()" type='button'>회원 탈퇴</button>
+<%--                            </a>--%>
                         </form>
-                        <a href="deleteMember.do?mi_id=${member.mi_id}" style="text-decoration:none">
-                            <button class="button2">회원 탈퇴</button>
-                        </a>
+
             </div>
         </div>
     </article>
