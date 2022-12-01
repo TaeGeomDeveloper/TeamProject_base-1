@@ -75,4 +75,13 @@ public class ReplyDAO {
         int bundleSeqCount = sqlSession.selectOne("mapper.reply.selectCountByBundleSeq", reply);
         return bundleSeqCount;
     }
+
+    public boolean updateReplyContent(ReplyVO reply) {
+        boolean flag = false;
+        int affectedCount = sqlSession.update("mapper.reply.updateReply", reply);
+        if(affectedCount>0) {
+            flag = true;
+        }
+        return flag;
+    }
 }

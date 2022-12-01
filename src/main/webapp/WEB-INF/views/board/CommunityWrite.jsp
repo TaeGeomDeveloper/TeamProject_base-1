@@ -78,7 +78,7 @@
                         <tr>
                             <th>제목</th>
                             <td><input class="form-control" placeholder="Title" type="text" name="cb_title" id="cb_title"
-                                       style="width: 50%"/></td>
+                                       maxlength='50' style="width: 50%"/></td>
                         </tr>
                         <tr>
                             <th>내용</th>

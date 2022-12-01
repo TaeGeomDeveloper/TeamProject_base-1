@@ -182,7 +182,7 @@
                                                                     </td>
                                                                     <td>
                                                                     <td>
-                                                                    <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}&cbr_bundleSeq=${reply.cbr_bundleSeq}&cbr_currentSeq=${reply.cbr_currentSeq}">
+                                                                    <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${Rereply.cbr_seq}&cbr_bundleSeq=${Rereply.cbr_bundleSeq}&cbr_currentSeq=${Rereply.cbr_currentSeq}">
                                                                         <button class="button3">삭제</button></a></td>
                                                                     </td>
                                                                 </tr>
