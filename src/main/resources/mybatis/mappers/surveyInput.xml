@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.surveyInput">
+    <resultMap id="surveyInputResult" type="surveyInputVO">
+        <result property="msi_id" column="msi_id" />
+        <result property="msi_memberName" column="msi_memberName" />
+        <result property="msi_memberAge" column="msi_memberAge" />
+        <result property="msi_memberGender" column="msi_memberGender" />
+        <result property="msi_desiredArea" column="msi_desiredArea" />
+        <result property="msi_desiredAreaDetail" column="msi_desiredAreaDetail" />
+        <result property="msi_desiredTimeSowing" column="msi_desiredTimeSowing" />
+        <result property="msi_desiredTimeSowingPart" column="msi_desiredTimeSowingPart" />
+        <result property="msi_desiredHarvestTime" column="msi_desiredHarvestTime" />
+        <result property="msi_desiredHarvestTimePart" column="msi_desiredHarvestTimePart" />
+        <result property="msi_cropClassification" column="msi_cropClassification" />
+        <result property="msi_cultivationMethod" column="msi_cultivationMethod" />
+        <result property="msi_farmingExperience" column="msi_farmingExperience" />
+        <result property="msi_hadMachinery" column="msi_hadMachinery" />
+        <result property="msi_capital" column="msi_capital" />
+        <result property="msi_holdingLand" column="msi_holdingLand" />
+    </resultMap>
+
+    <select id="selectSurveyInput">
+        <![CDATA[
+            select * from member_survey_input;
+        ]]>
+    </select>
+
+    <insert id="insertSurveyInput"  parameterType="surveyInputVO">
+        <![CDATA[
+            insert into member_survey_input(msi_id, msi_memberName, msi_memberAge, msi_memberGender, msi_desiredArea, msi_desiredAreaDetail, msi_desiredTimeSowing,
+                                            msi_desiredTimeSowingPart, msi_desiredHarvestTime, msi_desiredHarvestTimePart, msi_cropClassification,
+                                            msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery, msi_capital, msi_holdingLand)
+            values (#{msi_id}, #{msi_memberName}, #{msi_memberAge}, #{msi_memberGender}, #{msi_desiredArea},
+                    #{msi_desiredAreaDetail}, #{msi_desiredTimeSowing}, #{msi_desiredTimeSowingPart}, #{msi_desiredHarvestTime},
+                    #{msi_desiredHarvestTimePart}, #{msi_cropClassification}, #{msi_cultivationMethod}, #{msi_farmingExperience},
+                    #{msi_hadMachinery}, #{msi_capital}, #{msi_holdingLand})
+        ]]>
+    </insert>
+
+    <select id="checkId" resultType="int">
+        <![CDATA[
+        select count(*) from member_survey_input
+        where
+            msi_id = #{msi_id}
+        ]]>
+    </select>
+
+    <delete id="deleteSurvey" parameterType="String">
+        <![CDATA[
+            delete from member_survey_input where msi_id = #{msi_id}
+        ]]>
+    </delete>
+
+
+
+</mapper>

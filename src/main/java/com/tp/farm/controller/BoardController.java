@@ -235,7 +235,12 @@ public class BoardController {
     @RequestMapping(value="/updateReply.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateReply(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-
+        ReplyVO reply = new ReplyVO();
+        reply.setCb_seq(Integer.parseInt(request.getParameter("cb_seq")));
+        reply.setCbr_seq(Integer.parseInt(request.getParameter("cbr_seq")));
+        reply.setCbr_content(request.getParameter("cbr_content"));
+        boolean flag = replyService.updateReplyContent(reply);
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
         return mav;
     }
 

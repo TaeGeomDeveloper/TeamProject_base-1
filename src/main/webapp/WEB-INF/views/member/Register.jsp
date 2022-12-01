@@ -178,8 +178,7 @@
                 alert("아이디를 입력해주세요");
                 id.focus();
                 return false;
-            }
-            ;
+            };
 
             const idCheck = /^[A-Za-z0-9]{6,12}$/;
             if (!idCheck.test(id)) {
