@@ -67,17 +67,22 @@
         <result property="mpf_lieutenant" column="mpf_lieutenant" />
     </resultMap>
 
-    <select id="selectCrop">
-        <![CDATA[
-            select distinct * from crop_data cd
-              where cd.cd_cropClassification = #{msi_cropClassification}
-              and cd.cd_sowingStart = #{msi_desiredTimeSowing}
-              and cd.cd_sowingSemiannual = #{msi_desiredTimeSowingPart}
-              and cd.cd_harvestStart = #{msi_desiredHarvestTime}
-              and cd.cd_harvestSemiannual = #{msi_desiredHarvestTimePart};
+    <select id="selectAllCrop" resultMap="cropDataResult">
+      <![CDATA[
+        select * from crop_data;
         ]]>
     </select>
 
+    <select id="selectCrop" resultType="surveyInputVO" resultMap="cropDataResult">
+        <![CDATA[
+        select * from crop_data cd
+        where cd.cd_cropClassification = #{msi_cropClassification}
+          and cd.cd_sowingStart = #{msi_desiredTimeSowing}
+          and cd.cd_sowingSemiannual = #{msi_desiredTimeSowingPart}
+          and cd.cd_harvestStart = #{msi_desiredHarvestTime}
+          and cd.cd_harvestSemiannual = #{msi_desiredHarvestTimePart};
+        ]]>
+    </select>
 
 
 </mapper>

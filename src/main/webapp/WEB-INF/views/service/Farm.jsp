@@ -1,8 +1,11 @@
 <%@ page import="com.tp.farm.vo.FarmlandPriceVO" %>
-<%@ page import="com.tp.farm.vo.SurveyInputVO" %>
+<%@ page import="com.tp.farm.vo.CropDataVO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 
 <html>
 <head>
@@ -31,7 +34,7 @@
     </style>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var area0 = [
                 "도 선택",
@@ -225,7 +228,6 @@
             });
 
             // 시/도 선택시 구/군 설정
-
             $("select[name^=msi_desiredArea]").change(function () {
                 var area =
                     "area" + $("option", $(this)).index($("option:selected", $(this))); // 선택지역의 구군 Array
@@ -247,10 +249,26 @@
 
     <script>
         $(document).ready(function () {
-            //console.log('in');
-            $('#flip').on('click', function (event) {
-                //alert(event.target.id);
-                let memberId = $('#msi_id').val();
+
+            // 정렬
+            $("#menu1").click(function () {
+                $("#Info_menu1").slideDown("slow");
+                $("#Info_menu2").slideUp("slow");
+                $("#Info_menu3").slideUp("slow");
+            });
+            $("#menu2").click(function () {
+                $("#Info_menu1").slideUp("slow");
+                $("#Info_menu2").slideDown("slow");
+                $("#Info_menu3").slideUp("slow");
+            });
+            $("#menu3").click(function () {
+                $("#Info_menu1").slideUp("slow");
+                $("#Info_menu2").slideUp("slow");
+                $("#Info_menu3").slideDown("slow");
+            });
+
+            $("#flip").on('click', function (event) {
+
                 let msi_id = $("#msi_id").val();
                 let msi_memberName = $("#msi_memberName").val();
                 let msi_memberAge = $("#msi_memberAge").val();
@@ -269,156 +287,82 @@
                 let msi_holdingLand = $("#msi_holdingLand").val();
 
                 let param = {
-                    "msi_id":msi_id,
-                    "msi_memberName":msi_memberName,
-                    "msi_memberGender":msi_memberGender,
-                    "msi_memberAge":msi_memberAge,
-                    "msi_desiredArea":msi_desiredArea,
-                    "msi_desiredAreaDetail":msi_desiredAreaDetail,
-                    "msi_desiredTimeSowing":msi_desiredTimeSowing,
-                    "msi_desiredTimeSowingPart":msi_desiredTimeSowingPart,
-                    "msi_desiredHarvestTime":msi_desiredHarvestTime,
-                    "msi_desiredHarvestTimePart":msi_desiredHarvestTimePart,
-                    "msi_cropClassification":msi_cropClassification,
-                    "msi_cultivationMethod":msi_cultivationMethod,
-                    "msi_farmingExperience":msi_farmingExperience,
-                    "msi_hadMachinery":msi_hadMachinery,
-                    "msi_capital":msi_capital,
-                    "msi_holdingLand":msi_holdingLand
+                    "msi_id": msi_id,
+                    "msi_memberName": msi_memberName,
+                    "msi_memberGender": msi_memberGender,
+                    "msi_memberAge": msi_memberAge,
+                    "msi_desiredArea": msi_desiredArea,
+                    "msi_desiredAreaDetail": msi_desiredAreaDetail,
+                    "msi_desiredTimeSowing": msi_desiredTimeSowing,
+                    "msi_desiredTimeSowingPart": msi_desiredTimeSowingPart,
+                    "msi_desiredHarvestTime": msi_desiredHarvestTime,
+                    "msi_desiredHarvestTimePart": msi_desiredHarvestTimePart,
+                    "msi_cropClassification": msi_cropClassification,
+                    "msi_cultivationMethod": msi_cultivationMethod,
+                    "msi_farmingExperience": msi_farmingExperience,
+                    "msi_hadMachinery": msi_hadMachinery,
+                    "msi_capital": msi_capital,
+                    "msi_holdingLand": msi_holdingLand
                 }
 
-                //alert(memberId);
                 $.ajax({
-                    type : 'get',
-                    dataType : 'text',
-                    url : "${contextPath}/service/CropRecIdCheck.do",
-                    data : {msi_id : memberId},
-                    success : function (data, status) {
-                        //alert(data);
-                        if(data=='true'){
-                            alert("이미 동일 아이디로 입력하신 이력이 존재합니다. " +
-                                "\n기존에 있던 이력을 삭제해주세요 *^^*");
-                            const deleteData = confirm("기존에 있던 이력을 삭제 하시겠습니까?");
-                            if(deleteData){
-                                $.ajax({
-                                    type: 'POST',
-                                    url: "${contextPath}/service/DeleteSurvey.do?msi_id=${user.mi_id}",
-                                    success: function(data, status){
-                                        alert("삭제 완료");
-                                    },
-                                    error: function(data, status){
-                                        alert(data + status);
-                                    }
-                                })
-                            }
-                        }else{
-                            $.ajax({
-                                type: 'POST',
-                                url: "${contextPath}/service/FarmProcess.do",
-                                // dataType: "text",
-                                contentType: "application/json; charset=UTF-8",
-                                dataType: "json",
-                                data: JSON.stringify(param),
-                                async: false,
-                                success: function (data, status) {
-                                    //alert(check);
-                                    alert("성공!");
-                                    $("#window").slideDown("slow");
-                                    //alert(List);
-                                },
-                                error: function (data, status) {
-                                    // 실패시
-                                    alert(data + status);
+                    type: 'POST',
+                    url: "${contextPath}/service/FarmProcess.do",
+                    // dataType: "text",
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "json",
+                    data: JSON.stringify(param),
+                    success: function (result) {
+                        alert("성공!");
+                        $("#window").slideDown("slow");
+                        var table = "";
+
+                        for (var i = 0; i < result.length; i++) {
+                            var map = result[i];
+
+                            var container = document.getElementById("hold-this");
+
+                            function myFunction(map) {
+                                var el = document.createElement("div"),
+                                    button = document.createElement("button");
+
+                                button.innerHTML = '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +
+                                    '<img id="FV" src="/smartfarm/resources/image/FV/' + map.cd_idx + '.jpg">' +
+                                    '</button>';
+
+                                button.onclick = function (e) {
+                                    listener(e, map);
+                                    FarmInfo(map);
+                                    //Test(map);
                                 }
-                            });
-                        }
-                    },
-                    error : function (data, status){
-                        alert('error'+status);
-                    },
-                    complete : function (xhr, status){
-                        //alert(xhr.status);
+                                el.appendChild(button);
+                                container.appendChild(el);
+                            }
+
+                            function listener(e, map) {
+                                //e.target.innerHTML = map.cd_cropName;
+                            }
+
+                            myFunction(map);
+
+                        }   // end for loop
+                    }, // end function
+                    error: function (data, status) {
+                        // 실패시
+                        alert(data + status);
                     }
                 });
             });
         });
     </script>
 
-    <script>
-<%--        $(document).ready(function() {--%>
-<%--            $("#flip").on('click', function (event) {--%>
-
-<%--                // let msi_id = $("#msi_id").val();--%>
-<%--                // let msi_memberName = $("#msi_memberName").val();--%>
-<%--                // let msi_memberAge = $("#msi_memberAge").val();--%>
-<%--                // let msi_memberGender = $("#msi_memberGender").val();--%>
-<%--                // let msi_desiredArea = $("#msi_desiredArea").val();--%>
-<%--                // let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();--%>
-<%--                // let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();--%>
-<%--                // let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();--%>
-<%--                // let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();--%>
-<%--                // let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();--%>
-<%--                // let msi_cropClassification = $("#msi_cropClassification").val();--%>
-<%--                // let msi_cultivationMethod = $("#msi_cultivationMethod").val();--%>
-<%--                // let msi_farmingExperience = $("#msi_farmingExperience").val();--%>
-<%--                // let msi_hadMachinery = $("#msi_hadMachinery").val();--%>
-<%--                // let msi_capital = $("#msi_capital").val();--%>
-<%--                // let msi_holdingLand = $("#msi_holdingLand").val();--%>
-<%--&lt;%&ndash;                <%SurveyInputVO surveyInput = (SurveyInputVO) request.getAttribute("list");%>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                let check = <%=surveyInput.getMsi_id()%>&ndash;%&gt;--%>
-
-<%--                console.log(msi_desiredTimeSowing);--%>
-<%--                console.log(msi_desiredHarvestTime);--%>
-<%--                let param = {--%>
-<%--                    "msi_id":msi_id,--%>
-<%--                    "msi_memberName":msi_memberName,--%>
-<%--                    "msi_memberGender":msi_memberGender,--%>
-<%--                    "msi_memberAge":msi_memberAge,--%>
-<%--                    "msi_desiredArea":msi_desiredArea,--%>
-<%--                    "msi_desiredAreaDetail":msi_desiredAreaDetail,--%>
-<%--                    "msi_desiredTimeSowing":msi_desiredTimeSowing,--%>
-<%--                    "msi_desiredTimeSowingPart":msi_desiredTimeSowingPart,--%>
-<%--                    "msi_desiredHarvestTime":msi_desiredHarvestTime,--%>
-<%--                    "msi_desiredHarvestTimePart":msi_desiredHarvestTimePart,--%>
-<%--                    "msi_cropClassification":msi_cropClassification,--%>
-<%--                    "msi_cultivationMethod":msi_cultivationMethod,--%>
-<%--                    "msi_farmingExperience":msi_farmingExperience,--%>
-<%--                    "msi_hadMachinery":msi_hadMachinery,--%>
-<%--                    "msi_capital":msi_capital,--%>
-<%--                    "msi_holdingLand":msi_holdingLand--%>
-<%--                }--%>
-
-<%--                &lt;%&ndash;$.ajax({&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    type: 'POST',&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    url: "${contextPath}/service/FarmProcess.do",&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    // dataType: "text",&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    contentType: "application/json; charset=UTF-8",&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    dataType: "json",&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    data: JSON.stringify(param),&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    success: function (data, status) {&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        alert(check);&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        alert("성공!");&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        $("#window").slideDown("slow");&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        //alert(List);&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    },&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    error: function (data, status) {&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        // 실패시&ndash;%&gt;--%>
-<%--                &lt;%&ndash;        alert(data + status);&ndash;%&gt;--%>
-<%--                &lt;%&ndash;    }&ndash;%&gt;--%>
-<%--                &lt;%&ndash;});&ndash;%&gt;--%>
-<%--            });--%>
-<%--        });--%>
-    </script>
-
-    <script>
-        // function recommendCrop(){
-        //     const FarmInfo = document.FarmInfo;
-        //     FarmInfo.action = "./FarmProcess.do";
-        //     FarmInfo.method = "POST";
-        //     FarmInfo.submit();
-        //     $("#window").slideDown("slow");
-        // }
-    </script>
+    <style>
+        #FV {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
 
 </head>
 <body>
@@ -437,22 +381,26 @@
                     </p>
 
                     <%--작물 선택--%>
-                    <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
+                    <form id="FarmForm" name="FarmInfo"
+                          style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
                         <h2>회원 정보입력 (필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <input type="hidden" value="${user.mi_id}" name="msi_id" id="msi_id">
                                 <p class="WForm">이름</p>
-                                <input class="form-control form-control" type="text" value="${user.mi_name}" name="msi_memberName" id="msi_memberName" readonly>
+                                <input class="form-control form-control" type="text" value="${user.mi_name}"
+                                       name="msi_memberName" id="msi_memberName" readonly>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">나이</p>
-                                <input class="form-control form-control" type="text" placeholder="나이" name="msi_memberAge" id="msi_memberAge">
+                                <input class="form-control form-control" type="text" placeholder="나이"
+                                       name="msi_memberAge" id="msi_memberAge">
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">성별</p>
-                                <select class="form-select form-select mb-3" name="msi_memberGender" id="msi_memberGender">
+                                <select class="form-select form-select mb-3" name="msi_memberGender"
+                                        id="msi_memberGender">
                                     <option selected value="남자">남자</option>
                                     <option value="여자">여자</option>
                                 </select>
@@ -464,12 +412,15 @@
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">귀농 희망지역(도/시)</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredArea" id="msi_desiredArea"></select>
-                                <select class="form-select form-select mb-3" name="msi_desiredAreaDetail" id="msi_desiredAreaDetail"></select>
+                                <select class="form-select form-select mb-3" name="msi_desiredArea"
+                                        id="msi_desiredArea"></select>
+                                <select class="form-select form-select mb-3" name="msi_desiredAreaDetail"
+                                        id="msi_desiredAreaDetail"></select>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">파종시기</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredTimeSowing" id="msi_desiredTimeSowing">
+                                <select class="form-select form-select mb-3" name="msi_desiredTimeSowing"
+                                        id="msi_desiredTimeSowing">
                                     <option selected value="1">1월</option>
                                     <option value="2">2월</option>
                                     <option value="3">3월</option>
@@ -484,21 +435,25 @@
                                     <option value="12">12월</option>
                                 </select>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart" id="inlineRadio1" value="상">
+                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                           id="inlineRadio1" value="상">
                                     <label class="form-check-label" for="inlineRadio1">상</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart" id="inlineRadio2" value="중">
+                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                           id="inlineRadio2" value="중">
                                     <label class="form-check-label" for="inlineRadio2">중</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart" id="inlineRadio3" value="하">
+                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                           id="inlineRadio3" value="하">
                                     <label class="form-check-label" for="inlineRadio3">하</label>
                                 </div>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">수학 시기</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredHarvestTime" id="msi_desiredHarvestTime">
+                                <select class="form-select form-select mb-3" name="msi_desiredHarvestTime"
+                                        id="msi_desiredHarvestTime">
                                     <option selected value="1">1월</option>
                                     <option value="2">2월</option>
                                     <option value="3">3월</option>
@@ -513,15 +468,18 @@
                                     <option value="12">12월</option>
                                 </select>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart" id="inlineRadio4" value="상">
+                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                           id="inlineRadio4" value="상">
                                     <label class="form-check-label" for="inlineRadio4">상</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart" id="inlineRadio5" value="중">
+                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                           id="inlineRadio5" value="중">
                                     <label class="form-check-label" for="inlineRadio5">중</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart" id="inlineRadio6" value="하">
+                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                           id="inlineRadio6" value="하">
                                     <label class="form-check-label" for="inlineRadio6">하</label>
                                 </div>
                             </div>
@@ -532,7 +490,8 @@
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">작물분류</p>
-                                <select class="form-select form-select mb-3" name="msi_cropClassification" id="msi_cropClassification">
+                                <select class="form-select form-select mb-3" name="msi_cropClassification"
+                                        id="msi_cropClassification">
                                     <option selected value="전체">전체</option>
                                     <option value="과일">과일</option>
                                     <option value="채소">채소</option>
@@ -540,7 +499,8 @@
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">재배 방법</p>
-                                <select class="form-select form-select mb-3" aria-label=".form-select-lg example" name="msi_cultivationMethod" id="msi_cultivationMethod">
+                                <select class="form-select form-select mb-3" aria-label=".form-select-lg example"
+                                        name="msi_cultivationMethod" id="msi_cultivationMethod">
                                     <option selected value="둘다">둘다</option>
                                     <option value="노지">노지</option>
                                     <option value="비닐하우스">비닐하우스</option>
@@ -548,7 +508,8 @@
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농사 경험 유무</p>
-                                <select class="form-select form-select mb-3" name="msi_farmingExperience" id="msi_farmingExperience">
+                                <select class="form-select form-select mb-3" name="msi_farmingExperience"
+                                        id="msi_farmingExperience">
                                     <option selected value="없음">없음</option>
                                     <option value="3개월">3개월 이상</option>
                                     <option value="6개월">6개월 이상</option>
@@ -560,44 +521,39 @@
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농기계 및 설비 유무</p>
-                                <select class="form-select form-select mb-3" name="msi_hadMachinery" id="msi_hadMachinery">
+                                <select class="form-select form-select mb-3" name="msi_hadMachinery"
+                                        id="msi_hadMachinery">
                                     <option selected value="N">없음</option>
                                     <option value="Y">충분</option>
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">자본금</p>
-                                <input class="form-control form-control" type="text" placeholder="자본금" name="msi_capital" id="msi_capital" >
+                                <input class="form-control form-control" type="text" placeholder="자본금"
+                                       name="msi_capital" id="msi_capital">
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">토지크기 (ha)</p>
-                                <input class="form-control form-control" type="text" placeholder="토지크기" name="msi_holdingLand" id="msi_holdingLand">
+                                <input class="form-control form-control" type="text" placeholder="토지크기"
+                                       name="msi_holdingLand" id="msi_holdingLand">
                             </div>
                         </div>
                         <hr class="featurette-divider">
                         <div align="center">
-                            <a id="deleteLocation">
                             <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
                             </button>
-                            </a>
                         </div>
                     </form>
-
                 </div>
             </div>
+            <div id="TestForm"></div>
+            <%-- <jsp:include page="FarmInfo.jsp"></jsp:include> --%>
 
             <%-- 작물 정보 리스트 출력 --%>
             <div id="window" style="display: none">
                 <div id="Main_Box" align="center">
                     <div class="align-self-center" style="margin-bottom: 30px">
-                        <c:forEach var="i" begin="0" end="12">
-                            <!-- Button trigger modal -->
-                            <button id="Fbtn" onclick="fn_click(${i})" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                <img src="${contextPath}/resources/image/과일채소/${i+1}.jpg" alt="과일채소${i+1}" width="100"
-                                     height="100" class="rounded-circle">
-                            </button>
-                        </c:forEach>
+                        <div id="hold-this"></div>
                     </div>
 
                     <!-- Modal -->
@@ -613,16 +569,12 @@
                                 <div class="modal-body">
                                     <div id="Information" style="background: #ffaa00">
 
-                                        <div style="margin-top: 20px; padding: 10px">
+                                        <div style="margin-top: 20px; margin-bottom: 20px; padding: 10px">
                                             <button type="button" class="btn btn-outline-primary" id="menu1">기본 정보
                                             </button>
                                             <button type="button" class="btn btn-outline-success" id="menu2">재배 기술
                                             </button>
                                             <button type="button" class="btn btn-outline-secondary" id="menu3">시세 정보
-                                            </button>
-                                            <button type="button" class="btn btn-outline-danger" id="menu4">동영상
-                                            </button>
-                                            <button type="button" class="btn btn-outline-dark" id="menu5"> 갤러리
                                             </button>
                                         </div>
 
@@ -630,7 +582,7 @@
                                         <hr class="featurette-divider">
 
                                         <div id="Info_menu1" style="display: none">
-                                            <h1> 과일 정보 </h1>
+                                            <h1> 작물 정보 </h1>
                                             <div class="row featurette">
                                                 <div class="col-md-7">
                                                     <h2 class="featurette-heading fw-normal lh-1" id="Fruit_Title"> 제목
@@ -647,7 +599,8 @@
                                             </div>
 
                                             <hr class="featurette-divider">
-                                            <h1> 종류 </h1>
+                                            <h1> 상세정보 </h1>
+
                                             <div id="carouselExampleControls" class="carousel slide"
                                                  data-bs-ride="carousel">
 
@@ -663,10 +616,10 @@
                                                             <rect width="100%" height="100%" fill="#ffaa00"></rect>
                                                         </svg>
                                                         <div class="carousel-caption text-start">
+                                                            <h1>파종시기 와 수학시기</h1>
+                                                            <p id="sowing"> </p>
+                                                            <p id="harvest"> </p>
 
-                                                            <h1>동양계자두(P.salicina)</h1>
-                                                            <p>동양자두의 대표적인 품종은 과피가 빨갛고 과육이 노란색인 것과 껍질이 녹색이고 과육이 새빨간 것이
-                                                                있다. 모든 품종이 과즙이 많으며 새콤달콤하므로 날것으로 먹기에 적합하다.</p>
                                                             <p><a class="btn btn-lg btn-primary" href="#">상세보기</a></p>
                                                         </div>
 
@@ -684,13 +637,9 @@
                                                         </svg>
 
                                                         <div class="carousel-caption text-start">
+                                                            <h1>영양가</h1>
+                                                            <p id="nutrition"></p>
 
-                                                            <h1>유럽계자두(P.domestica)</h1>
-                                                            <p>서양자두는 풍만한 타원형이나 계란형이 많으며 껍질은 보라색이 많다. 과육은 보통 노란색이며 향기가
-                                                                좋다. 신맛이 강해서 날것으로 먹는 것 보다는 말리거나, 잼. 젤리. 통조림 등으로 가공된다.
-                                                                서양자두 중에서 가장 향기가 좋고 프랑스에서 파이와 같은 과자 재료로 사용되는 품종에 미라벨이라고
-                                                                하는 품종이 있다. 이것은 매실보다는 조금 작고 노란색으로 표피가 거의 투명하다.
-                                                            </p>
                                                             <p><a class="btn btn-lg btn-primary" href="#">상세보기</a></p>
                                                         </div>
 
@@ -709,8 +658,8 @@
 
                                                         <div class="carousel-caption text-start">
 
-                                                            <h1>미국자두(P.americana)</h1>
-                                                            <p>미국자두는 껍질이 빨갛거나 오렌지색으로 과육은 노랗고 즙이 많으며 신맛이 강하다.</p>
+                                                            <h1>추가설명</h1>
+                                                            <p> 아직 없음 .</p>
                                                             <p><a class="btn btn-lg btn-primary" href="#">상세보기</a></p>
                                                         </div>
                                                     </div>
@@ -730,74 +679,22 @@
                                             </div>
 
                                             <hr class="featurette-divider">
-                                            <h1> 품종 </h1>
+                                            <h1> 부가설명 </h1>
+                                                <div></div>
 
-                                            <div class="d-flex justify-content-center" style="width: 90%">
-                                                <div class="card">
-                                                    <img width="200" height="200"
-                                                         src="http://atis.rda.go.kr/rdais/commonModule/fileDownloadToApp.vw?file_name=%2Fatis%2Fspciesoutput%2Fspcies%2F20181217%2F%EC%9B%90%EA%B5%90%EB%A7%88-22%ED%98%B8.jpg"
-                                                         alt="젤리하트(Jelly Heart)">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Card 제목</h5>
-                                                        <p class="card-text">내용.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <img width="200" height="200"
-                                                         src="http://atis.rda.go.kr/rdais/commonModule/fileDownloadToApp.vw?file_name=%2Fatis%2Fspciesoutput%2Fspcies%2F20170113%2F20160804_141709_004.jpg"
-                                                         alt="썸머스타(Summer Star)">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Card 제목</h5>
-                                                        <p class="card-text">내용.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <img width="200" height="200"
-                                                         src="http://atis.rda.go.kr/rdais/commonModule/fileDownloadToApp.vw?file_name=%2Fatis%2Fspciesoutput%2Fspcies%2F20180723%2F%EC%9E%90%EB%91%90-%EC%8D%A8%EB%8B%88%ED%80%B81.jpg"
-                                                         alt="써니퀸(Sunny Queen)">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Card 제목</h5>
-                                                        <p class="card-text">내용.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <img width="200" height="200"
-                                                         src="http://atis.rda.go.kr/rdais/commonModule/fileDownloadToApp.vw?file_name=%2Fatis%2Ftctspciesinfo%2F97046.jpg"
-                                                         alt="플럼코트 심포니(원교사-08호">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Card 제목</h5>
-                                                        <p class="card-text">내용.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <img width="200" height="200"
-                                                         src="http://atis.rda.go.kr/rdais/commonModule/fileDownloadToApp.vw?file_name=%2Fatis%2Ftctspciesinfo%2F97031.jpg"
-                                                         alt="썸머 판타지아(원교마-07호)">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Card 제목</h5>
-                                                        <p class="card-text">내용.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            <hr class="featurette-divider" style="width: 90%">
                                         </div>
+                                        <%-- end of menu1 --%>
 
                                         <div id="Info_menu2" style="display: none">
-                                            <h1> 농업기술 길잡이 </h1>
-                                            <div class="row featurette">
-                                                <div class="col-md-7 order-md-2">
-                                                    <h2 class="featurette-heading fw-normal lh-1" id="Fruit_Title2"> 제목
-                                                        B </h2>
-                                                    <p class="lead" id="content2"> 부가 설명 입니다. </p>
-                                                    <div class="InfoBox">
-                                                        <div id="level"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 order-md-1">
-                                                    <div id="FruitPic2" onclick="PDF_popup()"></div>
-                                                </div>
+                                            <h1> 재배방법 </h1>
+                                            <div>
+                                                <p class="lead" id="content2" style="padding: 20px"> 부가 설명 입니다. </p>
                                             </div>
 
+                                            <hr class="featurette-divider">
+                                            <h1> 병충해 </h1>
+                                            <div id="pest"></div>
                                             <hr class="featurette-divider">
                                             <h1> 최신 영농활용 기술 </h1>
                                             <div class="d-flex justify-content-center"
@@ -826,8 +723,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-
+                                            <hr class="featurette-divider" style="width: 90%">
                                         </div>
+                                        <%-- end of menu2 --%>
 
                                         <div id="Info_menu3" style="display: none">
                                             <h1> 과일 시세 </h1>
@@ -838,7 +736,6 @@
                                                     <div class="InfoBox">
                                                         <div id="content3"></div>
                                                     </div>
-
                                                 </div>
                                                 <div class="col-md-5">
                                                 </div>
@@ -848,98 +745,20 @@
                                             <hr class="featurette-divider">
                                             <h1> 거래량 </h1>
                                             <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+                                            <hr class="featurette-divider" style="width: 90%">
                                         </div>
-
-                                        <div id="Info_menu4" style="display: none">
-                                            <h1> 동영상 </h1>
-                                            <div class="d-flex p-2">
-                                                <video width="50%" height="30%" controls>
-                                                    <source src="${contextPath}/resources/Video/자두/자두재배.mp4"
-                                                            type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                                <div>
-                                                    <h2>새콤달콤 자두 재배하기</h2>
-                                                    <p style="width: 80%">
-                                                        자두는 6~7월에 복숭아보다 조금 일찍 생산된다. 마땅한 다른 과일이 없는 시기에 생산되어 입맛을 돋게 하는
-                                                        과일이다.
-                                                        자두의 재배면적이 증가하고 있지만 수분수에 대한 인식이 낮아 결실이 불안정한 문제점이 있다.
-                                                        자두 품종에 대한 특성을 알아보고 결실관리기술에 대해 자세히 소개한다.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <hr class="featurette-divider">
-                                            <div class="d-flex p-2">
-                                                <video width="50%" height="30%" controls>
-                                                    <source src="${contextPath}/resources/Video/자두/품종과재배기술.mp4"
-                                                            type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                                <div>
-                                                    <h2>자두의 주요품종과 재배기술</h2>
-                                                    <p style="width: 80%">
-                                                        자두의 재배면적이 증가하고 있지만 수분수에 대한 인식이 낮아 결실이 불안정한 문제점이 있다.
-                                                        자두 품종에 대한 특성을 알아보고 수분수의 식재, 토양관리, 적과 및 낙과방지 등 재배기술에 대해 자세히 소개한다.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div id="Info_menu5" style="display: none">
-                                            <h1> 갤러리 </h1>
-                                        </div>
-
-                                        <!-- /END THE FEATURETTES -->
-                                        <hr class="featurette-divider">
-                                        <div style="width: 90%">
-                                            <div class="form-floating">
-                                                <h1>운영 팁</h1>
-                                                <div class="d-flex">
-                                                    <div class="p-2 w-100">
-                                    <textarea class="form-control" placeholder="Leave a comment here"
-                                              id="floatingTextarea2" style="height: 100px"></textarea>
-                                                        <%--                                    <label for="floatingTextarea2">Comments</label>--%>
-                                                    </div>
-                                                    <div class="p-2 flex-shrink-0">
-                                                        <button class="button2">등록</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="padding: 10px">
-                                                <table class="table table-sm" style="padding: 10px">
-                                                    <c:forEach var="i" begin="0" end="5">
-                                                        <tr class="table-secondary">
-                                                            <td class="table-secondary" style="height: 100px">
-                                                                댓글 입니다.
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </table>
-                                            </div>
-
-                                        </div>
+                                        <%-- end of menu3 --%>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <%--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-                                <%--                                    <button type="button" class="btn btn-primary">Save changes</button>--%>
+                                <div class="modal-footer" style="display: flex; justify-content: center">
+                                    <%-- 작물 최종 선택 --%>
+                                    <div id="FVS">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <%--                <div id="Main_Box2" align="center" style="margin-bottom: 30px">--%>
-                <%--                    <div class="d-flex justify-content-center" style="margin-bottom: 30px; margin-top: 30px">--%>
-                <%--                        <c:forEach var="i" begin="0" end="5">--%>
-                <%--                            <button id="Fbtn" onclick="fn_clcik2(${i})">--%>
-                <%--                                <img src="${contextPath}/resources/image/채소/채소${i+1}.jpg" alt="과일${i+1}" width="100"--%>
-                <%--                                     height="100" class="rounded-circle">--%>
-                <%--                            </button>--%>
-                <%--                        </c:forEach>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
 
             </div>
 
@@ -948,6 +767,5 @@
         </main>
     </article>
 </section>
-
 </body>
 </html>

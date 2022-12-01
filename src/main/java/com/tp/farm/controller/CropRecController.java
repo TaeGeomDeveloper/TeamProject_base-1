@@ -13,17 +13,18 @@
 package com.tp.farm.controller;
 
 import com.tp.farm.dao.SurveyInputDAO;
-import com.tp.farm.service.CropRecService;
+import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.SurveyInputVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /*
         작성자 : 윤태검
@@ -38,9 +39,9 @@ public class CropRecController {
 
     @Autowired
     private SurveyInputDAO surveyInputDAO;
-
-    @Autowired
-    private CropRecService cropRecService;
+    private SurveyInputVO surveyInput;
+//    @Autowired
+//    private CropRecommendService service;
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -114,7 +115,8 @@ public class CropRecController {
     }
     // 작물 선택 절차
     @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-    public SurveyInputVO FarmProcess(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+    public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+
         if(surveyInput == null){
             System.out.println("theres no VO founded");
         } else {
@@ -125,30 +127,29 @@ public class CropRecController {
         surveyInputDAO.insertFarmInfo(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
-        //List<SurveyInputVO> list = surveyInputDAO.selectAll();
+        List<CropDataVO> list = surveyInputDAO.select(surveyInput);
+        System.out.println("리스트 크기 : " + list.size());
 
-        return surveyInput;
+        return list;
     }
-
-    // 작물 선택 설문조사 시 id 중복 확인
-    @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
-    public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
-        boolean flag = false;
-        System.out.println("idCheck : " + msi_id);
-        flag = cropRecService.cropRecIdCheck(msi_id);
-        return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/DeleteSurvey.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView deleteSurvey(@RequestParam("msi_id") String msi_id){
+    // 작물 선택 결과지 페이지
+    @RequestMapping(value = "/FarmInfo.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FarmInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
-        surveyInputDAO.deleteSurvey(msi_id);
-        mav.setViewName("/service/Farm");
+        String viewName = this.getViewName(request);
+
+        // 회원 정보
+        String mi_id = request.getParameter("mi_id");
+        // 작물 정보
+        String cd_idx = request.getParameter("cd_idx");
+
+        viewName= "/service/FarmInfo";
+        mav.setViewName(viewName);
         return mav;
     }
 
 //    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-//    public SurveyInputVO FarmProcess(@RequestBody SurveyInputVO vo) throws  Exception{
+//     public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO vo) throws  Exception{
 //        if(vo == null){
 //            System.out.println("theres no VO found");
 //        } else {
@@ -159,7 +160,7 @@ public class CropRecController {
 ////        System.out.println(selectVO.getCs_location());
 //        surveyInputDAO.insertFarmInfo(vo);
 //
-//        return vo;
+//         return list;
 //    }
 
     private String getViewName(HttpServletRequest request) throws Exception {

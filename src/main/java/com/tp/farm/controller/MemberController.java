@@ -124,6 +124,7 @@ public class MemberController {
         System.out.println("로그인 회원 체크 : " + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
+
     // 관리자 페이지
     @RequestMapping(value = {"/Manager.do"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView membersInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -135,7 +136,8 @@ public class MemberController {
     }
     // CSV 삽입
     @RequestMapping(value = {"/InputCSV.do"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public void csvService(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView csvService(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
 
         String uploadFolder = "C:\\upload";
         Iterator var6 = files.iterator();
@@ -151,6 +153,11 @@ public class MemberController {
         csvService.insertDataTraditionalMarket();
         csvService.insertDataFarmlandPrice();
         csvService.insertCropData();
+
+        List<MemberVO> List = this.memberDAO.selectAllMemeber();
+        mav.addObject("List", List);
+        mav.setViewName("/member/Manager");
+        return mav;
     }
     // CSV 데이터 삭제
     @RequestMapping(value = "/DeleteTraditionalMarket.do", method = {RequestMethod.GET, RequestMethod.POST})

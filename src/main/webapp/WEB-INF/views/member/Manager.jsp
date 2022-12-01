@@ -41,30 +41,30 @@
     </style>
     <script>
         // CSV 데이터 삽입
-        // function fn_click() {
-        //     var csvForm = document.csvForm;
-        //
-        //     csvForm.method = "post";
-        //     csvForm.action = "./InputCSV.do";
-        //     csvForm.submit();
-        // }
+        function fn_click() {
+            var csvForm = document.csvForm;
+
+            csvForm.method = "post";
+            csvForm.action = "./InputCSV.do";
+            csvForm.submit();
+        }
     </script>
 
     <script>
         $(document).ready(function () {
             // CSV 삽입
-            $("#Insert").on('click', function () {
-                $.ajax({
-                    type: 'POST',
-                    url: "${contextPath}/member/InputCSV.do",
-                    success: function () {
-                        alert("성공!");
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-            });
+            <%--$("#Insert").on('click', function () {--%>
+            <%--    $.ajax({--%>
+            <%--        type: 'POST',--%>
+            <%--        url: "${contextPath}/member/InputCSV.do",--%>
+            <%--        success: function () {--%>
+            <%--            alert("성공!");--%>
+            <%--        },--%>
+            <%--        error: function () {--%>
+            <%--            alert("error");--%>
+            <%--        }--%>
+            <%--    });--%>
+            <%--});--%>
 
             // 전국전통시장데이터 삭제
             $("#Choice1").on('click', function () {

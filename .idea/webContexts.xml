@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/ReadTest.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member/Manager.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member/Register.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/member" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/service/Farm.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/service" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/Login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/ReadInfo.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
       </map>
