@@ -5,6 +5,7 @@
 
 <mapper namespace="mapper.surveyInput">
     <resultMap id="surveyInputResult" type="surveyInputVO">
+        <id property="msi_idx" column="msi_idx" />
         <result property="msi_id" column="msi_id" />
         <result property="msi_memberName" column="msi_memberName" />
         <result property="msi_memberAge" column="msi_memberAge" />
@@ -19,8 +20,6 @@
         <result property="msi_cultivationMethod" column="msi_cultivationMethod" />
         <result property="msi_farmingExperience" column="msi_farmingExperience" />
         <result property="msi_hadMachinery" column="msi_hadMachinery" />
-        <result property="msi_capital" column="msi_capital" />
-        <result property="msi_holdingLand" column="msi_holdingLand" />
     </resultMap>
 
     <select id="selectSurveyInput">
@@ -33,13 +32,19 @@
         <![CDATA[
             insert into member_survey_input(msi_id, msi_memberName, msi_memberAge, msi_memberGender, msi_desiredArea, msi_desiredAreaDetail, msi_desiredTimeSowing,
                                             msi_desiredTimeSowingPart, msi_desiredHarvestTime, msi_desiredHarvestTimePart, msi_cropClassification,
-                                            msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery, msi_capital, msi_holdingLand)
+                                            msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery)
             values (#{msi_id}, #{msi_memberName}, #{msi_memberAge}, #{msi_memberGender}, #{msi_desiredArea},
                     #{msi_desiredAreaDetail}, #{msi_desiredTimeSowing}, #{msi_desiredTimeSowingPart}, #{msi_desiredHarvestTime},
                     #{msi_desiredHarvestTimePart}, #{msi_cropClassification}, #{msi_cultivationMethod}, #{msi_farmingExperience},
-                    #{msi_hadMachinery}, #{msi_capital}, #{msi_holdingLand})
+                    #{msi_hadMachinery})
         ]]>
     </insert>
+
+    <delete id="deleteSurveyInput" parameterType="String">
+        <![CDATA[
+            delete from member_survey_input where msi_id = #{msi_id}
+        ]]>
+    </delete>
 
     <select id="checkId" resultType="int">
         <![CDATA[
@@ -48,12 +53,6 @@
             msi_id = #{msi_id}
         ]]>
     </select>
-
-    <delete id="deleteSurvey" parameterType="String">
-        <![CDATA[
-            delete from member_survey_input where msi_id = #{msi_id}
-        ]]>
-    </delete>
 
 
 

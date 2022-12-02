@@ -23,6 +23,18 @@
         <result property="msi_holdingLand" column="msi_holdingLand" />
     </resultMap>
 
+    <resultMap id="surveyOutputResult" type="surveyOutputVO">
+        <id property="mso_idx" column="mso_idx" />
+        <result property="mso_id" column="mso_id" />
+        <result property="mso_cropName" column="mso_cropName" />
+        <result property="mso_capital" column="mso_capital" />
+        <result property="mso_holdingLand" column="mso_holdingLand" />
+        <result property="mso_managementExpenses" column="mso_managementExpenses" />
+        <result property="mso_incomeCrops" column="mso_incomeCrops" />
+        <result property="mso_landCost" column="mso_landCost" />
+        <result property="mso_finalIncome" column="mso_finalIncome" />
+    </resultMap>
+
     <resultMap id="cropDataResult" type="cropDataVO">
         <id property="cd_idx" column="cd_idx" />
         <result property="cd_cropClassification" column="cd_cropClassification" />
@@ -84,5 +96,12 @@
         ]]>
     </select>
 
+    <select id="checkId" resultType="int">
+        <![CDATA[
+        select count(*) from member_survey_input msi, member_survey_output mso
+        where msi.msi_id = #{msi_id}
+          and mso.mso_id = #{msi_id};
+        ]]>
+    </select>
 
 </mapper>
