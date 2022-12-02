@@ -5,8 +5,7 @@
 
 <mapper namespace="mapper.surveyOutput">
     <resultMap id="surveyOutputResult" type="surveyOutputVO">
-        <id property="mso_idx" column="mso_idx" />
-        <result property="mso_id" column="mso_id" />
+        <id property="mso_id" column="mso_id" />
         <result property="mso_cropName" column="mso_cropName" />
         <result property="mso_capital" column="mso_capital" />
         <result property="mso_holdingLand" column="mso_holdingLand" />
@@ -36,9 +35,6 @@
             delete from member_survey_output where mso_id = #{mso_id}
         ]]>
     </delete>
-
-
-
 
 
 </mapper>

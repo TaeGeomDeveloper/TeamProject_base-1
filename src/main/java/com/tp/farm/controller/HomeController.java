@@ -74,14 +74,14 @@ public class HomeController {
         return mav;
     }
     // 공지사항
-    @RequestMapping(value = "/Notice.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView Notice(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        String viewName = this.getViewName(request);
-        viewName = "/home/Notice";
-        mav.setViewName(viewName);
-        return mav;
-    }
+//    @RequestMapping(value = "/Notice.do", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ModelAndView Notice(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        ModelAndView mav = new ModelAndView();
+//        String viewName = this.getViewName(request);
+//        viewName = "/home/Notice";
+//        mav.setViewName(viewName);
+//        return mav;
+//    }
     // 자유 게시판
     @RequestMapping(value = "/Board.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView Board(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -57,10 +57,11 @@ function FarmInfo(map) {
         $('#harvest').html(harvest);
         $('#content2').html(map.cd_methodCultivation);
         $('#pest').html(map.cd_pest);
+        $('#cd_marketValue').html(map.cd_marketValue+" 원");
+        $('#cd_operatingCost').html("10a당 경영비[만 원] : "+map.cd_operatingCost);
+        $('#cd_income').html("10a당 소득[만 원] : "+map.cd_income);
 
-        document.getElementById("FVS").innerHTML = "  <a href=\"/gwinongin/service/FarmInfo.do?cd_idx="+map.cd_idx+"\">\n" +
-            "                                            <button type=\"button\" class=\"btn btn-success\">작물 최종 선택</button>\n" +
-            "                                        </a>";
+        document.getElementById("FVS").innerHTML = "<button type=\"button\" onclick=\"FVResult_Click()\" class=\"btn btn-success\">작물 최종 선택</button>";
 
         //             document.getElementById("content1").innerHTML = data[number].content;
 

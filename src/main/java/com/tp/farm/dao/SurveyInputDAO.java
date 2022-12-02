@@ -1,6 +1,7 @@
 package com.tp.farm.dao;
 
 import com.tp.farm.vo.CropDataVO;
+import com.tp.farm.vo.MemberVO;
 import com.tp.farm.vo.SurveyInputVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,12 @@ public class SurveyInputDAO {
             flag = true;
         }
         return flag;
+    }
+
+    public SurveyInputVO selectOne(String msi_id) {
+        SurveyInputVO surveyInput = sqlSession.selectOne("mapper.surveyInput.selectOne", msi_id);
+
+        return surveyInput;
     }
 
 }

@@ -41,9 +41,9 @@
         <put-attribute name="body" value="/WEB-INF/views/service/Farm.jsp" />
     </definition>
 
-    <definition name="/service/FarmInfo" extends="baseLayout">
-        <put-attribute name="title" value="작물 선택 정보 페이지" />
-        <put-attribute name="body" value="/WEB-INF/views/service/FarmInfo.jsp" />
+    <definition name="/service/FarmResult" extends="baseLayout">
+        <put-attribute name="title" value="작물 선택 결과 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/service/FarmResult.jsp" />
     </definition>
 
     <definition name="/service/Recruitment" extends="baseLayout">

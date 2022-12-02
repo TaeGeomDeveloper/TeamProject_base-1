@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SurveyOutputVO {
-    private int mso_idx;
     private String mso_id;
     private String mso_cropName;
     private String mso_capital;

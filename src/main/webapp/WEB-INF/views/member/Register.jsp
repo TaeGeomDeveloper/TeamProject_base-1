@@ -485,7 +485,7 @@
 
         </div>
         <div id="BG">
-            <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%">
+            <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%;opacity: 0.5">
         </div>
 
     </article>

@@ -14,10 +14,12 @@ package com.tp.farm.controller;
 
 import com.tp.farm.dao.CropRecDAO;
 import com.tp.farm.dao.SurveyInputDAO;
-import com.tp.farm.service.CropRecService;
+import com.tp.farm.dao.SurveyOutputDAO;
 import com.tp.farm.vo.CropDataVO;
+import com.tp.farm.vo.MemberVO;
 import com.tp.farm.vo.SurveyInputVO;
 
+import com.tp.farm.vo.SurveyOutputVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /*
@@ -41,6 +44,10 @@ public class CropRecController {
 
     @Autowired
     private SurveyInputDAO surveyInputDAO;
+    private SurveyOutputDAO surveyOutputDAO;
+    private SurveyInputVO surveyInput;
+//    @Autowired
+//    private CropRecommendService service;
 
     @Autowired
     private CropRecService cropRecService;
@@ -129,7 +136,7 @@ public class CropRecController {
             System.out.println(surveyInput.toString());
         }
         System.out.println("작물 선택 절차");
-        surveyInputDAO.insertSurveyInput(surveyInput);
+        surveyInputDAO.insertFarmInfo(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
         List<CropDataVO> list = cropRecDAO.select(surveyInput);
@@ -157,17 +164,43 @@ public class CropRecController {
 
 
     // 작물 선택 결과지 페이지
-    @RequestMapping(value = "/FarmInfo.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView FarmInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @RequestMapping(value = "/FarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FarmInfo(@ModelAttribute("info") SurveyOutputVO surveyOutput,HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
         ModelAndView mav = new ModelAndView();
         String viewName = this.getViewName(request);
 
-        // 회원 정보
-        String mi_id = request.getParameter("mi_id");
-        // 작물 정보
-        String cd_idx = request.getParameter("cd_idx");
+        System.out.println(surveyOutput.getMso_cropName());
 
-        viewName= "/service/FarmInfo";
+        // 회원 정보 / 아이디
+        MemberVO mem = (MemberVO) httpSession.getAttribute("user");
+
+        // 작물 이름
+        //String cd_cropName = request.getParameter("cd_cropName");
+
+        // 회원 작물 선택 설문지 테이블 호출
+       // SurveyInputVO surveyInput = surveyInputDAO.selectOne(mem.getMi_id());
+
+        // 자본금, 보유중인 토지
+        //surveyInput.getMsi_
+
+        // 농작물의 예상 소득, 예상 토지 비용, 최종 예상 소득
+
+
+        // 회원 작물 선택 결과지 테이블 저장
+        //System.out.println("작물 선택 결과지 작성");
+        //SurveyOutputVO surveyOutput = new SurveyOutputVO();
+        //surveyOutputDAO.insertOutputSurvey(surveyOutput);
+
+
+
+        //mav.addObject("surveyInput", surveyInput);
+
+        // 회원 작물 선택 결과지 테이블 호출
+        //SurveyOutputVO surveyOutput = SurveyOutputVO.selectOneMember(mi_id);
+        //mav.addObject("surveyOutput", surveyOutput);
+
+
+        viewName= "/service/FarmResult";
         mav.setViewName(viewName);
         return mav;
     }

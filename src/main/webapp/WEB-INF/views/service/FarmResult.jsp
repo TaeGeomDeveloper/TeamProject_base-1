@@ -13,9 +13,13 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-            <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 선택 결과지 페이지 </h1>
+            <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 100px">작물 선택 결과지</h2>
 
 
+
+            <a href="${contextPath}/service/Advice.do">
+                <button type="button" class="button2">전문가 상담하기</button>
+            </a>
         </div>
     </article>
 </section>
