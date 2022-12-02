@@ -33,13 +33,19 @@
         <![CDATA[
             insert into member_survey_input(msi_id, msi_memberName, msi_memberAge, msi_memberGender, msi_desiredArea, msi_desiredAreaDetail, msi_desiredTimeSowing,
                                             msi_desiredTimeSowingPart, msi_desiredHarvestTime, msi_desiredHarvestTimePart, msi_cropClassification,
-                                            msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery, msi_capital, msi_holdingLand)
+                                            msi_cultivationMethod, msi_farmingExperience, msi_hadMachinery)
             values (#{msi_id}, #{msi_memberName}, #{msi_memberAge}, #{msi_memberGender}, #{msi_desiredArea},
                     #{msi_desiredAreaDetail}, #{msi_desiredTimeSowing}, #{msi_desiredTimeSowingPart}, #{msi_desiredHarvestTime},
                     #{msi_desiredHarvestTimePart}, #{msi_cropClassification}, #{msi_cultivationMethod}, #{msi_farmingExperience},
-                    #{msi_hadMachinery}, #{msi_capital}, #{msi_holdingLand})
+                    #{msi_hadMachinery})
         ]]>
     </insert>
+
+    <delete id="deleteSurveyInput" parameterType="String">
+        <![CDATA[
+            delete from member_survey_input where msi_id = #{msi_id}
+        ]]>
+    </delete>
 
     <select id="checkId" resultType="int">
         <![CDATA[

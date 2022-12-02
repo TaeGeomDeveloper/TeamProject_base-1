@@ -33,328 +33,105 @@
         }
     </style>
 
-    <script>
-        $(document).ready(function () {
+<%--    <script>--%>
+<%--        $(document).ready(function () {--%>
 
-            var area0 = [
-                "도 선택",
-                "강원도",
-                "경기도",
-                "충청남도",
-                "충청북도",
-                "경상남도",
-                "경상북도",
-                "전라남도",
-                "전라북도",
-            ];
-            var area1 = [
-                "춘천시",
-                "원주시",
-                "강릉시",
-                "동해시",
-                "태백시",
-                "속초시",
-                "삼척시",
-                "홍천시",
-                "횡성시",
-                "영월시",
-                "평창시",
-                "정선시",
-                "철원시",
-                "화천시",
-                "양구시",
-                "인제시",
-                "고성시",
-                "양양시",
-            ];
-            var area2 = [
-                "수원시",
-                "안양시",
-                "안산시",
-                "용인시",
-                "부천시",
-                "광명시",
-                "평택시",
-                "과천시",
-                "오산시",
-                "시흥시",
-                "군포시",
-                "의왕시",
-                "하남시",
-                "이천시",
-                "안성시",
-                "김포시",
-                "화성시",
-                "광주시",
-                "여주시",
-                "양평시",
-                "고양시",
-                "의정부",
-                "동두천",
-                "구리시",
-                "남양주시",
-                "파주시",
-                "양주시",
-                "포천시",
-                "연천시",
-                "가평시",
-            ];
-            var area3 = [
-                "천안시",
-                "공주시",
-                "보령시",
-                "아산시",
-                "서산시",
-                "논산시",
-                "계룡시",
-                "당진시",
-                "금산군",
-                "부여군",
-                "서천군",
-                "청양군",
-                "홍성군",
-                "예산군",
-                "태안군",
-            ];
-            var area4 = [
-                "청주시",
-                "충주시",
-                "제천시",
-                "보은군",
-                "옥천군",
-                "영동군",
-                "증평군",
-                "진천군",
-                "괴산군",
-                "음성군",
-                "단양군",
-            ];
-            var area5 = [
-                "창원시",
-                "진주시",
-                "통영시",
-                "사천시",
-                "김해시",
-                "밀양시",
-                "거제시",
-                "양산시",
-                "의령군",
-                "함안군",
-                "창녕군",
-                "고성군",
-                "남해군",
-                "하동군",
-                "산청군",
-                "함양군",
-                "거창군",
-                "합천군",
-            ];
-            var area6 = [
-                "포항시",
-                "경주시",
-                "김천시",
-                "안동시",
-                "구미시",
-                "영주시",
-                "영천시",
-                "상주시",
-                "문경시",
-                "경산시",
-                "군위군",
-                "의성군",
-                "청송군",
-                "영양군",
-                "영덕군",
-                "청도군",
-                "고령군",
-                "성주군",
-                "칠곡군",
-                "예천군",
-                "봉화군",
-                "울진군",
-                "울릉군",
-            ];
-            var area7 = [
-                "목포시",
-                "여수시",
-                "순천시",
-                "나주시",
-                "광양시",
-                "담양군",
-                "곡성군",
-                "구례군",
-                "고흥군",
-                "보성군",
-                "화순군",
-                "장흥군",
-                "강진군",
-                "해남군",
-                "영암군",
-                "무안군",
-                "함평군",
-                "영광군",
-                "장성군",
-                "완도군",
-                "진도군",
-                "신안군",
-            ];
-            var area8 = [
-                "전주시",
-                "군산시",
-                "익산시",
-                "정읍시",
-                "남원시",
-                "김제시",
-                "완주군",
-                "진안군",
-                "무주군",
-                "장수군",
-                "임실군",
-                "순창군",
-                "고창군",
-                "부안군",
-            ];
+<%--           --%>
+<%--        });--%>
+<%--    </script>--%>
 
-            // 시/도 선택 박스 초기화
 
-            $("select[name^=msi_desiredArea]").each(function () {
-                $msi_desiredArea = $(this);
-                $.each(eval(area0), function () {
-                    $msi_desiredArea.append(
-                        "<option value='" + this + "'>" + this + "</option>"
-                    );
-                });
-                $msi_desiredArea.next().append("<option value=''>시 선택</option>");
-            });
 
-            // 시/도 선택시 구/군 설정
-            $("select[name^=msi_desiredArea]").change(function () {
-                var area =
-                    "area" + $("option", $(this)).index($("option:selected", $(this))); // 선택지역의 구군 Array
-                var $msi_desiredAreaDetail = $(this).next(); // 선택영역 군구 객체
-                $("option", $msi_desiredAreaDetail).remove(); // 구군 초기화
+<%--    <script>--%>
+<%--        $(document).ready(function () {--%>
 
-                if (area == "area0")
-                    $msi_desiredAreaDetail.append("<option value=''>시 선택</option>");
-                else {
-                    $.each(eval(area), function () {
-                        $msi_desiredAreaDetail.append(
-                            "<option value='" + this + "'>" + this + "</option>"
-                        );
-                    });
-                }
-            });
-        });
-    </script>
+<%--            // 정렬--%>
 
-    <script>
-        $(document).ready(function () {
 
-            // 정렬
-            $("#menu1").click(function () {
-                $("#Info_menu1").slideDown("slow");
-                $("#Info_menu2").slideUp("slow");
-                $("#Info_menu3").slideUp("slow");
-            });
-            $("#menu2").click(function () {
-                $("#Info_menu1").slideUp("slow");
-                $("#Info_menu2").slideDown("slow");
-                $("#Info_menu3").slideUp("slow");
-            });
-            $("#menu3").click(function () {
-                $("#Info_menu1").slideUp("slow");
-                $("#Info_menu2").slideUp("slow");
-                $("#Info_menu3").slideDown("slow");
-            });
+<%--            $("#flip").on('click', function (event) {--%>
 
-            $("#flip").on('click', function (event) {
+<%--                let msi_id = $("#msi_id").val();--%>
+<%--                let msi_memberName = $("#msi_memberName").val();--%>
+<%--                let msi_memberAge = $("#msi_memberAge").val();--%>
+<%--                let msi_memberGender = $("#msi_memberGender").val();--%>
+<%--                let msi_desiredArea = $("#msi_desiredArea").val();--%>
+<%--                let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();--%>
+<%--                let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();--%>
+<%--                let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();--%>
+<%--                let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();--%>
+<%--                let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();--%>
+<%--                let msi_cropClassification = $("#msi_cropClassification").val();--%>
+<%--                let msi_cultivationMethod = $("#msi_cultivationMethod").val();--%>
+<%--                let msi_farmingExperience = $("#msi_farmingExperience").val();--%>
+<%--                let msi_hadMachinery = $("#msi_hadMachinery").val();--%>
 
-                let msi_id = $("#msi_id").val();
-                let msi_memberName = $("#msi_memberName").val();
-                let msi_memberAge = $("#msi_memberAge").val();
-                let msi_memberGender = $("#msi_memberGender").val();
-                let msi_desiredArea = $("#msi_desiredArea").val();
-                let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();
-                let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();
-                let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();
-                let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();
-                let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();
-                let msi_cropClassification = $("#msi_cropClassification").val();
-                let msi_cultivationMethod = $("#msi_cultivationMethod").val();
-                let msi_farmingExperience = $("#msi_farmingExperience").val();
-                let msi_hadMachinery = $("#msi_hadMachinery").val();
-                let msi_capital = $("#msi_capital").val();
-                let msi_holdingLand = $("#msi_holdingLand").val();
+<%--                let param = {--%>
+<%--                    "msi_id": msi_id,--%>
+<%--                    "msi_memberName": msi_memberName,--%>
+<%--                    "msi_memberGender": msi_memberGender,--%>
+<%--                    "msi_memberAge": msi_memberAge,--%>
+<%--                    "msi_desiredArea": msi_desiredArea,--%>
+<%--                    "msi_desiredAreaDetail": msi_desiredAreaDetail,--%>
+<%--                    "msi_desiredTimeSowing": msi_desiredTimeSowing,--%>
+<%--                    "msi_desiredTimeSowingPart": msi_desiredTimeSowingPart,--%>
+<%--                    "msi_desiredHarvestTime": msi_desiredHarvestTime,--%>
+<%--                    "msi_desiredHarvestTimePart": msi_desiredHarvestTimePart,--%>
+<%--                    "msi_cropClassification": msi_cropClassification,--%>
+<%--                    "msi_cultivationMethod": msi_cultivationMethod,--%>
+<%--                    "msi_farmingExperience": msi_farmingExperience,--%>
+<%--                    "msi_hadMachinery": msi_hadMachinery,--%>
+<%--                }--%>
 
-                let param = {
-                    "msi_id": msi_id,
-                    "msi_memberName": msi_memberName,
-                    "msi_memberGender": msi_memberGender,
-                    "msi_memberAge": msi_memberAge,
-                    "msi_desiredArea": msi_desiredArea,
-                    "msi_desiredAreaDetail": msi_desiredAreaDetail,
-                    "msi_desiredTimeSowing": msi_desiredTimeSowing,
-                    "msi_desiredTimeSowingPart": msi_desiredTimeSowingPart,
-                    "msi_desiredHarvestTime": msi_desiredHarvestTime,
-                    "msi_desiredHarvestTimePart": msi_desiredHarvestTimePart,
-                    "msi_cropClassification": msi_cropClassification,
-                    "msi_cultivationMethod": msi_cultivationMethod,
-                    "msi_farmingExperience": msi_farmingExperience,
-                    "msi_hadMachinery": msi_hadMachinery,
-                    "msi_capital": msi_capital,
-                    "msi_holdingLand": msi_holdingLand
-                }
+<%--                $.ajax({--%>
+<%--                    type: 'POST',--%>
+<%--                    url: "${contextPath}/service/FarmProcess.do",--%>
+<%--                    // dataType: "text",--%>
+<%--                    contentType: "application/json; charset=UTF-8",--%>
+<%--                    dataType: "json",--%>
+<%--                    data: JSON.stringify(param),--%>
+<%--                    success: function (result) {--%>
+<%--                        alert("성공!");--%>
+<%--                        $("#window").slideDown("slow");--%>
+<%--                        var table = "";--%>
 
-                $.ajax({
-                    type: 'POST',
-                    url: "${contextPath}/service/FarmProcess.do",
-                    // dataType: "text",
-                    contentType: "application/json; charset=UTF-8",
-                    dataType: "json",
-                    data: JSON.stringify(param),
-                    success: function (result) {
-                        alert("성공!");
-                        $("#window").slideDown("slow");
-                        var table = "";
+<%--                        for (var i = 0; i < result.length; i++) {--%>
+<%--                            var map = result[i];--%>
 
-                        for (var i = 0; i < result.length; i++) {
-                            var map = result[i];
+<%--                            var container = document.getElementById("hold-this");--%>
 
-                            var container = document.getElementById("hold-this");
+<%--                            function myFunction(map) {--%>
+<%--                                var el = document.createElement("div"),--%>
+<%--                                    button = document.createElement("button");--%>
 
-                            function myFunction(map) {
-                                var el = document.createElement("div"),
-                                    button = document.createElement("button");
+<%--                                button.innerHTML = '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +--%>
+<%--                                    '<img id="FV" src="/gwinongin/resources/image/FV/' + map.cd_idx + '.jpg">' +--%>
+<%--                                    '</button>';--%>
 
-                                button.innerHTML = '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +
-                                    '<img id="FV" src="/gwinongin/resources/image/FV/' + map.cd_idx + '.jpg">' +
-                                    '</button>';
+<%--                                button.onclick = function (e) {--%>
+<%--                                    listener(e, map);--%>
+<%--                                    FarmInfo(map);--%>
+<%--                                    //Test(map);--%>
+<%--                                }--%>
+<%--                                el.appendChild(button);--%>
+<%--                                container.appendChild(el);--%>
+<%--                            }--%>
 
-                                button.onclick = function (e) {
-                                    listener(e, map);
-                                    FarmInfo(map);
-                                    //Test(map);
-                                }
-                                el.appendChild(button);
-                                container.appendChild(el);
-                            }
+<%--                            function listener(e, map) {--%>
+<%--                                //e.target.innerHTML = map.cd_cropName;--%>
+<%--                            }--%>
 
-                            function listener(e, map) {
-                                //e.target.innerHTML = map.cd_cropName;
-                            }
+<%--                            myFunction(map);--%>
 
-                            myFunction(map);
-
-                        }   // end for loop
-                    }, // end function
-                    error: function (data, status) {
-                        // 실패시
-                        alert(data + status);
-                    }
-                });
-            });
-        });
-    </script>
+<%--                        }   // end for loop--%>
+<%--                    }, // end function--%>
+<%--                    error: function (data, status) {--%>
+<%--                        // 실패시--%>
+<%--                        alert(data + status);--%>
+<%--                    }--%>
+<%--                });--%>
+<%--            });--%>
+<%--        });--%>
+<%--    </script>--%>
 
     <style>
         #FV {

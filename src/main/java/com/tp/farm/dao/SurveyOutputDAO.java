@@ -26,11 +26,9 @@ public class SurveyOutputDAO {
 
     public boolean deleteSurveyOutput(String mso_id){
         boolean flag = false;
-        int affectedCount = sqlSession.delete("mapper.surveyInput.deleteSurveyOutput", mso_id);
+        int affectedCount = sqlSession.delete("mapper.surveyOutput.deleteSurveyOutput", mso_id);
         if(affectedCount>0){
             flag = true;
-        }else{
-            System.out.println("외 않되???");
         }
         return flag;
     }

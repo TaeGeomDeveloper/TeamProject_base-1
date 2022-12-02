@@ -16,7 +16,7 @@ public class SurveyInputDAO {
     private SqlSession sqlSession;
 
     //작물 선택 설문조사에서 회원이 선택한 값 DB에 insert
-    public boolean insertFarmInfo(SurveyInputVO surveyInput) {
+    public boolean insertSurveyInput(SurveyInputVO surveyInput) {
         System.out.println("작물 선택 DAO 실행");
         boolean flag = false;
         int affectedCount = sqlSession.insert("mapper.surveyInput.insertSurveyInput", surveyInput);
@@ -29,17 +29,13 @@ public class SurveyInputDAO {
         return flag;
     }
 
-    // 작물 정보 받기!
-    public List<CropDataVO> selectAll() {
-        System.out.println("작물 리스트 DAO 실행");
-        List<CropDataVO> list = sqlSession.selectList("mapper.cropRecommend.selectAllCrop");
-        return list;
-    }
-
-    public List<CropDataVO> select(SurveyInputVO vo) {
-        System.out.println("작물 리스트 DAO 실행");
-        List<CropDataVO> list = sqlSession.selectList("mapper.cropRecommend.selectCrop", vo);
-        return list;
+    public boolean deleteSurveyInput(String msi_id){
+        boolean flag = false;
+        int affectedCount = sqlSession.delete("mapper.surveyInput.deleteSurveyInput", msi_id);
+        if(affectedCount>0){
+            flag = true;
+        }
+        return flag;
     }
 
     public SurveyInputVO selectOne(String msi_id) {

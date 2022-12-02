@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SurveyInputVO {
+    private int msi_idx;
     private String msi_id;
     private String msi_memberName;
     private int msi_memberAge;
@@ -22,7 +23,4 @@ public class SurveyInputVO {
     private String msi_cultivationMethod;
     private String msi_farmingExperience;
     private String msi_hadMachinery;
-    private int msi_capital;
-    private int msi_holdingLand;
-
 }

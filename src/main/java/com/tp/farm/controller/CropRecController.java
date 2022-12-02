@@ -12,6 +12,7 @@
 
 package com.tp.farm.controller;
 
+import com.tp.farm.dao.CropRecDAO;
 import com.tp.farm.dao.SurveyInputDAO;
 import com.tp.farm.dao.SurveyOutputDAO;
 import com.tp.farm.vo.CropDataVO;
@@ -20,7 +21,8 @@ import com.tp.farm.vo.SurveyInputVO;
 
 import com.tp.farm.vo.SurveyOutputVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,6 +48,12 @@ public class CropRecController {
     private SurveyInputVO surveyInput;
 //    @Autowired
 //    private CropRecommendService service;
+
+    @Autowired
+    private CropRecService cropRecService;
+
+    @Autowired
+    private CropRecDAO cropRecDAO;
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -114,9 +122,6 @@ public class CropRecController {
         ModelAndView mav = new ModelAndView();
         String viewName = this.getViewName(request);
         viewName= "/service/Farm";
-
-
-
         mav.setViewName(viewName);
         return mav;
     }
@@ -134,11 +139,30 @@ public class CropRecController {
         surveyInputDAO.insertFarmInfo(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
-        List<CropDataVO> list = surveyInputDAO.select(surveyInput);
+        List<CropDataVO> list = cropRecDAO.select(surveyInput);
         System.out.println("리스트 크기 : " + list.size());
 
         return list;
     }
+
+    @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
+    public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
+        boolean flag = false;
+        System.out.println("idCheck : " + msi_id);
+        flag = cropRecService.cropRecIdCheck(msi_id);
+        return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/DeleteSurvey.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity<String> deleteSurvey(@RequestParam("msi_id") String msi_id, HttpServletRequest request){
+        boolean flag = false;
+//        System.out.println("controller " + msi_id);
+        flag = cropRecService.deleteSurvey(msi_id);
+//        System.out.println("controller flag " + flag);
+        return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
+    }
+
+
     // 작물 선택 결과지 페이지
     @RequestMapping(value = "/FarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView FarmInfo(@ModelAttribute("info") SurveyOutputVO surveyOutput,HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
