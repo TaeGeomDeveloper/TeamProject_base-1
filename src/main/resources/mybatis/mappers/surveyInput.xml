@@ -49,12 +49,17 @@
         ]]>
     </select>
 
-    <delete id="deleteSurvey" parameterType="String">
+    <delete id="deleteSurveyInput" parameterType="String">
         <![CDATA[
             delete from member_survey_input where msi_id = #{msi_id}
         ]]>
     </delete>
 
+    <select id="selectOne" resultType="surveyInputVO" parameterType="String" >
+      <![CDATA[
+        select * from member_survey_input where msi_id = #{msi_id}
+        ]]>
+     </select>
 
 
 </mapper>

@@ -24,7 +24,7 @@ function drawChart() {
 // PDF
 function PDF_popup() {
     //${contextPath}/resources/PDF/Pdf1.jsp
-    var pop = window.open("/smartfarm/resources/PDF/Pdf1.jsp", "pop", "width=600,height=800, scrollbars=yes, resizable=yes");
+    var pop = window.open("/gwinongin/resources/PDF/Pdf1.jsp", "pop", "width=600,height=800, scrollbars=yes, resizable=yes");
 }
 
 // 작물 정보
@@ -49,7 +49,7 @@ function FarmInfo(map) {
         cropName += map.cd_cropName;
         $('#Fruit_Title').html(cropName);
         $('#SmallInfo').html(map.cd_basicInformation);
-        document.getElementById("FruitPic").innerHTML = "<img src=\"/smartfarm/resources/image/FV/" + map.cd_idx + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+        document.getElementById("FruitPic").innerHTML = "<img src=\"/gwinongin/resources/image/FV/" + map.cd_idx + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
 
         // 상세 정보
         $('#nutrition').html(map.cd_nutritionEfficacy);
@@ -57,10 +57,11 @@ function FarmInfo(map) {
         $('#harvest').html(harvest);
         $('#content2').html(map.cd_methodCultivation);
         $('#pest').html(map.cd_pest);
+        $('#cd_marketValue').html(map.cd_marketValue+" 원");
+        $('#cd_operatingCost').html("10a당 경영비[만 원] : "+map.cd_operatingCost);
+        $('#cd_income').html("10a당 소득[만 원] : "+map.cd_income);
 
-        document.getElementById("FVS").innerHTML = "  <a href=\"/smartfarm/service/FarmInfo.do?cd_idx="+map.cd_idx+"\">\n" +
-            "                                            <button type=\"button\" class=\"btn btn-success\">작물 최종 선택</button>\n" +
-            "                                        </a>";
+        document.getElementById("FVS").innerHTML = "<button type=\"button\" onclick=\"FVResult_Click()\" class=\"btn btn-success\">작물 최종 선택</button>";
 
         //             document.getElementById("content1").innerHTML = data[number].content;
 
@@ -87,14 +88,14 @@ function fn_clcik2(number) {
     }
 
     $.ajax({
-        url: "/smartfarm/resources/JSON/Farm2.json",
+        url: "/gwinongin/resources/JSON/Farm2.json",
         dataType: "json",
         success: function (data) {
             if (data.length > 0) {
                 document.getElementById("content4").innerHTML = data[number].name + "<br/>"
                     + data[number].content;
-                document.getElementById("FruitPic").innerHTML = "<img src=\"smartfarm/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
-                document.getElementById("FruitPic2").innerHTML = "<img src=\"smartfarm/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                document.getElementById("FruitPic").innerHTML = "<img src=\"gwinongin/resources/image/과일/과일" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+                document.getElementById("FruitPic2").innerHTML = "<img src=\"gwinongin/resources/image/method/Fruit" + (number + 1) + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
 
 
                 document.getElementById("content5").innerHTML = "재배 난이도 : " + data[number].rating + "<br/>";

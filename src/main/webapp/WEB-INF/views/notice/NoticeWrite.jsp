@@ -42,7 +42,7 @@
           <table style="margin: 20px">
             <tr>
               <th>아이디</th>
-              <td><input class="form-control" placeholder="ID" type="text" name="mi_id"
+              <td><input class="form-control" placeholder="ID" type="text" name="cb_id"
                          style="width: 25%"/>
               </td>
             </tr>

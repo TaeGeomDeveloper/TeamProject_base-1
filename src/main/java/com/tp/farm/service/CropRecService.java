@@ -13,7 +13,7 @@ public class CropRecService {
 
     public boolean cropRecIdCheck(String msi_id){
         boolean flag = false;
-        flag = surveyInputDAO.checkId(msi_id);
+        //flag = surveyInputDAO.checkId(msi_id);
         return flag;
     };
 }
