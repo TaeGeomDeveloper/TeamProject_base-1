@@ -11,5 +11,6 @@
 		<typeAlias type="com.tp.farm.vo.CropDataVO" alias="cropDataVO"/>
 		<typeAlias type="com.tp.farm.vo.FarmlandPriceVO" alias="farmlandPriceVO"/>
 		<typeAlias type="com.tp.farm.vo.TraditionalMarketVO" alias="traditionalMarketVO"/>
+		<typeAlias type="com.tp.farm.vo.NoticeVO" alias="noticeVO"/>
 	</typeAliases>
 </configuration>

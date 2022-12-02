@@ -38,6 +38,11 @@ $(document).ready(function()
         $('#cb_content').summernote('fontName', '맑은 고딕');
 		$('#cb_content').summernote('lineHeight', 0.5);
 		$('#cb_content').summernote('code', '<p style="line-height: 0.5;"><font face="맑은 고딕">﻿</font></p>');
+
+		$('#nb_content').summernote(setting);
+		$('#nb_content').summernote('fontName', '맑은 고딕');
+		$('#nb_content').summernote('lineHeight', 0.5);
+		$('#nb_content').summernote('code', '<p style="line-height: 0.5;"><font face="맑은 고딕">﻿</font></p>');
 	});
 
 

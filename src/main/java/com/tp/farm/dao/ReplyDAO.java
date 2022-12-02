@@ -54,7 +54,6 @@ public class ReplyDAO {
 
     public boolean deleteReply(int cbrSeq) {
         boolean flag = false;
-        System.out.println(cbrSeq);
         int affectedCount = sqlSession.delete("mapper.reply.deleteOneReply", cbrSeq);
         if(affectedCount>0) {
             flag = true;

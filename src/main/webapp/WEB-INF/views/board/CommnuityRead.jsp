@@ -39,10 +39,14 @@
 
     <!-- 대댓글등록 button -->
     <script>
-        function reReplyForm_check(){
+        function reReplyForm_check(bundleSeq){
             var reReplyForm = document.reReplyForm;
-            let cbr_reReplyId = $("#cbr_reReplyId").val();
-            let cbr_reContent = $("#cbr_reContent").val();
+            let number = bundleSeq;
+            let cbr_reReplyId = $('#cbr_reReplyId' + number).val();
+            let cbr_reContent = $('#cbr_reContent' + number).val();
+            alert(number);
+            alert(cbr_reReplyId);
+            alert(cbr_reContent);
             if(cbr_reReplyId == ""){
                 alert("로그인이 필요합니다");
                 cbr_reReplyId.focus();
@@ -57,7 +61,8 @@
 
             reReplyForm.method = "post";
             reReplyForm.action = "./writeReReply.do";
-            reReplyForm.submit();
+            $("#reReplyForm").submit();
+            // reReplyForm.submit()
         }
     </script>
 
@@ -197,19 +202,19 @@
                                             </div>
                                             <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                             <div class="${reply.cbr_bundleSeq}" style="display: none; align-content: center">
-                                                <form name="reReplyForm" method="post">
+                                                <form name="reReplyForm" id="reReplyForm" method="post">
                                                     <table>
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId" id="cbr_reReplyId" style="width: 150px"/></td>
+                                                                       name="cbr_replyId${reply.cbr_bundleSeq}" id="cbr_reReplyId${reply.cbr_bundleSeq}" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
                                                             <td><textarea class="form-control"
-                                                                          id="cbr_reContent"
+                                                                          id="cbr_reContent${reply.cbr_bundleSeq}"
                                                                           style="height: 100px; width: 600px"
-                                                                          name="cbr_content"></textarea></td>
+                                                                          name="cbr_content${reply.cbr_bundleSeq}"></textarea></td>
                                                         </tr>
                                                         <tr>
                                                             <td><input type="hidden" name="cb_seq"
@@ -220,10 +225,9 @@
                                                                        value="${reply.cbr_currentSeq}"/></td>
                                                         </tr>
                                                     </table>
-                                                    <button class="button2" type="button" onclick="reReplyForm_check()" >수정하기</button>
+                                                    <button class="button2" type="button" onclick="reReplyForm_check(${reply.cbr_bundleSeq})" >수정하기</button>
                                                 </form>
                                             </div>
-
                                         </div>
                                     </td>
                                 </tr>
