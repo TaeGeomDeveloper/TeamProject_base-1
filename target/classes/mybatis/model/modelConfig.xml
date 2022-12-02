@@ -8,6 +8,7 @@
 		<typeAlias type="com.tp.farm.vo.BoardVO" alias="boardVO"/>
 		<typeAlias type="com.tp.farm.vo.ReplyVO" alias="replyVO"/>
 		<typeAlias type="com.tp.farm.vo.SurveyInputVO" alias="surveyInputVO"/>
+		<typeAlias type="com.tp.farm.vo.SurveyOutputVO" alias="surveyOutputVO"/>
 		<typeAlias type="com.tp.farm.vo.CropDataVO" alias="cropDataVO"/>
 		<typeAlias type="com.tp.farm.vo.FarmlandPriceVO" alias="farmlandPriceVO"/>
 		<typeAlias type="com.tp.farm.vo.TraditionalMarketVO" alias="traditionalMarketVO"/>
