@@ -15,6 +15,7 @@ package com.tp.farm.controller;
 import com.tp.farm.dao.CropRecDAO;
 import com.tp.farm.dao.SurveyInputDAO;
 import com.tp.farm.dao.SurveyOutputDAO;
+import com.tp.farm.service.CropRecService;
 import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.MemberVO;
 import com.tp.farm.vo.SurveyInputVO;
@@ -136,7 +137,7 @@ public class CropRecController {
             System.out.println(surveyInput.toString());
         }
         System.out.println("작물 선택 절차");
-        surveyInputDAO.insertFarmInfo(surveyInput);
+        surveyInputDAO.insertSurveyInput(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
         List<CropDataVO> list = cropRecDAO.select(surveyInput);
