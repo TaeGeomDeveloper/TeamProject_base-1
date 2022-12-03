@@ -60,4 +60,10 @@ public class ReplyService {
         flag = replyDAO.updateReplyDelText(cbrSeq);
         return flag;
     }
+
+    public boolean updateReplyContent(ReplyVO reply) {
+        boolean flag = false;
+        flag = replyDAO.updateReplyContent(reply);
+        return flag;
+    }
 }

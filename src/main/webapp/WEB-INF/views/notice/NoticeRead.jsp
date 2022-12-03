@@ -31,15 +31,15 @@
                     </thead>
                     <tbody class="table-group-divider">
                     <tr style="margin: auto">
-                        <td>${board.cb_seq}</td>
-                        <td>${board.cb_title}</td>
-                        <td>${board.mi_id}</td>
-                        <td>${board.cb_regDate}</td>
-                        <td>${board.cb_viewCount}</td>
-                        <td><a href="download.do?seq=${board.cb_seq}&token=on">
-                            ${board.cb_originFileName}</a></td>
-                        <td>${board.cb_downloadCount}</td>
-                        <td><a href="viewUpdatePage.do?seq=${board.cb_seq}">
+                        <td>${notice.nb_seq}</td>
+                        <td>${notice.nb_title}</td>
+                        <td>${notice.nb_id}</td>
+                        <td>${notice.nb_regDate}</td>
+                        <td>${notice.nb_viewCount}</td>
+                        <td><a href="download.do?seq=${notice.nb_seq}&token=on">
+                            ${notice.nb_originFileName}</a></td>
+                        <td>${notice.nb_downloadCount}</td>
+                        <td><a href="viewUpdatePage.do?seq=${notice.nb_seq}">
                             <button class="button3">수정</button>
                         </a></td>
                     </tr>
@@ -47,7 +47,7 @@
                 </table>
             </div>
             <div style="border: 5px solid #f7a063; border-radius: 20px; height: 700px; text-align: left">
-                ${board.cb_content}
+                ${notice.nb_content}
             </div>
         </div>
 
