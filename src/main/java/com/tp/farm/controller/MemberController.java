@@ -31,8 +31,7 @@ public class MemberController {
     private MailService mailService;
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private CsvService csvService;
+
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -124,50 +123,7 @@ public class MemberController {
         System.out.println("로그인 회원 체크 : " + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
-    // 관리자 페이지
-    @RequestMapping(value = {"/Manager.do"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView membersInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        List<MemberVO> List = this.memberDAO.selectAllMemeber();
-        mav.addObject("List", List);
-        mav.setViewName("/member/Manager");
-        return mav;
-    }
-    // CSV 삽입
-    @RequestMapping(value = {"/InputCSV.do"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public void csvService(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String uploadFolder = "C:\\upload";
-        Iterator var6 = files.iterator();
-
-        while (var6.hasNext()) {
-            MultipartFile file = (MultipartFile) var6.next();
-            String originalName = file.getOriginalFilename();
-            String filePath = uploadFolder + "/" + originalName;
-            File dest = new File(filePath);
-            file.transferTo(dest);
-        }
-
-        csvService.insertDataTraditionalMarket();
-        csvService.insertDataFarmlandPrice();
-        csvService.insertCropData();
-    }
-    // CSV 데이터 삭제
-    @RequestMapping(value = "/DeleteTraditionalMarket.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteTraditionalMarket() throws  Exception{
-        System.out.println("전국전통시장표준데이터_수정본 삭제");
-        csvService.deleteDataTraditionalMarket();
-    }
-    @RequestMapping(value = "/DeleteFarmlandPriceData.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteFarmlandPriceData() throws  Exception{
-        System.out.println("농지_시세_테이블 삭제");
-        csvService.deleteDataFarmlandPrice();
-    }
-    @RequestMapping(value = "/DeleteCropData.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteCropData() throws  Exception{
-        System.out.println("농작물_자료조사표 삭제");
-        csvService.deleteCropData();
-    }
 
     // 로그아웃
     @RequestMapping(value = "/Logout.do", method = RequestMethod.GET)
@@ -218,8 +174,6 @@ public class MemberController {
         return mav;
     }
 
-   
-
     // 비빌번호 찾기
     @RequestMapping(value = "/findPwd.do", method = {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<String> findPwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -235,11 +189,7 @@ public class MemberController {
             flag = true;
             String mi_password = member.getMi_password();
             System.out.println(mi_password + "find pwd success");
-
             mailService.sendMail(mi_email, "회원님이 요청하신 비밀번호 찾기입니다.", mi_id + " password is " + mi_password);
-
-            mailService.sendMail(mi_email, "gwinongin find password", mi_id + " password is" + mi_password + ".");
-
         }
         System.out.println("findPwd status --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);

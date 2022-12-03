@@ -70,9 +70,9 @@
             $("#Choice1").on('click', function () {
                 $.ajax({
                     type: 'POST',
-                    url: "${contextPath}/member/DeleteTraditionalMarket.do",
+                    url: "${contextPath}/admin/DeleteTraditionalMarket.do",
                     success: function () {
-                        alert("성공!");
+                        alert("삭제 완료");
                     },
                     error: function () {
                         alert("error");
@@ -83,9 +83,9 @@
             $("#Choice2").on('click', function () {
                 $.ajax({
                     type: 'POST',
-                    url: "${contextPath}/member/DeleteFarmlandPriceData.do",
+                    url: "${contextPath}/admin/DeleteFarmlandPriceData.do",
                     success: function () {
-                        alert("성공!");
+                        alert("삭제 완료");
                     },
                     error: function () {
                         alert("error");
@@ -96,9 +96,9 @@
             $("#Choice3").on('click', function (event) {
                 $.ajax({
                     type: 'POST',
-                    url: "${contextPath}/member/DeleteCropData.do",
+                    url: "${contextPath}/admin/DeleteCropData.do",
                     success: function () {
-                        alert("성공!");
+                        alert("삭제 완료");
                     },
                     error: function () {
                         alert("error");
