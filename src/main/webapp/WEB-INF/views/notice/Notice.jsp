@@ -63,23 +63,23 @@
                 <tbody class="table-group-divider">
                 <c:forEach var="vo" items="${list}">
                     <tr>
-                        <th scope="row">${vo.cb_seq}</th>
-                        <td><a href="ReadBoard.do?seq=${vo.cb_seq}">${vo.cb_title} </a></td>
-                        <td> ${vo.mi_id}</td>
-                        <td>${vo.cb_regDate}</td>
-                        <td>${vo.cb_viewCount}</td>
+                        <th scope="row">${vo.nb_seq}</th>
+                        <td><a href="ReadBoard.do?seq=${vo.nb_seq}">${vo.nb_title} </a></td>
+                        <td> ${vo.nb_id}</td>
+                        <td>${vo.nb_regDate}</td>
+                        <td>${vo.nb_viewCount}</td>
                         <td>
-                            <a href="Update.do?id=${vo.mi_id}">
+                            <a href="Update.do?id=${vo.nb_id}">
                                 <button class="button4">변경</button>
                             </a>
                         </td>
                         <td>
-                            <a href="delete.do?seq=${vo.cb_seq}">
+                            <a href="delete.do?seq=${vo.nb_seq}">
                                 <button class="button4">삭제</button>
                             </a>
                         </td>
                         <td>
-                            <a href="download.do?seq=${vo.cb_seq}&token=on">
+                            <a href="download.do?seq=${vo.nb_seq}&token=on">
                                 <button class="button4">첨부파일</button>
                             </a>
                         </td>
