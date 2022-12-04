@@ -54,7 +54,6 @@ public class ReplyDAO {
 
     public boolean deleteReply(int cbrSeq) {
         boolean flag = false;
-        System.out.println(cbrSeq);
         int affectedCount = sqlSession.delete("mapper.reply.deleteOneReply", cbrSeq);
         if(affectedCount>0) {
             flag = true;
@@ -74,5 +73,14 @@ public class ReplyDAO {
     public int selectCount(ReplyVO reply) {
         int bundleSeqCount = sqlSession.selectOne("mapper.reply.selectCountByBundleSeq", reply);
         return bundleSeqCount;
+    }
+
+    public boolean updateReplyContent(ReplyVO reply) {
+        boolean flag = false;
+        int affectedCount = sqlSession.update("mapper.reply.updateReply", reply);
+        if(affectedCount>0) {
+            flag = true;
+        }
+        return flag;
     }
 }

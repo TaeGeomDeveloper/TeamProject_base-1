@@ -46,7 +46,7 @@
                         }
                     };
 
-                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\ \'")}');
+                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\'")}');
                     $('#cb_content').summernote(setting);
                     $('#cb_content').summernote('fontName', '맑은 고딕');
             });
@@ -57,7 +57,7 @@
             	$.ajax({
             		data : form_data,
             		type : "POST",
-            		url : '/smartfarm/board/summerimages.do',
+            		url : '/gwinongin/board/summerimages.do',
             		cache : false,
             		contentType : false,
             		enctype : 'multipart/form-data',
@@ -105,7 +105,7 @@
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="cb_title" id="cb_title" value="${board.cb_title}"></td>
+                        <td><input type="text" name="cb_title" id="cb_title" maxlength='50' value="${board.cb_title}"></td>
                         <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
                     </tr>
                     <tr>

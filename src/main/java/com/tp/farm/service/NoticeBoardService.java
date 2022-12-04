@@ -2,7 +2,7 @@ package com.tp.farm.service;
 
 
 import com.tp.farm.dao.NoticeDAO;
-import com.tp.farm.vo.BoardVO;
+import com.tp.farm.vo.NoticeVO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -31,15 +31,15 @@ public class NoticeBoardService {
     @Autowired
     private NoticeDAO noticeDAO;
 
-    public boolean createBoard(BoardVO board, MultipartFile attachFile) throws Exception {
+    public boolean createBoard(NoticeVO notice, MultipartFile attachFile) throws Exception {
         boolean flag = false;
         if(attachFile.isEmpty()) {
-            flag = noticeDAO.insertBoard(board);
+            flag = noticeDAO.insertBoard(notice);
         } else {
             HashMap<String, String> fileNameMap = upload(attachFile);
-            board.setCb_originFileName(fileNameMap.get("originFileName"));
-            board.setCb_serverFileName(fileNameMap.get("serverFileName"));
-            flag = noticeDAO.insertBoard(board);
+            notice.setNb_originFileName(fileNameMap.get("originFileName"));
+            notice.setNb_serverFileName(fileNameMap.get("serverFileName"));
+            flag = noticeDAO.insertBoard(notice);
         }
         return flag;
     }
@@ -77,17 +77,17 @@ public class NoticeBoardService {
         return fileNameMap;
     }
 
-    public List<BoardVO> selectAllBoard() {
-        List<BoardVO> list = noticeDAO.selectAll();
+    public List<NoticeVO> selectAllBoard() {
+        List<NoticeVO> list = noticeDAO.selectAll();
         return list;
     }
 
     public boolean boardDownload(HttpServletResponse response, String seq, String token) throws IOException {
         boolean flag = false;
         //게시판 정보 레코드 얻기
-        BoardVO board = noticeDAO.selectOneBoard(seq);
-        String originFileName = board.getCb_originFileName();
-        String serverFileName = board.getCb_serverFileName();
+        NoticeVO notice = noticeDAO.selectOneBoard(seq);
+        String originFileName = notice.getNb_originFileName();
+        String serverFileName = notice.getNb_serverFileName();
         //본래파일명 한글처리
         originFileName = new String(originFileName.getBytes("UTF-8"), "ISO-8859-1");
         //게시판 첨부파일 경로지정
@@ -117,21 +117,21 @@ public class NoticeBoardService {
         return flag;
     }
 
-    public BoardVO readBoard(String seq) {
-        BoardVO board = new BoardVO();
+    public NoticeVO readBoard(String seq) {
+        NoticeVO board = new NoticeVO();
         board = noticeDAO.selectOneBoard(seq);
         return board;
     }
 
-    public boolean updateBoard(BoardVO board, MultipartFile attachFile) throws Exception {
+    public boolean updateBoard(NoticeVO notice, MultipartFile attachFile) throws Exception {
         boolean flag = false;
         if(attachFile.isEmpty()) {
-            flag = noticeDAO.update(board);
+            flag = noticeDAO.update(notice);
         } else {
             HashMap<String, String> fileNameMap = upload(attachFile);
-            board.setCb_originFileName(fileNameMap.get("originFileName"));
-            board.setCb_serverFileName(fileNameMap.get("serverFileName"));
-            flag = noticeDAO.update(board);
+            notice.setNb_originFileName(fileNameMap.get("originFileName"));
+            notice.setNb_serverFileName(fileNameMap.get("serverFileName"));
+            flag = noticeDAO.update(notice);
         }
         return flag;
     }

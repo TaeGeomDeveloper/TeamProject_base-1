@@ -89,7 +89,8 @@ public class BoardController {
         ModelAndView mav = new ModelAndView();
         BoardVO board = new BoardVO();
         boolean flag = false;
-        board.setMi_id(request.getParameter("mi_id"));
+        board.setCb_category(request.getParameter("cb_category"));
+        board.setCb_id(request.getParameter("cb_id"));
         board.setCb_title(request.getParameter("cb_title"));
         board.setCb_content(request.getParameter("cb_content"));
         try {
@@ -172,7 +173,7 @@ public class BoardController {
         //업로드
         File file = new File(path , fileName);
         img.transferTo(file);
-        return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);
+        return ResponseEntity.ok().body("/gwinongin/resources/upload/"+fileName);
     }
 
     //////////////////////////////////////////
@@ -219,14 +220,27 @@ public class BoardController {
     @RequestMapping(value="/viewUpdateReply.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewUpdateReply(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("UpdateReply");
+        String cb_seq = request.getParameter("cb_seq");
+        String cbr_seq = request.getParameter("cbr_seq");
+        boolean flag = false;
+        BoardVO board = boardService.readBoard(cb_seq);
+        List<ReplyVO> replyList = replyService.readAllReply(cb_seq);
+        mav.addObject("cbr_seq", cbr_seq);
+        mav.addObject("board", board);
+        mav.addObject("replyList", replyList);
+        mav.setViewName("/board/ReplyUpdate");
         return mav;
     }
 
     @RequestMapping(value="/updateReply.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateReply(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-
+        ReplyVO reply = new ReplyVO();
+        reply.setCb_seq(Integer.parseInt(request.getParameter("cb_seq")));
+        reply.setCbr_seq(Integer.parseInt(request.getParameter("cbr_seq")));
+        reply.setCbr_content(request.getParameter("cbr_content"));
+        boolean flag = replyService.updateReplyContent(reply);
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
         return mav;
     }
 

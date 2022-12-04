@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.surveyOutput">
+    <resultMap id="surveyOutputResult" type="surveyOutputVO">
+        <id property="mso_id" column="mso_id" />
+        <result property="mso_cropName" column="mso_cropName" />
+        <result property="mso_capital" column="mso_capital" />
+        <result property="mso_holdingLand" column="mso_holdingLand" />
+        <result property="mso_managementExpenses" column="mso_managementExpenses" />
+        <result property="mso_incomeCrops" column="mso_incomeCrops" />
+        <result property="mso_landCost" column="mso_landCost" />
+        <result property="mso_finalIncome" column="mso_finalIncome" />
+    </resultMap>
+
+    <select id="selectSurveyOutput">
+        <![CDATA[
+            select * from member_survey_output;
+        ]]>
+    </select>
+
+    <insert id="insertSurveyOutput"  parameterType="surveyOutputVO">
+        <![CDATA[
+            insert into member_survey_input(mso_id, mso_cropName, mso_capital, mso_holdingLand, mso_managementExpenses,
+                                            mso_incomeCrops, mso_landCost, mso_finalIncome)
+            values (#{mso_id}, #{mso_cropName}, #{mso_capital}, #{mso_holdingLand}, #{mso_managementExpenses},
+                    #{mso_incomeCrops}, #{mso_landCost}, #{mso_finalIncome})
+        ]]>
+    </insert>
+
+    <delete id="deleteSurveyOutput" parameterType="String">
+        <![CDATA[
+            delete from member_survey_output where mso_id = #{mso_id}
+        ]]>
+    </delete>
+
+
+</mapper>

@@ -6,7 +6,8 @@
 <mapper namespace="mapper.board">
     <resultMap id="boardResult" type="boardVO">
         <id property="cb_seq" column="cb_seq" />
-        <result property="mi_id" column="mi_id" />
+        <result property="cb_category" column="cb_category" />
+        <result property="cb_id" column="cb_id" />
         <result property="cb_title" column="cb_title" />
         <result property="cb_content" column="cb_content" />
         <result property="cb_viewCount" column="cb_viewCount" />
@@ -31,8 +32,8 @@
 
     <select id="insertBoard" parameterType="boardVO">
         <![CDATA[
-            insert into community_board(mi_id, cb_title, cb_content, cb_originFileName, cb_serverFileName)
-            value(#{mi_id}, #{cb_title}, #{cb_content}, #{cb_originFileName}, #{cb_serverFileName})
+            insert into community_board(cb_category, cb_id, cb_title, cb_content, cb_originFileName, cb_serverFileName)
+            value(#{cb_category}, #{cb_id}, #{cb_title}, #{cb_content}, #{cb_originFileName}, #{cb_serverFileName})
         ]]>
     </select>
 

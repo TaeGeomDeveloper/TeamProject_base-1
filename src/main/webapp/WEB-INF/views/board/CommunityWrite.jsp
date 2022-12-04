@@ -17,6 +17,7 @@
     <script type="text/javascript" src="${contextPath}/resources/summernote/lang/summernote-ko-KR.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
     <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteFunction.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteCategory.js" charset="UTF-8"></script>
 
     <script>
         function writeform_check(){
@@ -53,19 +54,31 @@
     <article>
         <div id="Main_Box" align="center" style="margin: auto; width: 90%">
             <h1 class="Title">쉼터</h1>
-            <form name="WriteForm" enctype="multipart/form-data">
+            <form name="writeForm" enctype="multipart/form-data">
                 <div style="border: 10px solid #04AA6D; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
                     <table style="margin: 20px">
                         <tr>
+                            <th>카테고리</th>
+                            <td class="d-flex p-2">
+                                <select class="form-select" style="width: 100px" onchange="category(this.value);"
+                                        name="cb_category" id="cb_category">
+                                    <option selected="selected" value="일반">일반</option>
+                                    <option value="정보">정보</option>
+                                    <option value="나눔">나눔</option>
+                                    <option value="질문">질문</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>아이디</th>
-                            <td><input class="form-control" placeholder="ID" type="text" name="mi_id"
+                            <td><input class="form-control" placeholder="ID" type="text" name="cb_id"
                                        style="width: 25%"/>
                             </td>
                         </tr>
                         <tr>
                             <th>제목</th>
                             <td><input class="form-control" placeholder="Title" type="text" name="cb_title" id="cb_title"
-                                       style="width: 50%"/></td>
+                                       maxlength='50' style="width: 50%"/></td>
                         </tr>
                         <tr>
                             <th>내용</th>
