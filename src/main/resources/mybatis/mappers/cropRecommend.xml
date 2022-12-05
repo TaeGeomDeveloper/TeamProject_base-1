@@ -104,4 +104,13 @@
         ]]>
     </select>
 
+    <select id="selectFarmlandPrice" resultType="farmlandPriceVO" resultMap="farmLandResult">
+        <![CDATA[
+        select * from market_price_farmland
+        where mpf_locationName = ${mpf_locationName};
+          and mpf_locationNameDetail like concat('%',#{mpf_locationNameDetail}, '%');
+        ]]>
+    </select>
+
+
 </mapper>

@@ -22,4 +22,10 @@ public class MemberService {
         flag = memberDAO.isSameId(mi_id);
         return flag;
     }
+
+    public boolean isMemberPhone(String phone) {
+        boolean flag = false;
+        flag = memberDAO.isSamePhone(phone);
+        return flag;
+    }
 }
