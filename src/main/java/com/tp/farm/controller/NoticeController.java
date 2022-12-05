@@ -65,9 +65,9 @@ public class NoticeController {
     public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
 
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         boolean flag = false;
-        NoticeVO notice = noticeBoardService.readBoard(seq);
+        NoticeVO notice = noticeBoardService.readBoard(nb_seq);
         mav.addObject("notice", notice);
         mav.setViewName("/notice/NoticeRead");
         return mav;
@@ -106,10 +106,10 @@ public class NoticeController {
     @RequestMapping(value="/download.do", method=RequestMethod.GET)
     public ModelAndView download(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         String token = request.getParameter("token");
         try {
-            boolean flag = noticeBoardService.boardDownload(response, seq, token);
+            boolean flag = noticeBoardService.boardDownload(response, nb_seq, token);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -120,9 +120,10 @@ public class NoticeController {
     @RequestMapping(value="/viewUpdatePage.do", method=RequestMethod.GET)
     public ModelAndView viewUpdate(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
-        mav.addObject("seq", seq);
-        mav.setViewName("updateTest");
+        String nb_seq = request.getParameter("nb_seq");
+        NoticeVO notice = noticeBoardService.readBoard(nb_seq);
+        mav.addObject("notice", notice);
+        mav.setViewName("/notice/NoticeUpdate");
         return mav;
     }
     @RequestMapping(value="/updateBoard.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -148,9 +149,9 @@ public class NoticeController {
     @RequestMapping(value="/delete.do", method=RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         boolean flag = false;
-        flag = noticeBoardService.deleteBoard(seq);
+        flag = noticeBoardService.deleteBoard(nb_seq);
         if(flag) {
             System.out.println("delete 완료");
         }

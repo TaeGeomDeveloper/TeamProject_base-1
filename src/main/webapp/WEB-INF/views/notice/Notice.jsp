@@ -64,7 +64,7 @@
                 <c:forEach var="vo" items="${list}">
                     <tr>
                         <th scope="row">${vo.nb_seq}</th>
-                        <td><a href="ReadBoard.do?seq=${vo.nb_seq}">${vo.nb_title} </a></td>
+                        <td><a href="ReadBoard.do?nb_seq=${vo.nb_seq}">${vo.nb_title} </a></td>
                         <td> ${vo.nb_id}</td>
                         <td>${vo.nb_regDate}</td>
                         <td>${vo.nb_viewCount}</td>
@@ -74,12 +74,12 @@
                             </a>
                         </td>
                         <td>
-                            <a href="delete.do?seq=${vo.nb_seq}">
+                            <a href="delete.do?nb_seq=${vo.nb_seq}">
                                 <button class="button4">삭제</button>
                             </a>
                         </td>
                         <td>
-                            <a href="download.do?seq=${vo.nb_seq}&token=on">
+                            <a href="download.do?nb_seq=${vo.nb_seq}&token=on">
                                 <button class="button4">첨부파일</button>
                             </a>
                         </td>
