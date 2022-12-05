@@ -9,6 +9,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/service/Farm.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/service" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/Login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/ReadInfo.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/Service.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
       </map>
     </option>
   </component>
