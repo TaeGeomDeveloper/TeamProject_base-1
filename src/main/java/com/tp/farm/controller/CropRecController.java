@@ -128,7 +128,7 @@ public class CropRecController {
     }
     // 작물 선택 절차
     @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-    public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+    public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO surveyInput, HttpServletRequest request) throws  Exception{
 
         if(surveyInput == null){
             System.out.println("theres no VO founded");
@@ -141,6 +141,7 @@ public class CropRecController {
 
         System.out.println("작물 정보 리스트 받아오기");
         List<CropDataVO> list = cropRecDAO.select(surveyInput);
+        request.setAttribute("list", list);
         System.out.println("리스트 크기 : " + list.size());
 
         return list;

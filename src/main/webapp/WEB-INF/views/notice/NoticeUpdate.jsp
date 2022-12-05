@@ -46,9 +46,9 @@
                         }
                     };
 
-                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\'")}');
-                    $('#cb_content').summernote(setting);
-                    $('#cb_content').summernote('fontName', '맑은 고딕');
+                    $('#nb_content').val('${fn:replace(notice.nb_content,"\'","\'")}');
+                    $('#nb_content').summernote(setting);
+                    $('#nb_content').summernote('fontName', '맑은 고딕');
             });
 
             function sendFile(file, editor) {
@@ -74,11 +74,11 @@
     <script>
         function update_check(){
             var updateForm = document.updateForm;
-            let cb_title = $("#cb_title").val();
+            let nb_title = $("#nb_title").val();
 
-            if(cb_title == ""){
+            if(nb_title == ""){
                 alert("제목를 입력해주세요");
-                cb_title.focus();
+                nb_title.focus();
                 return false;
             };
 
@@ -105,16 +105,16 @@
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="cb_title" id="cb_title" maxlength='50' value="${board.cb_title}"></td>
-                        <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
+                        <td><input type="text" name="nb_title" id="nb_title" maxlength='50' value="${notice.nb_title}"></td>
+                        <td><input type="hidden" name="nb_seq" value="${notice.nb_seq}" ></td>
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td width="1000px" ><textarea name="cb_content" id="cb_content" ></textarea>
+                        <td width="1000px" ><textarea name="nb_content" id="nb_content" ></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <th>첨부파일</th> <td><input type="file" name="cb_attachedFile" >${cb_originFileName}</td>
+                        <th>첨부파일</th> <td><input type="file" name="nb_attachedFile" >${nb_originFileName}</td>
                     </tr>
                 </table>
                 <div style="margin: auto">
