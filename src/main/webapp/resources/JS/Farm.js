@@ -116,6 +116,7 @@ function fn_clcik2(number) {
 }
 
 $(document).ready(function () {
+
     var area0 = [
         "도 선택",
         "강원도",
