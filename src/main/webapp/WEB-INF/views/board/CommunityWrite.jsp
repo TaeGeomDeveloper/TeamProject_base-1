@@ -21,8 +21,15 @@
 
     <script>
         function writeform_check(){
-            var writeForm = document.writeForm;
+            let writeForm = document.writeForm;
+            let cb_id = $("#cb_id").val();
             let cb_title = $("#cb_title").val();
+
+            if(cb_id == ""){
+                alert("로그인을 해주세요");
+                cb_id.focus();
+                return false;
+            };
 
             if(cb_title == ""){
                 alert("제목를 입력해주세요");
@@ -71,8 +78,8 @@
                         </tr>
                         <tr>
                             <th>아이디</th>
-                            <td><input class="form-control" placeholder="ID" type="text" name="cb_id"
-                                       style="width: 25%"/>
+                            <td><input class="form-control" placeholder="ID" type="text" name="cb_id" id="cb_id"
+                                       value="${user.mi_id}" readonly="readonly" style="width: 25%"/>
                             </td>
                         </tr>
                         <tr>

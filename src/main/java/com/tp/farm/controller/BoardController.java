@@ -3,6 +3,7 @@ package com.tp.farm.controller;
 import com.tp.farm.service.BoardService;
 import com.tp.farm.service.ReplyService;
 import com.tp.farm.vo.BoardVO;
+import com.tp.farm.vo.MemberVO;
 import com.tp.farm.vo.ReplyVO;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -58,7 +60,7 @@ public class BoardController {
     }
     //게시글 내용 페이지 - 이영록
     @RequestMapping(value="/ReadBoard.do", method=RequestMethod.GET)
-    public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
         String cb_seq = request.getParameter("cb_seq");
         boolean flag = false;
@@ -72,7 +74,7 @@ public class BoardController {
     }
     //게시글 생성 페이지 - 이영록
     @RequestMapping(value="/CreateNewBoard.do", method={RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView CreateNewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView CreateNewBoard(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
         System.out.println("게시글 작성");
         ModelAndView mav = new ModelAndView();
         String viewName = this.getViewName(request);
@@ -122,7 +124,7 @@ public class BoardController {
         String cb_seq = request.getParameter("cb_seq");
         BoardVO board = boardService.readBoard(cb_seq);
         mav.addObject("board", board);
-        mav.setViewName("/board/updateTest");
+        mav.setViewName("/board/UpdateBoard");
         return mav;
     }
     @RequestMapping(value="/updateBoard.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -188,14 +190,6 @@ public class BoardController {
             System.out.println("reply 실패");
         }
         mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
-        return mav;
-    }
-
-    @RequestMapping(value="/viewWriteReReply.do", method={RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewWriteReReply(@ModelAttribute("info") ReplyVO reply, HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("reply", reply);
-        mav.setViewName("/board/ReadReplyTest");
         return mav;
     }
 

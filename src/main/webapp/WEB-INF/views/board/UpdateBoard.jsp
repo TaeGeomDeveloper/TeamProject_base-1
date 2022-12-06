@@ -105,7 +105,8 @@
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="cb_title" id="cb_title" maxlength='50' value="${board.cb_title}"></td>
+                        <td><input type="text" name="cb_title" id="cb_title" style="width: 80%;"
+                                   maxlength='50' value="${board.cb_title}"></td>
                         <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
                     </tr>
                     <tr>

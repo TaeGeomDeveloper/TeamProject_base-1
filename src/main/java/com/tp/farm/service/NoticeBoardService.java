@@ -111,7 +111,8 @@ public class NoticeBoardService {
         while((len=fis.read(buffer))!=-1) {
             os.write(buffer, 0, len);
         }
-        flag = noticeDAO.updateCount(nb_seq, token);
+        System.out.println("hi");
+        flag = noticeDAO.updateDownloadCount(nb_seq, token);
         os.close();
         fis.close();
         return flag;
@@ -139,6 +140,12 @@ public class NoticeBoardService {
     public boolean deleteBoard(String nb_seq) {
         boolean flag = false;
         flag = noticeDAO.deleteOne(nb_seq);
+        return flag;
+    }
+
+    public boolean readCount(String nb_seq) {
+        boolean flag = false;
+        flag = noticeDAO.updateViewCount(nb_seq);
         return flag;
     }
 }

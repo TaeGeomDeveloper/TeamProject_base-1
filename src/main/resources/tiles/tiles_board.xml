@@ -36,9 +36,9 @@
       <put-attribute name="body" value="/WEB-INF/views/board/ReadReplyTest.jsp" />
    </definition>
 
-   <definition name="/board/updateTest" extends="baseLayout">
+   <definition name="/board/UpdateBoard" extends="baseLayout">
       <put-attribute name="title" value="수정 페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/board/updateTest.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/board/UpdateBoard.jsp" />
    </definition>
 
    <definition name="/board/ReplyUpdate" extends="baseLayout">
