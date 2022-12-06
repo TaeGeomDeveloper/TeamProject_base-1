@@ -125,56 +125,6 @@ public class MemberController {
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
 
-    // 관리자 페이지
-    @RequestMapping(value = {"/Manager.do"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView membersInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        List<MemberVO> List = this.memberDAO.selectAllMemeber();
-        mav.addObject("List", List);
-        mav.setViewName("/member/Manager");
-        return mav;
-    }
-    // CSV 삽입
-    @RequestMapping(value = {"/InputCSV.do"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView csvService(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
-
-        String uploadFolder = "C:\\upload";
-        Iterator var6 = files.iterator();
-
-        while (var6.hasNext()) {
-            MultipartFile file = (MultipartFile) var6.next();
-            String originalName = file.getOriginalFilename();
-            String filePath = uploadFolder + "/" + originalName;
-            File dest = new File(filePath);
-            file.transferTo(dest);
-        }
-
-        csvService.insertDataTraditionalMarket();
-        csvService.insertDataFarmlandPrice();
-        csvService.insertCropData();
-
-        List<MemberVO> List = this.memberDAO.selectAllMemeber();
-        mav.addObject("List", List);
-        mav.setViewName("/member/Manager");
-        return mav;
-    }
-    // CSV 데이터 삭제
-    @RequestMapping(value = "/DeleteTraditionalMarket.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteTraditionalMarket() throws  Exception{
-        System.out.println("전국전통시장표준데이터_수정본 삭제");
-        csvService.deleteDataTraditionalMarket();
-    }
-    @RequestMapping(value = "/DeleteFarmlandPriceData.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteFarmlandPriceData() throws  Exception{
-        System.out.println("농지_시세_테이블 삭제");
-        csvService.deleteDataFarmlandPrice();
-    }
-    @RequestMapping(value = "/DeleteCropData.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public void DeleteCropData() throws  Exception{
-        System.out.println("농작물_자료조사표 삭제");
-        csvService.deleteCropData();
-    }
 
     // 로그아웃
     @RequestMapping(value = "/Logout.do", method = RequestMethod.GET)
@@ -309,7 +259,7 @@ public class MemberController {
             numStr += ran;
         }
         mailService.sendMail(mi_email, "gwinongin 비밀번호 찾기 인증번호", "회원님이 요청하신 비밀번호 인증번호 입니다." + "\n" + numStr);
-        System.out.println("findPwd certificated number " + numStr);
+        System.out.println("findPwd certificated email number " + numStr);
         return numStr;
     }
 
