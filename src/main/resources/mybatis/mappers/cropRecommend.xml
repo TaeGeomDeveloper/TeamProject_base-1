@@ -104,4 +104,12 @@
         ]]>
     </select>
 
+    <select id="selectFarmlandPrice" resultType="surveyInputVO" resultMap="farmLandResult">
+        <![CDATA[
+        select * from market_price_farmland
+        where mpf_locationName = #{msi_desiredArea}
+        and mpf_locationNameDetail like concat('%',#{msi_desiredAreaDetail}, '%');
+        ]]>
+    </select>
+
 </mapper>

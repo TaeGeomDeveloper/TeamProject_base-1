@@ -62,6 +62,16 @@ public class MemberController {
         return mav;
     }
 
+    // 비밀번호 변경 페이지
+    @RequestMapping(value = "/PwReset.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView PwReset(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        String viewName = this.getViewName(request);
+        viewName = "/member/PwReset";
+        mav.setViewName(viewName);
+        return mav;
+    }
+
     // 회원가입
     @RequestMapping(value = "/Register.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView Register(HttpServletRequest request, HttpServletResponse response) throws Exception {

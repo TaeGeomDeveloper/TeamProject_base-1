@@ -162,17 +162,13 @@
                 let result2 = cd_operatingCost * mso_holdingLand;
                 let result3 = cd_income * mso_holdingLand;
                 // $("#price1") = result1;
-                let lineTotal1 = $("input[name=price1]").attr("value", result1).val();
-                let lineTotal2 = $("input[name=price2]").attr("value", result2).val();
-                let lineTotal3 = $("input[name=price3]").attr("value", result3).val();
-                const linetotals =
-                    Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
-                //console.log(linetotals);
-                let subtotal = $("input[name=subtotal]").attr("value", linetotals);
-                // console.log(mpf_averagePrice);
-                // console.log(cd_operatingCost);
-                // console.log(cd_income);
-                console.log(mso_holdingLand);
+                let lineTotal1 = $("input[name=mso_landCost]").attr("value", result1).val();
+                let lineTotal2 = $("input[name=mso_managementExpenses]").attr("value", result2).val();
+                let lineTotal3 = $("input[name=mso_incomeCrops]").attr("value", result3).val();
+                const linetotal = Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
+
+                $("input[name=mso_finalIncome]").attr("value", linetotal);
+
             });
         });
     </script>
@@ -331,8 +327,6 @@
                                     <option value="3년이상">3년 이상</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농기계 및 설비 유무</p>
                                 <select class="form-select form-select mb-3" name="msi_hadMachinery"
@@ -341,16 +335,10 @@
                                     <option value="Y">충분</option>
                                 </select>
                             </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">자본금</p>
-                                <input class="form-control form-control" type="text" placeholder="자본금"
-                                       name="msi_capital" id="msi_capital">
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">토지크기 (ha)</p>
-                                <input class="form-control form-control" type="text" placeholder="토지크기"
-                                       name="msi_holdingLand" id="msi_holdingLand">
-                            </div>
+                            <input class="form-control form-control" type="hidden" placeholder="자본금"
+                                   name="msi_capital" id="msi_capital">
+                            <input class="form-control form-control" type="hidden" placeholder="토지크기"
+                                   name="msi_holdingLand" id="msi_holdingLand">
                         </div>
                         <hr class="featurette-divider">
                         <div align="center">
@@ -575,105 +563,92 @@
                                                      style="width:100%; max-width:600px; height:500px;"></div>
 
                                             </div>
+
                                             <%-- end of menu3 --%>
                                             <div>
                                                 <hr class="featurette-divider">
-                                                <h1> 최종 선택지 </h1>
+                                                <h1> 농작물 소득 계산기 </h1>
 
                                                 <form name="invoice form" action="saveToDatabase.java">
-                                                    <table border="1" height="30%" width="80%">
+                                                    <table border="2" height="30%" width="80%">
                                                         <tr>
-                                                            <td align="center" colspan="5">농작물 소득 계산기</td>
+                                                            <td align="center" colspan="3">농작물 소득 을 계산해줍니다.</td>
+                                                            <td style="text-align: right">
+                                                                <input class="form-control form-control" type="text" placeholder="자본금"
+                                                                       name="mso_capital">
+                                                            </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td width="5%" bgcolor="#CCCCCC">Sn.no.</td>
-                                                            <td width="25%" bgcolor="#CCCCCC">Item</td>
+                                                            <td width="25%" bgcolor="#f7adad">목록</td>
 
-                                                            <td width="25%" bgcolor="#CCCCCC">선택한 지역 및 작물에 따른 비용</td>
-                                                            <td width="20%" bgcolor="#CCCCCC">
-                                                                보유 중이거나 희망하는 농작지 면적(10a)
+                                                            <td width="25%" bgcolor="#f7adad">선택한 지역 과 작물에 따른 비용</td>
+                                                            <td width="20%" bgcolor="#f7adad">
+                                                                예상하는 농작지 면적(약 300평)
                                                             </td>
-                                                            <td width="25%" bgcolor="#CCCCCC">
-                                                                합계<br />(선택한 지역 및 작물에 따른 비용 * 보유 중이거나 희망하는
+                                                            <td width="25%" bgcolor="#f7adad">
+                                                                합계<br />(선택한 지역 및 작물에 따른 비용 * 예상하는
                                                                 농작지 면적(10a))
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td width="5%">1</td>
                                                             <td width="25%">땅 지출</td>
 
                                                             <td width="25%">
-                                                                <input type="text" value="13986" name="mpf_averagePrice" id="mpf_averagePrice"
-                                                                       size="4" disabled style="width: 100%"/>
+                                                                <input class="form-control form-control" type="text" name="mpf_averagePrice" id="mpf_averagePrice"
+                                                                       size="4" disabled/>
                                                             </td>
                                                             <td width="20%">
-                                                                <input style="width: 100%" type="text" id="mso_holdingLand" value="" size="2" />
+                                                                <input class="form-control form-control" type="text" id="mso_holdingLand" value="" size="2" name="mso_holdingLand"/>
                                                             </td>
                                                             <td width="25%">
-                                                                <input style="width: 100%" type="text" id="price1" name="price1" value="" size="4" />
+                                                                <input class="form-control form-control" type="text" id="mso_landCost" name="mso_landCost" value="" size="4" />
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td width="5%">2</td>
                                                             <td width="25%">경영비(10a) 지출</td>
 
                                                             <td width="25%">
-                                                                <input type="text" value="997529" id="cd_operatingCost"
-                                                                       size="4" disabled style="width: 100%"/>
+                                                                <input class="form-control form-control" type="text" id="cd_operatingCost" size="4" name="cd_operatingCost" disabled/>
                                                             </td>
                                                             <td width="20%">
                                                             </td>
                                                             <td width="25%">
-                                                                <input style="width: 100%" type="text" name="price2" id="price2" value="" size="4" />
+                                                                <input class="form-control form-control" type="text" name="mso_managementExpenses" id="mso_managementExpenses" value="" size="4" />
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td width="5%">3</td>
                                                             <td width="25%">작물 소득</td>
 
                                                             <td width="25%">
-                                                                <input type="text" value="1020740" id="cd_income"
-                                                                       size="4" disabled  style="width: 100%" />
+                                                                <input class="form-control form-control" type="text" id="cd_income" name="cd_income"
+                                                                       size="4" disabled/>
                                                             </td>
                                                             <td width="20%">
                                                             </td>
                                                             <td width="25%">
-                                                                <input style="width: 100%" type="text" name="price3" id="price3" value="" size="4" />
+                                                                <input class="form-control form-control" type="text" name="mso_incomeCrops" id="mso_incomeCrops" value="" size="4" />
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td align="right" colspan="5">
-                                                                Total <input type="text" name="subtotal" value="0" size="12" disabled/>
+                                                            <td align="right" colspan="4">
+                                                                Total <input type="text" name="mso_finalIncome" id="mso_finalIncome" value="" size="12" readonly/>
                                                             </td>
                                                         </tr>
                                                     </table>
 
-                                                    <br />
+                                                    <br/>
                                                     <input type="hidden" name="formatNumber" value="" />
                                                     <input type="hidden" name="unformatNumber" value="" />
-                                                    <br />
+                                                    <br/>
                                                 </form>
 
                                                 <input type="hidden" value="${user.mi_id}" name="mso_id">
-                                                <input class="form-control form-control" type="text" placeholder="작물이름"
-                                                       name="mso_cropName">
-                                                <input class="form-control form-control" type="text" placeholder="자본금"
-                                                       name="mso_capital">
-                                                <input class="form-control form-control" type="text" placeholder="보유중인토지"
-                                                       name="mso_holdingLand">
-                                                <input class="form-control form-control" type="text" placeholder="경영비"
-                                                       name="mso_managementExpenses">
-                                                <input class="form-control form-control" type="text" placeholder="농작물의 예상소득"
-                                                       name="mso_incomeCrops">
-                                                <input class="form-control form-control" type="text" placeholder="예상토지 비용"
-                                                       name="mso_landCost">
-                                                <input class="form-control form-control" type="text" placeholder="최종 예상소득"
-                                                       name="mso_finalIncome">
+                                                <div id="cropNameTitle"></div>
 
                                                 <hr class="featurette-divider" style="width: 90%">
                                             </div>

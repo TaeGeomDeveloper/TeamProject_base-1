@@ -15,11 +15,9 @@ package com.tp.farm.controller;
 import com.tp.farm.dao.CropRecDAO;
 import com.tp.farm.dao.SurveyInputDAO;
 import com.tp.farm.dao.SurveyOutputDAO;
-import com.tp.farm.vo.CropDataVO;
-import com.tp.farm.vo.MemberVO;
-import com.tp.farm.vo.SurveyInputVO;
+import com.tp.farm.service.CropRecService;
+import com.tp.farm.vo.*;
 
-import com.tp.farm.vo.SurveyOutputVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -136,7 +134,7 @@ public class CropRecController {
             System.out.println(surveyInput.toString());
         }
         System.out.println("작물 선택 절차");
-        surveyInputDAO.insertFarmInfo(surveyInput);
+        surveyInputDAO.insertSurveyInput(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
         List<CropDataVO> list = cropRecDAO.select(surveyInput);
@@ -145,6 +143,25 @@ public class CropRecController {
         return list;
     }
 
+    // 농지 시세 가져오기
+    @RequestMapping(value = "/MPF.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+    public List<FarmlandPriceVO> MPF(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+
+        if(surveyInput == null){
+            System.out.println("theres no VO founded");
+        } else {
+            System.out.println("VO ON");
+            System.out.println(surveyInput.toString());
+        }
+        System.out.println("농지 시세 리스트 받아오기");
+
+        List<FarmlandPriceVO> list = cropRecDAO.selectFarmlandPrice(surveyInput);
+        System.out.println("리스트 크기 : " + list.size());
+
+        return list;
+    }
+    
+    // 작물선택 아이디 체크
     @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
     public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
         boolean flag = false;
@@ -162,17 +179,26 @@ public class CropRecController {
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
 
-
     // 작물 선택 결과지 페이지
     @RequestMapping(value = "/FarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView FarmInfo(@ModelAttribute("info") SurveyOutputVO surveyOutput,HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+    public ModelAndView FarmInfo(@ModelAttribute("info") SurveyOutputVO surveyOutput,HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
         String viewName = this.getViewName(request);
-
+        System.out.println(surveyOutput.getMso_id());
         System.out.println(surveyOutput.getMso_cropName());
+        System.out.println(surveyOutput.getMso_capital());
+        System.out.println(surveyOutput.getMso_holdingLand());
+        System.out.println(surveyOutput.getMso_managementExpenses());
+        System.out.println(surveyOutput.getMso_incomeCrops());
+        System.out.println(surveyOutput.getMso_landCost());
+        System.out.println(surveyOutput.getMso_finalIncome());
 
-        // 회원 정보 / 아이디
-        MemberVO mem = (MemberVO) httpSession.getAttribute("user");
+        SurveyOutputVO vo = new SurveyOutputVO(surveyOutput.getMso_id(),surveyOutput.getMso_cropName(),surveyOutput.getMso_capital(),
+                surveyOutput.getMso_holdingLand(),surveyOutput.getMso_managementExpenses(),surveyOutput.getMso_incomeCrops(),
+                surveyOutput.getMso_landCost(),surveyOutput.getMso_finalIncome());
+
+        System.out.println("설문지 결과 작성");
+        surveyOutputDAO.insertOutputSurvey(vo);
 
         // 작물 이름
         //String cd_cropName = request.getParameter("cd_cropName");

@@ -13,7 +13,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-            <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 100px">작물 선택 결과지</h2>
+            <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 50px">작물 선택 결과지</h2>
 
 
 

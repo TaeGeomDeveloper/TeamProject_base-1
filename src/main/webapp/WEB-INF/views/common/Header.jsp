@@ -23,7 +23,7 @@
 <%--헤더--%>
 <section class="head">
     <header style="font-size: 60px">
-        Back To The Farm
+        gwinongin
     </header>
     <nav>
         <c:choose>
@@ -141,9 +141,13 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <c:choose>
+                        <c:when test="${user.mi_id == 'Test' || user.mi_id == 'admin'}">
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/member/Manager.do">관리자</a>
                     </li>
+                        </c:when>
+                    </c:choose>
                 </ul>
 
                 <form class="d-flex" role="search">

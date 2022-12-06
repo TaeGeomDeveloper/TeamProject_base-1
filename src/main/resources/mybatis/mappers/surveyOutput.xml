@@ -23,7 +23,7 @@
 
     <insert id="insertSurveyOutput"  parameterType="surveyOutputVO">
         <![CDATA[
-            insert into member_survey_input(mso_id, mso_cropName, mso_capital, mso_holdingLand, mso_managementExpenses,
+            insert into member_survey_output(mso_id, mso_cropName, mso_capital, mso_holdingLand, mso_managementExpenses,
                                             mso_incomeCrops, mso_landCost, mso_finalIncome)
             values (#{mso_id}, #{mso_cropName}, #{mso_capital}, #{mso_holdingLand}, #{mso_managementExpenses},
                     #{mso_incomeCrops}, #{mso_landCost}, #{mso_finalIncome})

@@ -18,7 +18,7 @@
     <script>
         $(document).ready(function () {
             $('#table_i').DataTable({
-                order: [ [ 0, "desc" ] ]
+                order: [[0, "desc"]]
             });
         });
     </script>
@@ -74,14 +74,22 @@
                         <td>${vo.cb_regDate}</td>
                         <td>${vo.cb_viewCount}</td>
                         <td>
-                            <a href="Update.do?id=${vo.cb_id}">
-                                <button class="button3">변경</button>
-                            </a>
+                            <c:choose>
+                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
+                                    <a href="Update.do?id=${vo.cb_id}">
+                                        <button class="button3">변경</button>
+                                    </a>
+                                </c:when>
+                            </c:choose>
                         </td>
                         <td>
-                            <a href="delete.do?cb_seq=${vo.cb_seq}">
-                                <button class="button3">삭제</button>
-                            </a>
+                            <c:choose>
+                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
+                                    <a href="delete.do?cb_seq=${vo.cb_seq}">
+                                        <button class="button3">삭제</button>
+                                    </a>
+                                </c:when>
+                            </c:choose>
                         </td>
                         <td>
                             <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
@@ -94,7 +102,8 @@
                 <tfoot>
                 <tr>
                     <th>글번호</th>
-                    <th>제목</th>
+                    <th>분류</th>
+                    <th style="width: 40%">제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
                     <th>조회수</th>
