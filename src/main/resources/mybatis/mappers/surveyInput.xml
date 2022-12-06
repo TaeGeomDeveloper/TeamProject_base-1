@@ -19,8 +19,6 @@
         <result property="msi_cultivationMethod" column="msi_cultivationMethod" />
         <result property="msi_farmingExperience" column="msi_farmingExperience" />
         <result property="msi_hadMachinery" column="msi_hadMachinery" />
-        <result property="msi_capital" column="msi_capital" />
-        <result property="msi_holdingLand" column="msi_holdingLand" />
     </resultMap>
 
     <select id="selectSurveyInput">
@@ -41,19 +39,12 @@
         ]]>
     </insert>
 
-    <select id="checkId" resultType="int">
-        <![CDATA[
-        select count(*) from member_survey_input
-        where
-            msi_id = #{msi_id}
-        ]]>
-    </select>
-
     <delete id="deleteSurveyInput" parameterType="String">
         <![CDATA[
             delete from member_survey_input where msi_id = #{msi_id}
         ]]>
     </delete>
+
 
     <select id="selectOne" resultType="surveyInputVO" parameterType="String" >
       <![CDATA[

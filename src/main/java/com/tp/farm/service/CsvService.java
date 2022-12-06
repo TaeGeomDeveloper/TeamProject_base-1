@@ -76,7 +76,7 @@ public class CsvService {
 
     public ArrayList<CropDataVO> getCropData() throws IOException{
         ArrayList<CropDataVO> list = new ArrayList<>();
-        File file = new File("C:/Upload/농작물_자료조사표_상중하_수정.csv");
+        File file = new File("C:/Upload/농작물_자료조사표.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;

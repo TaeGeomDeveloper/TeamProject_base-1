@@ -63,8 +63,8 @@
     <select id="updateReply" parameterType="replyVO">
         <![CDATA[
             update community_board_reply
-            set cbr_content=#{cbr_content}, cbr_regDate=#{cbr_regDate}
-            where cbr_seq=#{cbr_seq}
+            set cbr_content=#{cbr_content}, cbr_regDate=now()
+            where cb_seq=#{cb_seq} and cbr_seq=#{cbr_seq}
         ]]>
     </select>
 

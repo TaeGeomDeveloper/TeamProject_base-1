@@ -18,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /*
         작성자 : 이영록
@@ -202,11 +199,12 @@ public class BoardController {
         return mav;
     }
 
-    @RequestMapping(value="/writeReReply.do", method={RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView writeReReply(@ModelAttribute("info") ReplyVO reply, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value="/writeReReply.do", method={RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+    public ModelAndView writeReReply(@RequestBody ReplyVO reply, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
         boolean flag = false;
-        System.out.println(reply.getCb_seq());
+        System.out.println("hi");
+        System.out.println(reply);
         flag = replyService.writeReReply(reply);
         if(flag) {
             System.out.println("ReReply 성공");
@@ -235,7 +233,12 @@ public class BoardController {
     @RequestMapping(value="/updateReply.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateReply(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-
+        ReplyVO reply = new ReplyVO();
+        reply.setCb_seq(Integer.parseInt(request.getParameter("cb_seq")));
+        reply.setCbr_seq(Integer.parseInt(request.getParameter("cbr_seq")));
+        reply.setCbr_content(request.getParameter("cbr_content"));
+        boolean flag = replyService.updateReplyContent(reply);
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
         return mav;
     }
 

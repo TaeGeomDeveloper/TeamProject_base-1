@@ -62,16 +62,6 @@ public class MemberController {
         return mav;
     }
 
-    // 비밀번호 변경 페이지
-    @RequestMapping(value = "/PwReset.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView PwReset(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView();
-        String viewName = this.getViewName(request);
-        viewName = "/member/PwReset";
-        mav.setViewName(viewName);
-        return mav;
-    }
-
     // 회원가입
     @RequestMapping(value = "/Register.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView Register(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -197,6 +187,19 @@ public class MemberController {
         return mav;
     }
 
+    // 비밀번호 변경 페이지
+    @RequestMapping(value = "/PwReset.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView PwReset(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        String viewName = this.getViewName(request);
+        String mi_id = request.getParameter("mi_id");
+        MemberVO member = memberDAO.selectOneMember(mi_id);
+        mav.addObject("member", member);
+        viewName = "/member/PwReset";
+        mav.setViewName(viewName);
+        return mav;
+    }
+
     //내 정보 버튼 클릭 시 해당 회원 개인정보 리스트 출력
     @RequestMapping(value = "/ReadInfo.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView readInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -235,12 +238,11 @@ public class MemberController {
         return mav;
     }
 
-   
-
-    // 비빌번호 찾기
+    // 비빌번호 찾기 시 회원 체크
     @RequestMapping(value = "/findPwd.do", method = {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<String> findPwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
         boolean flag = false;
+        Random rand = new Random();
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String mi_id = request.getParameter("mi_id");
@@ -248,14 +250,15 @@ public class MemberController {
         System.out.println("mi_id : " + mi_id);
         System.out.println("mi_email : " + mi_email);
         MemberVO member = memberDAO.findPwd(mi_id, mi_email);
+        String numStr = "";
+        for (int i = 0; i < 6; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr += ran;
+        }
         if (member != null) {
             flag = true;
-            String mi_password = member.getMi_password();
-            System.out.println(mi_password + "find pwd success");
-            mailService.sendMail(mi_email, "회원님이 요청하신 비밀번호 찾기입니다.", mi_id + " password is " + mi_password);
-            mailService.sendMail(mi_email, "gwinongin find password", mi_id + " password is" + mi_password + ".");
         }
-        System.out.println("findPwd status --->" + flag);
+        System.out.println("findPwd is member? --->" + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
 
@@ -272,7 +275,7 @@ public class MemberController {
         return result;
     }
 
-    // 아이디 체크
+    // 아이디 중복 체크
     @RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
     public ResponseEntity<String> idCheck(@RequestParam("mi_id") String mi_id) {
         boolean flag = false;
@@ -282,6 +285,32 @@ public class MemberController {
             flag = true;
         }
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
+    }
+
+    // 휴대전화 중복 체크
+    @RequestMapping(value = "/phoneCheck.do", method = RequestMethod.GET)
+    public ResponseEntity<String> phoneCheck(@RequestParam("mi_phone") String mi_phone) {
+        boolean flag = false;
+        System.out.println("phoneCheck : " + mi_phone);
+        flag = memberService.isMemberPhone(mi_phone);
+        if (mi_phone == "") {
+            flag = true;
+        }
+        return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
+    }
+
+    // 비밀 번호 찾기 시 이메일 인증번호 발송
+    @RequestMapping(value = "/sendEmail.do", method = {RequestMethod.POST, RequestMethod.GET})
+    public String sendEmail(String mi_email) {
+        Random rand = new Random();
+        String numStr = "";
+        for (int i = 0; i < 6; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr += ran;
+        }
+        mailService.sendMail(mi_email, "gwinongin 비밀번호 찾기 인증번호", "회원님이 요청하신 비밀번호 인증번호 입니다." + "\n" + numStr);
+        System.out.println("findPwd certificated number " + numStr);
+        return numStr;
     }
 
     // 문자 전송
@@ -299,6 +328,17 @@ public class MemberController {
         System.out.println("회원가입 문자 인증 => " + numStr);
         message.sendSMS(to, numStr);
         return numStr;
+    }
+
+    //비밀번호 변경
+    @RequestMapping(value = "/changePwd.do", method = RequestMethod.POST)
+    public ModelAndView changePwd(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        String mi_password = request.getParameter("mi_password");
+        String mi_id = request.getParameter("mi_id");
+        memberDAO.changePwd(mi_password, mi_id);
+        mav.setViewName("redirect:/member/Login.do");
+        return mav;
     }
 
     // View 처리

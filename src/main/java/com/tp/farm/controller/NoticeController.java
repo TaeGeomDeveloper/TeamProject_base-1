@@ -3,7 +3,7 @@ package com.tp.farm.controller;
 import com.tp.farm.service.BoardService;
 import com.tp.farm.service.NoticeBoardService;
 import com.tp.farm.service.ReplyService;
-import com.tp.farm.vo.BoardVO;
+import com.tp.farm.vo.NoticeVO;
 import com.tp.farm.vo.ReplyVO;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
@@ -55,7 +55,7 @@ public class NoticeController {
     public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("공지사항 리스트 ");
         ModelAndView mav = new ModelAndView();
-        List<BoardVO> list = noticeBoardService.selectAllBoard();
+        List<NoticeVO> list = noticeBoardService.selectAllBoard();
         mav.addObject("list", list);
         mav.setViewName("/notice/Notice");
         return mav;
@@ -65,10 +65,10 @@ public class NoticeController {
     public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
 
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         boolean flag = false;
-        BoardVO board = noticeBoardService.readBoard(seq);
-        mav.addObject("board", board);
+        NoticeVO notice = noticeBoardService.readBoard(nb_seq);
+        mav.addObject("notice", notice);
         mav.setViewName("/notice/NoticeRead");
         return mav;
     }
@@ -84,15 +84,15 @@ public class NoticeController {
     }
     //공지사항 생성 실행 주소(20221101수정판) - 이영록, 윤태검
     @RequestMapping(value="/createBoard.do", method={RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView createBoard(@RequestParam("cb_attachedFile") MultipartFile attachFile , HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView createBoard(@RequestParam("nb_attachedFile") MultipartFile attachFile , HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        BoardVO board = new BoardVO();
+        NoticeVO notice = new NoticeVO();
         boolean flag = false;
-        board.setCb_id(request.getParameter("cb_id"));
-        board.setCb_title(request.getParameter("cb_title"));
-        board.setCb_content(request.getParameter("cb_content"));
+        notice.setNb_id(request.getParameter("nb_id"));
+        notice.setNb_title(request.getParameter("nb_title"));
+        notice.setNb_content(request.getParameter("nb_content"));
         try {
-            flag = noticeBoardService.createBoard(board, attachFile);
+            flag = noticeBoardService.createBoard(notice, attachFile);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -106,10 +106,10 @@ public class NoticeController {
     @RequestMapping(value="/download.do", method=RequestMethod.GET)
     public ModelAndView download(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         String token = request.getParameter("token");
         try {
-            boolean flag = noticeBoardService.boardDownload(response, seq, token);
+            boolean flag = noticeBoardService.boardDownload(response, nb_seq, token);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -120,57 +120,43 @@ public class NoticeController {
     @RequestMapping(value="/viewUpdatePage.do", method=RequestMethod.GET)
     public ModelAndView viewUpdate(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
-        mav.addObject("seq", seq);
-        mav.setViewName("updateTest");
+        String nb_seq = request.getParameter("nb_seq");
+        NoticeVO notice = noticeBoardService.readBoard(nb_seq);
+        mav.addObject("notice", notice);
+        mav.setViewName("/notice/NoticeUpdate");
         return mav;
     }
     @RequestMapping(value="/updateBoard.do", method={RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView updateBoard(@RequestParam("cb_attachedFile") MultipartFile attachFile, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView updateBoard(@RequestParam("nb_attachedFile") MultipartFile attachFile, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        BoardVO board = new BoardVO();
+        NoticeVO notice = new NoticeVO();
         boolean flag = false;
-        board.setCb_seq(Integer.parseInt(request.getParameter("cb_seq")));
-        board.setCb_title(request.getParameter("cb_title"));
-        board.setCb_content(request.getParameter("cb_content"));
+        notice.setNb_seq(Integer.parseInt(request.getParameter("nb_seq")));
+        notice.setNb_title(request.getParameter("nb_title"));
+        notice.setNb_content(request.getParameter("nb_content"));
         try {
-            flag = noticeBoardService.updateBoard(board, attachFile);
+            flag = noticeBoardService.updateBoard(notice, attachFile);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         if(flag) {
             System.out.println("게시글 생성 완료");
         }
-        mav.setViewName("redirect:./ReadBoard.do?cb_seq=" + board.getCb_seq());
+        mav.setViewName("redirect:./ReadBoard.do?nb_seq=" + notice.getNb_seq());
         return mav;
     }
 
     @RequestMapping(value="/delete.do", method=RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String nb_seq = request.getParameter("nb_seq");
         boolean flag = false;
-        flag = noticeBoardService.deleteBoard(seq);
+        flag = noticeBoardService.deleteBoard(nb_seq);
         if(flag) {
             System.out.println("delete 완료");
         }
         mav.setViewName("redirect:./BoardList.do");
         return mav;
-    }
-
-    @RequestMapping(value="summerimages.do", method=RequestMethod.POST)
-    public ResponseEntity<?> summerimage(@RequestParam("file") MultipartFile img, HttpServletRequest request) throws IOException {
-        String path =  request.getSession().getServletContext().getRealPath("resources/upload");
-        //이미지 파일명 변경
-        Random random = new Random();
-        long currentTime = System.currentTimeMillis();
-        int   randomValue = random.nextInt(100);
-        String imgName = img.getOriginalFilename();
-        String fileName = Long.toString(currentTime) + "-" + UUID.randomUUID().toString().substring(0,13) + imgName.substring(imgName.lastIndexOf("."));
-        //업로드
-        File file = new File(path , fileName);
-        img.transferTo(file);
-        return ResponseEntity.ok().body("/gwinongin/resources/upload/"+fileName);
     }
 
     private String getViewName(HttpServletRequest request) throws Exception {

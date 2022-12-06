@@ -160,7 +160,7 @@ public class CropRecController {
 
         return list;
     }
-    
+
     // 작물선택 아이디 체크
     @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
     public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
@@ -178,6 +178,7 @@ public class CropRecController {
 //        System.out.println("controller flag " + flag);
         return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
     }
+
 
     // 작물 선택 결과지 페이지
     @RequestMapping(value = "/FarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})

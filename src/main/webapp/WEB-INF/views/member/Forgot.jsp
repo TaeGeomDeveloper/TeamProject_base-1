@@ -75,14 +75,33 @@
                             $("#floatingInputID").val('');
                             $("#floatingInputEmail").val('');
                         } else {
-                            Find.method = "post";
-                            Find.action = "${contextPath}/member/Login.do";
-                            Find.submit();
-                            alert("등록된 이메일로 비밀번호를 발송했습니다.");
+                            $.ajax({
+                                type: "POST",
+                                url: "${contextPath}/member/sendEmail.do",
+                                data: {mi_email : email},
+                                cache: false,
+                                success: function (data){
+                                    alert("등록된 이메일로 인증번호를 발송했습니다.");
+                                    code2 = data;
+                                }
+                            });
+
                         }
                     },
                     error: function (data, status) {
                         alert(status);
+                    }
+                });
+                $("#checkQualifiedNumber").click(function () {
+                    const validate = document.getElementById("validate")
+                    let authNum = $("#authNum").val();
+                    if (authNum == code2) {
+                        alert("인증 성공");
+                        Find.method= "post";
+                        Find.action = "${contextPath}/member/PwReset.do";
+                        Find.submit();
+                    } else {
+                        alert("인증 실패");
                     }
                 });
             });

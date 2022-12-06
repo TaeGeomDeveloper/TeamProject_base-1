@@ -7,6 +7,7 @@
 
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Main</title>
@@ -18,6 +19,7 @@
             var replyForm = document.replyForm;
             let cbr_replyId = $("#cbr_replyId").val();
             let cbr_content = $("#cbr_content").val();
+
             if(cbr_replyId == ""){
                 alert("로그인이 필요합니다");
                 console.log(cbr_replyId);
@@ -39,10 +41,14 @@
 
     <!-- 대댓글등록 button -->
     <script>
-        function reReplyForm_check(){
-            var reReplyForm = document.reReplyForm;
-            let cbr_reReplyId = $("#cbr_reReplyId").val();
-            let cbr_reContent = $("#cbr_reContent").val();
+        function reReplyForm_check(bundleSeq){
+            let reReplyForm = document.reReplyForm;
+            let number = bundleSeq;
+            let cb_seq = $('#cb_reSeq' + number).val();
+            let cbr_currentSeq = $('#cbr_reCurrentSeq' + number).val();
+            let cbr_reReplyId = $('#cbr_reReplyId' + number).val();
+            let cbr_reContent = $('#cbr_reContent' + number).val();
+
             if(cbr_reReplyId == ""){
                 alert("로그인이 필요합니다");
                 cbr_reReplyId.focus();
@@ -55,9 +61,31 @@
                 return false;
             };
 
-            reReplyForm.method = "post";
-            reReplyForm.action = "./writeReReply.do";
-            reReplyForm.submit();
+            let param = {
+                "cbr_replyId" : cbr_reReplyId,
+                "cbr_content" : cbr_reContent,
+                "cb_seq" : cb_seq,
+                "cbr_currentSeq" : cbr_currentSeq,
+                "cbr_bundleSeq" : number
+            }
+
+            $.ajax({
+                anyne: true,
+                type: 'POST',
+                data: JSON.stringify(param),
+                url:"${contextPath}/board/writeReReply.do",
+                contentType: "application/json; charset=UTF-8",
+                dataType: "text",
+                success : function(data) {
+                    // alert("성공");
+                    location.href="${contextPath}/board/ReadBoard.do?cb_seq=" + cb_seq;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(this.data);
+                    alert("ERROR : " + textStatus + " : " + errorThrown);
+                }
+            });
+            // $("#reReplyForm").attr("action","writeReReply.do").submit();
         }
     </script>
 
@@ -116,7 +144,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; text-align: left">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; padding: 20px; text-align: left">
                 ${board.cb_content}
             </div>
 
@@ -182,7 +210,7 @@
                                                                     </td>
                                                                     <td>
                                                                     <td>
-                                                                    <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}&cbr_bundleSeq=${reply.cbr_bundleSeq}&cbr_currentSeq=${reply.cbr_currentSeq}">
+                                                                    <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${Rereply.cbr_seq}&cbr_bundleSeq=${Rereply.cbr_bundleSeq}&cbr_currentSeq=${Rereply.cbr_currentSeq}">
                                                                         <button class="button3">삭제</button></a></td>
                                                                     </td>
                                                                 </tr>
@@ -190,6 +218,7 @@
                                                                     <td colspan="7"
                                                                         style="height: 100px">${Rereply.cbr_content}</td>
                                                                 </tr>
+                                                                <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                                             </c:when>
                                                         </c:choose>
                                                     </c:forEach>
@@ -197,33 +226,34 @@
                                             </div>
                                             <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                             <div class="${reply.cbr_bundleSeq}" style="display: none; align-content: center">
-                                                <form name="reReplyForm" method="post">
+                                                <form name="reReplyForm" id="reReplyForm" >
                                                     <table>
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId" id="cbr_reReplyId" style="width: 150px"/></td>
+                                                                       name="cbr_replyId${reply.cbr_bundleSeq}" id="cbr_reReplyId${reply.cbr_bundleSeq}" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
                                                             <td><textarea class="form-control"
-                                                                          id="cbr_reContent"
+                                                                          id="cbr_reContent${reply.cbr_bundleSeq}"
                                                                           style="height: 100px; width: 600px"
-                                                                          name="cbr_content"></textarea></td>
+                                                                          name="cbr_content${reply.cbr_bundleSeq}"></textarea></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type="hidden" name="cb_seq"
+                                                            <td><input type="hidden" name="cb_seq${reply.cbr_bundleSeq}"
+                                                                       id="cb_reSeq${reply.cbr_bundleSeq}"
                                                                        value="${reply.cb_seq}"></td>
-                                                            <td><input type="text" name="cbr_bundleSeq"
+                                                            <td><input type="text" name="cbr_bundleSeq${reply.cbr_bundleSeq}"
                                                                        value="${reply.cbr_bundleSeq}"/></td>
-                                                            <td><input type="text" name="cbr_currentSeq"
+                                                            <td><input type="text" name="cbr_currentSeq${reply.cbr_bundleSeq}"
+                                                                       id="cbr_reCurrentSeq${reply.cbr_bundleSeq}"
                                                                        value="${reply.cbr_currentSeq}"/></td>
                                                         </tr>
                                                     </table>
-                                                    <button class="button2" type="button" onclick="reReplyForm_check()" >수정하기</button>
+                                                    <button class="button2" type="button" onclick="reReplyForm_check(${reply.cbr_bundleSeq})" >수정하기</button>
                                                 </form>
                                             </div>
-
                                         </div>
                                     </td>
                                 </tr>

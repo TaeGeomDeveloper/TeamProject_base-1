@@ -98,4 +98,25 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+
+    public boolean isSamePhone(String phone) {
+		boolean flag = false;
+		int affectedCount = sqlSession.selectOne("mapper.member.selectPhone", phone);
+		if(affectedCount>0){
+			flag = true;
+		}
+		return flag;
+    }
+
+    public boolean changePwd(String mi_password, String mi_id) {
+		boolean flag = false;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mi_password", mi_password);
+		map.put("mi_id", mi_id);
+		int affectedCount = sqlSession.update("mapper.member.updateMemberPwd", map);
+		if(affectedCount>0){
+			flag = true;
+		}
+		return flag;
+    }
 }
