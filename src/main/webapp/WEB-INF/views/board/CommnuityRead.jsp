@@ -117,14 +117,17 @@
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-success">
-                        <th scope="col" style="width: 5%">번호</th>
-                        <th scope="col" style="width: 35%">제목</th>
-                        <th scope="col" style="width: 10%">작성자</th>
-                        <th scope="col" style="width: 15%">등록일</th>
-                        <th scope="col" style="width: 5%">조회수</th>
-                        <th scope="col" style="width: 10%">첨부파일</th>
-                        <th scope="col" style="width: 10%">다운 횟수</th>
-                        <th scope="col" style="width: 10%">수정</th>
+                        <th scope="col" >번호</th>
+                        <th scope="col" >제목</th>
+                        <th scope="col" >작성자</th>
+                        <th scope="col" >등록일</th>
+                        <th scope="col" >조회수</th>
+                        <th scope="col" >첨부파일</th>
+                        <th scope="col" >다운 횟수</th>
+                        <c:if test="${user.mi_id==board.cb_id}">
+                            <th scope="col" >수정</th>
+                            <th scope="col" >삭제</th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -137,9 +140,14 @@
                         <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">
                             ${board.cb_originFileName}</a></td>
                         <td>${board.cb_downloadCount}</td>
-                        <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">
-                            <button class="button3">수정</button>
-                        </a></td>
+                        <c:if test="${user.mi_id==board.cb_id}">
+                            <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">
+                                <button class="button3">수정</button>
+                            </a></td>
+                            <td><a href="delete.do?cb_seq=${vo.cb_seq}">
+                                <button class="button3">삭제</button>
+                            </a></td>
+                        </c:if>
                     </tr>
                     </tbody>
                 </table>
@@ -153,13 +161,12 @@
                 <table class="table align-middle" style="margin-top: 30px; border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-warning">
-                        <th scope="col" style="width: 10%">글번호</th>
-                        <th scope="col" style="width: 30%">작성자</th>
-                        <th scope="col" style="width: 10%">번들Seq</th>
-                        <th scope="col" style="width: 10%">현재Seq</th>
-                        <th scope="col" style="width: 20%">작성일</th>
-                        <th scope="col" style="width: 10%">수정</th>
-                        <th scope="col" style="width: 10%">삭제</th>
+                        <th scope="col" style="width: 10%">댓글번호</th>
+                        <th scope="col" style="width: 10%">작성자</th>
+                        <th scope="col" style="width: 50%">내용</th>
+                        <th scope="col" style="width: 10%">작성일</th>
+                        <th scope="col" style="width: 10%"></th>
+                        <th scope="col" style="width: 10%"></th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -169,55 +176,66 @@
                                 <tr>
                                     <td>${reply.cbr_seq}</td>
                                     <td>${reply.cbr_replyId}</td>
-                                    <td>${reply.cbr_bundleSeq}</td>
-                                    <td>${reply.cbr_currentSeq}</td>
+                                    <td style="height: 100%"; align="left";>${reply.cbr_content}</td>
                                     <td>${reply.cbr_regDate}</td>
-                                    <td>
-                                        <a href="viewUpdateReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}">
-                                            <button class="button3">수정</button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}&cbr_bundleSeq=${reply.cbr_bundleSeq}&cbr_currentSeq=${reply.cbr_currentSeq}">
-                                            <button class="button3">삭제</button></a></td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="7" style="height: 100px">${reply.cbr_content}</td>
+                                    <c:choose>
+                                        <c:when test="${user.mi_id==reply.cbr_replyId}">
+                                            <td>
+                                                <a href="viewUpdateReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}">
+                                                    <button class="button3">수정</button>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${reply.cbr_seq}&cbr_bundleSeq=${reply.cbr_bundleSeq}&cbr_currentSeq=${reply.cbr_currentSeq}">
+                                                    <button class="button3">삭제</button></a></td>
+                                            </td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td></td>
+                                            <td></td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                                 <tr>
                                     <td colspan="7">
-                                        <button class="button" onclick="fn_click(${reply.cbr_bundleSeq})">답글</button>
+                                        <button class="button" onclick="fn_click(${reply.cbr_bundleSeq})" style="float: left;">답글</button>
                                         <div id="${reply.cbr_bundleSeq}"
                                              style="display: none; background-color: lightgray">
                                             <div>
-                                                <table style="width: 100%">
+                                                <table id="reReplyTable" style="width: 100%;" >
                                                     <c:forEach var="Rereply" items="${replyList}">
                                                         <c:choose>
                                                             <c:when test="${Rereply.cbr_currentSeq != 1 && Rereply.cbr_currentSeq != 0 && reply.cbr_bundleSeq == Rereply.cbr_bundleSeq}">
                                                                 <tr>
-                                                                    <td>${Rereply.cbr_seq}</td>
-                                                                    <td>${Rereply.cbr_replyId}</td>
-                                                                    <td>
-                                                                        <a href="viewWriteReReply.do?cb_seq=${board.cb_seq}&cbr_bundleSeq=${Rereply.cbr_bundleSeq}&cbr_currentSeq=${Rereply.cbr_currentSeq}">${reply.cbr_bundleSeq}</a>
-                                                                    </td>
-                                                                    <td>${Rereply.cbr_currentSeq}</td>
-                                                                    <td>${Rereply.cbr_regDate}</td>
-                                                                    <td>
-                                                                        <a href="viewUpdateReply.do?cb_seq=${Rereply.cb_seq}&cbr_seq=${Rereply.cbr_seq}">
-                                                                            <button class="button3">수정</button>
-                                                                        </a>
-                                                                    </td>
-                                                                    <td>
-                                                                    <td>
-                                                                    <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${Rereply.cbr_seq}&cbr_bundleSeq=${Rereply.cbr_bundleSeq}&cbr_currentSeq=${Rereply.cbr_currentSeq}">
-                                                                        <button class="button3">삭제</button></a></td>
-                                                                    </td>
+                                                                    <td style="width: 5%;" >${Rereply.cbr_seq}</td>
+                                                                    <td style="width: 10%;" >${Rereply.cbr_replyId}</td>
+                                                                    <td colspan="7" style="width: 55%; height: 100px; border: 1px solid black">${Rereply.cbr_content}</td>
+                                                                    <td style="width: 10%;" >${Rereply.cbr_regDate}</td>
+                                                                    <c:choose>
+                                                                        <c:when test="${user.mi_id==Rereply.cbr_replyId}">
+                                                                            <td>
+                                                                                <a href="viewUpdateReply.do?cb_seq=${Rereply.cb_seq}&cbr_seq=${Rereply.cbr_seq}">
+                                                                                    <button class="button3">수정</button>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="deleteReply.do?cb_seq=${reply.cb_seq}&cbr_seq=${Rereply.cbr_seq}&cbr_bundleSeq=${Rereply.cbr_bundleSeq}&cbr_currentSeq=${Rereply.cbr_currentSeq}">
+                                                                                    <button class="button3">삭제</button></a></td>
+                                                                            </td>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <td style="width: 5%;"></td>
+                                                                            <td style="width: 5%;"></td>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </tr>
+<<<<<<< HEAD
+=======
                                                                 <tr>
                                                                     <td colspan="7"
                                                                         style="height: 100px">${Rereply.cbr_content}</td>
                                                                 </tr>
+>>>>>>> b220ee658674e0a7e7142b7bc0c682cbd7e1c1ec
                                                             </c:when>
                                                         </c:choose>
                                                     </c:forEach>
@@ -230,7 +248,8 @@
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId${reply.cbr_bundleSeq}" id="cbr_reReplyId${reply.cbr_bundleSeq}" style="width: 150px"/></td>
+                                                                       name="cbr_replyId${reply.cbr_bundleSeq}" id="cbr_reReplyId${reply.cbr_bundleSeq}"
+                                                                       value="${user.mi_id}" readonly="readonly" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
@@ -242,15 +261,15 @@
                                                         <tr>
                                                             <td><input type="hidden" name="cb_seq${reply.cbr_bundleSeq}"
                                                                        id="cb_reSeq${reply.cbr_bundleSeq}"
-                                                                       value="${reply.cb_seq}"></td>
-                                                            <td><input type="text" name="cbr_bundleSeq${reply.cbr_bundleSeq}"
-                                                                       value="${reply.cbr_bundleSeq}"/></td>
-                                                            <td><input type="text" name="cbr_currentSeq${reply.cbr_bundleSeq}"
+                                                                       readonly="readonly" value="${reply.cb_seq}"></td>
+                                                            <td><input type="hidden" name="cbr_bundleSeq${reply.cbr_bundleSeq}"
+                                                                       readonly="readonly" value="${reply.cbr_bundleSeq}"/></td>
+                                                            <td><input type="hidden" name="cbr_currentSeq${reply.cbr_bundleSeq}"
                                                                        id="cbr_reCurrentSeq${reply.cbr_bundleSeq}"
-                                                                       value="${reply.cbr_currentSeq}"/></td>
+                                                                       readonly="readonly" value="${reply.cbr_currentSeq}"/></td>
                                                         </tr>
                                                     </table>
-                                                    <button class="button2" type="button" onclick="reReplyForm_check(${reply.cbr_bundleSeq})" >수정하기</button>
+                                                    <button class="button2" type="button" onclick="reReplyForm_check(${reply.cbr_bundleSeq})" >댓글등록</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -267,7 +286,8 @@
                 <table style="margin-bottom: 30px">
                     <tr>
                         <th>아이디</th>
-                        <td><input class="form-control" type="text" name="cbr_replyId" id="cbr_replyId" style="width: 150px"/></td>
+                        <td><input class="form-control" type="text" name="cbr_replyId" id="cbr_replyId"
+                                   value="${user.mi_id}" readonly="readonly" style="width: 150px"/></td>
                     </tr>
                     <tr>
                         <th>댓글</th>
