@@ -57,8 +57,8 @@
     </script>
 
     <script>
-        $(document).ready(function (){
-            $("#fn_find_pwd").on('click',function (event) {
+        $(document).ready(function () {
+            $("#fn_find_pwd").on('click', function (event) {
                 var Find = document.Find;
 
                 let id = $("#floatingInputID").val();
@@ -68,7 +68,7 @@
                 $.ajax({
                     url: "${contextPath}/member/findPwd.do",
                     type: "POST",
-                    data:{mi_id: id, mi_email: email},
+                    data: {mi_id: id, mi_email: email},
                     success: function (data, status) {
                         if (data == "false") {
                             alert("아이디 또는 이메일을 잘못 입력하셨습니다.")
@@ -103,7 +103,7 @@
                     } else {
                         alert("인증 실패");
                     }
-                })
+                });
             });
         });
     </script>
@@ -191,9 +191,6 @@
                                 <input type="button" value="확인" class="button" id="checkQualifiedNumber">
                                 <label for="authNum"></label>
                             </td>
-                        </tr>
-                        <tr>
-
                         </tr>
                     </table>
                 </div>

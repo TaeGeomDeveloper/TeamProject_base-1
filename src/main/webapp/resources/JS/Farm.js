@@ -50,6 +50,7 @@ function FarmInfo(map) {
         $('#Fruit_Title').html(cropName);
         $('#SmallInfo').html(map.cd_basicInformation);
         document.getElementById("FruitPic").innerHTML = "<img src=\"/gwinongin/resources/image/FV/" + map.cd_idx + ".jpg\" width=\"300px\" height=\"300px\" style=\"border-radius: 20px\" >";
+        document.getElementById("cropNameTitle").innerHTML = "<input type=\"hidden\" value=\""+map.cd_cropName+"\" name=\"mso_cropName\">";
 
         // 상세 정보
         $('#nutrition').html(map.cd_nutritionEfficacy);
@@ -60,6 +61,10 @@ function FarmInfo(map) {
         $('#cd_marketValue').html(map.cd_marketValue+" 원");
         $('#cd_operatingCost').html("10a당 경영비[만 원] : "+map.cd_operatingCost);
         $('#cd_income').html("10a당 소득[만 원] : "+map.cd_income);
+
+        // 계산기 수정
+        $("input[name=cd_operatingCost]").attr("value", map.cd_operatingCost);
+        $("input[name=cd_income]").attr("value", map.cd_income);
 
         document.getElementById("FVS").innerHTML = "<button type=\"button\" onclick=\"FVResult_Click()\" class=\"btn btn-success\">작물 최종 선택</button>";
 
@@ -111,6 +116,7 @@ function fn_clcik2(number) {
 }
 
 $(document).ready(function () {
+
     var area0 = [
         "도 선택",
         "강원도",
@@ -477,6 +483,27 @@ $(document).ready(function () {
                             alert(data + status);
                         },
                     });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./MPF.do",
+                        // dataType: "text",
+                        contentType: "application/json; charset=UTF-8",
+                        dataType: "json",
+                        data: JSON.stringify(param),
+                        success: function (data) {
+                            var MPF = data[0];
+                            alert(MPF.mpf_averagePrice);
+                            $("input[name=mpf_averagePrice]").attr("value", MPF.mpf_averagePrice);
+
+                        },
+                        error: function (data, status) {
+                            // 실패시
+                            alert(data + status);
+                        },
+                    });
+
+
                 }
             },
             error: function (data, status) {
@@ -489,28 +516,27 @@ $(document).ready(function () {
     });
 });
 
-$("input").change(function () {
-    let mpf_averagePrice = $("#mpf_averagePrice").val();
-    let cd_operatingCost = $("#cd_operatingCost").val();
-    let cd_income = $("#cd_income").val();
-    let mso_holdingLand1 = $("#mso_holdingLand1").val();
-    let mso_holdingLand2 = $("#mso_holdingLand2").val();
-    let mso_holdingLand3 = $("#mso_holdingLand3").val();
-    let result1 = mpf_averagePrice * mso_holdingLand1;
-    let result2 = cd_operatingCost * mso_holdingLand2;
-    let result3 = cd_income * mso_holdingLand3;
-    // $("#price1") = result1;
-    let lineTotal1 = $("input[name=price1]").attr("value", result1).val();
-    let lineTotal2 = $("input[name=price2]").attr("value", result2).val();
-    let lineTotal3 = $("input[name=price3]").attr("value", result3).val();
-    const linetotals =
-        Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
-    //console.log(linetotals);
-    let subtotal = $("input[name=subtotal]").attr("value", linetotals);
-    // console.log(mpf_averagePrice);
-    // console.log(cd_operatingCost);
-    // console.log(cd_income);
-    console.log(mso_holdingLand1);
-    console.log(mso_holdingLand2);
-    console.log(mso_holdingLand3);
-});
+// $("input").change(function () {
+//     let mpf_averagePrice = $("#mpf_averagePrice").val();
+//     let cd_operatingCost = $("#cd_operatingCost").val();
+//     let cd_income = $("#cd_income").val();
+//     let mso_holdingLand1 = $("#mso_holdingLand1").val();
+//     let mso_holdingLand2 = $("#mso_holdingLand2").val();
+//     let mso_holdingLand3 = $("#mso_holdingLand3").val();
+//     let result1 = mpf_averagePrice * mso_holdingLand1;
+//     let result2 = cd_operatingCost * mso_holdingLand2;
+//     let result3 = cd_income * mso_holdingLand3;
+//     // $("#price1") = result1;
+//     let lineTotal1 = $("input[name=price1]").attr("value", result1).val();
+//     let lineTotal2 = $("input[name=price2]").attr("value", result2).val();
+//     let lineTotal3 = $("input[name=price3]").attr("value", result3).val();
+//     const linetotals = Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
+//     //console.log(linetotals);
+//     let subtotal = $("input[name=subtotal]").attr("value", linetotals);
+//     // console.log(mpf_averagePrice);
+//     // console.log(cd_operatingCost);
+//     // console.log(cd_income);
+//     console.log(mso_holdingLand1);
+//     console.log(mso_holdingLand2);
+//     console.log(mso_holdingLand3);
+// });

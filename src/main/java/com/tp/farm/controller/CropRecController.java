@@ -16,11 +16,8 @@ import com.tp.farm.dao.CropRecDAO;
 import com.tp.farm.dao.SurveyInputDAO;
 import com.tp.farm.dao.SurveyOutputDAO;
 import com.tp.farm.service.CropRecService;
-import com.tp.farm.vo.CropDataVO;
-import com.tp.farm.vo.MemberVO;
-import com.tp.farm.vo.SurveyInputVO;
+import com.tp.farm.vo.*;
 
-import com.tp.farm.vo.SurveyOutputVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +42,9 @@ public class CropRecController {
 
     @Autowired
     private SurveyInputDAO surveyInputDAO;
+    @Autowired
     private SurveyOutputDAO surveyOutputDAO;
-    private SurveyInputVO surveyInput;
+//    private SurveyInputVO surveyInput;
 //    @Autowired
 //    private CropRecommendService service;
 
@@ -128,7 +126,7 @@ public class CropRecController {
     }
     // 작물 선택 절차
     @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
-    public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO surveyInput, HttpServletRequest request) throws  Exception{
+    public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO surveyInput) throws  Exception{
 
         if(surveyInput == null){
             System.out.println("theres no VO founded");
@@ -141,12 +139,30 @@ public class CropRecController {
 
         System.out.println("작물 정보 리스트 받아오기");
         List<CropDataVO> list = cropRecDAO.select(surveyInput);
-        request.setAttribute("list", list);
         System.out.println("리스트 크기 : " + list.size());
 
         return list;
     }
 
+    // 농지 시세 가져오기
+    @RequestMapping(value = "/MPF.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
+    public List<FarmlandPriceVO> MPF(@RequestBody SurveyInputVO surveyInput) throws  Exception{
+
+        if(surveyInput == null){
+            System.out.println("theres no VO founded");
+        } else {
+            System.out.println("VO ON");
+            System.out.println(surveyInput.toString());
+        }
+        System.out.println("농지 시세 리스트 받아오기");
+
+        List<FarmlandPriceVO> list = cropRecDAO.selectFarmlandPrice(surveyInput);
+        System.out.println("리스트 크기 : " + list.size());
+
+        return list;
+    }
+
+    // 작물선택 아이디 체크
     @RequestMapping(value = "/CropRecIdCheck.do", method = RequestMethod.GET)
     public ResponseEntity<String> cropRecIdCheck(@RequestParam("msi_id") String msi_id) {
         boolean flag = false;
@@ -167,14 +183,47 @@ public class CropRecController {
 
     // 작물 선택 결과지 페이지
     @RequestMapping(value = "/FarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView FarmInfo(@ModelAttribute("info") SurveyOutputVO surveyOutput,HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+    public ModelAndView FarmInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
+
+        String Mso_id = request.getParameter("mso_id");
+        String Mso_cropName = request.getParameter("mso_cropName");
+        String Mso_capital = request.getParameter("mso_capital");
+        String Mso_holdingLand = request.getParameter("mso_holdingLand");
+        String Mso_managementExpenses = request.getParameter("mso_managementExpenses");
+        String Mso_incomeCrops = request.getParameter("mso_incomeCrops");
+        String Mso_landCost = request.getParameter("mso_landCost");
+        String Mso_finalIncome = request.getParameter("mso_finalIncome");
+//        System.out.println(Mso_id);
+//        System.out.println(Mso_cropName);
+//        System.out.println(Mso_capital);
+//        System.out.println(Mso_holdingLand);
+//        System.out.println(Mso_managementExpenses);
+//        System.out.println(Mso_incomeCrops);
+//        System.out.println(Mso_landCost);
+//        System.out.println(Mso_finalIncome);
+        SurveyOutputVO surveyOutput = new SurveyOutputVO(Mso_id, Mso_cropName, Mso_capital, Mso_holdingLand, Mso_managementExpenses, Mso_incomeCrops, Mso_landCost, Mso_finalIncome);
+        System.out.println(surveyOutput.toString());
+        boolean flag =surveyOutputDAO.insertOutputSurvey(surveyOutput);
+        if (flag) {
+            System.out.println("success");
+        }else{
+            System.out.println("failed");
+        }
+
         String viewName = this.getViewName(request);
+//        System.out.println(surveyOutput.getMso_id());
+//        System.out.println(surveyOutput.getMso_cropName());
+//        System.out.println(surveyOutput.getMso_capital());
+//        System.out.println(surveyOutput.getMso_holdingLand());
+//        System.out.println(surveyOutput.getMso_managementExpenses());
+//        System.out.println(surveyOutput.getMso_incomeCrops());
+//        System.out.println(surveyOutput.getMso_landCost());
+//        System.out.println(surveyOutput.getMso_finalIncome());
 
-        System.out.println(surveyOutput.getMso_cropName());
+        System.out.println("설문지 결과 작성");
 
-        // 회원 정보 / 아이디
-        MemberVO mem = (MemberVO) httpSession.getAttribute("user");
+
 
         // 작물 이름
         //String cd_cropName = request.getParameter("cd_cropName");

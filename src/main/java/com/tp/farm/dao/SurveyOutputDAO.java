@@ -12,9 +12,9 @@ public class SurveyOutputDAO {
     private SqlSession sqlSession;
 
     public boolean insertOutputSurvey(SurveyOutputVO surveyOutput) {
-        System.out.println("작물 선택 DAO 실행");
+        System.out.println("작물 선택 결과 DAO 실행");
         boolean flag = false;
-        int affectedCount = sqlSession.insert("mapper.surveyInput.insertSurveyOutput", surveyOutput);
+        int affectedCount = sqlSession.insert("mapper.surveyOutput.insertSurveyOutput", surveyOutput);
         if(affectedCount>0) {
             flag = true;
         }

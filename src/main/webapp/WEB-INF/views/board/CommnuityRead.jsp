@@ -229,6 +229,13 @@
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                                 </tr>
+<<<<<<< HEAD
+=======
+                                                                <tr>
+                                                                    <td colspan="7"
+                                                                        style="height: 100px">${Rereply.cbr_content}</td>
+                                                                </tr>
+>>>>>>> b220ee658674e0a7e7142b7bc0c682cbd7e1c1ec
                                                             </c:when>
                                                         </c:choose>
                                                     </c:forEach>

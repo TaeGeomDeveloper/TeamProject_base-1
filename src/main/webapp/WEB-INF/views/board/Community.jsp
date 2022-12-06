@@ -18,7 +18,7 @@
     <script>
         $(document).ready(function () {
             $('#table_i').DataTable({
-                order: [ [ 0, "desc" ] ]
+                order: [[0, "desc"]]
             });
         });
     </script>
@@ -75,11 +75,35 @@
                         <td>${vo.cb_regDate}</td>
                         <td>${vo.cb_viewCount}</td>
                         <td>
+<<<<<<< HEAD
                             <c:if test="${vo.cb_originFileName!=null}">
                                 <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
                                     ${vo.cb_originFileName}
                                 </a>
                             </c:if>
+=======
+                            <c:choose>
+                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
+                                    <a href="Update.do?id=${vo.cb_id}">
+                                        <button class="button3">변경</button>
+                                    </a>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
+                                    <a href="delete.do?cb_seq=${vo.cb_seq}">
+                                        <button class="button3">삭제</button>
+                                    </a>
+                                </c:when>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
+                                <button class="button3">첨부파일</button>
+                            </a>
+>>>>>>> b220ee658674e0a7e7142b7bc0c682cbd7e1c1ec
                         </td>
                         <c:if test="${user.mi_id=='admin'}">
                             <td>
@@ -91,6 +115,22 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+<<<<<<< HEAD
+=======
+                <tfoot>
+                <tr>
+                    <th>글번호</th>
+                    <th>분류</th>
+                    <th style="width: 40%">제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                    <th>변경 버튼</th>
+                    <th>삭제 버튼</th>
+                    <th>첨부파일</th>
+                </tr>
+                </tfoot>
+>>>>>>> b220ee658674e0a7e7142b7bc0c682cbd7e1c1ec
             </table>
 
             <a href="${contextPath}/board/CreateNewBoard.do">
