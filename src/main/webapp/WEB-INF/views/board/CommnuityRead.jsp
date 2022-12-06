@@ -218,7 +218,6 @@
                                                                     <td colspan="7"
                                                                         style="height: 100px">${Rereply.cbr_content}</td>
                                                                 </tr>
-                                                                <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                                             </c:when>
                                                         </c:choose>
                                                     </c:forEach>
