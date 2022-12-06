@@ -53,6 +53,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+
             $("input").change(function () {
                 let mpf_averagePrice = $("#mpf_averagePrice").val();
                 let cd_operatingCost = $("#cd_operatingCost").val();
@@ -71,6 +73,64 @@
 
             });
         });
+    </script>
+
+    <script>
+        // $(document).ready(function(){
+        //     let jumin = $("#msi_memberAge").val();
+        //     if(jumin.includes('-')){
+        //         jumin = jumin.replace('-','');
+        //     }
+        //
+        //     let today = new Date();	// 현재 날짜 및 시간
+        //
+        //     let juminFront = jumin.substr(0,6); // 주민번호앞자리
+        //     let juminBackFirstVal = jumin.substr(6,1); //주민번호뒷자리 첫 문자열(2000년도 이전생인지 확인)
+        //
+        //     let age = 0;
+        //     let birthDate = null;
+        //     let juminYear = null;
+        //     let juminMonth = jumin.substr(2,2);//10
+        //     let juminDate = jumin.substr(4,2);//03
+        //
+        //     let monthCheck = 0;
+        //
+        //     if(juminBackFirstVal == 1 || juminBackFirstVal == 2){
+        //         // 2000년생 이전일 경우
+        //         juminYear = "19" + jumin.substr(0,2);//93~~
+        //
+        //         // 문법상 Month(월)은 0부터 시작하기 때문에 -1 처리해야 됨.
+        //         birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+        //
+        //         // 현재 연도에서 - 태어난 연도
+        //         age = today.getFullYear() - birthDate.getFullYear();
+        //
+        //         // 현재 월에서 - 태어난 월
+        //         monthCheck = today.getMonth() - birthDate.getMonth();
+        //
+        //         // 생일 월이 현재 월을 지나지 않았을 경우 만 나이기 때문에 -1
+        //         if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+        //             age--;
+        //         }
+        //     }else{
+        //         // 2000년생 이후
+        //         juminYear = "20" + jumin.substr(0,2);//01~~
+        //
+        //         birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+        //
+        //         age = today.getFullYear() - birthDate.getFullYear();
+        //
+        //         monthCheck = today.getMonth() - birthDate.getMonth();
+        //
+        //         if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+        //             age--;
+        //         }
+        //     }
+        //
+        //     console.log("=====================만 나이: ",age + "세");
+        //
+        //     return age;
+        // });
     </script>
 
 </head>
