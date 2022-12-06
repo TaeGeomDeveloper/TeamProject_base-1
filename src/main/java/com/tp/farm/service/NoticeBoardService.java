@@ -82,10 +82,10 @@ public class NoticeBoardService {
         return list;
     }
 
-    public boolean boardDownload(HttpServletResponse response, String seq, String token) throws IOException {
+    public boolean boardDownload(HttpServletResponse response, String nb_seq, String token) throws IOException {
         boolean flag = false;
         //게시판 정보 레코드 얻기
-        NoticeVO notice = noticeDAO.selectOneBoard(seq);
+        NoticeVO notice = noticeDAO.selectOneBoard(nb_seq);
         String originFileName = notice.getNb_originFileName();
         String serverFileName = notice.getNb_serverFileName();
         //본래파일명 한글처리
@@ -111,15 +111,15 @@ public class NoticeBoardService {
         while((len=fis.read(buffer))!=-1) {
             os.write(buffer, 0, len);
         }
-        flag = noticeDAO.updateCount(seq, token);
+        flag = noticeDAO.updateCount(nb_seq, token);
         os.close();
         fis.close();
         return flag;
     }
 
-    public NoticeVO readBoard(String seq) {
+    public NoticeVO readBoard(String nb_seq) {
         NoticeVO board = new NoticeVO();
-        board = noticeDAO.selectOneBoard(seq);
+        board = noticeDAO.selectOneBoard(nb_seq);
         return board;
     }
 
@@ -136,9 +136,9 @@ public class NoticeBoardService {
         return flag;
     }
 
-    public boolean deleteBoard(String seq) {
+    public boolean deleteBoard(String nb_seq) {
         boolean flag = false;
-        flag = noticeDAO.deleteOne(seq);
+        flag = noticeDAO.deleteOne(nb_seq);
         return flag;
     }
 }

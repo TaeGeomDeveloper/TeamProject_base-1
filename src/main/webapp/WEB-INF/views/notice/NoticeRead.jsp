@@ -36,17 +36,17 @@
                         <td>${notice.nb_id}</td>
                         <td>${notice.nb_regDate}</td>
                         <td>${notice.nb_viewCount}</td>
-                        <td><a href="download.do?seq=${notice.nb_seq}&token=on">
+                        <td><a href="download.do?nb_seq=${notice.nb_seq}&token=on">
                             ${notice.nb_originFileName}</a></td>
                         <td>${notice.nb_downloadCount}</td>
-                        <td><a href="viewUpdatePage.do?seq=${notice.nb_seq}">
+                        <td><a href="viewUpdatePage.do?nb_seq=${notice.nb_seq}">
                             <button class="button3">수정</button>
                         </a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div style="border: 5px solid #f7a063; border-radius: 20px; height: 700px; text-align: left">
+            <div style="border: 5px solid #f7a063; border-radius: 20px; padding: 20px; height: 700px; text-align: left">
                 ${notice.nb_content}
             </div>
         </div>

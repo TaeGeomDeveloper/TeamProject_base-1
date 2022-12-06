@@ -25,7 +25,7 @@ public class NoticeDAO {
 
     public boolean insertBoard(NoticeVO notice) {
         boolean flag = false;
-        int affectedCount = sqlSession.insert("mapper.notice.insertBoard", notice);
+        int affectedCount = sqlSession.insert("mapper.notice.insertNotice", notice);
         if(affectedCount>0) {
             System.out.println("DAO에서 insert완료");
             flag = true;
@@ -34,15 +34,15 @@ public class NoticeDAO {
     }
 
     public List<NoticeVO> selectAll() {
-        List<NoticeVO> list = sqlSession.selectList("mapper.notice.selectAllBoard");
+        List<NoticeVO> list = sqlSession.selectList("mapper.notice.selectAllNotice");
         return list;
     }
 
 
-    public boolean updateCount(String seq, String token) {
+    public boolean updateCount(String nb_seq, String token) {
         boolean flag = false;
         if(token=="on") {
-            int affectedCount = sqlSession.update("mapper.notice.updateDownloadCount", seq);
+            int affectedCount = sqlSession.update("mapper.notice.updateNoticeDownloadCount", nb_seq);
             if (affectedCount > 0) {
                 System.out.println("다운로드 완료");
                 flag = true;
@@ -53,14 +53,14 @@ public class NoticeDAO {
         return flag;
     }
 
-    public NoticeVO selectOneBoard(String seq) {
-        NoticeVO notice = (NoticeVO) sqlSession.selectOne("mapper.notice.selectOneBoardBySeq", seq);
+    public NoticeVO selectOneBoard(String nb_seq) {
+        NoticeVO notice = (NoticeVO) sqlSession.selectOne("mapper.notice.selectOneNoticeBySeq", nb_seq);
         return notice;
     }
 
     public boolean update(NoticeVO notice) {
         boolean flag = false;
-        int affectedCount = sqlSession.update("updateBoard", notice);
+        int affectedCount = sqlSession.update("updateNotice", notice);
         if(affectedCount>0) {
             System.out.println("DAO update성공");
         } else {
@@ -69,9 +69,9 @@ public class NoticeDAO {
         return flag;
     }
 
-    public boolean deleteOne(String seq) {
+    public boolean deleteOne(String nb_seq) {
         boolean flag = false;
-        int affectedCount = sqlSession.delete("mapper.notice.deleteOne", seq);
+        int affectedCount = sqlSession.delete("mapper.notice.deleteOneNotice", nb_seq);
         if(affectedCount>0) {
             flag = true;
         }
