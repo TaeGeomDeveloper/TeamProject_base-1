@@ -1,6 +1,7 @@
 package com.tp.farm.dao;
 
 import com.tp.farm.vo.CropDataVO;
+import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.SurveyInputVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class CropRecDAO {
     public List<CropDataVO> select(SurveyInputVO vo) {
         System.out.println("작물 리스트 DAO 실행");
         List<CropDataVO> list = sqlSession.selectList("mapper.cropRecommend.selectCrop", vo);
+        return list;
+    }
+
+    public List<FarmlandPriceVO> selectFarmlandPrice(SurveyInputVO vo) {
+        System.out.println("농지 시세 리스트 DAO 실행");
+        List<FarmlandPriceVO> list = sqlSession.selectList("mapper.cropRecommend.selectFarmlandPrice", vo);
         return list;
     }
 

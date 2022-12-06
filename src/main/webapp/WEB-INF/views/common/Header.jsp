@@ -148,9 +148,13 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <c:choose>
+                        <c:when test="${user.mi_id == 'Test' || user.mi_id == 'admin'}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/admin/Manager.do">관리자</a>
+                        <a class="nav-link" href="${contextPath}/member/Manager.do">관리자</a>
                     </li>
+                        </c:when>
+                    </c:choose>
                 </ul>
 
                 <form class="d-flex" role="search">

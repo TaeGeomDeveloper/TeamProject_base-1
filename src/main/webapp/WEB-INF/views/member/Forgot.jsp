@@ -57,8 +57,8 @@
     </script>
 
     <script>
-        $(document).ready(function (){
-            $("#fn_find_pwd").on('click',function (event) {
+        $(document).ready(function () {
+            $("#fn_find_pwd").on('click', function (event) {
                 var Find = document.Find;
 
                 let id = $("#floatingInputID").val();
@@ -68,7 +68,7 @@
                 $.ajax({
                     url: "${contextPath}/member/findPwd.do",
                     type: "POST",
-                    data:{mi_id: id, mi_email: email},
+                    data: {mi_id: id, mi_email: email},
                     success: function (data, status) {
                         if (data == "false") {
                             alert("아이디 또는 이메일을 잘못 입력하셨습니다.")
@@ -103,7 +103,7 @@
                     } else {
                         alert("인증 실패");
                     }
-                })
+                });
             });
         });
     </script>
@@ -179,21 +179,21 @@
                                 <input type="text" class="form-control" id="floatingInputEmail"
                                        placeholder="이메일"
                                        name="mi_email">
-                                <button class="button w-100" type="button" id="fn_find_pwd">인증번호 받기
-                                </button>
                                 <label for="floatingInputEmail"></label>
                             </td>
                         </tr>
                         <tr>
                             <td class="form-floating w-80" align="center">
                                 인증번호
-                                <input type="text" class="form-control" id="authNum" placeholder="인증 번호를 입력하세요">
-                                <input type="button" value="확인" class="button" id="checkQualifiedNumber">
-                                <label for="authNum"></label>
+                                <input type="text" class="form-control" id="" placeholder="인증번호">
+                                <label for=""></label>
                             </td>
                         </tr>
                         <tr>
-
+                            <td align="center">
+                                <button class="button w-100" type="button" id="fn_find_pwd">PW 찾기
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>

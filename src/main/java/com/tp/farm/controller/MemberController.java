@@ -31,7 +31,8 @@ public class MemberController {
     private MailService mailService;
     @Autowired
     private MemberService memberService;
-
+    @Autowired
+    private CsvService csvService;
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})

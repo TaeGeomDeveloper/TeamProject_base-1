@@ -104,13 +104,12 @@
         ]]>
     </select>
 
-    <select id="selectFarmlandPrice" resultType="farmlandPriceVO" resultMap="farmLandResult">
+    <select id="selectFarmlandPrice" resultType="surveyInputVO" resultMap="farmLandResult">
         <![CDATA[
         select * from market_price_farmland
-        where mpf_locationName = ${mpf_locationName};
-          and mpf_locationNameDetail like concat('%',#{mpf_locationNameDetail}, '%');
+        where mpf_locationName = #{msi_desiredArea}
+        and mpf_locationNameDetail like concat('%',#{msi_desiredAreaDetail}, '%');
         ]]>
     </select>
-
 
 </mapper>
