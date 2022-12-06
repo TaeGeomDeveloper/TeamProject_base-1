@@ -258,7 +258,7 @@ public class MemberController {
             numStr += ran;
         }
         mailService.sendMail(mi_email, "gwinongin 비밀번호 찾기 인증번호", "회원님이 요청하신 비밀번호 인증번호 입니다." + "\n" + numStr);
-        System.out.println("findPwd certificated number " + numStr);
+        System.out.println("findPwd certificated email number " + numStr);
         return numStr;
     }
 

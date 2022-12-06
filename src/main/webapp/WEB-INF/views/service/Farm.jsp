@@ -33,106 +33,6 @@
         }
     </style>
 
-<%--    <script>--%>
-<%--        $(document).ready(function () {--%>
-
-<%--           --%>
-<%--        });--%>
-<%--    </script>--%>
-
-
-
-<%--    <script>--%>
-<%--        $(document).ready(function () {--%>
-
-<%--            // 정렬--%>
-
-
-<%--            $("#flip").on('click', function (event) {--%>
-
-<%--                let msi_id = $("#msi_id").val();--%>
-<%--                let msi_memberName = $("#msi_memberName").val();--%>
-<%--                let msi_memberAge = $("#msi_memberAge").val();--%>
-<%--                let msi_memberGender = $("#msi_memberGender").val();--%>
-<%--                let msi_desiredArea = $("#msi_desiredArea").val();--%>
-<%--                let msi_desiredAreaDetail = $("#msi_desiredAreaDetail").val();--%>
-<%--                let msi_desiredTimeSowing = $("#msi_desiredTimeSowing").val();--%>
-<%--                let msi_desiredTimeSowingPart = $('input:radio[name=msi_desiredTimeSowingPart]:checked').val();--%>
-<%--                let msi_desiredHarvestTime = $("#msi_desiredHarvestTime").val();--%>
-<%--                let msi_desiredHarvestTimePart = $('input:radio[name=msi_desiredHarvestTimePart]:checked').val();--%>
-<%--                let msi_cropClassification = $("#msi_cropClassification").val();--%>
-<%--                let msi_cultivationMethod = $("#msi_cultivationMethod").val();--%>
-<%--                let msi_farmingExperience = $("#msi_farmingExperience").val();--%>
-<%--                let msi_hadMachinery = $("#msi_hadMachinery").val();--%>
-
-<%--                let param = {--%>
-<%--                    "msi_id": msi_id,--%>
-<%--                    "msi_memberName": msi_memberName,--%>
-<%--                    "msi_memberGender": msi_memberGender,--%>
-<%--                    "msi_memberAge": msi_memberAge,--%>
-<%--                    "msi_desiredArea": msi_desiredArea,--%>
-<%--                    "msi_desiredAreaDetail": msi_desiredAreaDetail,--%>
-<%--                    "msi_desiredTimeSowing": msi_desiredTimeSowing,--%>
-<%--                    "msi_desiredTimeSowingPart": msi_desiredTimeSowingPart,--%>
-<%--                    "msi_desiredHarvestTime": msi_desiredHarvestTime,--%>
-<%--                    "msi_desiredHarvestTimePart": msi_desiredHarvestTimePart,--%>
-<%--                    "msi_cropClassification": msi_cropClassification,--%>
-<%--                    "msi_cultivationMethod": msi_cultivationMethod,--%>
-<%--                    "msi_farmingExperience": msi_farmingExperience,--%>
-<%--                    "msi_hadMachinery": msi_hadMachinery,--%>
-<%--                }--%>
-
-<%--                $.ajax({--%>
-<%--                    type: 'POST',--%>
-<%--                    url: "${contextPath}/service/FarmProcess.do",--%>
-<%--                    // dataType: "text",--%>
-<%--                    contentType: "application/json; charset=UTF-8",--%>
-<%--                    dataType: "json",--%>
-<%--                    data: JSON.stringify(param),--%>
-<%--                    success: function (result) {--%>
-<%--                        alert("성공!");--%>
-<%--                        $("#window").slideDown("slow");--%>
-<%--                        var table = "";--%>
-
-<%--                        for (var i = 0; i < result.length; i++) {--%>
-<%--                            var map = result[i];--%>
-
-<%--                            var container = document.getElementById("hold-this");--%>
-
-<%--                            function myFunction(map) {--%>
-<%--                                var el = document.createElement("div"),--%>
-<%--                                    button = document.createElement("button");--%>
-
-<%--                                button.innerHTML = '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +--%>
-<%--                                    '<img id="FV" src="/gwinongin/resources/image/FV/' + map.cd_idx + '.jpg">' +--%>
-<%--                                    '</button>';--%>
-
-<%--                                button.onclick = function (e) {--%>
-<%--                                    listener(e, map);--%>
-<%--                                    FarmInfo(map);--%>
-<%--                                    //Test(map);--%>
-<%--                                }--%>
-<%--                                el.appendChild(button);--%>
-<%--                                container.appendChild(el);--%>
-<%--                            }--%>
-
-<%--                            function listener(e, map) {--%>
-<%--                                //e.target.innerHTML = map.cd_cropName;--%>
-<%--                            }--%>
-
-<%--                            myFunction(map);--%>
-
-<%--                        }   // end for loop--%>
-<%--                    }, // end function--%>
-<%--                    error: function (data, status) {--%>
-<%--                        // 실패시--%>
-<%--                        alert(data + status);--%>
-<%--                    }--%>
-<%--                });--%>
-<%--            });--%>
-<%--        });--%>
-<%--    </script>--%>
-
     <style>
         #FV {
             width: 100px;
@@ -151,32 +51,8 @@
         }
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("input").change(function () {
-                let mpf_averagePrice = $("#mpf_averagePrice").val();
-                let cd_operatingCost = $("#cd_operatingCost").val();
-                let cd_income = $("#cd_income").val();
-                let mso_holdingLand = $("#mso_holdingLand").val();
-                let result1 = mpf_averagePrice * mso_holdingLand;
-                let result2 = cd_operatingCost * mso_holdingLand;
-                let result3 = cd_income * mso_holdingLand;
-                // $("#price1") = result1;
-                let lineTotal1 = $("input[name=price1]").attr("value", result1).val();
-                let lineTotal2 = $("input[name=price2]").attr("value", result2).val();
-                let lineTotal3 = $("input[name=price3]").attr("value", result3).val();
-                const linetotals =
-                    Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
-                //console.log(linetotals);
-                let subtotal = $("input[name=subtotal]").attr("value", linetotals);
-                // console.log(mpf_averagePrice);
-                // console.log(cd_operatingCost);
-                // console.log(cd_income);
-                console.log(mso_holdingLand);
-            });
-        });
+    <script>
     </script>
-
 
 </head>
 <body>
@@ -209,7 +85,7 @@
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">나이</p>
                                 <input class="form-control form-control" type="text" placeholder="나이"
-                                       name="msi_memberAge" id="msi_memberAge">
+                                       name="msi_memberAge" id="msi_memberAge" value="${user.mi_regidentRegNumber}">
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">성별</p>
