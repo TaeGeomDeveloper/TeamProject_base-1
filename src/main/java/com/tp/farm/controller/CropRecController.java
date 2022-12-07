@@ -222,6 +222,10 @@ public class CropRecController {
         CropDataVO cropData = cropRecDAO.selectOneCrop(Mso_cropName);
         mav.addObject("cropData", cropData);
 
+        List<TraditionalMarketVO> TM_list = cropRecDAO.selectMarketInformation(surveyInput);
+        mav.addObject("TM_list", TM_list);
+        System.out.println("리스트 크기 : " + TM_list.size());
+
         viewName= "/service/FarmResult";
         mav.setViewName(viewName);
         return mav;

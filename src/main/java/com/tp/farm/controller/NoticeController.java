@@ -37,7 +37,6 @@ import java.util.UUID;
 public class NoticeController {
 
     private ServletContext context;
-
     @Autowired
     private NoticeBoardService noticeBoardService;
 

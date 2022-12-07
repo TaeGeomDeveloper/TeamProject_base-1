@@ -119,4 +119,10 @@
         ]]>
     </select>
 
+    <select id="selectMarketInformation" resultType="surveyInputVO" resultMap="tmResult" >
+        select * from traditional_market_information
+        where tmi_roadNameAddress like concat('%', #{msi_desiredArea}, '%')
+          and tmi_roadNameAddress like concat('%', #{msi_desiredAreaDetail}, '%');
+    </select>
+
 </mapper>
