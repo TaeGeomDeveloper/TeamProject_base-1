@@ -53,5 +53,4 @@ public class CropRecDAO {
         }
         return flag;
     }
-
 }

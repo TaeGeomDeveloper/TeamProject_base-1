@@ -303,7 +303,7 @@
                         </div>
                         <hr class="featurette-divider">
                         <div align="center">
-                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
+                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto" >작물 확인
                             </button>
                         </div>
                     </form>
