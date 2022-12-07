@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,10 +64,10 @@ public class NoticeController {
     //공지사항 내용 페이지 - 이영록, 윤태검
     @RequestMapping(value="/ReadBoard.do", method=RequestMethod.GET)
     public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
-
         ModelAndView mav = new ModelAndView();
         String nb_seq = request.getParameter("nb_seq");
         boolean flag = false;
+        flag = noticeBoardService.readCount(nb_seq);
         NoticeVO notice = noticeBoardService.readBoard(nb_seq);
         mav.addObject("notice", notice);
         mav.setViewName("/notice/NoticeRead");
@@ -118,7 +119,7 @@ public class NoticeController {
     }
 
     @RequestMapping(value="/viewUpdatePage.do", method=RequestMethod.GET)
-    public ModelAndView viewUpdate(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView viewUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
         String nb_seq = request.getParameter("nb_seq");
         NoticeVO notice = noticeBoardService.readBoard(nb_seq);

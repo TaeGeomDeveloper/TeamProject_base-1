@@ -105,7 +105,7 @@
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="nb_title" id="nb_title" maxlength='50' value="${notice.nb_title}"></td>
+                        <td><input type="text" name="nb_title" id="nb_title" maxlength='50' value="${notice.nb_title}" style="width: 80%;"></td>
                         <td><input type="hidden" name="nb_seq" value="${notice.nb_seq}" ></td>
                     </tr>
                     <tr>

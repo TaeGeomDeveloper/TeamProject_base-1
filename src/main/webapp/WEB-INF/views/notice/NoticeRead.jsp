@@ -26,7 +26,10 @@
                         <th scope="col" style="width: 5%">조회수</th>
                         <th scope="col" style="width: 10%">첨부파일</th>
                         <th scope="col" style="width: 10%">다운 횟수</th>
-                        <th scope="col" style="width: 10%">수정</th>
+                        <c:if test="${user.mi_id=='admin'}">
+                            <th scope="col" >수정</th>
+                            <th scope="col" >삭제</th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -39,9 +42,14 @@
                         <td><a href="download.do?nb_seq=${notice.nb_seq}&token=on">
                             ${notice.nb_originFileName}</a></td>
                         <td>${notice.nb_downloadCount}</td>
-                        <td><a href="viewUpdatePage.do?nb_seq=${notice.nb_seq}">
-                            <button class="button3">수정</button>
-                        </a></td>
+                        <c:if test="${user.mi_id=='admin'}">
+                            <td><a href="viewUpdatePage.do?nb_seq=${notice.nb_seq}">
+                                <button class="button3">수정</button>
+                            </a></td>
+                            <td><a href="delete.do?nb_seq=${vo.nb_seq}">
+                                <button class="button3">삭제</button>
+                            </a></td>
+                        </c:if>
                     </tr>
                     </tbody>
                 </table>

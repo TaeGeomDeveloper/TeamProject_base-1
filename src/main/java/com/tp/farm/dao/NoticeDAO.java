@@ -38,17 +38,14 @@ public class NoticeDAO {
         return list;
     }
 
-
-    public boolean updateCount(String nb_seq, String token) {
+    public boolean updateDownloadCount(String nb_seq, String token) {
         boolean flag = false;
-        if(token=="on") {
-            int affectedCount = sqlSession.update("mapper.notice.updateNoticeDownloadCount", nb_seq);
-            if (affectedCount > 0) {
-                System.out.println("다운로드 완료");
-                flag = true;
-            } else {
-                System.out.println("다운로드 실패");
-            }
+        int affectedCount = sqlSession.update("mapper.notice.updateNoticeDownloadCount", nb_seq);
+        if (affectedCount > 0) {
+            System.out.println("다운로드 완료");
+            flag = true;
+        } else {
+            System.out.println("다운로드 실패");
         }
         return flag;
     }
@@ -60,7 +57,7 @@ public class NoticeDAO {
 
     public boolean update(NoticeVO notice) {
         boolean flag = false;
-        int affectedCount = sqlSession.update("updateNotice", notice);
+        int affectedCount = sqlSession.update("mapper.notice.updateNotice", notice);
         if(affectedCount>0) {
             System.out.println("DAO update성공");
         } else {
@@ -72,6 +69,15 @@ public class NoticeDAO {
     public boolean deleteOne(String nb_seq) {
         boolean flag = false;
         int affectedCount = sqlSession.delete("mapper.notice.deleteOneNotice", nb_seq);
+        if(affectedCount>0) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean updateViewCount(String nb_seq) {
+        boolean flag = false;
+        int affectedCount = sqlSession.update("mapper.notice.updateNoticeViewCount", nb_seq);
         if(affectedCount>0) {
             flag = true;
         }

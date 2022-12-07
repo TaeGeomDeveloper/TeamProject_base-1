@@ -73,6 +73,71 @@
         });
     </script>
 
+    <script>
+        //주민등록번호에 따른 나이(만) 계산 및 성별 결정
+        $(document).ready(function(){
+            let jumin = $("#msi_memberAge").val();
+            let man = "남자";
+            let woman = "여자";
+            if(jumin.includes('-')){
+                jumin = jumin.replace('-','');
+            }
+
+            let today = new Date();	// 현재 날짜 및 시간
+
+            let juminFront = jumin.substr(0,6); // 주민번호앞자리
+            let juminBackFirstVal = jumin.substr(6,1); //주민번호뒷자리 첫 문자열(2000년도 이전생인지 확인)
+
+            console.log(juminFront);
+            let age = 0;
+            let birthDate = null;
+            let juminYear = null;
+            let juminMonth = jumin.substr(2,2);//10
+            let juminDate = jumin.substr(4,2);//03
+
+            let monthCheck = 0;
+
+            if(juminBackFirstVal == 1 || juminBackFirstVal == 2){
+                // 2000년생 이전일 경우
+                juminYear = "19" + jumin.substr(0,2);//93~~
+
+                // 문법상 Month(월)은 0부터 시작하기 때문에 -1 처리해야 됨.
+                birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+
+                // 현재 연도에서 - 태어난 연도
+                age = today.getFullYear() - birthDate.getFullYear();
+
+                // 현재 월에서 - 태어난 월
+                monthCheck = today.getMonth() - birthDate.getMonth();
+
+                // 생일 월이 현재 월을 지나지 않았을 경우 만 나이기 때문에 -1
+                if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+                    age--;
+                }
+            }else{
+                // 2000년생 이후
+                juminYear = "20" + jumin.substr(0,2);//01~~
+
+                birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+
+                age = today.getFullYear() - birthDate.getFullYear();
+
+                monthCheck = today.getMonth() - birthDate.getMonth();
+
+                if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+                    age--;
+                }
+            }
+            $('input[name=msi_memberAge]').attr('value', age);
+
+            if(juminBackFirstVal%2==0){
+                $('input[name=msi_memberGender]').attr('value', woman);
+            }else{
+                $('input[name=msi_memberGender]').attr('value', man);
+            }
+        });
+    </script>
+
 </head>
 <body>
 <%%>
@@ -102,17 +167,14 @@
                                        name="msi_memberName" id="msi_memberName" readonly>
                             </div>
                             <div style="width: 25%; padding: 20px">
-                                <p class="WForm">나이</p>
+                                <p class="WForm">나이(만)</p>
                                 <input class="form-control form-control" type="text" placeholder="나이"
-                                       name="msi_memberAge" id="msi_memberAge" value="">
+                                       name="msi_memberAge" id="msi_memberAge" value="${user.mi_regidentRegNumber}" readonly="readonly">
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">성별</p>
-                                <select class="form-select form-select mb-3" name="msi_memberGender"
-                                        id="msi_memberGender">
-                                    <option selected value="남자">남자</option>
-                                    <option value="여자">여자</option>
-                                </select>
+                                <input  class="form-control form-control" name="msi_memberGender"
+                                        id="msi_memberGender" value="" readonly="readonly">
                             </div>
                         </div>
                         <hr class="featurette-divider">
@@ -192,11 +254,6 @@
                                     <label class="form-check-label" for="inlineRadio6">하</label>
                                 </div>
                             </div>
-                        </div>
-                        <hr class="featurette-divider">
-                        <h2 class="h2_selector">고려사항 (선택)</h2>
-                        <hr class="featurette-divider" style="border-top: 8px solid">
-                        <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">작물분류</p>
                                 <select class="form-select form-select mb-3" name="msi_cropClassification"
@@ -206,6 +263,11 @@
                                     <option value="채소">채소</option>
                                 </select>
                             </div>
+                        </div>
+                        <hr class="featurette-divider">
+                        <h2 class="h2_selector">고려사항 (선택)</h2>
+                        <hr class="featurette-divider" style="border-top: 8px solid">
+                        <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">재배 방법</p>
                                 <select class="form-select form-select mb-3" aria-label=".form-select-lg example"
