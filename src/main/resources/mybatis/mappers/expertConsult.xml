@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.consult">
+    <resultMap id="consultationResult" type="expertConsultVO">
+        <id property="ecb_seq" column="ecb_seq" />
+        <result property="ecb_id" column="ecb_id" />
+        <result property="ecb_title" column="ecb_title" />
+        <result property="ecb_content" column="ecb_content" />
+        <result property="ecb_viewCount" column="ecb_viewCount" />
+        <result property="ecb_regDate" column="ecb_regDate" />
+        <result property="ecb_originFileName" column="ecb_originFileName" />
+        <result property="ecb_serverFileName" column="ecb_serverFileName" />
+        <result property="ecb_downloadCount" column="ecb_downloadCount" />
+    </resultMap>
+
+    <!-- 공지사항 -->
+    <select id="selectAllConsultation" resultMap="consultationResult">
+        <![CDATA[
+        select * from expert_consultation_board order by ecb_seq desc
+        ]]>
+    </select>
+
+    <select id="selectOneConsultationBySeq" resultMap="consultationResult" resultType="expertConsultVO" parameterType="java.lang.String">
+        <![CDATA[
+        select * from expert_consultation_board where ecb_seq=#{ecb_seq}
+        ]]>
+    </select>
+
+    <select id="insertConsultation" parameterType="expertConsultVO">
+        <![CDATA[
+        insert into expert_consultation_board(ecb_id, ecb_title, ecb_content, ecb_originFileName, ecb_serverFileName)
+            value(#{ecb_id}, #{ecb_title}, #{ecb_content}, #{ecb_originFileName}, #{ecb_serverFileName})
+        ]]>
+    </select>
+
+    <select id="updateConsultationDownloadCount" parameterType="java.lang.String">
+        <![CDATA[
+        update expert_consultation_board
+        set ecb_downloadCount = ecb_downloadCount+1
+        where ecb_seq = #{ecb_seq}
+        ]]>
+    </select>
+
+    <select id="updateConsultation" parameterType="expertConsultVO">
+        <![CDATA[
+        update expert_consultation_board
+        set ecb_title=#{ecb_title}, ecb_content=#{ecb_content}, ecb_originFileName=#{ecb_originFileName}, ecb_serverFileName=#{ecb_serverFileName}, ecb_regDate=now()
+        where ecb_seq=#{ecb_seq}
+        ]]>
+    </select>
+
+    <select id="deleteOneConsultation" parameterType="java.lang.String">
+        <![CDATA[
+        delete from expert_consultation_board
+        where ecb_seq=#{ecb_seq}
+        ]]>
+    </select>
+
+    <select id="updateConsultationViewCount" parameterType="java.lang.String">
+        <![CDATA[
+        update expert_consultation_board
+        set ecb_viewCount=ecb_viewCount+1
+        where ecb_seq=#{ecb_seq}
+        ]]>
+    </select>
+
+</mapper>
