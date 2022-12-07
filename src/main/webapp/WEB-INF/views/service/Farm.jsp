@@ -53,8 +53,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-
             $("input").change(function () {
                 let mpf_averagePrice = $("#mpf_averagePrice").val();
                 let cd_operatingCost = $("#cd_operatingCost").val();
@@ -290,8 +288,6 @@
                                     <option value="3년이상">3년 이상</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농기계 및 설비 유무</p>
                                 <select class="form-select form-select mb-3" name="msi_hadMachinery"
@@ -324,212 +320,211 @@
                     </div>
 
                     <!-- Modal -->
-                    <form name="FVResult">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">스마트 팜</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="Information" style="background: #ffaa00">
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">스마트 팜</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div id="Information" style="background: #ffaa00">
+                                        <div style="margin-top: 20px; margin-bottom: 20px; padding: 10px">
+                                            <button type="button" class="btn btn-outline-primary" id="menu1">기본 정보
+                                            </button>
+                                            <button type="button" class="btn btn-outline-success" id="menu2">재배 기술
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" id="menu3">시세 정보
+                                            </button>
+                                        </div>
 
-                                            <div style="margin-top: 20px; margin-bottom: 20px; padding: 10px">
-                                                <button type="button" class="btn btn-outline-primary" id="menu1">기본 정보
-                                                </button>
-                                                <button type="button" class="btn btn-outline-success" id="menu2">재배 기술
-                                                </button>
-                                                <button type="button" class="btn btn-outline-secondary" id="menu3">시세 정보
-                                                </button>
+                                        <!-- START THE FEATURETTES -->
+                                        <hr class="featurette-divider">
+
+                                        <div id="Info_menu1" style="display: none">
+                                            <h1> 작물 정보 </h1>
+                                            <div class="row featurette">
+                                                <div class="col-md-7">
+                                                    <h2 class="featurette-heading fw-normal lh-1" id="Fruit_Title">
+                                                        제목
+                                                        A </h2>
+                                                    <p class="lead" id="SmallInfo" style="color: #f0f0f0"> 부가 설명
+                                                        입니다. </p>
+                                                    <div class="InfoBox">
+                                                        <p id="content1" style="width: 80%;"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div id="FruitPic"></div>
+                                                </div>
                                             </div>
 
-                                            <!-- START THE FEATURETTES -->
                                             <hr class="featurette-divider">
+                                            <h1> 상세정보 </h1>
 
-                                            <div id="Info_menu1" style="display: none">
-                                                <h1> 작물 정보 </h1>
-                                                <div class="row featurette">
-                                                    <div class="col-md-7">
-                                                        <h2 class="featurette-heading fw-normal lh-1" id="Fruit_Title">
-                                                            제목
-                                                            A </h2>
-                                                        <p class="lead" id="SmallInfo" style="color: #f0f0f0"> 부가 설명
-                                                            입니다. </p>
-                                                        <div class="InfoBox">
-                                                            <p id="content1" style="width: 80%;"></p>
+                                            <div id="carouselExampleControls" class="carousel slide"
+                                                 data-bs-ride="carousel">
+
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item">
+                                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
+                                                             width="800"
+                                                             height="400" xmlns="http://www.w3.org/2000/svg"
+                                                             role="img"
+                                                             aria-label="Placeholder: First slide"
+                                                             preserveAspectRatio="xMidYMid slice"
+                                                             focusable="false"><title>Placeholder</title>
+
+                                                            <rect width="100%" height="100%" fill="#ffaa00"></rect>
+                                                        </svg>
+                                                        <div class="carousel-caption text-start">
+                                                            <h1>파종시기 와 수학시기</h1>
+                                                            <p id="sowing"></p>
+                                                            <p id="harvest"></p>
+
+                                                            <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
+                                                            </p>
                                                         </div>
+
                                                     </div>
-                                                    <div class="col-md-5">
-                                                        <div id="FruitPic"></div>
+
+                                                    <div class="carousel-item active">
+                                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
+                                                             width="800"
+                                                             height="400" xmlns="http://www.w3.org/2000/svg"
+                                                             role="img"
+                                                             aria-label="Placeholder: Second slide"
+                                                             preserveAspectRatio="xMidYMid slice"
+                                                             focusable="false"><title>Placeholder</title>
+
+                                                            <rect width="100%" height="100%" fill="#ffaa00"></rect>
+                                                        </svg>
+
+                                                        <div class="carousel-caption text-start">
+                                                            <h1>영양가</h1>
+                                                            <p id="nutrition"></p>
+
+                                                            <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="carousel-item">
+                                                        <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
+                                                             width="800"
+                                                             height="400" xmlns="http://www.w3.org/2000/svg"
+                                                             role="img"
+                                                             aria-label="Placeholder: third slide"
+                                                             preserveAspectRatio="xMidYMid slice"
+                                                             focusable="false"><title>Placeholder</title>
+
+                                                            <rect width="100%" height="100%" fill="#ffaa00"></rect>
+                                                        </svg>
+
+                                                        <div class="carousel-caption text-start">
+
+                                                            <h1>추가설명</h1>
+                                                            <p> 아직 없음 .</p>
+                                                            <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <hr class="featurette-divider">
-                                                <h1> 상세정보 </h1>
-
-                                                <div id="carouselExampleControls" class="carousel slide"
-                                                     data-bs-ride="carousel">
-
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item">
-                                                            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                                                                 width="800"
-                                                                 height="400" xmlns="http://www.w3.org/2000/svg"
-                                                                 role="img"
-                                                                 aria-label="Placeholder: First slide"
-                                                                 preserveAspectRatio="xMidYMid slice"
-                                                                 focusable="false"><title>Placeholder</title>
-
-                                                                <rect width="100%" height="100%" fill="#ffaa00"></rect>
-                                                            </svg>
-                                                            <div class="carousel-caption text-start">
-                                                                <h1>파종시기 와 수학시기</h1>
-                                                                <p id="sowing"></p>
-                                                                <p id="harvest"></p>
-
-                                                                <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
-                                                                </p>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="carousel-item active">
-                                                            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                                                                 width="800"
-                                                                 height="400" xmlns="http://www.w3.org/2000/svg"
-                                                                 role="img"
-                                                                 aria-label="Placeholder: Second slide"
-                                                                 preserveAspectRatio="xMidYMid slice"
-                                                                 focusable="false"><title>Placeholder</title>
-
-                                                                <rect width="100%" height="100%" fill="#ffaa00"></rect>
-                                                            </svg>
-
-                                                            <div class="carousel-caption text-start">
-                                                                <h1>영양가</h1>
-                                                                <p id="nutrition"></p>
-
-                                                                <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
-                                                                </p>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="carousel-item">
-                                                            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                                                                 width="800"
-                                                                 height="400" xmlns="http://www.w3.org/2000/svg"
-                                                                 role="img"
-                                                                 aria-label="Placeholder: third slide"
-                                                                 preserveAspectRatio="xMidYMid slice"
-                                                                 focusable="false"><title>Placeholder</title>
-
-                                                                <rect width="100%" height="100%" fill="#ffaa00"></rect>
-                                                            </svg>
-
-                                                            <div class="carousel-caption text-start">
-
-                                                                <h1>추가설명</h1>
-                                                                <p> 아직 없음 .</p>
-                                                                <p><a class="btn btn-lg btn-primary" href="#">상세보기</a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <%-- 버튼 --%>
-                                                    <button class="carousel-control-prev" type="button"
-                                                            data-bs-target="#carouselExampleControls"
-                                                            data-bs-slide="prev">
+                                                <%-- 버튼 --%>
+                                                <button class="carousel-control-prev" type="button"
+                                                        data-bs-target="#carouselExampleControls"
+                                                        data-bs-slide="prev">
                                                         <span class="carousel-control-prev-icon"
                                                               aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next" type="button"
-                                                            data-bs-target="#carouselExampleControls"
-                                                            data-bs-slide="next">
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                        data-bs-target="#carouselExampleControls"
+                                                        data-bs-slide="next">
                                                         <span class="carousel-control-next-icon"
                                                               aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                </div>
-
-                                                <hr class="featurette-divider">
-                                                <h1> 부가설명 </h1>
-                                                <div></div>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
                                             </div>
-                                            <%-- end of menu1 --%>
 
-                                            <div id="Info_menu2" style="display: none">
-                                                <h1> 재배방법 </h1>
-                                                <div>
-                                                    <p class="lead" id="content2" style="padding: 20px"> 부가 설명 입니다. </p>
-                                                </div>
+                                            <hr class="featurette-divider">
+                                            <h1> 부가설명 </h1>
+                                            <div></div>
+                                        </div>
+                                        <%-- end of menu1 --%>
 
-                                                <hr class="featurette-divider">
-                                                <h1> 병충해 </h1>
-                                                <div id="pest"></div>
-                                                <hr class="featurette-divider">
-                                                <h1> 최신 영농활용 기술 </h1>
-                                                <div class="d-flex justify-content-center"
-                                                     style="width: 80%; height: 300px; text-align: center; overflow: auto">
-                                                    <table class="table table-striped table-hover"
-                                                           style="margin-top: 10px; background: #f0f0f0">
-                                                        <thead>
-                                                        <tr class="table-success">
-                                                            <th scope="col" style="width: 5%">번호</th>
-                                                            <th scope="col" style="width: 60%">제목</th>
-                                                            <th scope="col" style="width: 10%">작성자</th>
-                                                            <th scope="col" style="width: 15%">등록일</th>
-                                                            <th scope="col" style="width: 10%">조회수</th>
+                                        <div id="Info_menu2" style="display: none">
+                                            <h1> 재배방법 </h1>
+                                            <div>
+                                                <p class="lead" id="content2" style="padding: 20px"> 부가 설명 입니다. </p>
+                                            </div>
+
+                                            <hr class="featurette-divider">
+                                            <h1> 병충해 </h1>
+                                            <div id="pest"></div>
+                                            <hr class="featurette-divider">
+                                            <h1> 최신 영농활용 기술 </h1>
+                                            <div class="d-flex justify-content-center"
+                                                 style="width: 80%; height: 300px; text-align: center; overflow: auto">
+                                                <table class="table table-striped table-hover"
+                                                       style="margin-top: 10px; background: #f0f0f0">
+                                                    <thead>
+                                                    <tr class="table-success">
+                                                        <th scope="col" style="width: 5%">번호</th>
+                                                        <th scope="col" style="width: 60%">제목</th>
+                                                        <th scope="col" style="width: 10%">작성자</th>
+                                                        <th scope="col" style="width: 15%">등록일</th>
+                                                        <th scope="col" style="width: 10%">조회수</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="table-group-divider">
+                                                    <c:forEach var="i" begin="1" end="15">
+                                                        <tr>
+                                                            <th scope="row">${i}</th>
+                                                            <td>제목 ${i}</td>
+                                                            <td>작성자 ${i}</td>
+                                                            <td>2022.10.24</td>
+                                                            <td>100</td>
                                                         </tr>
-                                                        </thead>
-                                                        <tbody class="table-group-divider">
-                                                        <c:forEach var="i" begin="1" end="15">
-                                                            <tr>
-                                                                <th scope="row">${i}</th>
-                                                                <td>제목 ${i}</td>
-                                                                <td>작성자 ${i}</td>
-                                                                <td>2022.10.24</td>
-                                                                <td>100</td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                    </c:forEach>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <%-- end of menu2 --%>
+                                        </div>
+                                        <%-- end of menu2 --%>
 
-                                            <div id="Info_menu3" style="display: none">
-                                                <h1> 과일 시세 </h1>
-                                                <div class="row featurette">
-                                                    <div class="col-md-7">
-                                                        <h2 class="featurette-heading fw-normal lh-1"> 작물 시세 </h2>
-                                                        <p class="lead" id="cd_marketValue"> 부가 설명 입니다. </p>
-                                                        <div class="InfoBox">
-                                                            <div id="content3"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5">
+                                        <div id="Info_menu3" style="display: none">
+                                            <h1> 과일 시세 </h1>
+                                            <div class="row featurette">
+                                                <div class="col-md-7">
+                                                    <h2 class="featurette-heading fw-normal lh-1"> 작물 시세 </h2>
+                                                    <p class="lead" id="cd_marketValue"> 부가 설명 입니다. </p>
+                                                    <div class="InfoBox">
+                                                        <div id="content3"></div>
                                                     </div>
                                                 </div>
-                                                <hr class="featurette-divider">
-                                                <h1> 경영 및 관리비 </h1>
-
-<%--                                                <div id="cd_operatingCost"></div>--%>
-<%--                                                <div id="cd_income"></div>--%>
-                                                <hr class="featurette-divider">
-                                                <h1> 거래량 </h1>
-                                                <div id="myChart"
-                                                     style="width:100%; max-width:600px; height:500px;"></div>
-
+                                                <div class="col-md-5">
+                                                </div>
                                             </div>
+                                            <hr class="featurette-divider">
+                                            <h1> 경영 및 관리비 </h1>
 
-                                            <%-- end of menu3 --%>
+                                            <%--                                                <div id="cd_operatingCost"></div>--%>
+                                            <%--                                                <div id="cd_income"></div>--%>
+                                            <hr class="featurette-divider">
+                                            <h1> 거래량 </h1>
+                                            <div id="myChart"
+                                                 style="width:100%; max-width:600px; height:500px;"></div>
+
+                                        </div>
+
+                                        <%-- end of menu3 --%>
+                                        <form name="FVResult">
                                             <div>
                                                 <hr class="featurette-divider">
                                                 <h1> 농작물 소득 계산기 </h1>
@@ -539,7 +534,8 @@
                                                         <tr>
                                                             <td align="center" colspan="3">농작물 소득 을 계산해줍니다.</td>
                                                             <td style="text-align: right">
-                                                                <input class="form-control form-control" type="text" placeholder="자본금"
+                                                                <input class="form-control form-control" type="text"
+                                                                       placeholder="자본금"
                                                                        name="mso_capital">
                                                             </td>
                                                         </tr>
@@ -552,7 +548,7 @@
                                                                 예상하는 농작지 면적(약 300평)
                                                             </td>
                                                             <td width="25%" bgcolor="#f7adad">
-                                                                합계<br />(선택한 지역 및 작물에 따른 비용 * 예상하는
+                                                                합계<br/>(선택한 지역 및 작물에 따른 비용 * 예상하는
                                                                 농작지 면적(10a))
                                                             </td>
                                                         </tr>
@@ -561,14 +557,19 @@
                                                             <td width="25%">땅 지출</td>
 
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" name="mpf_averagePrice" id="mpf_averagePrice"
+                                                                <input class="form-control form-control" type="text"
+                                                                       name="mpf_averagePrice" id="mpf_averagePrice"
                                                                        size="4" disabled/>
                                                             </td>
                                                             <td width="20%">
-                                                                <input class="form-control form-control" type="text" id="mso_holdingLand" value="" size="2" name="mso_holdingLand"/>
+                                                                <input class="form-control form-control" type="text"
+                                                                       id="mso_holdingLand" value="" size="2"
+                                                                       name="mso_holdingLand"/>
                                                             </td>
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" id="mso_landCost" name="mso_landCost" value="" size="4" />
+                                                                <input class="form-control form-control" type="text"
+                                                                       id="mso_landCost" name="mso_landCost" value=""
+                                                                       size="4"/>
                                                             </td>
                                                         </tr>
 
@@ -576,12 +577,16 @@
                                                             <td width="25%">경영비(10a) 지출</td>
 
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" id="cd_operatingCost" size="4" name="cd_operatingCost" disabled/>
+                                                                <input class="form-control form-control" type="text"
+                                                                       id="cd_operatingCost" size="4"
+                                                                       name="cd_operatingCost" disabled/>
                                                             </td>
                                                             <td width="20%">
                                                             </td>
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" name="mso_managementExpenses" id="mso_managementExpenses" value="" size="4" />
+                                                                <input class="form-control form-control" type="text"
+                                                                       name="mso_managementExpenses"
+                                                                       id="mso_managementExpenses" value="" size="4"/>
                                                             </td>
                                                         </tr>
 
@@ -589,26 +594,31 @@
                                                             <td width="25%">작물 소득</td>
 
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" id="cd_income" name="cd_income"
+                                                                <input class="form-control form-control" type="text"
+                                                                       id="cd_income" name="cd_income"
                                                                        size="4" disabled/>
                                                             </td>
                                                             <td width="20%">
                                                             </td>
                                                             <td width="25%">
-                                                                <input class="form-control form-control" type="text" name="mso_incomeCrops" id="mso_incomeCrops" value="" size="4" />
+                                                                <input class="form-control form-control" type="text"
+                                                                       name="mso_incomeCrops" id="mso_incomeCrops"
+                                                                       value="" size="4"/>
                                                             </td>
                                                         </tr>
 
                                                         <tr>
                                                             <td align="right" colspan="4">
-                                                                Total <input type="text" name="mso_finalIncome" id="mso_finalIncome" value="" size="12" readonly/>
+                                                                Total <input type="text" name="mso_finalIncome"
+                                                                             id="mso_finalIncome" value="" size="12"
+                                                                             readonly/>
                                                             </td>
                                                         </tr>
                                                     </table>
 
                                                     <br/>
-                                                    <input type="hidden" name="formatNumber" value="" />
-                                                    <input type="hidden" name="unformatNumber" value="" />
+                                                    <input type="hidden" name="formatNumber" value=""/>
+                                                    <input type="hidden" name="unformatNumber" value=""/>
                                                     <br/>
                                                 </form>
 
@@ -617,18 +627,20 @@
 
                                                 <hr class="featurette-divider" style="width: 90%">
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <div class="modal-footer" style="display: flex; justify-content: center">
-                                        <%-- 작물 최종 선택 --%>
 
-                                        <div id="FVS">
-                                        </div>
+                                </div>
+                                <div class="modal-footer" style="display: flex; justify-content: center">
+                                    <%-- 작물 최종 선택 --%>
+
+                                    <div id="FVS">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
 
             </div>

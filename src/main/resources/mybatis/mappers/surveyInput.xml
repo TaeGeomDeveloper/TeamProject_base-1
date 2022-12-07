@@ -21,7 +21,7 @@
         <result property="msi_hadMachinery" column="msi_hadMachinery" />
     </resultMap>
 
-    <select id="selectSurveyInput">
+    <select id="selectAllSurveyInput">
         <![CDATA[
             select * from member_survey_input;
         ]]>

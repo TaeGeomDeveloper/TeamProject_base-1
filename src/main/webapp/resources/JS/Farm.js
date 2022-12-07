@@ -406,7 +406,7 @@ $(document).ready(function () {
             url: "./CropRecIdCheck.do",
             data: { msi_id: memberId },
             success: function (data, status) {
-                //alert(data);
+                alert(data);
                 if (data == "true") {
                     //$("#window").slideUp("slow");
                     alert(
