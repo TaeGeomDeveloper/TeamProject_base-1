@@ -54,7 +54,7 @@
             <tr>
               <th>아이디</th>
               <td><input class="form-control" placeholder="ID" type="text" name="nb_id"
-                         style="width: 25%"/>
+                         value="${user.mi_id}" readonly="readonly" style="width: 25%"/>
               </td>
             </tr>
             <tr>

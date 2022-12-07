@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.surveyOutput">
     <resultMap id="surveyOutputResult" type="surveyOutputVO">
-        <id property="mso_id" column="mso_id" />
+        <result property="mso_id" column="mso_id" />
         <result property="mso_cropName" column="mso_cropName" />
         <result property="mso_capital" column="mso_capital" />
         <result property="mso_holdingLand" column="mso_holdingLand" />
@@ -15,7 +15,7 @@
         <result property="mso_finalIncome" column="mso_finalIncome" />
     </resultMap>
 
-    <select id="selectSurveyOutput">
+    <select id="selectAllSurveyOutput">
         <![CDATA[
             select * from member_survey_output;
         ]]>
@@ -23,12 +23,20 @@
 
     <insert id="insertSurveyOutput"  parameterType="surveyOutputVO">
         <![CDATA[
-            insert into member_survey_input(mso_id, mso_cropName, mso_capital, mso_holdingLand, mso_managementExpenses,
+            insert into member_survey_output(mso_id, mso_cropName, mso_capital, mso_holdingLand, mso_managementExpenses,
                                             mso_incomeCrops, mso_landCost, mso_finalIncome)
             values (#{mso_id}, #{mso_cropName}, #{mso_capital}, #{mso_holdingLand}, #{mso_managementExpenses},
                     #{mso_incomeCrops}, #{mso_landCost}, #{mso_finalIncome})
         ]]>
     </insert>
+
+    <select id="selectSurveyOutput" resultType="surveyOutputVO"  parameterType="String" >
+      <![CDATA[
+        select * from member_survey_output
+        where
+            mso_id=#{mso_id}
+        ]]>
+     </select>
 
     <delete id="deleteSurveyOutput" parameterType="String">
         <![CDATA[

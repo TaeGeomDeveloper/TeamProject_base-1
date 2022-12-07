@@ -1,6 +1,7 @@
 package com.tp.farm.dao;
 
 import com.tp.farm.vo.CropDataVO;
+import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.SurveyInputVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,22 @@ public class CropRecDAO {
         return list;
     }
 
+    public CropDataVO selectOneCrop(String cd_cropName) {
+        CropDataVO CropData = sqlSession.selectOne("mapper.cropRecommend.selectOneCrop", cd_cropName);
+
+        return CropData;
+    }
+
+    public List<FarmlandPriceVO> selectFarmlandPrice(SurveyInputVO vo) {
+        System.out.println("농지 시세 리스트 DAO 실행");
+        List<FarmlandPriceVO> list = sqlSession.selectList("mapper.cropRecommend.selectFarmlandPrice", vo);
+        return list;
+    }
+
     public boolean checkId(String msi_id) {
         boolean flag = false;
-        int affectedCount = sqlSession.selectOne("mapper.cropRecommend.checkId", msi_id);
-        if(affectedCount>0){
+        SurveyInputVO vo = sqlSession.selectOne("mapper.cropRecommend.checkId", msi_id);
+        if(vo != null){
             flag = true;
         }
         return flag;

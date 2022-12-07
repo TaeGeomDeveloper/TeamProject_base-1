@@ -51,8 +51,17 @@
     <update id="updateMember"  parameterType="memberVO">
      <![CDATA[
         update member_information
-        set mi_password=#{mi_password}, mi_email=#{mi_email}, mi_phone=#{mi_phone}, mi_wireline=#{mi_wireline}, mi_address=#{mi_address}, mi_addressDetail=#{mi_addressDetail},
-            mi_addressCode=#{mi_addressCode}
+            set mi_password=#{mi_password}, mi_email=#{mi_email}, mi_phone=#{mi_phone}, mi_wireline=#{mi_wireline}, mi_address=#{mi_address}, mi_addressDetail=#{mi_addressDetail},
+                mi_addressCode=#{mi_addressCode}
+        where
+            mi_id=#{mi_id}
+        ]]>
+    </update>
+
+    <update id="updateMemberPwd" parameterType="java.util.Map">
+        <![CDATA[
+        update member_information
+            set mi_password=#{mi_password}
         where
             mi_id=#{mi_id}
         ]]>
@@ -98,4 +107,13 @@
             mi_id = #{mi_id}
         ]]>
     </select>
+
+    <select id="selectPhone" resultType="int">
+        <![CDATA[
+        select count(*) from member_information
+        where
+            mi_phone = #{mi_phone}
+        ]]>
+    </select>
+
 </mapper>

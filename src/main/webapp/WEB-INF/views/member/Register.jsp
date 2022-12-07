@@ -95,6 +95,68 @@
     </script>
 
     <script>
+        $(function () {
+            $("#sendSMS").click(function () {
+                const submitPop = document.getElementById("submitPop");
+                submitPop.style.display = 'inline-block';
+                let phoneNum = $("#mi_phone").val();
+                let phoneNum1 = $("#mi_phone1").val();
+                let phoneNum2 = $("#mi_phone2").val();
+                let sendNumber = phoneNum+phoneNum1+phoneNum2;
+                if(sendNumber=="010"){
+                    alert("휴대폰 번호가 올바르지 않습니다.");
+                    return false;
+                }else if(phoneNum1=="") {
+                    alert("휴대폰 번호가 올바르지 않습니다.");
+                    return false;
+                }else if(phoneNum2==""){
+                    alert("휴대폰 번호가 올바르지 않습니다.");
+                    return false;
+                }else{
+                    $.ajax({
+                        type: "get",
+                        dataType: "text",
+                        url: "${contextPath}/member/phoneCheck.do",
+                        data: {mi_phone : sendNumber},
+                        success: function (data, status){
+                            if(data=='true'){
+                                alert("이미 회원가입 된 전화번호 입니다.");
+                                submitPop.style = "display:none";
+                            }else{
+                                $.ajax({
+                                    type: "POST",
+                                    url: "${contextPath}/member/sendSMS.do",
+                                    data: {to : sendNumber},
+                                    cache: false,
+                                    success: function (data){
+                                        submitPop.innerHTML = "인증번호 발송이 완료되었습니다. 혹시 인증번호가 오지 않는다면 재발송 해주십시오.";
+                                        //alert("전송 완료");
+                                        code2 = data;
+                                    }
+                                }); //인증번호 전송
+                            }
+                        },
+                        error: function (data, status){
+                            alert(data+status);
+                        }
+                    }); // 휴대전화 번호 중복 체크
+                }
+            });
+
+            $("#checkQualifiedNumber").click(function () {
+                const validate = document.getElementById("validate")
+                if ($("#authNum").val() == code2) {
+                    alert("인증 성공");
+                } else {
+                    alert("인증 실패");
+
+                }
+            })
+        })
+    </script>
+
+
+    <script>
         $(document).focusout(function () {
             var pwd1 = $("#password_1").val();
             var pwd2 = $("#password_2").val();
@@ -115,46 +177,6 @@
         });
     </script>
 
-    <script>
-        $(function () {
-            $("#sendSMS").click(function () {
-                const submitPop = document.getElementById("submitPop");
-                submitPop.style.display = 'inline-block';
-                let phoneNum = $("#mi_phone").val();
-                let phoneNum1 = $("#mi_phone1").val();
-                let phoneNum2 = $("#mi_phone2").val();
-                console.log(phoneNum2);
-                const sendNumber = phoneNum+phoneNum1+phoneNum2;
-                if(sendNumber=="010"){
-                    alert("휴대폰 번호가 올바르지 않습니다");
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "${contextPath}/member/sendSMS.do",
-                    data: {to : sendNumber},
-                    cache: false,
-                    success: function (data){
-                        if(data==" "){
-                            alert("휴대폰 번호가 올바르지 않습니다.");
-                        } else {
-                            //alert("전송 완료");
-                            code2 = data;
-                        }
-                    }
-                });
-            });
-
-            $("#checkQualifiedNumber").click(function () {
-                const validate = document.getElementById("validate")
-                if ($("#authNum").val() == code2) {
-                    alert("인증 성공");
-                } else {
-                    alert("인증 실패");
-
-                }
-            })
-        })
-    </script>
 
     <script>
         function joinform_check() {
@@ -194,7 +216,7 @@
             }
 
             if (password2 == "") {
-                alert("비밀번호를 확인을 해주세요");
+                alert("비밀번호를 확인 해주세요");
                 password2.focus();
                 return false;
             }
@@ -344,7 +366,7 @@
                                        id="password_1">
                                 <span id="rightPwd" style="display: none; color:green"></span>
                                 <span id="unrightPwd" style="display: none; color:red"></span>
-                                <span style="font-size: 10pt;">비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.</span>
+                                <span style="font-size: 10pt;">비밀번호는 8자 이상이어야 하며, 숫자/소문자/특수문자를 모두 포함해야 합니다.</span>
                             </td>
                         </tr>
                         <tr>
@@ -416,7 +438,7 @@
                         <tr>
                             <td>
                             <span id="submitPop" style="display: none; color: lightgray">
-                                인증번호 발송이 완료되었습니다. 혹시 인증번호가 오지 않는다면 재발송 해주십시오.
+
                             </span>
                             </td>
                         </tr>

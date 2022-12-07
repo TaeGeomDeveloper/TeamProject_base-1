@@ -15,6 +15,13 @@
     <%-- 폰트 --%>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+        #headLink:link {
+            color:#4CAF50;
+        }
+        #headLink:visited {
+            color:#4CAF50;
+        }
     </style>
 
 </head>
@@ -22,8 +29,8 @@
 
 <%--헤더--%>
 <section class="head">
-    <header style="font-size: 60px">
-        gwinongin
+    <header style="font-size: 60px;">
+        <a id="headLink" href="${contextPath}/home/Main.do" style="text-decoration-line:none">gwinongin</a>
     </header>
     <nav>
         <c:choose>
@@ -141,9 +148,13 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
+                    <c:choose>
+                        <c:when test="${user.mi_id == 'Test' || user.mi_id == 'admin'}">
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/admin/Manager.do">관리자</a>
                     </li>
+                        </c:when>
+                    </c:choose>
                 </ul>
 
                 <form class="d-flex" role="search">

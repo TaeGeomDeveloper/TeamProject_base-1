@@ -1,5 +1,6 @@
 package com.tp.farm.dao;
 
+import com.tp.farm.vo.MemberVO;
 import com.tp.farm.vo.SurveyOutputVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +12,21 @@ public class SurveyOutputDAO {
     @Autowired
     private SqlSession sqlSession;
 
-    public boolean insertOutputSurvey(SurveyOutputVO surveyOutput) {
-        System.out.println("작물 선택 DAO 실행");
-        boolean flag = false;
-        int affectedCount = sqlSession.insert("mapper.surveyInput.insertSurveyOutput", surveyOutput);
-        if(affectedCount>0) {
-            flag = true;
-        }
-        else {
-            System.out.println("안들어감");
-        }
-        return flag;
+    //@Autowired
+    //private SurveyOutputVO surveyOutput;
+
+    public void insertOutputSurvey(SurveyOutputVO surveyOutput) {
+        System.out.println("작물 선택 결과 DAO 실행");
+        sqlSession.insert("mapper.surveyOutput.insertSurveyOutput", surveyOutput);
+
     }
+
+    public SurveyOutputVO selectSurveyOutput(String mso_id) {
+        SurveyOutputVO surveyOutput = sqlSession.selectOne("mapper.surveyOutput.selectSurveyOutput", mso_id);
+
+        return surveyOutput;
+    }
+
 
     public boolean deleteSurveyOutput(String mso_id){
         boolean flag = false;

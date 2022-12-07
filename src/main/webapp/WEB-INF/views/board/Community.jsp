@@ -18,7 +18,7 @@
     <script>
         $(document).ready(function () {
             $('#table_i').DataTable({
-                order: [ [ 0, "desc" ] ]
+                order: [[0, "desc"]]
             });
         });
     </script>
@@ -59,9 +59,10 @@
                     <th>작성자</th>
                     <th>등록일</th>
                     <th>조회수</th>
-                    <th>변경 버튼</th>
-                    <th>삭제 버튼</th>
                     <th>첨부파일</th>
+                    <c:if test="${user.mi_id=='admin'}">
+                        <th>삭제</th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,40 +75,29 @@
                         <td>${vo.cb_regDate}</td>
                         <td>${vo.cb_viewCount}</td>
                         <td>
-                            <a href="Update.do?id=${vo.cb_id}">
-                                <button class="button3">변경</button>
-                            </a>
+                            <c:if test="${vo.cb_originFileName!=null}">
+                                <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
+                                    ${vo.cb_originFileName}
+                                </a>
+                            </c:if>
                         </td>
-                        <td>
-                            <a href="delete.do?cb_seq=${vo.cb_seq}">
-                                <button class="button3">삭제</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
-                                <button class="button3">첨부파일</button>
-                            </a>
-                        </td>
+                        <c:if test="${user.mi_id=='admin'}">
+                            <td>
+                                <a href="delete.do?cb_seq=${vo.cb_seq}">
+                                    <button class="button3">삭제</button>
+                                </a>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <th>글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>등록일</th>
-                    <th>조회수</th>
-                    <th>변경 버튼</th>
-                    <th>삭제 버튼</th>
-                    <th>첨부파일</th>
-                </tr>
-                </tfoot>
             </table>
 
-            <a href="${contextPath}/board/CreateNewBoard.do">
-                <button class="button2">작성하기</button>
-            </a>
+            <c:if test="${user.mi_id!=null}">
+                <a href="${contextPath}/board/CreateNewBoard.do">
+                    <button class="button2">작성하기</button>
+                </a>
+            </c:if>
 
         </div>
     </article>

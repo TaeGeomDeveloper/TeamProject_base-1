@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.expertReply">
+    <resultMap id="expertReplyResult" type="expertReplyVO">
+        <id property="ecbr_seq" column="ecbr_seq" />
+        <result property="ecb_seq" column="ecb_seq" />
+        <result property="ecbr_replyId" column="ecbr_replyId" />
+        <result property="ecbr_content" column="ecbr_content" />
+        <result property="ecbr_regDate" column="ecbr_regDate" />
+        <result property="ecbr_bundleSeq" column="ecbr_bundleSeq" />
+        <result property="ecbr_currentSeq" column="ecbr_currentSeq" />
+    </resultMap>
+
+    <select id="selectAllExpertReply" parameterType="java.lang.String" resultMap="expertReplyResult">
+        <![CDATA[
+            select * from expert_consultation_board_reply
+            where ecb_seq=#{ecb_seq}
+            order by ecbr_bundleSeq asc, ecbr_currentSeq asc
+        ]]>
+    </select>
+
+    <select id="insertExpertReply" parameterType="expertReplyVO">
+        <![CDATA[
+            insert into expert_consultation_board_reply(ecb_seq, ecbr_replyId, ecbr_content)
+            value(#{ecb_seq}, #{ecbr_replyId}, #{ecbr_content})
+        ]]>
+    </select>
+
+    <select id="selectMaxExpertReplySeq" resultMap="expertReplyResult" resultType="expertReplyVO" parameterType="java.lang.Integer">
+        <![CDATA[
+            select max(ecbr_seq) ecbr_seq, max(ecbr_bundleSeq) ecbr_bundleSeq
+            from expert_consultation_board_reply
+            where ecb_seq = #{ecb_seq}
+        ]]>
+    </select>
+
+    <select id="updateInitTopExpertReply" parameterType="expertReplyVO">
+        <![CDATA[
+            update expert_consultation_board_reply
+            set ecbr_bundleSeq=#{ecbr_bundleSeq}+1, ecbr_currentSeq=ecbr_currentSeq+1
+            where ecbr_seq=#{ecbr_seq}
+        ]]>
+    </select>
+
+    <select id="selectMaxExpertReplyCurrentSeq" parameterType="expertReplyVO" resultType="java.lang.Integer">
+        <![CDATA[
+            select max(ecbr_currentSeq) ecbr_currentSeq
+            from expert_consultation_board_reply
+            where ecb_seq=${ecb_seq} and ecbr_bundleSeq=${ecbr_bundleSeq}
+        ]]>
+    </select>
+
+    <select id="insertExpertReReply" parameterType="expertReplyVO">
+        <![CDATA[
+            insert into expert_consultation_board_reply(ecb_seq, ecbr_replyId, ecbr_content, ecbr_bundleSeq, ecbr_currentSeq)
+            value(#{ecb_seq}, #{ecbr_replyId}, #{ecbr_content}, #{ecbr_bundleSeq}, #{ecbr_currentSeq}+1)
+        ]]>
+    </select>
+
+    <select id="updateExpertReply" parameterType="expertReplyVO">
+        <![CDATA[
+            update expert_consultation_board_reply
+            set ecbr_content=#{ecbr_content}, ecbr_regDate=now()
+            where ecb_seq=#{ecb_seq} and ecbr_seq=#{ecbr_seq}
+        ]]>
+    </select>
+
+    <select id="deleteOneExpertReply" parameterType="java.lang.Integer">
+        <![CDATA[
+        delete from expert_consultation_board_reply
+        where ecbr_seq=#{ecbr_seq}
+        ]]>
+    </select>
+
+    <select id="selectCountByExpertReplyBundleSeq" parameterType="expertReplyVO" resultType="java.lang.Integer">
+        <![CDATA[
+        select count(ecbr_bundleSeq)
+        from expert_consultation_board_reply
+        where ecbr_bundleSeq=#{ecbr_bundleSeq} and ecb_seq=#{ecb_seq};
+        ]]>
+    </select>
+
+    <select id="updateExpertReplyDeleteText" parameterType="java.lang.Integer">
+        <![CDATA[
+        update expert_consultation_board_reply
+        set ecbr_content='해당 댓글은 삭제되었습니다.', ecbr_currentSeq=0
+        where ecbr_seq=#{ecbr_seq}
+        ]]>
+    </select>
+
+</mapper>

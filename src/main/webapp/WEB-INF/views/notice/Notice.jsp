@@ -16,7 +16,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_i').DataTable();
+            $('#table_i').DataTable({
+                order: [ [ 0, "desc" ] ]
+            });
         });
     </script>
 
@@ -55,9 +57,10 @@
                     <th>작성자</th>
                     <th>등록일</th>
                     <th>조회수</th>
-                    <th>변경 버튼</th>
-                    <th>삭제 버튼</th>
                     <th>첨부파일</th>
+                    <c:if test="${user.mi_id=='admin'}">
+                        <th>삭제 버튼</th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -69,28 +72,29 @@
                         <td>${vo.nb_regDate}</td>
                         <td>${vo.nb_viewCount}</td>
                         <td>
-                            <a href="Update.do?id=${vo.nb_id}">
-                                <button class="button4">변경</button>
-                            </a>
+                            <c:if test="${vo.nb_originFileName!=null}">
+                                <a href="download.do?nb_seq=${vo.nb_seq}&token=on">
+                                        ${vo.nb_originFileName}
+                                </a>
+                            </c:if>
                         </td>
-                        <td>
-                            <a href="delete.do?nb_seq=${vo.nb_seq}">
-                                <button class="button4">삭제</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="download.do?nb_seq=${vo.nb_seq}&token=on">
-                                <button class="button4">첨부파일</button>
-                            </a>
-                        </td>
+                        <c:if test="${user.mi_id=='admin'}">
+                            <td>
+                                <a href="delete.do?nb_seq=${vo.nb_seq}">
+                                    <button class="button4">삭제</button>
+                                </a>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
 
-            <a href="${contextPath}/gwinongin/notice/CreateNewBoard.do">
-                <button class="button2">작성하기</button>
-            </a>
+            <c:if test="${user.mi_id=='admin'}">
+                <a href="${contextPath}/gwinongin/notice/CreateNewBoard.do">
+                    <button class="button2">작성하기</button>
+                </a>
+            </c:if>
 
         </div>
     </article>

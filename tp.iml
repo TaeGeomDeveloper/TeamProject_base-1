@@ -19,8 +19,11 @@
       <configuration>
         <fileset id="fileset" name="Mail Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/mail-context.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Servlet Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/action-mybatis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/mail-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml</file>
         </fileset>
       </configuration>
@@ -84,5 +87,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.7" level="project" />
+    <orderEntry type="library" name="jquery-latest" level="application" />
   </component>
 </module>

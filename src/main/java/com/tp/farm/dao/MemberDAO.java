@@ -62,7 +62,6 @@ public class MemberDAO {
 
 	//로그인 할 때 회원인지 체크
 	public MemberVO checkMember(String mi_id, String mi_password) {
-		// TODO Auto-generated method stub
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("mi_id", mi_id);
 		map.put("mi_password",mi_password);
@@ -98,4 +97,27 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+
+	//phone(휴대전화) 중복확인
+    public boolean isSamePhone(String phone) {
+		boolean flag = false;
+		int affectedCount = sqlSession.selectOne("mapper.member.selectPhone", phone);
+		if(affectedCount>0){
+			flag = true;
+		}
+		return flag;
+    }
+
+	//비밀번호 재설정
+    public boolean changePwd(String mi_password, String mi_id) {
+		boolean flag = false;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mi_password", mi_password);
+		map.put("mi_id", mi_id);
+		int affectedCount = sqlSession.update("mapper.member.updateMemberPwd", map);
+		if(affectedCount>0){
+			flag = true;
+		}
+		return flag;
+    }
 }

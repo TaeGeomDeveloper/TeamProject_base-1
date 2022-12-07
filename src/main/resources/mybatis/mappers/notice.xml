@@ -36,7 +36,7 @@
         ]]>
     </select>
 
-    <select id="updateNoticeDownloadCount" parameterType="java.lang.Integer">
+    <select id="updateNoticeDownloadCount" parameterType="java.lang.String">
         <![CDATA[
         update notice_board
         set nb_downloadCount = nb_downloadCount+1
@@ -55,6 +55,14 @@
     <select id="deleteOneNotice" parameterType="java.lang.String">
         <![CDATA[
         delete from notice_board
+        where nb_seq=#{nb_seq}
+        ]]>
+    </select>
+
+    <select id="updateNoticeViewCount" parameterType="java.lang.String">
+        <![CDATA[
+        update notice_board
+        set nb_viewCount=nb_viewCount+1
         where nb_seq=#{nb_seq}
         ]]>
     </select>

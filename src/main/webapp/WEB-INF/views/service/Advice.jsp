@@ -254,35 +254,6 @@
                 <h1 style="font-size: 60px; color: #f58e45; margin-bottom: 10px; text-align: center"> 전문가 상담 및 문의 </h1>
                 <form name="WriteForm" id="frm" enctype="multipart/form-data">
                     <div style="border: 10px solid #f58e45; border-radius: 20px; width: 100%; margin-bottom: 20px">
-                        <h3 style="text-align: center">작물선택 결과</h3>
-                        <table>
-                            <tr>
-                                <th>
-                                    선택한 작물
-                                </th>
-                                <td>
-                                    작물A
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    작물 A의 시세
-                                </th>
-                                <td>
-                                    얼마
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    작물 A의 파종기와 수학시기
-                                </th>
-                                <td>
-                                    1월 ~ 12월 상중하
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div style="border: 10px solid #f58e45; border-radius: 20px; width: 100%; margin-bottom: 20px">
                         <table id="Advice" style="margin: 20px">
                             <tr>
                                 <th>아이디</th>

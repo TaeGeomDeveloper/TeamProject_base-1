@@ -96,11 +96,26 @@
         ]]>
     </select>
 
-    <select id="checkId" resultType="int">
+    <select id="selectOneCrop" resultType="cropDataVO"  parameterType="String" >
+      <![CDATA[
+        select * from crop_data
+        where
+            cd_cropName=#{cd_cropName}
+        ]]>
+     </select>
+
+    <select id="checkId" resultType="surveyInputVO" parameterType="String">
         <![CDATA[
-        select count(*) from member_survey_input msi, member_survey_output mso
-        where msi.msi_id = #{msi_id}
-          and mso.mso_id = #{msi_id};
+        select * from member_survey_input
+        where msi_id = #{msi_id};
+        ]]>
+    </select>
+
+    <select id="selectFarmlandPrice" resultType="surveyInputVO" resultMap="farmLandResult">
+        <![CDATA[
+        select * from market_price_farmland
+        where mpf_locationName = #{msi_desiredArea}
+        and mpf_locationNameDetail like concat('%',#{msi_desiredAreaDetail}, '%');
         ]]>
     </select>
 
