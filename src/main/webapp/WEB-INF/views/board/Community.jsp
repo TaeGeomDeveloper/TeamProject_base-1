@@ -80,27 +80,6 @@
                                     ${vo.cb_originFileName}
                                 </a>
                             </c:if>
-                            <c:choose>
-                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
-                                    <a href="Update.do?id=${vo.cb_id}">
-                                        <button class="button3">변경</button>
-                                    </a>
-                                </c:when>
-                            </c:choose>
-                        </td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${user.mi_id == vo.cb_id || user.mi_id == vo.cb_id}">
-                                    <a href="delete.do?cb_seq=${vo.cb_seq}">
-                                        <button class="button3">삭제</button>
-                                    </a>
-                                </c:when>
-                            </c:choose>
-                        </td>
-                        <td>
-                            <a href="download.do?cb_seq=${vo.cb_seq}&token=on">
-                                <button class="button3">첨부파일</button>
-                            </a>
                         </td>
                         <c:if test="${user.mi_id=='admin'}">
                             <td>
@@ -112,19 +91,6 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <th>글번호</th>
-                    <th>분류</th>
-                    <th style="width: 40%">제목</th>
-                    <th>작성자</th>
-                    <th>등록일</th>
-                    <th>조회수</th>
-                    <th>변경 버튼</th>
-                    <th>삭제 버튼</th>
-                    <th>첨부파일</th>
-                </tr>
-                </tfoot>
             </table>
 
             <a href="${contextPath}/board/CreateNewBoard.do">
