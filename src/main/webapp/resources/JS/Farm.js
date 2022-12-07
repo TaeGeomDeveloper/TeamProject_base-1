@@ -116,7 +116,6 @@ function fn_clcik2(number) {
 }
 
 $(document).ready(function () {
-
     var area0 = [
         "도 선택",
         "강원도",
@@ -377,8 +376,8 @@ $(document).ready(function () {
         let msi_cultivationMethod = $("#msi_cultivationMethod").val();
         let msi_farmingExperience = $("#msi_farmingExperience").val();
         let msi_hadMachinery = $("#msi_hadMachinery").val();
-        // let msi_capital = $("#msi_capital").val();
-        // let msi_holdingLand = $("#msi_holdingLand").val();
+
+
 
         let param = {
             msi_id: msi_id,
@@ -406,7 +405,7 @@ $(document).ready(function () {
             url: "./CropRecIdCheck.do",
             data: { msi_id: memberId },
             success: function (data, status) {
-                alert(data);
+                //alert(data);
                 if (data == "true") {
                     //$("#window").slideUp("slow");
                     alert(
@@ -427,7 +426,7 @@ $(document).ready(function () {
                                 }
                             },
                             error: function (data, status) {
-                                alert(data + status);
+                                //alert(data + status);
                             },
                         });
                     }
@@ -440,7 +439,7 @@ $(document).ready(function () {
                         dataType: "json",
                         data: JSON.stringify(param),
                         success: function (result) {
-                            alert("성공!");
+                            alert("조건에 부합한 작물을 찾았습니다!");
                             $("#window").slideDown("slow");
                             var table = "";
 
@@ -480,7 +479,7 @@ $(document).ready(function () {
                         }, // end function
                         error: function (data, status) {
                             // 실패시
-                            alert(data + status);
+                            alert("필수 값을 입력해주세요");
                         },
                     });
 
@@ -493,7 +492,7 @@ $(document).ready(function () {
                         data: JSON.stringify(param),
                         success: function (data) {
                             var MPF = data[0];
-                            alert(MPF.mpf_averagePrice);
+                            //alert(MPF.mpf_averagePrice);
                             $("input[name=mpf_averagePrice]").attr("value", MPF.mpf_averagePrice);
 
                         },
@@ -515,28 +514,3 @@ $(document).ready(function () {
         });
     });
 });
-
-// $("input").change(function () {
-//     let mpf_averagePrice = $("#mpf_averagePrice").val();
-//     let cd_operatingCost = $("#cd_operatingCost").val();
-//     let cd_income = $("#cd_income").val();
-//     let mso_holdingLand1 = $("#mso_holdingLand1").val();
-//     let mso_holdingLand2 = $("#mso_holdingLand2").val();
-//     let mso_holdingLand3 = $("#mso_holdingLand3").val();
-//     let result1 = mpf_averagePrice * mso_holdingLand1;
-//     let result2 = cd_operatingCost * mso_holdingLand2;
-//     let result3 = cd_income * mso_holdingLand3;
-//     // $("#price1") = result1;
-//     let lineTotal1 = $("input[name=price1]").attr("value", result1).val();
-//     let lineTotal2 = $("input[name=price2]").attr("value", result2).val();
-//     let lineTotal3 = $("input[name=price3]").attr("value", result3).val();
-//     const linetotals = Number(lineTotal3) - Number(Number(lineTotal1) + Number(lineTotal2));
-//     //console.log(linetotals);
-//     let subtotal = $("input[name=subtotal]").attr("value", linetotals);
-//     // console.log(mpf_averagePrice);
-//     // console.log(cd_operatingCost);
-//     // console.log(cd_income);
-//     console.log(mso_holdingLand1);
-//     console.log(mso_holdingLand2);
-//     console.log(mso_holdingLand3);
-// });

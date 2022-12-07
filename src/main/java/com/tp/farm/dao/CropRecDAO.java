@@ -3,6 +3,7 @@ package com.tp.farm.dao;
 import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.SurveyInputVO;
+import com.tp.farm.vo.TraditionalMarketVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,5 +48,4 @@ public class CropRecDAO {
         }
         return flag;
     }
-
 }
