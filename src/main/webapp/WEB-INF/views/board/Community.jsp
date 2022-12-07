@@ -93,9 +93,11 @@
                 </tbody>
             </table>
 
-            <a href="${contextPath}/board/CreateNewBoard.do">
-                <button class="button2">작성하기</button>
-            </a>
+            <c:if test="${user.mi_id!=null}">
+                <a href="${contextPath}/board/CreateNewBoard.do">
+                    <button class="button2">작성하기</button>
+                </a>
+            </c:if>
 
         </div>
     </article>
