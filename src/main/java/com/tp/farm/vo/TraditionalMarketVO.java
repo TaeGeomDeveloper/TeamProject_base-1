@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TraditionalMarketVO {
-
     private String tmi_name;
     private String tmi_marketType;
     private String tmi_roadNameAddress;
