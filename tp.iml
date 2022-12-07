@@ -19,8 +19,11 @@
       <configuration>
         <fileset id="fileset" name="Mail Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/mail-context.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Servlet Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/action-mybatis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/mail-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml</file>
         </fileset>
       </configuration>

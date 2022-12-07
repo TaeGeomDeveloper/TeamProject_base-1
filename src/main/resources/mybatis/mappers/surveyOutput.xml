@@ -15,7 +15,7 @@
         <result property="mso_finalIncome" column="mso_finalIncome" />
     </resultMap>
 
-    <select id="selectSurveyOutput">
+    <select id="selectAllSurveyOutput">
         <![CDATA[
             select * from member_survey_output;
         ]]>
@@ -29,6 +29,14 @@
                     #{mso_incomeCrops}, #{mso_landCost}, #{mso_finalIncome})
         ]]>
     </insert>
+
+    <select id="selectSurveyOutput" resultType="surveyOutputVO"  parameterType="String" >
+      <![CDATA[
+        select * from member_survey_output
+        where
+            mso_id=#{mso_id}
+        ]]>
+     </select>
 
     <delete id="deleteSurveyOutput" parameterType="String">
         <![CDATA[
