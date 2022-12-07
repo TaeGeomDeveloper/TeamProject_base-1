@@ -1,6 +1,7 @@
 <%@ page import="com.tp.farm.vo.SurveyOutputVO" %>
 <%@ page import="com.tp.farm.vo.SurveyInputVO" %>
 <%@ page import="com.tp.farm.vo.CropDataVO" %>
+<%@ page import="com.tp.farm.vo.TraditionalMarketVO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -8,6 +9,12 @@
 <html>
 <head>
     <title>Main</title>
+
+    <style>
+        th {
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
@@ -18,6 +25,7 @@
     SurveyInputVO surveyInput = (SurveyInputVO) request.getAttribute("surveyInput");
 
     CropDataVO cropData = (CropDataVO) request.getAttribute("cropData");
+
 %>
 
 <%--몸통--%>
@@ -28,23 +36,79 @@
 
             <div style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
                 <table id="list_table" style="margin-bottom: 20px;">
-                    <tr>
-                        <th>회원 아이디</th><td>${surveyInput.msi_id}</td>
-                        <th>회원 이름</th><td>${surveyInput.msi_memberName}</td>
-                        <th>회원 나이</th><td>${surveyInput.msi_memberAge}</td>
+                    <tr style="width: 90%">
+                        <th>회원 아이디</th>
+                        <td><input class="form-control form-control" type="text" value="${surveyInput.msi_id}"
+                                   readonly/></td>
+                        <th>회원 이름</th>
+                        <td><input class="form-control form-control" type="text" value="${surveyInput.msi_memberName}"
+                                   readonly/></td>
                     </tr>
                     <tr>
-                        <th>귀농 희망지역</th><td>${surveyInput.msi_desiredArea} ${surveyInput.msi_desiredAreaDetail}</td>
-                        <th>파종 희망시기</th><td>${surveyInput.msi_desiredTimeSowing}</td>
+                        <th>귀농 희망지역</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyInput.msi_desiredArea} ${surveyInput.msi_desiredAreaDetail}"
+                                   readonly/></td>
                     </tr>
                     <tr>
-                        <th>${cropData.cd_cropName}</th><td><img src="${contextPath}/resources/image/FV/${cropData.cd_idx}.jpg" width="300px" height="300px" style="border-radius: 20px" ></td>
-                        <th>자본금</th><td>${surveyOutput.mso_capital}</td>
-                        <th>보유중인 토지</th><td>${surveyOutput.mso_holdingLand}</td>
+                        <th>파종 시기</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyInput.msi_desiredTimeSowing} ${surveyInput.msi_desiredTimeSowingPart}"
+                                   readonly/></td>
+                        <th>수학 시기</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyInput.msi_desiredHarvestTime} ${surveyInput.msi_desiredHarvestTimePart}"
+                                   readonly/></td>
                     </tr>
                     <tr>
-                        <th>최종예상 소득</th><td>${surveyOutput.mso_finalIncome}</td>
+                        <th>선택한 작물<br>${cropData.cd_cropName}</th>
+                        <td><img src="${contextPath}/resources/image/FV/${cropData.cd_idx}.jpg" width="200px"
+                                 height="200px" style="border-radius: 20px"></td>
                     </tr>
+                    <tr>
+                        <th>자본금</th>
+                        <td><input class="form-control form-control" type="text" value="${surveyOutput.mso_capital} 천원"
+                                   readonly/></td>
+                        <th>보유중인 토지</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_holdingLand} 평" readonly/></td>
+                    </tr>
+                    <tr>
+                        <th>예상 토지비용</th>
+                        <td><input class="form-control form-control" type="text" value="${surveyOutput.mso_landCost} 천원"
+                                   readonly/></td>
+                        <th>에상 경영비</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_managementExpenses} 천원" readonly/></td>
+                    </tr>
+                    <tr>
+                        <th>예상 농작물소득</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_incomeCrops} 천원" readonly/></td>
+                        <th>최종예상 소득</th>
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_finalIncome} 천원" readonly/></td>
+                    </tr>
+                </table>
+
+                <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 50px">관련 시장 정보</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>시장 이름</th>
+                        <th>시장 유형</th>
+                        <th>도로명 주소</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="vo" items="${TM_list}">
+                        <tr>
+                            <td>${vo.tmi_name}</td>
+                            <td>${vo.tmi_marketType}</td>
+                            <td>${vo.tmi_roadNameAddress}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
                 </table>
             </div>
 

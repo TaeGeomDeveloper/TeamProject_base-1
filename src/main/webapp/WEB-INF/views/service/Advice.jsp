@@ -168,7 +168,7 @@
 
                 <div style="margin-top: 30px">
                     <%-- 상담 게시판 현황 --%>
-                    <h1> 상담 현황 </h1>
+                        <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 상담 현황 </h1>
                     <table id="table_Adivce" class="table table-striped table-bordered" style="width:100%;">
                         <thead style="background-color: #7afacb">
                         <tr>

@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TraditionalMarketVO {
 
-    private int tmi_idx;
     private String tmi_name;
     private String tmi_marketType;
     private String tmi_roadNameAddress;
