@@ -135,7 +135,7 @@
                                 <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/HowFarmer.do">귀농 절차</a></li>
                                     <li><a class="dropdown-item rounded-2 " href="${contextPath}/service/Farm.do">작물 선택</a></li>
-                                    <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Advice.do">전문가 상담/문의</a></li>
+                                    <li><a class="dropdown-item rounded-2" href="${contextPath}/consult/BoardList.do">전문가 상담/문의</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Recruitment.do">일손 구하기</a></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/AgriculturalSupplies.do">농업 용품</a></li>

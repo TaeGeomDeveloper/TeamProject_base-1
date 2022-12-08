@@ -64,6 +64,50 @@
         }
     </style>
 
+    <script>
+        function Advice_click(){
+            var WriteForm = document.WriteForm;
+            let cb_title = $("#cb_title").val();
+
+            if(cb_title == ""){
+                alert("제목를 입력해주세요");
+                cb_title.focus();
+                return false;
+            };
+
+            WriteForm.method = "post";
+            WriteForm.action = "./createBoard.do";
+            WriteForm.submit();
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#table_i').DataTable({
+                order: [[0, "desc"]]
+            });
+        });
+    </script>
+
+    <style>
+        .AdviceBtn {
+            border-radius: 15px;
+            background-color: #f58e45;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .AdviceBtn:hover {
+            background-color: #ed6909;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -71,7 +115,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 전문가 상담 및 문의 </h1>
+            <h1 class="Title" style="color: #f58e45; margin-bottom: 60px;"> 전문가 상담 및 문의 </h1>
 
             <div class="container marketing" style="margin-top: 30px">
 
@@ -158,8 +202,8 @@
 
                 <!-- Button trigger modal -->
                 <div style="margin-top: 20px;margin-bottom: 20px">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            style="width: 50%; height: 80px; font-size: 40px">
+                    <button class="AdviceBtn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            style="width: 50%; height: 80px; font-size: 40px;">
                         상담 예약
                     </button>
                 </div>
@@ -169,7 +213,8 @@
                 <div style="margin-top: 30px">
                     <%-- 상담 게시판 현황 --%>
                         <h1 class="Title" style="color: #f58e45; margin-bottom: 30px;"> 상담 현황 </h1>
-                    <table id="table_Adivce" class="table table-striped table-bordered" style="width:100%;">
+
+                    <table id="table_i" class="table table-striped table-bordered" style="width:100%;">
                         <thead style="background-color: #7afacb">
                         <tr>
                             <th>글번호</th>
@@ -177,59 +222,37 @@
                             <th>작성자</th>
                             <th>등록일</th>
                             <th>조회수</th>
-                            <th>변경 버튼</th>
-                            <th>삭제 버튼</th>
                             <th>첨부파일</th>
+                            <c:if test="${user.mi_id=='admin'}">
+                                <th>삭제 버튼</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="i" begin="0" end="15">
+                        <c:forEach var="vo" items="${list}">
                             <tr>
-                                <td>${i}</td>
-                                <td> 제목 ${i}</td>
-                                <td>김 모씨</td>
-                                <td>2022-11-11</td>
-                                <td>0</td>
+                                <th scope="row">${vo.ecb_seq}</th>
+                                <td><a href="ReadBoard.do?ecb_seq=${vo.ecb_seq}">${vo.ecb_title} </a></td>
+                                <td> ${vo.ecb_id}</td>
+                                <td>${vo.ecb_regDate}</td>
+                                <td>${vo.ecb_viewCount}</td>
                                 <td>
-                                    <button class="button3">변경</button>
+                                    <c:if test="${vo.ecb_originFileName!=null}">
+                                        <a href="download.do?ecb_seq=${vo.ecb_seq}&token=on">
+                                                ${vo.ecb_originFileName}
+                                        </a>
+                                    </c:if>
                                 </td>
-                                <td>
-                                    <button class="button3">삭제</button>
-                                </td>
-                                <td>
-                                    <button class="button3">첨부파일</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>${i}</td>
-                                <td> 상담 리스트 ${i}</td>
-                                <td>윤 모씨</td>
-                                <td>2022-11-11</td>
-                                <td>0</td>
-                                <td>
-                                    <button class="button3">변경</button>
-                                </td>
-                                <td>
-                                    <button class="button3">삭제</button>
-                                </td>
-                                <td>
-                                    <button class="button3">첨부파일</button>
-                                </td>
+                                <c:if test="${user.mi_id=='admin'}">
+                                    <td>
+                                        <a href="delete.do?nb_seq=${vo.ecb_seq}">
+                                            <button class="button4">삭제</button>
+                                        </a>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>글번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>등록일</th>
-                            <th>조회수</th>
-                            <th>변경 버튼</th>
-                            <th>삭제 버튼</th>
-                            <th>첨부파일</th>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
 
@@ -257,29 +280,34 @@
                         <table id="Advice" style="margin: 20px">
                             <tr>
                                 <th>아이디</th>
-                                <td><input class="form-control" placeholder="ID" type="text" name="mi_id"
+                                <td><input class="form-control" placeholder="ID" type="text" name="ecb_id"
                                            style="width: 25%"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>제목</th>
-                                <td><input class="form-control" placeholder="Title" type="text" name="cb_title"
+                                <td><input class="form-control" placeholder="Title" type="text" name="ecb_title"
                                            style="width: 50%"/></td>
                             </tr>
                             <tr>
                                 <th>내용</th>
                                 <td style="width: 900px;">
                                     <div>
-                                        <textarea name="cb_content" id="cb_content" placeholder=""></textarea>
+                                        <textarea name="ecb_content" id="cb_content" placeholder=""></textarea>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>첨부파일</th>
+                                <td><input class="form-control" placeholder="file" type="file" name="ecb_attachedFile"
+                                           style="width: 50%"/></td>
                             </tr>
                         </table>
                     </div>
                 </form>
 
                 <div align="center">
-                    <button class="Mbtn" type="submit" onclick="fn_click()" id="savebutton"> 작성하기</button>
+                    <button class="Mbtn" type="submit" onclick="Advice_click()"> 작성하기</button>
                 </div>
             </div>
 
