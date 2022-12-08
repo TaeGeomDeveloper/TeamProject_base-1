@@ -354,6 +354,7 @@ $(document).ready(function () {
         $("#Info_menu3").slideDown("slow");
     });
 
+
     //console.log('in');
     $("#flip").on("click", function (event) {
         //alert(event.target.id);
@@ -399,118 +400,124 @@ $(document).ready(function () {
         };
 
         //alert(memberId);
-        $.ajax({
-            type: "get",
-            dataType: "text",
-            url: "./CropRecIdCheck.do",
-            data: { msi_id: memberId },
-            success: function (data, status) {
+        // $.ajax({
+        //     type: "get",
+        //     dataType: "text",
+        //     url: "./CropRecIdCheck.do",
+        //     data: { msi_id: memberId },
+        //     success: function (data, status) {
                 //alert(data);
-                if (data == "true") {
-                    //$("#window").slideUp("slow");
-                    alert(
-                        "이미 동일 아이디로 입력하신 이력이 존재합니다. " +
-                        "\n기존에 있던 이력을 삭제해주세요 *^^*"
-                    );
-                    const deleteData = confirm("기존에 있던 이력을 삭제 하시겠습니까?");
-                    if (deleteData) {
-                        $.ajax({
-                            type: "POST",
-                            dataType: "text",
-                            url: "./DeleteSurvey.do",
-                            data: {msi_id: memberId},
-                            success: function (data, status) {
-                                if(data=="false"){
-                                    alert("삭제 완료");
-                                    window.location.reload();
-                                }
-                            },
-                            error: function (data, status) {
-                                //alert(data + status);
-                            },
-                        });
-                    }
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "./FarmProcess.do",
-                        // dataType: "text",
-                        contentType: "application/json; charset=UTF-8",
-                        dataType: "json",
-                        data: JSON.stringify(param),
-                        success: function (result) {
-                            alert("조건에 부합한 작물을 찾았습니다!");
-                            $("#window").slideDown("slow");
-                            var table = "";
+                // if (data == "true") {
+                //     $("#window").slideUp("slow");
+                //     alert(
+                //         "이미 동일 아이디로 입력하신 이력이 존재합니다. " +
+                //         "\n기존에 있던 이력을 삭제해주세요 *^^*"
+                //     );
+                //     const deleteData = confirm("기존에 있던 이력을 삭제 하시겠습니까?");
+                //     if (deleteData) {
+                //         $.ajax({
+                //             type: "POST",
+                //             dataType: "text",
+                //             url: "./DeleteSurvey.do",
+                //             data: {msi_id: memberId},
+                //             success: function (data, status) {
+                //                 if(data=="false"){
+                //                     alert("삭제 완료");
+                //                     //window.location.reload();
+                //                     localStorage.clear();
+                //                     $("#window").slideUp("slow");
+                //                 }
+                //             },
+                //             error: function (data, status) {
+                //                 //alert(data + status);
+                //             },
+                //         });
+                //     }
+                // } else {
+            $.ajax({
+                type: "POST",
+                url: "./FarmProcess.do",
+                // dataType: "text",
+                contentType: "application/json; charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify(param),
+                success: function (result) {
+                    alert("조건에 부합한 작물을 찾았습니다!");
+                    $("#window").slideDown("slow");
+                    $("#flip").css("display","none");
+                    var table = "";
 
-                            for (var i = 0; i < result.length; i++) {
-                                var map = result[i];
+                    for (var i = 0; i < result.length; i++) {
+                        var map = result[i];
 
-                                var container = document.getElementById("hold-this");
+                        var container = document.getElementById("hold-this");
 
-                                function myFunction(map) {
-                                    var el = document.createElement("div"),
-                                        button = document.createElement("button");
+                        function myFunction(map) {
+                            var el = document.createElement("div"),
+                                button = document.createElement("button");
 
-                                    if (button != null) {
-                                        button.innerHTML =
-                                            '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +
-                                            '<img id="FV" src="/gwinongin/resources/image/FV/' +
-                                            map.cd_idx +
-                                            '.jpg">' +
-                                            "</button>";
-                                    }
+                            if (button != null) {
+                                button.innerHTML =
+                                    '<button id="Fbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">' +
+                                    '<img id="FV" src="/gwinongin/resources/image/FV/' +
+                                    map.cd_idx +
+                                    '.jpg">' +
+                                    "</button>";
+                            }
 
-                                    button.onclick = function (e) {
-                                        listener(e, map);
-                                        FarmInfo(map);
-                                        //Test(map);
-                                    };
-                                    el.appendChild(button);
-                                    container.appendChild(el);
-                                }
+                            button.onclick = function (e) {
+                                listener(e, map);
+                                FarmInfo(map);
+                                //Test(map);
+                            };
+                            el.appendChild(button);
+                            container.appendChild(el);
+                        }
 
-                                function listener(e, map) {
-                                    //e.target.innerHTML = map.cd_cropName;
-                                }
+                        function listener(e, map) {
+                            //e.target.innerHTML = map.cd_cropName;
+                        }
 
-                                myFunction(map);
-                            } // end for loop
-                        }, // end function
-                        error: function (data, status) {
-                            // 실패시
-                            alert("필수 값을 입력해주세요");
-                        },
-                    });
+                        myFunction(map);
+                    } // end for loop
+                }, // end function
+                error: function (data, status) {
+                    // 실패시
+                    alert("선택하신 조건에 해당하는 정보가 없습니다.");
 
-                    $.ajax({
-                        type: "POST",
-                        url: "./MPF.do",
-                        // dataType: "text",
-                        contentType: "application/json; charset=UTF-8",
-                        dataType: "json",
-                        data: JSON.stringify(param),
-                        success: function (data) {
-                            var MPF = data[0];
-                            //alert(MPF.mpf_averagePrice);
-                            $("input[name=mpf_averagePrice]").attr("value", MPF.mpf_averagePrice);
+                },
+            });
 
-                        },
-                        error: function (data, status) {
-                            // 실패시
-                            alert(data + status);
-                        },
-                    });
+            $.ajax({
+                type: "POST",
+                url: "./MPF.do",
+                // dataType: "text",
+                contentType: "application/json; charset=UTF-8",
+                dataType: "json",
+                data: JSON.stringify(param),
+                success: function (data) {
+                    var MPF = data[0];
+                    //alert(MPF.mpf_averagePrice);
+                    $("input[name=mpf_averagePrice]").attr("value", MPF.mpf_averagePrice);
+
+                },
+                error: function (data, status) {
+                    // 실패시
+                   alert("귀농 희망 지역을 다시 선택해주세요");
+                },
+            });
 
 
-                }
-            },
-            error: function (data, status) {
-                alert("error" + status);
-            },
-            complete: function (xhr, status) {
-                //alert(xhr.status);
-            },
-        });
+            //     }
+            // },
+//             error: function (data, status) {
+//                 alert("error" + status);
+//             },
+//             complete: function (xhr, status) {
+//                 //alert(xhr.status);
+//             },
+//         });
+
     });
 });
+
