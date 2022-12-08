@@ -82,6 +82,11 @@ public class BoardService {
         return list;
     }
 
+    public List<BoardVO> selectCategoryBoard(String cb_category) {
+        List<BoardVO> list = boardDAO.selectCategory(cb_category);
+        return list;
+    }
+
     public boolean boardDownload(HttpServletResponse response, String cb_seq, String token) throws IOException {
         boolean flag = false;
         //게시판 정보 레코드 얻기
@@ -147,4 +152,5 @@ public class BoardService {
         flag = boardDAO.updateViewCount(cb_seq);
         return flag;
     }
+
 }

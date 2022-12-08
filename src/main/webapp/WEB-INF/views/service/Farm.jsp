@@ -53,6 +53,25 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#deleteSurvey").on("click", function (event) {
+                let memberId = $("#msi_id").val();
+                console.log(memberId);
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    url: "./DeleteSurvey.do?msi_id=${user.mi_id}",
+                    data: {msi_id: memberId},
+                    success: function (data, status) {
+                        if(data=="false"){
+                            alert("삭제 완료");
+                            window.location.reload();
+                        }
+                    },
+                    error: function (data, status) {
+                        alert(data + status);
+                    },
+                });
+            })
             $("input").change(function () {
                 let mpf_averagePrice = $("#mpf_averagePrice").val();
                 let cd_operatingCost = $("#cd_operatingCost").val();
@@ -153,8 +172,14 @@
                         자신의 여건과 적성, 기술수준, 자본능력 등에 적합한 작물을 신중하게 선택해야 합니다.<br/>
                         지역 환경 고려 하고 지역 특산물을 우선 하는게 좋습니다.<br/>
                     </p>
-
+                    <c:if test="${surveyInputYN=='Y'}">
+                        <p>설문조사 내역이 있습니다. 기존의 내역을 삭제해야 이용가능 합니다.</p>
+                        <button class="btn btn-primary btn-lg" type="button" id="deleteSurvey"  >삭제
+                        </button>
+                    </c:if>
+                    <span id="msg" style="display: none"></span>
                     <%--작물 선택--%>
+                    <c:if test="${surveyInputYN=='N'}">
                     <form id="FarmForm" name="FarmInfo"
                           style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
                         <h2>회원 정보입력 (필수)</h2>
@@ -303,10 +328,14 @@
                         </div>
                         <hr class="featurette-divider">
                         <div align="center">
-                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
-                            </button>
+                            <c:if test="${surveyInputYN=='N'}">
+                                <button class="btn btn-primary btn-lg" type="button" id="flip"  >작물 확인
+                                </button>
+                            </c:if>
+
                         </div>
                     </form>
+                    </c:if>
                 </div>
             </div>
             <div id="TestForm"></div>

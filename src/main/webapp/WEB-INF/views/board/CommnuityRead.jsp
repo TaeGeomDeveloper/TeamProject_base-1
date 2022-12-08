@@ -144,7 +144,7 @@
                             <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">
                                 <button class="button3">수정</button>
                             </a></td>
-                            <td><a href="delete.do?cb_seq=${vo.cb_seq}">
+                            <td><a href="delete.do?cb_seq=${board.cb_seq}">
                                 <button class="button3">삭제</button>
                             </a></td>
                         </c:if>
@@ -229,11 +229,6 @@
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td colspan="7"
-                                                                        style="height: 100px">${Rereply.cbr_content}</td>
-                                                                </tr>
-
                                                             </c:when>
                                                         </c:choose>
                                                     </c:forEach>
