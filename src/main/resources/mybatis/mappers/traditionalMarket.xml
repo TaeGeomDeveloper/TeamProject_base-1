@@ -5,7 +5,6 @@
 
 <mapper namespace="mapper.traditionalMarket">
     <resultMap id="tmResult" type="traditionalMarketVO">
-        <id property="tmi_idx" column="tmi_idx" />
         <result property="tmi_name" column="tmi_name" />
         <result property="tmi_marketType" column="tmi_marketType" />
         <result property="tmi_roadNameAddress" column="tmi_roadNameAddress" />
@@ -23,7 +22,7 @@
         ]]>
     </select>
 
-    <insert id="insertTraditionalMarket" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="tmi_idx">
+    <insert id="insertTraditionalMarket" parameterType="java.util.List" useGeneratedKeys="true">
                 insert into traditional_market_information(tmi_name, tmi_marketType, tmi_roadNameAddress, tmi_numberAddress,
                                                           tmi_storesNumber, tmi_hasVoucher, tmi_hasParkingLot, tmi_phoneNumber, tmi_renewalDate) values
         <foreach collection="list" item="item" separator=",">

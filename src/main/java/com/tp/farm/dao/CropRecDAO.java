@@ -3,6 +3,7 @@ package com.tp.farm.dao;
 import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.SurveyInputVO;
+import com.tp.farm.vo.TraditionalMarketVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,11 @@ public class CropRecDAO {
         return list;
     }
 
+    public List<TraditionalMarketVO> selectMarketInformation(SurveyInputVO surveyInput){
+        List<TraditionalMarketVO> list = sqlSession.selectList("mapper.cropRecommend.selectMarketInformation", surveyInput);
+        return list;
+    }
+
     public boolean checkId(String msi_id) {
         boolean flag = false;
         SurveyInputVO vo = sqlSession.selectOne("mapper.cropRecommend.checkId", msi_id);
@@ -47,5 +53,4 @@ public class CropRecDAO {
         }
         return flag;
     }
-
 }

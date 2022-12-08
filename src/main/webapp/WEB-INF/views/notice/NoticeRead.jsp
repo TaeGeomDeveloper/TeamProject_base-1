@@ -46,7 +46,7 @@
                             <td><a href="viewUpdatePage.do?nb_seq=${notice.nb_seq}">
                                 <button class="button3">수정</button>
                             </a></td>
-                            <td><a href="delete.do?nb_seq=${vo.nb_seq}">
+                            <td><a href="delete.do?nb_seq=${notice.nb_seq}">
                                 <button class="button3">삭제</button>
                             </a></td>
                         </c:if>

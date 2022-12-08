@@ -57,7 +57,6 @@
     </resultMap>
 
     <resultMap id="tmResult" type="traditionalMarketVO">
-        <id property="tmi_idx" column="tmi_idx" />
         <result property="tmi_name" column="tmi_name" />
         <result property="tmi_marketType" column="tmi_marketType" />
         <result property="tmi_roadNameAddress" column="tmi_roadNameAddress" />
@@ -117,6 +116,12 @@
         where mpf_locationName = #{msi_desiredArea}
         and mpf_locationNameDetail like concat('%',#{msi_desiredAreaDetail}, '%');
         ]]>
+    </select>
+
+    <select id="selectMarketInformation" resultType="surveyInputVO" resultMap="tmResult" >
+        select * from traditional_market_information
+        where tmi_roadNameAddress like concat('%', #{msi_desiredArea}, '%')
+          and tmi_roadNameAddress like concat('%', #{msi_desiredAreaDetail}, '%');
     </select>
 
 </mapper>
