@@ -34,18 +34,12 @@
 
             <nav class="navbar" style="background-color: #7afacb; margin-top: 30px">
                 <div class="container-fluid">
-                    <select class="form-select" aria-label="Default select example" style="width: 20%">
-                        <option selected>카테고리</option>
-                        <option value="1">일반</option>
-                        <option value="2">정보</option>
-                        <option value="3">나눔</option>
-                        <option value="4">질문</option>
-                    </select>
                     <div class="d-flex">
-                        <button class="button">일반</button>
-                        <button class="button">정보</button>
-                        <button class="button">나눔</button>
-                        <button class="button">질문</button>
+                        <a href="BoardList.do"><button class="button">전체</button></a>
+                        <a href="BoardList.do?cb_category=일반"><button class="button">일반</button></a>
+                        <a href="BoardList.do?cb_category=정보"><button class="button">정보</button></a>
+                        <a href="BoardList.do?cb_category=나눔"><button class="button">나눔</button></a>
+                        <a href="BoardList.do?cb_category=질문"><button class="button">질문</button></a>
                     </div>
                 </div>
             </nav>

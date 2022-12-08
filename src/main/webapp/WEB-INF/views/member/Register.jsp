@@ -49,6 +49,7 @@
             $('#idCheck').on('click', function (event) {
                 //alert(event.target.id);
                 let memberId = $('#mi_id').val();
+                let idCheck = /^[A-Za-z0-9]{6,12}$/;
                 //alert(memberId);
                 $.ajax({
                     type : 'get',
@@ -63,11 +64,21 @@
                             return false;
                         }
                         if(data=='true'){
-                            $('#msg').html("중복된 아이디 입니다.")
+                            $("#unrightId").css('display', 'inline-block');
+                            $('#unrightId').html("중복된 아이디 입니다.")
+                            $("#rightId").css('display', 'none');
+                            $('#mi_id').val("");
+                            $('#mi_id').focus();
+                        }else if(!idCheck.test(memberId)){
+                            $("#unrightId").css('display', 'inline-block');
+                            $('#unrightId').html("사용할 수 없는 아이디 입니다.")
+                            $("#rightId").css('display', 'none');
                             $('#mi_id').val("");
                             $('#mi_id').focus();
                         }else{
-                            $('#msg').html("사용할 수 있는 아이디 입니다.")
+                            $("#rightId").css('display', 'inline-block');
+                            $('#rightId').html("사용할 수 있는 아이디 입니다.")
+                            $("#unrightId").css('display', 'none');
                             $('#isIdCheck').val('true');
                         }
                     },
@@ -300,6 +311,27 @@
         });
     </script>
 
+    <script>
+        window.onload = function() {
+            // 도메인 직접 입력 or domain option 선택
+            const domainListEl = document.querySelector('#domain_list')
+            const domainInputEl = document.querySelector('#mi_email1')
+            // select 옵션 변경 시
+            domainListEl.addEventListener('change', (event) => {
+                // option에 있는 도메인 선택 시
+                if(event.target.value !== "type") {
+                    // 선택한 도메인을 input에 입력하고 disabled
+                    domainInputEl.value = event.target.value
+                    domainInputEl.disabled = true
+                } else { // 직접 입력 시
+                    // input 내용 초기화 & 입력 가능하도록 변경
+                    domainInputEl.value = ""
+                    domainInputEl.disabled = false
+                }
+            })
+        }
+    </script>
+
     <style>
         .form-control {
             width: 200px;
@@ -355,7 +387,8 @@
                                        maxlength="12"
                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                 <input type="button" class="button" name="id_check" value="중복확인" id="idCheck">
-                                <span id="msg" style="color:green"></span>
+                                <span id="rightId" style="display: none; color:green"></span>
+                                <span id="unrightId" style="display: none; color:red"></span>
                                 <span style="font-size: 10pt;">아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.</span>
                             </td>
                         </tr>
@@ -485,13 +518,13 @@
                                 <input class="form-control form-control" type="text" name="mi_email" id="mi_email"
                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');"><span
                                     style="font-size: 20pt;"> @ </span>
-                                <select class="form-select" style="width: 200px" name="mi_email" id="mi_email1">
-                                    <option selected="selected" value="none">선택</option>
-                                    <option value="@naver.com">naver.com</option>
-                                    <option value="@daum.net">daum.net</option>
-                                    <option value="@gmail.com">gmail.com</option>
-                                    <option value="@nate.com">nate.com</option>
-                                    <option value="직접입력" id="inputText">직접입력</option>
+                                <input class="form-control form-control" type="text" name="mi_email1" id="mi_email1" />
+                                <select class="form-select" style="width: 200px" name="domain_list" id="domain_list">
+                                    <option value="type" selected="selected">직접입력</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="daum.net">daum.net</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="nate.com">nate.com</option>
                                 </select>
 
                             </td>
