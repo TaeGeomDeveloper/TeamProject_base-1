@@ -111,7 +111,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 게시글 </h1>
+            <h1 class="Title" style="margin-bottom: 30px;"> 쉼터 </h1>
 
             <div class="d-flex justify-content-center" style="width: 80%; text-align: center; ">
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
@@ -240,6 +240,7 @@
                                                 </table>
                                             </div>
                                             <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
+
                                             <div class="${reply.cbr_bundleSeq}" style="display: none; align-content: center">
                                                 <form name="reReplyForm" id="reReplyForm" >
                                                     <table>

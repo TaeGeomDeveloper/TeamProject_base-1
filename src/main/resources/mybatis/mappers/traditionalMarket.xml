@@ -5,7 +5,6 @@
 
 <mapper namespace="mapper.traditionalMarket">
     <resultMap id="tmResult" type="traditionalMarketVO">
-        <id property="tmi_idx" column="tmi_idx" />
         <result property="tmi_name" column="tmi_name" />
         <result property="tmi_marketType" column="tmi_marketType" />
         <result property="tmi_roadNameAddress" column="tmi_roadNameAddress" />

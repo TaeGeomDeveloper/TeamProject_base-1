@@ -26,6 +26,21 @@
         <put-attribute name="body" value="/WEB-INF/views/service/Advice.jsp" />
     </definition>
 
+    <definition name="/service/AdviceReadInfo" extends="baseLayout">
+        <put-attribute name="title" value="상담문의 정보 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/service/AdviceReadInfo.jsp" />
+    </definition>
+
+    <definition name="/service/AdviceUpdate" extends="baseLayout">
+        <put-attribute name="title" value="상담문의 정보 수정 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/service/AdviceUpdate.jsp" />
+    </definition>
+
+    <definition name="/service/AdviceReplyUpdate" extends="baseLayout">
+        <put-attribute name="title" value="상담문의 정보 답글 수정 페이지" />
+        <put-attribute name="body" value="/WEB-INF/views/service/AdviceReplyUpdate.jsp" />
+    </definition>
+
     <definition name="/service/HowFarmer" extends="baseLayout">
         <put-attribute name="title" value="농부 절차 페이지" />
         <put-attribute name="body" value="/WEB-INF/views/service/HowFarmer.jsp" />

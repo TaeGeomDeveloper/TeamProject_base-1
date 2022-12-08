@@ -126,6 +126,7 @@ public class NoticeController {
         mav.setViewName("/notice/NoticeUpdate");
         return mav;
     }
+
     @RequestMapping(value="/updateBoard.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView updateBoard(@RequestParam("nb_attachedFile") MultipartFile attachFile, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
