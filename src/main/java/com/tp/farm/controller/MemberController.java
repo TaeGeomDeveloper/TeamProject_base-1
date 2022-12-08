@@ -76,12 +76,12 @@ public class MemberController {
     @RequestMapping(value = "/registProcess.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView registProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
-
         String mi_id = request.getParameter("mi_id");
         String mi_password = request.getParameter("mi_password");
         String mi_name = request.getParameter("mi_name");
-        String[] mi_email = request.getParameterValues("mi_email");
-        String email = mi_email[0] + mi_email[1];
+        String mi_email = request.getParameter("mi_email");
+        String mi_email1 = request.getParameter("mi_email1");
+        String email = mi_email + "@" + mi_email1;
         String[] mi_phone = request.getParameterValues("mi_phone");
         String[] mi_wireline = request.getParameterValues("mi_wireline");
         String phone = mi_phone[0] + mi_phone[1] + mi_phone[2];

@@ -24,6 +24,14 @@
         ]]>
     </select>
 
+    <select id="selectCategoryBoard" resultMap="boardResult" parameterType="java.lang.String">
+        <![CDATA[
+        select * from community_board
+        where cb_category=#{cb_category}
+        order by cb_seq desc
+        ]]>
+    </select>
+
     <select id="selectOneBoardBySeq" resultMap="boardResult" resultType="boardVO" parameterType="java.lang.String">
         <![CDATA[
             select * from community_board where cb_seq=#{cb_seq}
