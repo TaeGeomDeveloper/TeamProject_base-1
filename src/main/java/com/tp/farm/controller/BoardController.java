@@ -53,8 +53,14 @@ public class BoardController {
     public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("게시글 ");
         ModelAndView mav = new ModelAndView();
-        List<BoardVO> list = boardService.selectAllBoard();
-        mav.addObject("list", list);
+        String cb_category = request.getParameter("cb_category");
+        if(cb_category==null) {
+            List<BoardVO> list = boardService.selectAllBoard();
+            mav.addObject("list", list);
+        } else {
+            List<BoardVO> list = boardService.selectCategoryBoard(cb_category);
+            mav.addObject("list", list);
+        }
         mav.setViewName("/board/Community");
         return mav;
     }

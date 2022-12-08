@@ -20,29 +20,24 @@
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center">
-            <h1> 기상청 작물별 농업 주산지 상세날씨 조회서비스 </h1>
+        <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
+            <h1 class="Title" style="color: #38a9d9; margin-bottom: 30px;"> 경상남도 작물별 주산지 날씨</h1>
 
             <div style="border: #04AA6D 5px; border-radius: 20px; margin-top: 30px">
-                <input class="form-control" type="text" placeholder="원하는 날짜 (예: 20221114)" id="Day">
+                <div class="d-flex justify-content-center" style="margin-top: 50px">
+                    <input class="form-control" type="date" placeholder="원하는 날짜 (예: 20221114)" id="Day" name="Day">
 
-                <select class="form-select" id="AREA_ID">
-                    <option selected>주산지</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                    <select class="form-select" id="AREA_ID" name="AREA_ID">
+                    </select>
 
-                <select class="form-select" id="PA_CROP_SPE_ID">
-                    <option selected>작물명</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-
+                    <select class="form-select" id="PA_CROP_SPE_ID" name="PA_CROP_SPE_ID">
+                    </select>
+                </div>
             </div>
 
-            <div id="weatherBox" style="margin-top: 30px">
+            <button type="button" class="button2" style="margin-top: 50px" id="WT">날씨 조회하기</button>
+
+            <div id="weatherBox" style="margin-top: 100px; margin-bottom: 200px">
 
             </div>
         </div>

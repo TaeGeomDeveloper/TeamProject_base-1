@@ -23,15 +23,13 @@
                 alert("내용을 입력해주세요");
                 cbr_content1.focus();
                 return false;
-            }
-            ;
+            };
 
             if (cbr_content2 == "") {
                 alert("내용을 입력해주세요");
                 cbr_content2.focus();
                 return false;
-            }
-            ;
+            };
 
             replyUpdateForm.method = "post";
             replyUpdateForm.action = "./updateReply.do";

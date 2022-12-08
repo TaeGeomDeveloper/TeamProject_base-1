@@ -38,6 +38,11 @@ public class BoardDAO {
         return list;
     }
 
+    public List<BoardVO> selectCategory(String cb_category) {
+        List<BoardVO> list = sqlSession.selectList("mapper.board.selectCategoryBoard", cb_category);
+        return list;
+    }
+
     public boolean updateDownloadCount(String cb_seq, String token) {
         boolean flag = false;
         int affectedCount = sqlSession.update("mapper.board.updateDownloadCount", cb_seq);
@@ -84,4 +89,5 @@ public class BoardDAO {
         }
         return flag;
     }
+
 }
