@@ -3,6 +3,7 @@
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/tp/farm/vo/MemberVO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/농작물_자료조사표.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/농지_시세_테이블.csv" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
