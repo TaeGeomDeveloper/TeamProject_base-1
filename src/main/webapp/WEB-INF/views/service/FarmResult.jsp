@@ -10,6 +10,12 @@
 <head>
     <title>Main</title>
 
+    <%-- 차트 --%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="${contextPath}/resources/JSON/Farm2.json"></script>
+    <script src="${contextPath}/resources/JS/Farm.js"></script>
+
+
     <style>
         th {
             text-align: center;
@@ -62,8 +68,9 @@
                     </tr>
                     <tr>
                         <th>선택한 작물<br>${cropData.cd_cropName}</th>
-                        <td><img src="${contextPath}/resources/image/FV/${cropData.cd_idx}.jpg" width="200px"
-                                 height="200px" style="border-radius: 20px"></td>
+                        <td>
+                            <img src="${contextPath}/resources/image/FV/${cropData.cd_idx}.jpg" width="200px"
+                                 id="CropData" name="CropData" height="200px" style="border-radius: 20px"></td>
                     </tr>
                     <tr>
                         <th>자본금</th>

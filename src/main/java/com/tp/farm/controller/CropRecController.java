@@ -251,6 +251,28 @@ public class CropRecController {
         return mav;
     }
 
+    @RequestMapping(value = "/MemberFarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView MemberFarmInfo(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        //session에 로그인한 아이디
+        MemberVO mem = (MemberVO) httpSession.getAttribute("user");
+        String mso_id = mem.getMi_id();
+        //로그인한 아이디 설문지 호출
+        SurveyInputVO surveyInput = surveyInputDAO.selectOne(mso_id);
+        SurveyOutputVO surveyOutput = surveyOutputDAO.selectSurveyOutput(mso_id);
+        String mso_cropName = surveyOutput.getMso_cropName();
+        CropDataVO cropData = cropRecDAO.selectOneCrop(mso_cropName);
+
+        List<TraditionalMarketVO> TM_list = cropRecDAO.selectMarketInformation(surveyInput);
+
+        mav.addObject("surveyInput", surveyInput);
+        mav.addObject("surveyOutput", surveyOutput);
+        mav.addObject("cropData", cropData);
+        mav.addObject("TM_list", TM_list);
+        mav.setViewName("/service/FarmResult");
+        return mav;
+    }
+
 //    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json")
 //     public List<CropDataVO> FarmProcess(@RequestBody SurveyInputVO vo) throws  Exception{
 //        if(vo == null){

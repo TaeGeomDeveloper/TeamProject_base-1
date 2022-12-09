@@ -174,7 +174,10 @@
                     </p>
                     <c:if test="${surveyInputYN=='Y'}">
                         <p>설문조사 내역이 있습니다. 기존의 내역을 삭제해야 이용가능 합니다.</p>
-                        <button class="btn btn-primary btn-lg" type="button" id="deleteSurvey"  >삭제
+                        <a href="${contextPath}/service/MemberFarmResult.do" style="text-decoration: none;">
+                            <button class="btn btn-primary btn-lg" type="button" id="memberSurvey">내 설문지보기</button>
+                        </a>
+                        <button class="btn btn-primary btn-lg" type="button" id="deleteSurvey" style="background-color: red;">삭제
                         </button>
                     </c:if>
                     <span id="msg" style="display: none"></span>
