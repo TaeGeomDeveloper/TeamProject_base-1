@@ -44,12 +44,15 @@
     </script>
 
     <script>
+        let idCheckYN = "N";
+        let phoneCheckYN = "N";
         $(document).ready(function () {
             //console.log('in');
             $('#idCheck').on('click', function (event) {
                 //alert(event.target.id);
                 let memberId = $('#mi_id').val();
                 let idCheck = /^[A-Za-z0-9]{6,12}$/;
+                console.log(idCheckYN);
                 //alert(memberId);
                 $.ajax({
                     type : 'get',
@@ -61,7 +64,15 @@
                         if(memberId == ""){
                             alert("아이디를 입력해주세요");
                             memberId.focus();
-                            return false;
+                            idCheckYN = "N"
+                        }
+                        if(!idCheck.test(memberId)){
+                            $("#unrightId").css('display', 'inline-block');
+                            $('#unrightId').html("사용할 수 없는 아이디 입니다.")
+                            $("#rightId").css('display', 'none');
+                            $('#mi_id').val("");
+                            $('#mi_id').focus();
+                            idCheckYN = "N"
                         }
                         if(data=='true'){
                             $("#unrightId").css('display', 'inline-block');
@@ -69,18 +80,16 @@
                             $("#rightId").css('display', 'none');
                             $('#mi_id').val("");
                             $('#mi_id').focus();
-                        }else if(!idCheck.test(memberId)){
-                            $("#unrightId").css('display', 'inline-block');
-                            $('#unrightId').html("사용할 수 없는 아이디 입니다.")
-                            $("#rightId").css('display', 'none');
-                            $('#mi_id').val("");
-                            $('#mi_id').focus();
-                        }else{
+                            idCheckYN = "N"
+                        }
+                        if(idCheck.test(memberId)){
                             $("#rightId").css('display', 'inline-block');
                             $('#rightId').html("사용할 수 있는 아이디 입니다.")
                             $("#unrightId").css('display', 'none');
                             $('#isIdCheck').val('true');
+                            idCheckYN = "Y"
                         }
+                        console.log("idCheckYN :"+idCheckYN);
                     },
                     error : function (data, status){
                         alert('error'+status);
@@ -103,9 +112,7 @@
             //     }
             // });
         });
-    </script>
 
-    <script>
         $(function () {
             $("#sendSMS").click(function () {
                 const submitPop = document.getElementById("submitPop");
@@ -116,13 +123,13 @@
                 let sendNumber = phoneNum+phoneNum1+phoneNum2;
                 if(sendNumber=="010"){
                     alert("휴대폰 번호가 올바르지 않습니다.");
-                    return false;
+                    phoneCheckYN = "N";
                 }else if(phoneNum1=="") {
                     alert("휴대폰 번호가 올바르지 않습니다.");
-                    return false;
+                    phoneCheckYN = "N";
                 }else if(phoneNum2==""){
                     alert("휴대폰 번호가 올바르지 않습니다.");
-                    return false;
+                    phoneCheckYN = "N";
                 }else{
                     $.ajax({
                         type: "get",
@@ -156,18 +163,22 @@
 
             $("#checkQualifiedNumber").click(function () {
                 const validate = document.getElementById("validate")
+                if ($("#authNum").val() == "") {
+                    alert("인증 실패");
+                    phoneCheckYN = "N";
+                    console.log("phoneCheckYN "+phoneCheckYN);
+                }
                 if ($("#authNum").val() == code2) {
                     alert("인증 성공");
+                    phoneCheckYN = "Y";
+                    console.log("phoneCheckYN "+phoneCheckYN);
                 } else {
                     alert("인증 실패");
-
+                    phoneCheckYN = "N";
+                    console.log("phoneCheckYN "+phoneCheckYN);
                 }
             })
         })
-    </script>
-
-
-    <script>
         $(document).focusout(function () {
             var pwd1 = $("#password_1").val();
             var pwd2 = $("#password_2").val();
@@ -186,37 +197,65 @@
                 }
             }
         });
-    </script>
 
-
-    <script>
         function joinform_check() {
 
             var SendPerson = document.SendPerson;
+            var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+            var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
+            var arrNum2 = new Array(); // 주민번호 뒷자리숫자 7개를 담을 배열
 
             let id = $("#mi_id").val();
             let password1 = $("#password_1").val();
             let password2 = $("#password_2").val();
             let name = $("#mi_name").val();
-            let regNum = $("#regNum1").val() + "-" + $("#regNum2").val();
+            let regNum1 = document.getElementById("regNum1");
+            let regNum2 = document.getElementById("regNum2");
             let address = $("#mi_address").val();
             let addressCode = $("#mi_addressCode").val();
             let addressDetail = $("#mi_addressDetail").val();
-            let phone = $("#mi_phone").val() + $("#mi_phone1").val() + $("#mi_phone2").val();
-            let checkQualifiedNumber = $("#checkQualifiedNumber").val();
-            let email = $("#mi_email").val() + $("#mi_email1").val();
+            let mi_phone = $("#mi_phone").val()
+            let mi_phone_1 = $("#mi_phone1").val()
+            let mi_phone_2 = $("#mi_phone2").val();
+            let authNum = $("#authNum").val();
+            let email = $("#mi_email").val();
             let emailAddress = $("#mi_email1").val();
-
+            console.log(id);
+            console.log(password1);
+            console.log(password2);
+            console.log(name);
+            console.log(regNum1);
+            console.log(regNum2);
+            console.log(address);
+            console.log(addressCode);
+            console.log(addressDetail);
+            console.log(mi_phone);
+            console.log(mi_phone_1);
+            console.log(mi_phone_2);
+            console.log(authNum);
+            console.log(email);
+            console.log(emailAddress);
             if (id == "") {
                 alert("아이디를 입력해주세요");
                 id.focus();
                 return false;
             };
 
-            const idCheck = /^[A-Za-z0-9]{6,12}$/;
-            if (!idCheck.test(id)) {
-                alert("아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.");
-                id.focus();
+            // const idCheck = /^[A-Za-z0-9]{6,12}$/;
+            // if (!idCheck.test(id)) {
+            //     alert("아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.");
+            //     id.focus();
+            //     return false;
+            // }
+
+            if(idCheckYN=="N"){
+                alert("아이디 중복체크를 해주세요");
+                return false;
+            }
+
+            if(phoneCheckYN=="N"){
+                alert("인증번호를 확인해주세요.");
                 return false;
             }
 
@@ -228,6 +267,13 @@
 
             if (password2 == "") {
                 alert("비밀번호를 확인 해주세요");
+                password2.focus();
+                return false;
+            }
+
+            if(password1!=password2){
+                alert("비밀번호가 일치하지 않습니다.");
+                password1.focus();
                 password2.focus();
                 return false;
             }
@@ -245,12 +291,45 @@
                 return false;
             }
 
-            if (regNum == "") {
+            if (regNum1 == "", regNum2 == "") {
                 alert("주민등록번호를 입력해주세요");
-                regNum.focus();
+                regNum1.focus();
+                regNum2.focus();
                 return false;
             }
 
+
+
+            // for (let i=0; i<regNum1.value.length; i++) {
+            //     arrNum1[i] = regNum1.value.charAt(i);
+            // } // 주민번호 앞자리를 배열에 순서대로 담는다.
+            //
+            // for (let i=0; i<regNum2.value.length; i++) {
+            //     arrNum2[i] = regNum2.value.charAt(i);
+            // } // 주민번호 뒷자리를 배열에 순서대로 담는다.
+            //
+            // let tempSum=0;
+            //
+            // for (let i=0; i<regNum1.value.length; i++) {
+            //     tempSum += arrNum1[i] * (2+i);
+            // } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
+            //
+            // for (let i=0; i<regNum2.value.length-1; i++) {
+            //     if(i>=2) {
+            //         tempSum += arrNum2[i] * i;
+            //     }
+            //     else {
+            //         tempSum += arrNum2[i] * (8+i);
+            //     }
+            // } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
+            //
+            // if((11-(tempSum%11))%10!=arrNum2[6]) {
+            //     alert("올바른 주민번호가 아닙니다.");
+            //     regNum1.value = "";
+            //     regNum2.value = "";
+            //     regNum1.focus();
+            //     return false;
+            // }
             if (address == "", addressDetail == "", addressCode == "") {
                 alert("주소 관련 항목들을 입력해주세요");
                 address.focus();
@@ -259,15 +338,17 @@
                 return false;
             }
 
-            if (phone == "") {
+            if (mi_phone == "010", mi_phone_1=="", mi_phone_2=="") {
                 alert("휴대전화를 입력해주세요");
-                phone.focus();
+                mi_phone.focus();
+                mi_phone_1.focus();
+                mi_phone_2.focus();
                 return false;
             }
 
-            if (checkQualifiedNumber == "") {
+            if (authNum == "") {
                 alert("인증번호를 입력해주세요");
-                checkQualifiedNumber.focus();
+                authNum.focus();
                 return false;
             }
 
@@ -287,9 +368,7 @@
             SendPerson.action = "./registProcess.do";
             SendPerson.submit();
         }
-    </script>
 
-    <script>
         $(document).focusout(function () {
             let pwdCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
             let password1 = $("#password_1").val();
@@ -309,9 +388,7 @@
             }
 
         });
-    </script>
 
-    <script>
         window.onload = function() {
             // 도메인 직접 입력 or domain option 선택
             const domainListEl = document.querySelector('#domain_list')

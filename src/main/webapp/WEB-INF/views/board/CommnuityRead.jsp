@@ -114,7 +114,7 @@
             <h1 class="Title" style="margin-bottom: 30px;"> 쉼터 </h1>
 
             <div class="d-flex justify-content-center" style="width: 80%; text-align: center; ">
-                <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
+                <table class="table align-middle" style="margin-top: 30px; height: auto;  border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-success">
                         <th scope="col" >번호</th>
