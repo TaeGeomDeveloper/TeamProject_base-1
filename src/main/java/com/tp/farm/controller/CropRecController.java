@@ -118,10 +118,20 @@ public class CropRecController {
     }
     // 작물 선택
     @RequestMapping(value = "/Farm.do", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView Farm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView Farm(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
         ModelAndView mav = new ModelAndView();
+        boolean flag = false;
+        String suveyInputYN = "N";
         String viewName = this.getViewName(request);
         viewName= "/service/Farm";
+        MemberVO member = (MemberVO) httpSession.getAttribute("user");
+        String mi_id = member.getMi_id();
+        flag = cropRecService.cropRecIdCheck(mi_id);
+        System.out.println(flag);
+        if(flag){
+            suveyInputYN = "Y";
+        }
+        mav.addObject("surveyInputYN", suveyInputYN);
         mav.setViewName(viewName);
         return mav;
     }
@@ -136,13 +146,21 @@ public class CropRecController {
             System.out.println(surveyInput.toString());
         }
         System.out.println("작물 선택 절차");
-        surveyInputDAO.insertSurveyInput(surveyInput);
 
         System.out.println("작물 정보 리스트 받아오기");
-        List<CropDataVO> list = cropRecDAO.select(surveyInput);
-        System.out.println("리스트 크기 : " + list.size());
-
-        return list;
+        List<CropDataVO> cropList = cropRecDAO.select(surveyInput);
+        List<FarmlandPriceVO> farmlandPriceList = cropRecDAO.selectFarmlandPrice(surveyInput);
+        System.out.println("작물 데이터 리스트 크기 : " + cropList.size());
+        System.out.println("작물 데이터 리스트 내용 : " + cropList);
+        System.out.println("농지 시세 리스트 크기 : " + farmlandPriceList.size());
+        System.out.println("농지 시세 리스트 내용 : " + farmlandPriceList);
+        if((cropList.size() == 0)||(farmlandPriceList.size()==0)){
+            cropList = null;
+            farmlandPriceList = null;
+        }else{
+            surveyInputDAO.insertSurveyInput(surveyInput);
+        }
+        return cropList;
     }
 
     // 농지 시세 가져오기
@@ -159,7 +177,9 @@ public class CropRecController {
 
         List<FarmlandPriceVO> list = cropRecDAO.selectFarmlandPrice(surveyInput);
         System.out.println("리스트 크기 : " + list.size());
-
+        if(list.size()==0) {
+            list = null;
+        }
         return list;
     }
 
@@ -228,6 +248,28 @@ public class CropRecController {
 
         viewName= "/service/FarmResult";
         mav.setViewName(viewName);
+        return mav;
+    }
+
+    @RequestMapping(value = "/MemberFarmResult.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView MemberFarmInfo(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        //session에 로그인한 아이디
+        MemberVO mem = (MemberVO) httpSession.getAttribute("user");
+        String mso_id = mem.getMi_id();
+        //로그인한 아이디 설문지 호출
+        SurveyInputVO surveyInput = surveyInputDAO.selectOne(mso_id);
+        SurveyOutputVO surveyOutput = surveyOutputDAO.selectSurveyOutput(mso_id);
+        String mso_cropName = surveyOutput.getMso_cropName();
+        CropDataVO cropData = cropRecDAO.selectOneCrop(mso_cropName);
+
+        List<TraditionalMarketVO> TM_list = cropRecDAO.selectMarketInformation(surveyInput);
+
+        mav.addObject("surveyInput", surveyInput);
+        mav.addObject("surveyOutput", surveyOutput);
+        mav.addObject("cropData", cropData);
+        mav.addObject("TM_list", TM_list);
+        mav.setViewName("/service/FarmResult");
         return mav;
     }
 

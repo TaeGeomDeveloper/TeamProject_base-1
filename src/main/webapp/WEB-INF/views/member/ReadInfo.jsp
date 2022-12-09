@@ -74,6 +74,9 @@
             max-width: 100px;
             min-width: 100px;
         }
+
+        #sidebar{
+        }
     </style>
 </head>
 <body>
@@ -96,7 +99,6 @@
 <%--몸통--%>
 <section>
     <article>
-
         <div id="Main_Box" align="center">
             <div id="MB" style="margin-top: 50px">
                 <h1><h1 style="text-align: center;font-size: 60px"> 회원정보 </h1>

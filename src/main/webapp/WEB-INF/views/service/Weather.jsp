@@ -21,7 +21,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
-            <h1 class="Title" style="color: #38a9d9; margin-bottom: 30px;"> 작물별 주산지 상세 날씨 조회서비스</h1>
+            <h1 class="Title" style="color: #38a9d9; margin-bottom: 30px;"> 경상남도 작물별 주산지 날씨</h1>
 
             <div style="border: #04AA6D 5px; border-radius: 20px; margin-top: 30px">
                 <div class="d-flex justify-content-center" style="margin-top: 50px">
