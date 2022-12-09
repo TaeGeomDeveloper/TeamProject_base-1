@@ -44,7 +44,7 @@
             <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #f58e45; margin-top: 50px">귀농 문의</h2>
 
             <div class="d-flex justify-content-center" style="text-align: center; ">
-                <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #f7a063;">
+                <table class="table align-middle" style="margin-top: 30px; border: 5px solid #f7a063;">
                     <thead style="background-color: #f7a063">
                     <tr>
                         <th scope="col" style="width: 5%">번호</th>
@@ -82,7 +82,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="border: 5px solid #f7a063; border-radius: 20px; padding: 20px; height: 700px; text-align: left">
+            <div style="border: 5px solid #f7a063; border-radius: 20px; padding: 20px; height: auto; text-align: left">
                 ${consultation.ecb_content}
             </div>
 

@@ -245,7 +245,7 @@
                                 </td>
                                 <c:if test="${user.mi_id=='admin'}">
                                     <td>
-                                        <a href="delete.do?nb_seq=${vo.ecb_seq}">
+                                        <a href="delete.do?ecb_seq=${vo.ecb_seq}">
                                             <button class="button4">삭제</button>
                                         </a>
                                     </td>
