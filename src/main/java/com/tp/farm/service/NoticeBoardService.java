@@ -50,7 +50,8 @@ public class NoticeBoardService {
         String originFileName = "";
         String serverFileName = "";
         //디렉토리 생성
-        String baseDir = "C:\\Upload\\BoardFile";
+//        String baseDir = "C:\\Upload\\BoardFile";
+        String baseDir = "/home/ubuntu/dev/Upload";
         //날짜관련
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String today = formatter.format(new java.util.Date());
@@ -91,7 +92,8 @@ public class NoticeBoardService {
         //본래파일명 한글처리
         originFileName = new String(originFileName.getBytes("UTF-8"), "ISO-8859-1");
         //게시판 첨부파일 경로지정
-        String baseDir = "C:\\Upload\\BoardFile";
+//        String baseDir = "C:\\Upload\\BoardFile";
+        String baseDir = "/home/ubuntu/dev/Upload";
         String year = serverFileName.substring(0,4);
         String month = serverFileName.substring(4,6);
         String rootDownloadDir = baseDir + File.separator + year + File.separator + month + File.separator;

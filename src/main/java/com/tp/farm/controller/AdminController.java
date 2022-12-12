@@ -51,7 +51,8 @@ public class AdminController {
     @RequestMapping(value = {"/InputCSV.do"}, method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView csvService(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
-        String uploadFolder = "C:\\upload";
+//        String uploadFolder = "C:\\Upload";
+        String uploadFolder = "/home/ubuntu/dev/Upload";
         Iterator var6 = files.iterator();
 
         while (var6.hasNext()) {
