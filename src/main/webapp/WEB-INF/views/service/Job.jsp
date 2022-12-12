@@ -9,21 +9,58 @@
     <!-- 스타일시트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript"
-            src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6dmgzabotq"></script>
-    <script src="${contextPath}/resources/JS/naverMap.js"></script>
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c6741a104f1846dfcf89a12bc5b105f"></script>
 
     <style>
         .carousel-indicators {
             position: relative;
         }
+
         #Information {
             margin: 20px;
             border-radius: 20px;
         }
+
         p {
             text-align: left;
         }
     </style>
+
+    <script>
+        $(document).ready(function () {
+            $("#exampleModal").on('shown.bs.modal', function () {
+                var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+                var options = { //지도를 생성할 때 필요한 기본 옵션
+                    center: new kakao.maps.LatLng(35.278647, 128.658421), //지도의 중심좌표.
+                    level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+
+                var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+                // 마커가 표시될 위치입니다
+                var markerPosition = new kakao.maps.LatLng(35.278647, 128.658421);
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+
+                var iwContent = '<div style="padding:5px;"> 창원 농장 <br><a href="https://map.kakao.com/link/map/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,35.278647,128.658421" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwPosition = new kakao.maps.LatLng(35.278647, 128.658421); //인포윈도우 표시 위치입니다
+
+                // 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    position: iwPosition,
+                    content: iwContent
+                });
+                // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                infowindow.open(map, marker);
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -275,7 +312,7 @@
     </article>
 </section>
 
-<!-- Modal -->
+<!-- Modal 1 -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -291,11 +328,13 @@
                     <div class="row featurette">
                         <div class="col-md-7 order-md-2">
                             <div style="margin: 30px">
-                                <h1 class="featurette-heading fw-normal lh-1">농장 알바 모집 </h1>
+                                <h1 class="featurette-heading fw-normal lh-1">창원 농장 알바 모집 </h1>
+                                <br>
                                 <h3 style="margin-top: 30px">정보</h3>
+                                <br>
                                 <p>시급 1만원</p>
-                                <p>월~일 협의</p>
-                                <p>09:00~23:30</p>
+                                <p>날짜 : 월~일 협의</p>
+                                <p>시간 : 09:00~23:30</p>
                             </div>
 
                         </div>
@@ -317,12 +356,12 @@
                             <h2 class="display-5">상세 내용</h2>
                         </div>
                         <div style="height: 500px">
-                            <p>20대 중반 ~ 40대 까지</p>
-                            <p>남/여 성별무관</p>
-                            <p>약속 잘지키시는분</p>
-                            <p>책임감 있으신분!</p>
-                            <p>꼼꼼하신분!</p>
-                            <p>손빠르신분 ,면허있으신분 대환영</p>
+                            <p>20대 중반 ~ 40대 까지 남/여 성별무관</p>
+                            <p>약속 잘지키시는분 / 책임감 있으신분!</p>
+                            <p>꼼꼼하신분! 손빠르신분 ,면허있으신분 대환영!</p>
+                            <br>
+                            <p>신입교육 1주후 누구라도 업무 가능하며 </p>
+                            <p> 교육일수도 근무일수로  포함됩니다.</p>
                         </div>
                     </div>
 
@@ -336,6 +375,7 @@
         </div>
     </div>
 </div>
+
 
 </body>
 </html>

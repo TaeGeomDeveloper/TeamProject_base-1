@@ -68,7 +68,7 @@
 <section>
   <article>
     <div id="Main_Box" align="center" style="margin-top: 30px">
-      <h1 style="font-size: 60px; color: #f7cc4a; margin-bottom: 30px"> 귀농 절차 </h1>
+      <h1 style="font-size: 60px; color: #f7cc4a; margin-bottom: 10px; text-align: center"> 귀농 절차 </h1>
 
       <img src="${contextPath}/resources/image/HowFarmer/귀농절차2.jpg" alt="promo1" width="90%" height="50%">
 

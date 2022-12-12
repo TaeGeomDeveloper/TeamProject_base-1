@@ -22,7 +22,7 @@
     <article>
         <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
             <h1 class="Title" style="color: #38a9d9; margin-bottom: 30px;"> 경상남도 작물별 주산지 날씨</h1>
-
+            <img src="${contextPath}/resources/image/Job/알바.jpg" alt="promo1" width="800" height="450">
             <div style="border: #04AA6D 5px; border-radius: 20px; margin-top: 30px">
                 <div class="d-flex justify-content-center" style="margin-top: 50px">
                     <input class="form-control" type="date" placeholder="원하는 날짜 (예: 20221114)" id="Day" name="Day">

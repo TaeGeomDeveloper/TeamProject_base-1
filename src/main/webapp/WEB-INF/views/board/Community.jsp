@@ -30,7 +30,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin: auto; width: 90%">
-            <h1 class="Title" style="margin-bottom: 30px;"> 쉼터 </h1>
+            <h1 class="Title" style="margin-bottom: 30px;"> 대화의 씨앗 </h1>
 
             <nav class="navbar" style="background-color: #7afacb; margin-top: 30px">
                 <div class="container-fluid">

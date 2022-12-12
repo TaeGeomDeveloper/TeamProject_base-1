@@ -443,7 +443,6 @@
 
     </style>
 
-
 </head>
 <body>
 
@@ -616,7 +615,7 @@
 
         </div>
         <div id="BG">
-            <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%;opacity: 0.5">
+<%--            <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경"style="height: auto; width: auto; max-width: 100%; max-height: 100%; opacity: 0.5">--%>
         </div>
 
     </article>

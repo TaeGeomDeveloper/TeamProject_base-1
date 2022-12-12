@@ -24,6 +24,15 @@
         }
     </style>
 
+    <script>
+        $(document).ready(function () {
+            $("#ID_RQ").on("click", function (event) {
+                alert("로그인 이 필요한 서비스 입니다.");
+            });
+        });
+    </script>
+
+
 </head>
 <body>
 
@@ -116,7 +125,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/board/BoardList.do">쉼터</a>
+                        <a class="nav-link" href="${contextPath}/board/BoardList.do">대화의 씨앗</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/service/Job.do">알바</a>
@@ -144,7 +153,9 @@
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item">
-                                <a class="nav-link disabled">귀농 지원 서비스</a>
+                                <div id="ID_RQ">
+                                    <a class="nav-link disabled">귀농 지원 서비스</a>
+                                </div>
                             </li>
                         </c:otherwise>
                     </c:choose>
