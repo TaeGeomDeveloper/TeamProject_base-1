@@ -44,7 +44,8 @@ public class CsvService {
     //지정된 경로에 csv 파일 읽는 코드
     public ArrayList<TraditionalMarketVO> getTraditionalMarketData() throws IOException{
         ArrayList<TraditionalMarketVO> list = new ArrayList<>();
-        File file = new File("C:/Upload/전국전통시장표준데이터_수정본.csv");
+//        File file = new File("C:/Upload/전국전통시장표준데이터_수정본.csv");
+        File file = new File("/home/ubuntu/dev/Upload/전국전통시장표준데이터_수정본.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
@@ -60,7 +61,8 @@ public class CsvService {
 
     public ArrayList<FarmlandPriceVO> getFarmlandPriceData() throws IOException{
         ArrayList<FarmlandPriceVO> list = new ArrayList<>();
-        File file = new File("C:/Upload/농지_시세_테이블.csv");
+//        File file = new File("C:/Upload/농지_시세_테이블.csv");
+        File file = new File("/home/ubuntu/dev/Upload/농지_시세_테이블.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
@@ -76,7 +78,8 @@ public class CsvService {
 
     public ArrayList<CropDataVO> getCropData() throws IOException{
         ArrayList<CropDataVO> list = new ArrayList<>();
-        File file = new File("C:/Upload/농작물_자료조사표.csv");
+//        File file = new File("C:/Upload/농작물_자료조사표.csv");
+        File file = new File("/home/ubuntu/dev/Upload/농작물_자료조사표.csv");
         FileReader fr =  new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line = null;
