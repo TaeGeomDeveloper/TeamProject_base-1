@@ -280,8 +280,9 @@
                         <table id="Advice" style="margin: 20px">
                             <tr>
                                 <th>아이디</th>
-                                <td><input class="form-control" placeholder="ID" type="text" name="ecb_id"
-                                           style="width: 25%"/>
+                                <td>
+                                    <input class="form-control" placeholder="ID" type="text" name="ecb_id"
+                                           value="${user.mi_id}" readonly="readonly" style="width: 25%"/>
                                 </td>
                             </tr>
                             <tr>

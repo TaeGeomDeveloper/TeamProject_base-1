@@ -54,7 +54,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="border: 5px solid #f7a063; border-radius: 20px; padding: 20px; height: auto; text-align: left">
+            <div style="border: 5px solid #f7a063; border-radius: 20px; padding: 20px; height: auto; text-align: left; min-height: 600px">
                 ${notice.nb_content}
             </div>
         </div>

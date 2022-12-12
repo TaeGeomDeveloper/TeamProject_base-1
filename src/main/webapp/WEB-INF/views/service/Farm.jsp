@@ -62,7 +62,7 @@
                     url: "./DeleteSurvey.do?msi_id=${user.mi_id}",
                     data: {msi_id: memberId},
                     success: function (data, status) {
-                        if(data=="false"){
+                        if (data == "false") {
                             alert("삭제 완료");
                             window.location.reload();
                         }
@@ -94,34 +94,34 @@
 
     <script>
         //주민등록번호에 따른 나이(만) 계산 및 성별 결정
-        $(document).ready(function(){
+        $(document).ready(function () {
             let jumin = $("#msi_memberAge").val();
             let man = "남자";
             let woman = "여자";
-            if(jumin.includes('-')){
-                jumin = jumin.replace('-','');
+            if (jumin.includes('-')) {
+                jumin = jumin.replace('-', '');
             }
 
             let today = new Date();	// 현재 날짜 및 시간
 
-            let juminFront = jumin.substr(0,6); // 주민번호앞자리
-            let juminBackFirstVal = jumin.substr(6,1); //주민번호뒷자리 첫 문자열(2000년도 이전생인지 확인)
+            let juminFront = jumin.substr(0, 6); // 주민번호앞자리
+            let juminBackFirstVal = jumin.substr(6, 1); //주민번호뒷자리 첫 문자열(2000년도 이전생인지 확인)
 
             console.log(juminFront);
             let age = 0;
             let birthDate = null;
             let juminYear = null;
-            let juminMonth = jumin.substr(2,2);//10
-            let juminDate = jumin.substr(4,2);//03
+            let juminMonth = jumin.substr(2, 2);//10
+            let juminDate = jumin.substr(4, 2);//03
 
             let monthCheck = 0;
 
-            if(juminBackFirstVal == 1 || juminBackFirstVal == 2){
+            if (juminBackFirstVal == 1 || juminBackFirstVal == 2) {
                 // 2000년생 이전일 경우
-                juminYear = "19" + jumin.substr(0,2);//93~~
+                juminYear = "19" + jumin.substr(0, 2);//93~~
 
                 // 문법상 Month(월)은 0부터 시작하기 때문에 -1 처리해야 됨.
-                birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+                birthDate = new Date(juminYear * 1, juminMonth - 1, juminDate * 1);
 
                 // 현재 연도에서 - 태어난 연도
                 age = today.getFullYear() - birthDate.getFullYear();
@@ -130,28 +130,28 @@
                 monthCheck = today.getMonth() - birthDate.getMonth();
 
                 // 생일 월이 현재 월을 지나지 않았을 경우 만 나이기 때문에 -1
-                if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+                if (monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())) {
                     age--;
                 }
-            }else{
+            } else {
                 // 2000년생 이후
-                juminYear = "20" + jumin.substr(0,2);//01~~
+                juminYear = "20" + jumin.substr(0, 2);//01~~
 
-                birthDate = new Date(juminYear*1, juminMonth-1, juminDate*1);
+                birthDate = new Date(juminYear * 1, juminMonth - 1, juminDate * 1);
 
                 age = today.getFullYear() - birthDate.getFullYear();
 
                 monthCheck = today.getMonth() - birthDate.getMonth();
 
-                if(monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())){
+                if (monthCheck < 0 || (monthCheck === 0 && today.getDate() < birthDate.getDate())) {
                     age--;
                 }
             }
             $('input[name=msi_memberAge]').attr('value', age);
 
-            if(juminBackFirstVal%2==0){
+            if (juminBackFirstVal % 2 == 0) {
                 $('input[name=msi_memberGender]').attr('value', woman);
-            }else{
+            } else {
                 $('input[name=msi_memberGender]').attr('value', man);
             }
         });
@@ -177,167 +177,169 @@
                         <a href="${contextPath}/service/MemberFarmResult.do" style="text-decoration: none;">
                             <button class="btn btn-primary btn-lg" type="button" id="memberSurvey">내 설문지보기</button>
                         </a>
-                        <button class="btn btn-primary btn-lg" type="button" id="deleteSurvey" style="background-color: red;">삭제
+                        <button class="btn btn-primary btn-lg" type="button" id="deleteSurvey"
+                                style="background-color: red;">삭제
                         </button>
                     </c:if>
                     <span id="msg" style="display: none"></span>
                     <%--작물 선택--%>
                     <c:if test="${surveyInputYN=='N'}">
-                    <form id="FarmForm" name="FarmInfo"
-                          style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
-                        <h2>회원 정보입력 (필수)</h2>
-                        <hr class="featurette-divider" style="border-top: 8px solid">
-                        <div class="d-flex justify-content-center">
-                            <div style="width: 25%; padding: 20px">
-                                <input type="hidden" value="${user.mi_id}" name="msi_id" id="msi_id">
-                                <p class="WForm">이름</p>
-                                <input class="form-control form-control" type="text" value="${user.mi_name}"
-                                       name="msi_memberName" id="msi_memberName" readonly>
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">나이(만)</p>
-                                <input class="form-control form-control" type="text" placeholder="나이"
-                                       name="msi_memberAge" id="msi_memberAge" value="${user.mi_regidentRegNumber}" readonly="readonly">
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">성별</p>
-                                <input  class="form-control form-control" name="msi_memberGender"
-                                        id="msi_memberGender" value="" readonly="readonly">
-                            </div>
-                        </div>
-                        <hr class="featurette-divider">
-                        <h2 class="h2_selector">귀농 희망지역 및 수확시기 (필수)</h2>
-                        <hr class="featurette-divider" style="border-top: 8px solid">
-                        <div class="d-flex justify-content-center">
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">귀농 희망지역(도/시)</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredArea"
-                                        id="msi_desiredArea"></select>
-                                <select class="form-select form-select mb-3" name="msi_desiredAreaDetail"
-                                        id="msi_desiredAreaDetail"></select>
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">파종시기</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredTimeSowing"
-                                        id="msi_desiredTimeSowing">
-                                    <option selected value="1">1월</option>
-                                    <option value="2">2월</option>
-                                    <option value="3">3월</option>
-                                    <option value="4">4월</option>
-                                    <option value="5">5월</option>
-                                    <option value="6">6월</option>
-                                    <option value="7">7월</option>
-                                    <option value="8">8월</option>
-                                    <option value="9">9월</option>
-                                    <option value="10">10월</option>
-                                    <option value="11">11월</option>
-                                    <option value="12">12월</option>
-                                </select>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
-                                           id="inlineRadio1" value="상">
-                                    <label class="form-check-label" for="inlineRadio1">상</label>
+                        <form id="FarmForm" name="FarmInfo"
+                              style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7cb">
+                            <h2>회원 정보입력 (필수)</h2>
+                            <hr class="featurette-divider" style="border-top: 8px solid">
+                            <div class="d-flex justify-content-center">
+                                <div style="width: 25%; padding: 20px">
+                                    <input type="hidden" value="${user.mi_id}" name="msi_id" id="msi_id">
+                                    <p class="WForm">이름</p>
+                                    <input class="form-control form-control" type="text" value="${user.mi_name}"
+                                           name="msi_memberName" id="msi_memberName" readonly>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
-                                           id="inlineRadio2" value="중">
-                                    <label class="form-check-label" for="inlineRadio2">중</label>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">나이(만)</p>
+                                    <input class="form-control form-control" type="text" placeholder="나이"
+                                           name="msi_memberAge" id="msi_memberAge" value="${user.mi_regidentRegNumber}"
+                                           readonly="readonly">
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
-                                           id="inlineRadio3" value="하">
-                                    <label class="form-check-label" for="inlineRadio3">하</label>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">성별</p>
+                                    <input class="form-control form-control" name="msi_memberGender"
+                                           id="msi_memberGender" value="" readonly="readonly">
                                 </div>
                             </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">수학 시기</p>
-                                <select class="form-select form-select mb-3" name="msi_desiredHarvestTime"
-                                        id="msi_desiredHarvestTime">
-                                    <option selected value="1">1월</option>
-                                    <option value="2">2월</option>
-                                    <option value="3">3월</option>
-                                    <option value="4">4월</option>
-                                    <option value="5">5월</option>
-                                    <option value="6">6월</option>
-                                    <option value="7">7월</option>
-                                    <option value="8">8월</option>
-                                    <option value="9">9월</option>
-                                    <option value="10">10월</option>
-                                    <option value="11">11월</option>
-                                    <option value="12">12월</option>
-                                </select>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
-                                           id="inlineRadio4" value="상">
-                                    <label class="form-check-label" for="inlineRadio4">상</label>
+                            <hr class="featurette-divider">
+                            <h2 class="h2_selector">귀농 희망지역 및 수확시기 (필수)</h2>
+                            <hr class="featurette-divider" style="border-top: 8px solid">
+                            <div class="d-flex justify-content-center">
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">귀농 희망지역(도/시)</p>
+                                    <select class="form-select form-select mb-3" name="msi_desiredArea"
+                                            id="msi_desiredArea"></select>
+                                    <select class="form-select form-select mb-3" name="msi_desiredAreaDetail"
+                                            id="msi_desiredAreaDetail"></select>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
-                                           id="inlineRadio5" value="중">
-                                    <label class="form-check-label" for="inlineRadio5">중</label>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">파종시기</p>
+                                    <select class="form-select form-select mb-3" name="msi_desiredTimeSowing"
+                                            id="msi_desiredTimeSowing">
+                                        <option selected value="1">1월</option>
+                                        <option value="2">2월</option>
+                                        <option value="3">3월</option>
+                                        <option value="4">4월</option>
+                                        <option value="5">5월</option>
+                                        <option value="6">6월</option>
+                                        <option value="7">7월</option>
+                                        <option value="8">8월</option>
+                                        <option value="9">9월</option>
+                                        <option value="10">10월</option>
+                                        <option value="11">11월</option>
+                                        <option value="12">12월</option>
+                                    </select>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                               id="inlineRadio1" value="상">
+                                        <label class="form-check-label" for="inlineRadio1">상반기</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                               id="inlineRadio2" value="중">
+                                        <label class="form-check-label" for="inlineRadio2">중반기</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredTimeSowingPart"
+                                               id="inlineRadio3" value="하">
+                                        <label class="form-check-label" for="inlineRadio3">하반기</label>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
-                                           id="inlineRadio6" value="하">
-                                    <label class="form-check-label" for="inlineRadio6">하</label>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">수확 시기</p>
+                                    <select class="form-select form-select mb-3" name="msi_desiredHarvestTime"
+                                            id="msi_desiredHarvestTime">
+                                        <option selected value="1">1월</option>
+                                        <option value="2">2월</option>
+                                        <option value="3">3월</option>
+                                        <option value="4">4월</option>
+                                        <option value="5">5월</option>
+                                        <option value="6">6월</option>
+                                        <option value="7">7월</option>
+                                        <option value="8">8월</option>
+                                        <option value="9">9월</option>
+                                        <option value="10">10월</option>
+                                        <option value="11">11월</option>
+                                        <option value="12">12월</option>
+                                    </select>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                               id="inlineRadio4" value="상">
+                                        <label class="form-check-label" for="inlineRadio4">상반기</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                               id="inlineRadio5" value="중">
+                                        <label class="form-check-label" for="inlineRadio5">중반기</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="msi_desiredHarvestTimePart"
+                                               id="inlineRadio6" value="하">
+                                        <label class="form-check-label" for="inlineRadio6">하반기</label>
+                                    </div>
+                                </div>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">작물분류</p>
+                                    <select class="form-select form-select mb-3" name="msi_cropClassification"
+                                            id="msi_cropClassification">
+                                        <option selected value="전체">전체</option>
+                                        <option value="과일">과일</option>
+                                        <option value="채소">채소</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">작물분류</p>
-                                <select class="form-select form-select mb-3" name="msi_cropClassification"
-                                        id="msi_cropClassification">
-                                    <option selected value="전체">전체</option>
-                                    <option value="과일">과일</option>
-                                    <option value="채소">채소</option>
-                                </select>
+                            <hr class="featurette-divider">
+                            <h2 class="h2_selector">고려사항 (선택)</h2>
+                            <hr class="featurette-divider" style="border-top: 8px solid">
+                            <div class="d-flex justify-content-center">
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">재배 방법</p>
+                                    <select class="form-select form-select mb-3" aria-label=".form-select-lg example"
+                                            name="msi_cultivationMethod" id="msi_cultivationMethod">
+                                        <option selected value="둘다">둘다</option>
+                                        <option value="노지">노지</option>
+                                        <option value="비닐하우스">비닐하우스</option>
+                                    </select>
+                                </div>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">농사 경험 유무</p>
+                                    <select class="form-select form-select mb-3" name="msi_farmingExperience"
+                                            id="msi_farmingExperience">
+                                        <option selected value="없음">없음</option>
+                                        <option value="3개월">3개월 이상</option>
+                                        <option value="6개월">6개월 이상</option>
+                                        <option value="1년이상">1년 이상</option>
+                                        <option value="3년이상">3년 이상</option>
+                                    </select>
+                                </div>
+                                <div style="width: 25%; padding: 20px">
+                                    <p class="WForm">농기계 및 설비 유무</p>
+                                    <select class="form-select form-select mb-3" name="msi_hadMachinery"
+                                            id="msi_hadMachinery">
+                                        <option selected value="N">없음</option>
+                                        <option value="Y">충분</option>
+                                    </select>
+                                </div>
+                                <input class="form-control form-control" type="hidden" placeholder="자본금"
+                                       name="msi_capital" id="msi_capital">
+                                <input class="form-control form-control" type="hidden" placeholder="토지크기"
+                                       name="msi_holdingLand" id="msi_holdingLand">
                             </div>
-                        </div>
-                        <hr class="featurette-divider">
-                        <h2 class="h2_selector">고려사항 (선택)</h2>
-                        <hr class="featurette-divider" style="border-top: 8px solid">
-                        <div class="d-flex justify-content-center">
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">재배 방법</p>
-                                <select class="form-select form-select mb-3" aria-label=".form-select-lg example"
-                                        name="msi_cultivationMethod" id="msi_cultivationMethod">
-                                    <option selected value="둘다">둘다</option>
-                                    <option value="노지">노지</option>
-                                    <option value="비닐하우스">비닐하우스</option>
-                                </select>
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">농사 경험 유무</p>
-                                <select class="form-select form-select mb-3" name="msi_farmingExperience"
-                                        id="msi_farmingExperience">
-                                    <option selected value="없음">없음</option>
-                                    <option value="3개월">3개월 이상</option>
-                                    <option value="6개월">6개월 이상</option>
-                                    <option value="1년이상">1년 이상</option>
-                                    <option value="3년이상">3년 이상</option>
-                                </select>
-                            </div>
-                            <div style="width: 25%; padding: 20px">
-                                <p class="WForm">농기계 및 설비 유무</p>
-                                <select class="form-select form-select mb-3" name="msi_hadMachinery"
-                                        id="msi_hadMachinery">
-                                    <option selected value="N">없음</option>
-                                    <option value="Y">충분</option>
-                                </select>
-                            </div>
-                            <input class="form-control form-control" type="hidden" placeholder="자본금"
-                                   name="msi_capital" id="msi_capital">
-                            <input class="form-control form-control" type="hidden" placeholder="토지크기"
-                                   name="msi_holdingLand" id="msi_holdingLand">
-                        </div>
-                        <hr class="featurette-divider">
-                        <div align="center">
-                            <c:if test="${surveyInputYN=='N'}">
-                                <button class="btn btn-primary btn-lg" type="button" id="flip"  >작물 확인
-                                </button>
-                            </c:if>
+                            <hr class="featurette-divider">
+                            <div align="center">
+                                <c:if test="${surveyInputYN=='N'}">
+                                    <button class="btn btn-primary btn-lg" type="button" id="flip">작물 확인
+                                    </button>
+                                </c:if>
 
-                        </div>
-                    </form>
+                            </div>
+                        </form>
                     </c:if>
                 </div>
             </div>
@@ -545,11 +547,10 @@
                                             </div>
                                             <hr class="featurette-divider">
                                             <h1> 경영 및 관리비 </h1>
-
-                                            <%--                                                <div id="cd_operatingCost"></div>--%>
-                                            <%--                                                <div id="cd_income"></div>--%>
+                                            <div> 준비중 입니다. </div>
                                             <hr class="featurette-divider">
                                             <h1> 거래량 </h1>
+                                            <div> 준비중 입니다. </div>
                                             <div id="myChart"
                                                  style="width:100%; max-width:600px; height:500px;"></div>
 
@@ -580,7 +581,7 @@
                                                                 예상하는 농작지 면적(약 300평)
                                                             </td>
                                                             <td width="25%" bgcolor="#f7adad">
-                                                                합계<br/>(선택한 지역 및 작물에 따른 비용 * 예상하는
+                                                                합계 (천원단위)<br/>(선택한 지역 및 작물에 따른 비용 * 예상하는
                                                                 농작지 면적(10a))
                                                             </td>
                                                         </tr>

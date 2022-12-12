@@ -22,6 +22,14 @@
         }
     </style>
 
+    <script>
+        $(document).ready(function () {
+            $("#ID_Box").click(function () {
+                $("#findID").slideToggle("slow");
+            });
+        });
+    </script>
+
 </head>
 <body>
 
@@ -61,7 +69,7 @@
                         <td><input class="form-control form-control" type="text"
                                    value="${surveyInput.msi_desiredTimeSowing} ${surveyInput.msi_desiredTimeSowingPart}"
                                    readonly/></td>
-                        <th>수학 시기</th>
+                        <th>수확 시기</th>
                         <td><input class="form-control form-control" type="text"
                                    value="${surveyInput.msi_desiredHarvestTime} ${surveyInput.msi_desiredHarvestTimePart}"
                                    readonly/></td>
@@ -74,7 +82,8 @@
                     </tr>
                     <tr>
                         <th>자본금</th>
-                        <td><input class="form-control form-control" type="text" value="${surveyOutput.mso_capital} 천원"
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_capital} (천원단위)"
                                    readonly/></td>
                         <th>보유중인 토지</th>
                         <td><input class="form-control form-control" type="text"
@@ -82,44 +91,48 @@
                     </tr>
                     <tr>
                         <th>예상 토지비용</th>
-                        <td><input class="form-control form-control" type="text" value="${surveyOutput.mso_landCost} 천원"
+                        <td><input class="form-control form-control" type="text"
+                                   value="${surveyOutput.mso_landCost} (천원단위)"
                                    readonly/></td>
                         <th>에상 경영비</th>
                         <td><input class="form-control form-control" type="text"
-                                   value="${surveyOutput.mso_managementExpenses} 천원" readonly/></td>
+                                   value="${surveyOutput.mso_managementExpenses} (천원단위)" readonly/></td>
                     </tr>
                     <tr>
                         <th>예상 농작물소득</th>
                         <td><input class="form-control form-control" type="text"
-                                   value="${surveyOutput.mso_incomeCrops} 천원" readonly/></td>
+                                   value="${surveyOutput.mso_incomeCrops} (천원단위)" readonly/></td>
                         <th>최종예상 소득</th>
                         <td><input class="form-control form-control" type="text"
-                                   value="${surveyOutput.mso_finalIncome} 천원" readonly/></td>
+                                   value="${surveyOutput.mso_finalIncome} (천원단위)" readonly/></td>
                     </tr>
                 </table>
 
                 <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 50px">관련 시장 정보</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>시장 이름</th>
-                        <th>시장 유형</th>
-                        <th>도로명 주소</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="vo" items="${TM_list}">
+                <button class="button" id="ID_Box">리스트 확인</button>
+                <div id="findID" style="display: none">
+                    <table>
+                        <thead>
                         <tr>
-                            <td>${vo.tmi_name}</td>
-                            <td>${vo.tmi_marketType}</td>
-                            <td>${vo.tmi_roadNameAddress}</td>
+                            <th>시장 이름</th>
+                            <th>시장 유형</th>
+                            <th>도로명 주소</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="vo" items="${TM_list}">
+                            <tr>
+                                <td>${vo.tmi_name}</td>
+                                <td>${vo.tmi_marketType}</td>
+                                <td>${vo.tmi_roadNameAddress}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <a href="${contextPath}/service/Advice.do">
+            <a href="${contextPath}/consult/BoardList.do">
                 <button type="button" class="button2">전문가 상담하기</button>
             </a>
         </div>

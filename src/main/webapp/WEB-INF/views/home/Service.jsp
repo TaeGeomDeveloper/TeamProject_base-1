@@ -98,12 +98,24 @@
         }
     </style>
 
+    <script>
+        $(document).ready(function () {
+            $("#SH1").click(function () {
+                $("#SB1").slideToggle("slow");
+            });
+            $("#SH2").click(function () {
+                $("#SB2").slideToggle("slow");
+            });
+        });
+    </script>
+
 </head>
 <body>
 
 <%--몸통--%>
 <article>
     <div id="Main_Box">
+        <h2 class="pb-2 border-bottom" align="center" style="font-size: 60px; color: #4CAF50; margin-top: 50px">gwinongin</h2>
         <div id="content_head">
             <div>
             <span>
@@ -126,10 +138,14 @@
             </p>
         </div>
         <div class="service_Line">
-            <h5 style="text-align:center;margin-top:20px;">
-                <span>서비스 내용 정리</span>
+            <h5 style="text-align:center;margin-top:40px; margin-bottom: 40px">
+                <span id="SH1">
+                    <button class="button" style="height: 40px;">
+                        서비스 내용 확인
+                    </button>
+                </span>
             </h5>
-            <div class="serviceBody">
+            <div class="serviceBody" id="SB1" style="display: none">
                 <dl class="serviceDl">
                     <span>
                         <img src="${contextPath}/resources/image/quote.png" />
@@ -172,10 +188,14 @@
             </div>
         </div>
         <div class="service_Line">
-            <h5 style="text-align:center;margin-top:20px;">
-                <span>서비스 내용 정리</span>
+            <h5 style="text-align:center;margin-top:40px; margin-bottom: 40px">
+                <span id="SH2">
+                    <button class="button" style="height: 40px;">
+                        서비스 내용 확인
+                    </button>
+                </span>
             </h5>
-            <div class="serviceBody">
+            <div class="serviceBody" id="SB2" style="display: none">
                 <dl class="serviceDl">
                     <span>
                         <img src="${contextPath}/resources/image/quote.png" />
@@ -219,21 +239,12 @@
         </div>
     </div>
     <div id="serviceHead">
-        <h5>팀 소개</h5>
+        <h1 class="Title" align="center" style="color: #4CAF50;"> Team 기가막히조 </h1>
         <%--<h5 style="text-align:center;margin-top:20px;">--%>
-        <span id="serviceIntro">TEAM 기가막히조</span>
-        </h5>
+
         <span>
             <img src="${contextPath}/resources/image/family.jpg" />
-            </span>
-        <p>
-            A : ~ ~ ~ ~ ~ ~ ~ ~ 하고있어요  역할을 맡았어요<br/>
-            B : ~~~~~~~~~~~~~~~~하고있어요   역할을 맡았어요<br/>
-            C :  @#@!@#@~!!~@!!!하고있어요   역할을 맡았어요<br/>
-            D : !~~~~~~~~~!@~#~~하고있어요  역할을 맡았어요<br/>
-            E : !~~$$**((#%##@##하고있어요  역할을 맡았어요<br/>
-            F : ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        </p>
+        </span>
     </div>
     </div>
 </article>

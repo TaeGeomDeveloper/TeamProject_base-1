@@ -60,7 +60,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 게시글 </h1>
+            <h1 class="Title">대화의 씨앗</h1>
 
             <div class="d-flex justify-content-center" style="width: 80%; text-align: center; ">
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
@@ -89,7 +89,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; text-align: left">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; text-align: left; min-height: 600px">
                 ${board.cb_content}
             </div>
 
@@ -101,8 +101,6 @@
                         <tr class="table-warning">
                             <th scope="col" style="width: 10%">글번호</th>
                             <th scope="col" style="width: 30%">작성자</th>
-                            <th scope="col" style="width: 10%">번들Seq</th>
-                            <th scope="col" style="width: 10%">현재Seq</th>
                             <th scope="col" style="width: 20%">작성일</th>
                         </tr>
                         </thead>
@@ -113,14 +111,12 @@
                                     <tr>
                                         <td>${reply.cbr_seq}</td>
                                         <td>${reply.cbr_replyId}</td>
-                                        <td>${reply.cbr_bundleSeq}</td>
-                                        <td>${reply.cbr_currentSeq}</td>
                                         <td>${reply.cbr_regDate}</td>
                                     </tr>
                                     <tr>
                                         <c:choose>
                                             <c:when test="${reply.cbr_seq == cbr_seq}">
-                                                <td colspan="4"><textarea class="form-control"
+                                                <td colspan="2"><textarea class="form-control"
                                                                           style="height: 100px; width: 100%;"
                                                                           id="cbr_content1"
                                                                           name="cbr_content">${reply.cbr_content}</textarea>
@@ -134,8 +130,11 @@
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td colspan="7"
-                                                    style="height: 100px">${reply.cbr_content}</td>
+                                                <td colspan="3" style="height: 100px">
+                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" readonly style="height: 200px;">
+                                                            ${reply.cbr_content}
+                                                    </textarea>
+                                                </td>
                                             </c:otherwise>
                                         </c:choose>
                                     </tr>
@@ -154,15 +153,13 @@
                                                                     <tr>
                                                                         <td>${Rereply.cbr_seq}</td>
                                                                         <td>${Rereply.cbr_replyId}</td>
-                                                                        <td>${reply.cbr_bundleSeq}</td>
-                                                                        <td>${Rereply.cbr_currentSeq}</td>
                                                                         <td>${Rereply.cbr_regDate}</td>
                                                                         <td>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:choose>
                                                                             <c:when test="${Rereply.cbr_seq == cbr_seq}">
-                                                                                <td colspan="5"><textarea
+                                                                                <td colspan="3"><textarea
                                                                                         class="form-control"
                                                                                         style="height: 100px; width: 100%;"
                                                                                         id="cbr_content2"
@@ -179,7 +176,7 @@
                                                                                 </td>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <td colspan="7"
+                                                                                <td colspan="4"
                                                                                     style="height: 100px">${Rereply.cbr_content}</td>
                                                                             </c:otherwise>
                                                                         </c:choose>
@@ -200,24 +197,6 @@
                 </form>
             </div>
         </div>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
 
     </article>
 </section>

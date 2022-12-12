@@ -60,7 +60,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin: auto; width: 90%">
-            <h1 class="Title">쉼터</h1>
+            <h1 class="Title">대화의 씨앗</h1>
             <form name="writeForm" enctype="multipart/form-data">
                 <div style="border: 10px solid #04AA6D; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
                     <table style="margin: 20px">

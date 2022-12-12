@@ -70,7 +70,7 @@
             z-index: 1;
         }
         #footer{
-            bottom: -1000px;
+            bottom: -600px;
         }
     </style>
 
@@ -127,10 +127,6 @@
         </div>
     </article>
 </section>
-
-<div id="BG">
-    <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%">
-</div>
 
 </body>
 </html>

@@ -93,9 +93,10 @@
 <body>
 
 <%--몸통--%>
-<div id="Main_Box">
+<div id="Main_Box" align="center" style="width: 90%; margin:auto;">
+    <h2 class="pb-2 border-bottom" style="font-size: 60px; color: #04AA6D; margin-top: 50px">스마트팜</h2>
 
-    <div class="SmartFarmInfoHead" style="font-size: 20px">
+    <div class="SmartFarmInfoHead" style="font-size: 20px; margin-top: 50px">
         <span>스마트 팜</span>은 농촌 고령화와 인구 감소로 인해 노동력이 부족한 현실을 <br/>보완하기 위해 개발되어 직접적인 노동 인력 없이도
         자동으로 농작물을 <br/>관리할 수 있는정보통신기술(ICT), 바이오기술(BT), 녹색기술(GT), 사물인터넷(IoT) 등을<br/> 농업에 접목해 지능화한 스마트 농장을 일컫는다
     </div>

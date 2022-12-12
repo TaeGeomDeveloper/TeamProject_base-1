@@ -16,11 +16,68 @@
     <meta charset="UTF-8">
     <title>메인 페이지</title>
 
-    <!-- 스크립트 & 스타일시트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+
+    <style>
+        /* BADGES */
+        .badges {
+            position: fixed;
+            top: 300px;
+            left: 50px;
+            z-index: 5;
+        }
+
+        .badges .badge {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, .15);
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            const badgeEl = document.querySelector('.badges');
+
+            window.addEventListener('scroll', _.throttle(function () {
+                console.log(window.scrollY);
+                if (window.scrollY > 700) {
+                    // 배지 숨기기
+                    // badgeEl.style.display = 'none';
+                    // gsap.to (요소, 지속시간, 옵션);
+                    gsap.to(badgeEl, .6, {
+                        opacity: 0,
+                        display: 'none'
+                    })
+
+                } else {
+                    // 배지 보이기
+                    // badgeEl.style.display = 'block';
+                    gsap.to(badgeEl, .6, {
+                        opacity: 1,
+                        display: 'block'
+                    })
+                }
+            }, 300));
+        });
+    </script>
 
 </head>
 
 <body>
+
+<%--뱃지--%>
+<div class="badges">
+    <div class="badge">
+        <img src="${contextPath}/resources/image/귀농뱃지.jpg" alt="promoBadge" width="300" height="400">
+    </div>
+</div>
+
 <%--몸통--%>
 <section>
     <article>
@@ -28,13 +85,11 @@
             <img src="${contextPath}/resources/image/Job/알바.jpg" alt="promo1" width="800" height="450">
         </div>
 
-
-
     </article>
 </section>
 
 <%--슬라이더--%>
-<main style="width: 80%; height: 700px; margin: auto">
+<main style="width: 60%; height: 700px; margin: auto">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -82,6 +137,10 @@
         </button>
     </div>
 </main>
+
+<div align="center">
+    <img src="${contextPath}/resources/image/gwinong.jpg" alt="promo1" width="70%" height="600">
+</div>
 
 <%--지원 사업 관련--%>
 <main class="main">
